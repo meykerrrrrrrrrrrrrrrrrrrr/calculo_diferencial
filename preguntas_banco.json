@@ -1,0 +1,1702 @@
+[
+  {
+    "id": 1,
+    "topic": "numeros_reales",
+    "topicName": "N\u00fameros Reales",
+    "difficulty": "F\u00e1cil",
+    "question": "\u00bfA cu\u00e1l de los siguientes conjuntos num\u00e9ricos pertenece $\\sqrt{11}$?",
+    "options": [
+      "N\u00fameros Irracionales ($\\mathbb{I}$)",
+      "N\u00fameros Racionales ($\\mathbb{Q}$)",
+      "N\u00fameros Enteros ($\\mathbb{Z}$)",
+      "N\u00fameros Naturales ($\\mathbb{N}$)"
+    ],
+    "correct": 0,
+    "explanation": "$\\sqrt{11} \\approx 3.31662479...$ tiene infinitas cifras decimales no peri\u00f3dicas y no se puede escribir como fracci\u00f3n de dos enteros. Por ende pertenece al conjunto de los n\u00fameros irracionales ($\\mathbb{I}$).",
+    "source": "Taller Unidad 1: N\u00fameros Reales (P\u00e1g 15, Ej. 1a)",
+    "subtopic": "Clasificaci\u00f3n Num\u00e9rica"
+  },
+  {
+    "id": 2,
+    "topic": "numeros_reales",
+    "topicName": "N\u00fameros Reales",
+    "difficulty": "Medio",
+    "question": "El n\u00famero decimal peri\u00f3dico puro $2.333333...$ expresado como fracci\u00f3n irreducible corresponde a:",
+    "options": [
+      "$$\\frac{7}{3}$$",
+      "$$\\frac{23}{10}$$",
+      "$$\\frac{21}{9}$$",
+      "$$\\frac{14}{6}$$"
+    ],
+    "correct": 0,
+    "explanation": "Sea $x = 2.\\bar{3}$. Multiplicando por 10: $10x = 23.\\bar{3}$. Restando miembro a miembro: $10x - x = 23.\\bar{3} - 2.\\bar{3} \\implies 9x = 21 \\implies x = \\frac{21}{9} = \\frac{7}{3}$.",
+    "source": "Taller Unidad 1: N\u00fameros Reales (P\u00e1g 1)",
+    "subtopic": "Fracciones y Mixtos"
+  },
+  {
+    "id": 3,
+    "topic": "numeros_reales",
+    "topicName": "N\u00fameros Reales",
+    "difficulty": "F\u00e1cil",
+    "question": "Indique si la afirmaci\u00f3n es Verdadera o Falsa: *\"Todo n\u00famero entero es un n\u00famero racional ($\\mathbb{Z} \\subset \\mathbb{Q}$)\"*",
+    "options": [
+      "Verdadero, porque cualquier entero $z$ se puede escribir como $\\frac{z}{1}$ con denominador $1 \\neq 0$.",
+      "Falso, porque los enteros no tienen parte decimal fraccionaria.",
+      "Falso, porque los n\u00fameros racionales solo son n\u00fameros entre 0 y 1.",
+      "Verdadero, pero solo aplica a los enteros estrictamente positivos."
+    ],
+    "correct": 0,
+    "explanation": "Cualquier entero $a \\in \\mathbb{Z}$ se puede escribir en la forma de cociente $\\frac{a}{1}$, cumpliendo exactamente la definici\u00f3n de n\u00famero racional $\\mathbb{Q}$.",
+    "source": "Taller Unidad 1: N\u00fameros Reales (P\u00e1g 15, Ej. 2a)",
+    "subtopic": "Clasificaci\u00f3n Num\u00e9rica"
+  },
+  {
+    "id": 4,
+    "topic": "numeros_reales",
+    "topicName": "N\u00fameros Reales",
+    "difficulty": "F\u00e1cil",
+    "question": "Calcula el valor de la expresi\u00f3n con valor absoluto: $$|-15| + |8| - |-9|$$",
+    "options": [
+      "14",
+      "32",
+      "-16",
+      "18"
+    ],
+    "correct": 0,
+    "explanation": "$|-15| = 15$, $|8| = 8$, $|-9| = 9$.\\nSustituyendo: $15 + 8 - 9 = 23 - 9 = 14$.",
+    "source": "Taller Unidad 1: N\u00fameros Reales (P\u00e1g 1 & 12)",
+    "subtopic": "Valor Absoluto"
+  },
+  {
+    "id": 5,
+    "topic": "numeros_reales",
+    "topicName": "N\u00fameros Reales",
+    "difficulty": "Medio",
+    "question": "Resuelve el polinomio aritm\u00e9tico: $$100 - [(-4) + 7]$$",
+    "options": [
+      "97",
+      "103",
+      "89",
+      "-97"
+    ],
+    "correct": 0,
+    "explanation": "Operaci\u00f3n dentro del corchete: $(-4) + 7 = 3$.\\nLuego: $100 - 3 = 97$.",
+    "source": "Taller Unidad 1: N\u00fameros Reales (P\u00e1g 13, Ej. 4a)",
+    "subtopic": "Operaciones Combinadas"
+  },
+  {
+    "id": 6,
+    "topic": "numeros_reales",
+    "topicName": "N\u00fameros Reales",
+    "difficulty": "Medio",
+    "question": "Calcula el valor del polinomio aritm\u00e9tico: $$12 + \\{ [(-5) + 2] - (3 + 4) \\}$$",
+    "options": [
+      "2",
+      "-2",
+      "22",
+      "16"
+    ],
+    "correct": 0,
+    "explanation": "1. Corchete interno: $[(-5) + 2] = -3$.\\n2. Par\u00e9ntesis: $(3 + 4) = 7$.\\n3. En la llave: $\\{-3 - 7\\} = -10$.\\n4. Suma: $12 + (-10) = 2$.",
+    "source": "Taller Unidad 1: N\u00fameros Reales (P\u00e1g 13, Ej. 4b)",
+    "subtopic": "Operaciones Combinadas"
+  },
+  {
+    "id": 7,
+    "topic": "numeros_reales",
+    "topicName": "N\u00fameros Reales",
+    "difficulty": "Dif\u00edcil",
+    "question": "Efect\u00faa la operaci\u00f3n combinada: $$(14 - 7) + \\{ [13 - (-2)] - [7 + (-6)] \\}$$",
+    "options": [
+      "21",
+      "19",
+      "23",
+      "15"
+    ],
+    "correct": 0,
+    "explanation": "1. $(14 - 7) = 7$.\\n2. Primer corchete: $13 - (-2) = 13 + 2 = 15$.\\n3. Segundo corchete: $7 + (-6) = 1$.\\n4. En la llave: $15 - 1 = 14$.\\n5. Total: $7 + 14 = 21$.",
+    "source": "Taller Unidad 1: N\u00fameros Reales (P\u00e1g 13, Ej. 4c)",
+    "subtopic": "Operaciones Combinadas"
+  },
+  {
+    "id": 8,
+    "topic": "numeros_reales",
+    "topicName": "N\u00fameros Reales",
+    "difficulty": "F\u00e1cil",
+    "question": "\u00bfCu\u00e1l es la conversi\u00f3n a n\u00famero mixto de la fracci\u00f3n impropia $\\frac{9}{4}$?",
+    "options": [
+      "$$2\\frac{1}{4}$$",
+      "$$1\\frac{5}{4}$$",
+      "$$2\\frac{3}{4}$$",
+      "$$3\\frac{1}{4}$$"
+    ],
+    "correct": 0,
+    "explanation": "Dividiendo numerador entre denominador: $9 \\div 4 = 2$ con residuo $1$. Por tanto $\\frac{9}{4} = 2 + \\frac{1}{4} = 2\\frac{1}{4}$.",
+    "source": "Taller Unidad 1: N\u00fameros Reales (P\u00e1g 5 & 14)",
+    "subtopic": "Fracciones y Mixtos"
+  },
+  {
+    "id": 9,
+    "topic": "numeros_reales",
+    "topicName": "N\u00fameros Reales",
+    "difficulty": "Medio",
+    "question": "Calcula el valor de la operaci\u00f3n con potencias: $$(-3)^2 + (-2)^3 - (-1)^{100}$$",
+    "options": [
+      "0",
+      "2",
+      "-2",
+      "16"
+    ],
+    "correct": 0,
+    "explanation": "$(-3)^2 = 9$ (base negativa con exponente par da positivo).\\n$(-2)^3 = -8$ (exponente impar conserva signo negativo).\\n$(-1)^{100} = 1$.\\nSustituyendo: $9 + (-8) - 1 = 1 - 1 = 0$.",
+    "source": "Taller Unidad 1: N\u00fameros Reales (P\u00e1g 3)",
+    "subtopic": "Potenciaci\u00f3n"
+  },
+  {
+    "id": 10,
+    "topic": "numeros_reales",
+    "topicName": "N\u00fameros Reales",
+    "difficulty": "F\u00e1cil",
+    "question": "Indique si la afirmaci\u00f3n es Verdadera o Falsa: *\"La ra\u00edz impar de un n\u00famero negativo no pertenece a los n\u00fameros reales ($\\mathbb{R}$)\"*",
+    "options": [
+      "Falso, porque la ra\u00edz de \u00edndice impar de un n\u00famero negativo s\u00ed es real (por ejemplo, $\\sqrt[3]{-8} = -2 \\in \\mathbb{R}$).",
+      "Verdadero, cualquier ra\u00edz de un n\u00famero negativo siempre da imaginario.",
+      "Verdadero, solo se pueden calcular ra\u00edces impares a n\u00fameros naturales positivos.",
+      "Falso, solo aplica si el radicando es un n\u00famero fraccionario."
+    ],
+    "correct": 0,
+    "explanation": "La ra\u00edz impar de un negativo S\u00cd es un n\u00famero real: $(-2)^3 = -8 \\implies \\sqrt[3]{-8} = -2 \\in \\mathbb{R}$. Las que no son reales son las ra\u00edces de \u00edndice PAR de cantidades negativas.",
+    "source": "Taller Unidad 1: N\u00fameros Reales (P\u00e1g 15, Ej. 2k)",
+    "subtopic": "Potenciaci\u00f3n"
+  },
+  {
+    "id": 11,
+    "topic": "numeros_reales",
+    "topicName": "N\u00fameros Reales",
+    "difficulty": "Medio",
+    "question": "Simplifica la expresi\u00f3n con potencias: $$\\frac{(3b^2)^3}{(3b)^2}$$",
+    "options": [
+      "$$3b^4$$",
+      "$$9b^4$$",
+      "$$3b^3$$",
+      "$$b^4$$"
+    ],
+    "correct": 0,
+    "explanation": "Numerador: $(3b^2)^3 = 3^3 \\cdot (b^2)^3 = 27b^6$.\\nDenominador: $(3b)^2 = 3^2 \\cdot b^2 = 9b^2$.\\nDivisi\u00f3n: $\\frac{27b^6}{9b^2} = 3b^{6-2} = 3b^4$.",
+    "source": "Taller Unidad 1: N\u00fameros Reales (P\u00e1g 13, Ej. 6g)",
+    "subtopic": "Potenciaci\u00f3n"
+  },
+  {
+    "id": 12,
+    "topic": "numeros_reales",
+    "topicName": "N\u00fameros Reales",
+    "difficulty": "Medio",
+    "question": "Desarrolla la operaci\u00f3n con potencias de misma base: $$[(2a)^2]^3 \\times (2a)^2$$",
+    "options": [
+      "$$256a^8 \\quad \\text{\u00f3} \\quad (2a)^8$$",
+      "$$(2a)^7$$",
+      "$$64a^8$$",
+      "$$(2a)^{12}$$"
+    ],
+    "correct": 0,
+    "explanation": "$[(2a)^2]^3 = (2a)^{2 \\times 3} = (2a)^6$.\\nMultiplicando por $(2a)^2$: $(2a)^6 \\times (2a)^2 = (2a)^{6+2} = (2a)^8 = 2^8 a^8 = 256a^8$.",
+    "source": "Taller Unidad 1: N\u00fameros Reales (P\u00e1g 13, Ej. 6k)",
+    "subtopic": "Potenciaci\u00f3n"
+  },
+  {
+    "id": 13,
+    "topic": "expresiones_alg",
+    "topicName": "Expresiones Algebraicas",
+    "difficulty": "F\u00e1cil",
+    "question": "Realiza la suma de polinomios: $$(6x^2 + 3x - 2) + (-x^2 + 7x + 4)$$",
+    "options": [
+      "$$5x^2 + 10x + 2$$",
+      "$$7x^2 + 10x + 2$$",
+      "$$5x^2 + 4x - 6$$",
+      "$$5x^2 - 4x + 2$$"
+    ],
+    "correct": 0,
+    "explanation": "T\u00e9rminos semejantes:\\n\u2022 $x^2$: $6 - 1 = 5 \\implies 5x^2$\\n\u2022 $x$: $3 + 7 = 10 \\implies 10x$\\n\u2022 Constante: $-2 + 4 = 2$\\nResultado: $5x^2 + 10x + 2$.",
+    "source": "Taller \u00c1lgebra (Imagen de WhatsApp, Punto 1.1)",
+    "subtopic": "Suma de Polinomios"
+  },
+  {
+    "id": 14,
+    "topic": "expresiones_alg",
+    "topicName": "Expresiones Algebraicas",
+    "difficulty": "Medio",
+    "question": "Efect\u00faa la suma: $$(8a^2 - 6a^3 + 4a) + (4a^3 + a^2 - 4a - 5)$$",
+    "options": [
+      "$$-2a^3 + 9a^2 - 5$$",
+      "$$-10a^3 + 9a^2 + 8a - 5$$",
+      "$$2a^3 + 7a^2 - 5$$",
+      "$$-2a^3 + 7a^2 + 8a - 5$$"
+    ],
+    "correct": 0,
+    "explanation": "Ordenando por grado:\\n\u2022 $a^3$: $-6a^3 + 4a^3 = -2a^3$\\n\u2022 $a^2$: $8a^2 + a^2 = 9a^2$\\n\u2022 $a$: $4a - 4a = 0$\\n\u2022 Constante: $-5$\\nResultado: $-2a^3 + 9a^2 - 5$.",
+    "source": "Taller \u00c1lgebra (Imagen de WhatsApp, Punto 1.2)",
+    "subtopic": "Suma de Polinomios"
+  },
+  {
+    "id": 15,
+    "topic": "expresiones_alg",
+    "topicName": "Expresiones Algebraicas",
+    "difficulty": "Medio",
+    "question": "Efect\u00faa la suma de expresiones: $$(5x^4 - 3x^2 + 6x - 3) + (-3x^4 + x^3 + 5x^2 - 7x + 3)$$",
+    "options": [
+      "$$2x^4 + x^3 + 2x^2 - x$$",
+      "$$2x^4 + x^3 + 8x^2 - x$$",
+      "$$2x^4 - 2x^2 - x + 6$$",
+      "$$8x^4 + x^3 + 2x^2 - 13x$$"
+    ],
+    "correct": 0,
+    "explanation": "\u2022 $x^4$: $5 - 3 = 2 \\implies 2x^4$\\n\u2022 $x^3$: $x^3$\\n\u2022 $x^2$: $-3 + 5 = 2 \\implies 2x^2$\\n\u2022 $x$: $6 - 7 = -1 \\implies -x$\\n\u2022 Constante: $-3 + 3 = 0$\\nTotal: $2x^4 + x^3 + 2x^2 - x$.",
+    "source": "Taller \u00c1lgebra (Imagen de WhatsApp, Punto 1.3)",
+    "subtopic": "Suma de Polinomios"
+  },
+  {
+    "id": 16,
+    "topic": "expresiones_alg",
+    "topicName": "Expresiones Algebraicas",
+    "difficulty": "F\u00e1cil",
+    "question": "De $5a^2 - 3a + 2$ resta $8a^2 - 5a + 7$. El resultado es:",
+    "options": [
+      "$$-3a^2 + 2a - 5$$",
+      "$$3a^2 - 2a + 5$$",
+      "$$-3a^2 - 8a + 9$$",
+      "$$13a^2 - 8a + 9$$"
+    ],
+    "correct": 0,
+    "explanation": "$(5a^2 - 3a + 2) - (8a^2 - 5a + 7) = 5a^2 - 3a + 2 - 8a^2 + 5a - 7 = -3a^2 + 2a - 5$.",
+    "source": "Taller \u00c1lgebra (Imagen de WhatsApp, Punto 2.1)",
+    "subtopic": "Resta de Polinomios"
+  },
+  {
+    "id": 17,
+    "topic": "expresiones_alg",
+    "topicName": "Expresiones Algebraicas",
+    "difficulty": "Medio",
+    "question": "\u00bfCu\u00e1l es el resultado de la resta: $$(3x^3 - 5x^2 - 6x + 3) - (2x^3 + 4x - 8)$$?",
+    "options": [
+      "$$x^3 - 5x^2 - 10x + 11$$",
+      "$$x^3 - 5x^2 - 2x - 5$$",
+      "$$5x^3 - 5x^2 - 10x + 11$$",
+      "$$x^3 - 5x^2 - 10x - 5$$"
+    ],
+    "correct": 0,
+    "explanation": "Cambiamos los signos del sustraendo:\\n$3x^3 - 5x^2 - 6x + 3 - 2x^3 - 4x + 8$\\n\u2022 $x^3$: $3 - 2 = 1 \\implies x^3$\\n\u2022 $x^2$: $-5x^2$\\n\u2022 $x$: $-6 - 4 = -10 \\implies -10x$\\n\u2022 Constante: $3 + 8 = 11$\\nResultado: $x^3 - 5x^2 - 10x + 11$.",
+    "source": "Taller \u00c1lgebra (Imagen de WhatsApp, Punto 2.2)",
+    "subtopic": "Resta de Polinomios"
+  },
+  {
+    "id": 18,
+    "topic": "expresiones_alg",
+    "topicName": "Expresiones Algebraicas",
+    "difficulty": "F\u00e1cil",
+    "question": "Resta $8x - 3y - 6$ de $5x + 4y - 1$.",
+    "options": [
+      "$$-3x + 7y + 5$$",
+      "$$3x - 7y - 5$$",
+      "$$13x + y - 7$$",
+      "$$-3x + y - 7$$"
+    ],
+    "correct": 0,
+    "explanation": "'Resta A de B' significa $B - A$:\\n$(5x + 4y - 1) - (8x - 3y - 6) = 5x + 4y - 1 - 8x + 3y + 6 = -3x + 7y + 5$.",
+    "source": "Taller #2: Expresiones Algebraicas (P\u00e1g 2)",
+    "subtopic": "Resta de Polinomios"
+  },
+  {
+    "id": 19,
+    "topic": "expresiones_alg",
+    "topicName": "Expresiones Algebraicas",
+    "difficulty": "F\u00e1cil",
+    "question": "Realiza: $$(a^2 + a - 1) - (a^2 - a + 1)$$",
+    "options": [
+      "$$2a - 2$$",
+      "$$0$$",
+      "$$2a^2 + 2a$$",
+      "$$2a$$"
+    ],
+    "correct": 0,
+    "explanation": "$a^2 + a - 1 - a^2 + a - 1 = (a^2 - a^2) + (a + a) + (-1 - 1) = 2a - 2$.",
+    "source": "Taller #2: Expresiones Algebraicas (P\u00e1g 2)",
+    "subtopic": "Multiplicaci\u00f3n Algebraica"
+  },
+  {
+    "id": 20,
+    "topic": "expresiones_alg",
+    "topicName": "Expresiones Algebraicas",
+    "difficulty": "Medio",
+    "question": "Suprime los signos de agrupaci\u00f3n y simplifica: $$3x - \\{2y - (5x + 3y)\\}$$",
+    "options": [
+      "$$8x + y$$",
+      "$$-2x - y$$",
+      "$$8x - y$$",
+      "$$2x + 5y$$"
+    ],
+    "correct": 0,
+    "explanation": "1. Par\u00e9ntesis interno: $2y - (5x + 3y) = 2y - 5x - 3y = -5x - y$.\\n2. Sustituyendo en la llave: $3x - \\{-5x - y\\} = 3x + 5x + y = 8x + y$.",
+    "source": "Taller #2 (P\u00e1g 3) y WhatsApp (Punto 3.1)",
+    "subtopic": "Signos de Agrupaci\u00f3n"
+  },
+  {
+    "id": 21,
+    "topic": "expresiones_alg",
+    "topicName": "Expresiones Algebraicas",
+    "difficulty": "Medio",
+    "question": "Simplifica suprimiendo signos de agrupaci\u00f3n: $$-(6a - 3b) - \\{5a - 9b - (2c - 9b)\\}$$",
+    "options": [
+      "$$-11a + 3b + 2c$$",
+      "$$-11a - 15b - 2c$$",
+      "$$-a + 3b - 2c$$",
+      "$$-11a + 3b - 2c$$"
+    ],
+    "correct": 0,
+    "explanation": "1. $-(6a - 3b) = -6a + 3b$.\\n2. En la llave: $5a - 9b - 2c + 9b = 5a - 2c$.\\n3. Menos exterior: $-\\{5a - 2c\\} = -5a + 2c$.\\n4. Suma: $(-6a + 3b) + (-5a + 2c) = -11a + 3b + 2c$.",
+    "source": "Taller #2 (P\u00e1g 3) y WhatsApp (Punto 3.2)",
+    "subtopic": "Suma de Polinomios"
+  },
+  {
+    "id": 22,
+    "topic": "expresiones_alg",
+    "topicName": "Expresiones Algebraicas",
+    "difficulty": "Dif\u00edcil",
+    "question": "Simplifica reduciendo t\u00e9rminos semejantes: $$4m + \\{(6m - 3n) - (9n - 5m) + (8m - 2n)\\}$$",
+    "options": [
+      "$$23m - 14n$$",
+      "$$15m - 14n$$",
+      "$$23m + 8n$$",
+      "$$19m - 10n$$"
+    ],
+    "correct": 0,
+    "explanation": "1. Dentro de la llave:\\n$6m - 3n - 9n + 5m + 8m - 2n = (6+5+8)m + (-3-9-2)n = 19m - 14n$.\\n2. Sumamos $4m$: $4m + 19m - 14n = 23m - 14n$.",
+    "source": "Taller #2 (P\u00e1g 3) y WhatsApp (Punto 3.4)",
+    "subtopic": "Suma de Polinomios"
+  },
+  {
+    "id": 23,
+    "topic": "expresiones_alg",
+    "topicName": "Expresiones Algebraicas",
+    "difficulty": "Medio",
+    "question": "Simplifica la expresi\u00f3n: $$2a - \\{7a - (3a - 7b) + (10a - 9b)\\}$$",
+    "options": [
+      "$$-12a + 2b$$",
+      "$$-12a - 16b$$",
+      "$$8a + 2b$$",
+      "$$-15a + 7b$$"
+    ],
+    "correct": 0,
+    "explanation": "1. Dentro de la llave: $7a - 3a + 7b + 10a - 9b = 14a - 2b$.\\n2. $2a - (14a - 2b) = 2a - 14a + 2b = -12a + 2b$.",
+    "source": "Taller #2 (P\u00e1g 3) y WhatsApp (Punto 3.5)",
+    "subtopic": "Signos de Agrupaci\u00f3n"
+  },
+  {
+    "id": 24,
+    "topic": "expresiones_alg",
+    "topicName": "Expresiones Algebraicas",
+    "difficulty": "F\u00e1cil",
+    "question": "Calcula el producto de los monomios: $$\\left(-\\frac{3}{5}mn\\right)\\left(-\\frac{5}{3}m^4np\\right)$$",
+    "options": [
+      "$$m^5n^2p$$",
+      "$$-m^5n^2p$$",
+      "$$\\frac{9}{25}m^5n^2p$$",
+      "$$m^4n^2p$$"
+    ],
+    "correct": 0,
+    "explanation": "Signos y coeficientes: $\\left(-\\frac{3}{5}\\right)\\left(-\\frac{5}{3}\\right) = +1$.\\nVariables: $m^1 \\cdot m^4 = m^5$, $n^1 \\cdot n^1 = n^2$, $p = p$.\\nTotal: $m^5n^2p$.",
+    "source": "Taller #2: Multiplicaci\u00f3n de Monomios (P\u00e1g 3, Ej. 9)",
+    "subtopic": "Signos de Agrupaci\u00f3n"
+  },
+  {
+    "id": 25,
+    "topic": "expresiones_alg",
+    "topicName": "Expresiones Algebraicas",
+    "difficulty": "Medio",
+    "question": "Multiplica el monomio por el polinomio: $$(4a^3c - 7a^2b - 2c)(-3ac^4)$$",
+    "options": [
+      "$$-12a^4c^5 + 21a^3bc^4 + 6ac^5$$",
+      "$$-12a^4c^4 + 21a^2bc^4 + 6ac^4$$",
+      "$$12a^4c^5 - 21a^3bc^4 - 6ac^5$$",
+      "$$-12a^3c^5 + 21a^3bc^4 + 6ac^5$$"
+    ],
+    "correct": 0,
+    "explanation": "Aplicamos propiedad distributiva t\u00e9rmino a t\u00e9rmino:\\n1. $(4a^3c)(-3ac^4) = -12a^{3+1}c^{1+4} = -12a^4c^5$\\n2. $(-7a^2b)(-3ac^4) = +21a^{2+1}bc^4 = 21a^3bc^4$\\n3. $(-2c)(-3ac^4) = +6ac^{1+4} = 6ac^5$\\nResultado: $-12a^4c^5 + 21a^3bc^4 + 6ac^5$.",
+    "source": "Taller #2: Monomio por Polinomio (P\u00e1g 3, Ej. 8)",
+    "subtopic": "Signos de Agrupaci\u00f3n"
+  },
+  {
+    "id": 26,
+    "topic": "expresiones_alg",
+    "topicName": "Expresiones Algebraicas",
+    "difficulty": "F\u00e1cil",
+    "question": "Efect\u00faa la divisi\u00f3n algebraica: $$\\frac{9a^6b^{10}}{3a^2b^5}$$",
+    "options": [
+      "$$3a^4b^5$$",
+      "$$3a^3b^2$$",
+      "$$6a^4b^5$$",
+      "$$3a^8b^{15}$$"
+    ],
+    "correct": 0,
+    "explanation": "$\\frac{9}{3} = 3$, $a^{6-2} = a^4$, $b^{10-5} = b^5$. Resultado: $3a^4b^5$.",
+    "source": "Taller #2: Divisi\u00f3n (P\u00e1g 4, Ej. 1)",
+    "subtopic": "Signos de Agrupaci\u00f3n"
+  },
+  {
+    "id": 27,
+    "topic": "expresiones_alg",
+    "topicName": "Expresiones Algebraicas",
+    "difficulty": "F\u00e1cil",
+    "question": "Calcula el cociente: $$\\frac{42x^9y^2}{-7x^5y^2}$$",
+    "options": [
+      "$$-6x^4$$",
+      "$$6x^4$$",
+      "$$-6x^4y$$",
+      "$$-6x^{14}y^4$$"
+    ],
+    "correct": 0,
+    "explanation": "$\\frac{42}{-7} = -6$, $x^{9-5} = x^4$, $y^{2-2} = y^0 = 1$. Resultado: $-6x^4$.",
+    "source": "Taller #2: Divisi\u00f3n (P\u00e1g 4, Ej. 2)",
+    "subtopic": "Signos de Agrupaci\u00f3n"
+  },
+  {
+    "id": 28,
+    "topic": "expresiones_alg",
+    "topicName": "Expresiones Algebraicas",
+    "difficulty": "F\u00e1cil",
+    "question": "Efect\u00faa la divisi\u00f3n: $$\\frac{-26a^5b^6}{-13b^3}$$",
+    "options": [
+      "$$2a^5b^3$$",
+      "$$-2a^5b^3$$",
+      "$$2a^5b^2$$",
+      "$$13a^5b^3$$"
+    ],
+    "correct": 0,
+    "explanation": "$\\frac{-26}{-13} = +2$. El t\u00e9rmino $a^5$ permanece intacto y $b^{6-3} = b^3$. Total: $2a^5b^3$.",
+    "source": "Taller #2: Divisi\u00f3n (P\u00e1g 4, Ej. 3)",
+    "subtopic": "Signos de Agrupaci\u00f3n"
+  },
+  {
+    "id": 29,
+    "topic": "expresiones_alg",
+    "topicName": "Expresiones Algebraicas",
+    "difficulty": "F\u00e1cil",
+    "question": "Efect\u00faa la divisi\u00f3n: $$\\frac{32p^5q^6}{-8p^3q^2}$$",
+    "options": [
+      "$$-4p^2q^4$$",
+      "$$4p^2q^4$$",
+      "$$-4p^8q^8$$",
+      "$$-24p^2q^4$$"
+    ],
+    "correct": 0,
+    "explanation": "$\\frac{32}{-8} = -4$, $p^{5-3} = p^2$, $q^{6-2} = q^4$. Resultado: $-4p^2q^4$.",
+    "source": "Taller #2: Divisi\u00f3n (P\u00e1g 4, Ej. 4)",
+    "subtopic": "Signos de Agrupaci\u00f3n"
+  },
+  {
+    "id": 30,
+    "topic": "productos_notables",
+    "topicName": "Productos Notables",
+    "difficulty": "F\u00e1cil",
+    "question": "Desarrolla el cuadrado del binomio: $$(x + 0.2)^2$$",
+    "options": [
+      "$$x^2 + 0.4x + 0.04$$",
+      "$$x^2 + 0.2x + 0.04$$",
+      "$$x^2 + 0.4x + 0.4$$",
+      "$$x^2 + 0.04$$"
+    ],
+    "correct": 0,
+    "explanation": "$(x)^2 + 2(x)(0.2) + (0.2)^2 = x^2 + 0.4x + 0.04$.",
+    "source": "Taller #2: Productos Notables (P\u00e1g 1, Ej. 20)",
+    "subtopic": "Cuadrado de un Binomio"
+  },
+  {
+    "id": 31,
+    "topic": "productos_notables",
+    "topicName": "Productos Notables",
+    "difficulty": "Medio",
+    "question": "Calcula el cuadrado del binomio: $$(4x^3 + 5y)^2$$",
+    "options": [
+      "$$16x^6 + 40x^3y + 25y^2$$",
+      "$$16x^5 + 40x^3y + 25y^2$$",
+      "$$8x^6 + 20x^3y + 10y^2$$",
+      "$$16x^6 + 25y^2$$"
+    ],
+    "correct": 0,
+    "explanation": "$(4x^3)^2 + 2(4x^3)(5y) + (5y)^2 = 16x^6 + 40x^3y + 25y^2$.",
+    "source": "Taller #2: Productos Notables (P\u00e1g 1, Ej. 21)",
+    "subtopic": "Cubo de un Binomio"
+  },
+  {
+    "id": 32,
+    "topic": "productos_notables",
+    "topicName": "Productos Notables",
+    "difficulty": "Medio",
+    "question": "Desarrolla: $$(9a^3 - a^2b)^2$$",
+    "options": [
+      "$$81a^6 - 18a^5b + a^4b^2$$",
+      "$$81a^6 - 9a^5b + a^4b^2$$",
+      "$$81a^9 - 18a^5b + a^4b^2$$",
+      "$$81a^6 + 18a^5b - a^4b^2$$"
+    ],
+    "correct": 0,
+    "explanation": "$(9a^3)^2 - 2(9a^3)(a^2b) + (a^2b)^2 = 81a^6 - 18a^5b + a^4b^2$.",
+    "source": "Taller #2: Productos Notables (P\u00e1g 1, Ej. 22)",
+    "subtopic": "Cubo de un Binomio"
+  },
+  {
+    "id": 33,
+    "topic": "productos_notables",
+    "topicName": "Productos Notables",
+    "difficulty": "Medio",
+    "question": "Desarrolla el cuadrado del binomio con potencias: $$(a^5 - b^5)^2$$",
+    "options": [
+      "$$a^{10} - 2a^5b^5 + b^{10}$$",
+      "$$a^{25} - 2a^5b^5 + b^{25}$$",
+      "$$a^{10} - b^{10}$$",
+      "$$a^{10} + 2a^5b^5 + b^{10}$$"
+    ],
+    "correct": 0,
+    "explanation": "$(a^5)^2 - 2(a^5)(b^5) + (b^5)^2 = a^{5 \\times 2} - 2a^5b^5 + b^{5 \\times 2} = a^{10} - 2a^5b^5 + b^{10}$.",
+    "source": "Taller #2: Cuadrado de Binomio (P\u00e1g 1, Ej. 24)",
+    "subtopic": "Cuadrado de un Binomio"
+  },
+  {
+    "id": 34,
+    "topic": "productos_notables",
+    "topicName": "Productos Notables",
+    "difficulty": "Dif\u00edcil",
+    "question": "Desarrolla el binomio con fracciones: $$\\left(1 - \\frac{3}{4}xy\\right)^2$$",
+    "options": [
+      "$$1 - \\frac{3}{2}xy + \\frac{9}{16}x^2y^2$$",
+      "$$1 - \\frac{3}{4}xy + \\frac{9}{16}x^2y^2$$",
+      "$$1 - \\frac{3}{2}xy + \\frac{6}{8}x^2y^2$$",
+      "$$1 - \\frac{9}{16}x^2y^2$$"
+    ],
+    "correct": 0,
+    "explanation": "$(1)^2 - 2(1)\\left(\\frac{3}{4}xy\\right) + \\left(\\frac{3}{4}xy\\right)^2 = 1 - \\frac{6}{4}xy + \\frac{9}{16}x^2y^2 = 1 - \\frac{3}{2}xy + \\frac{9}{16}x^2y^2$.",
+    "source": "Taller #2: Productos Notables (P\u00e1g 1, Ej. 25)",
+    "subtopic": "Cuadrado de un Binomio"
+  },
+  {
+    "id": 35,
+    "topic": "productos_notables",
+    "topicName": "Productos Notables",
+    "difficulty": "F\u00e1cil",
+    "question": "Efect\u00faa el producto de binomios conjugados: $$(3x + 5y)(3x - 5y)$$",
+    "options": [
+      "$$9x^2 - 25y^2$$",
+      "$$9x^2 + 25y^2$$",
+      "$$9x^2 - 30xy + 25y^2$$",
+      "$$6x^2 - 10y^2$$"
+    ],
+    "correct": 0,
+    "explanation": "$(3x)^2 - (5y)^2 = 9x^2 - 25y^2$ (diferencia de cuadrados).",
+    "source": "Taller #2: Binomios Conjugados (P\u00e1g 1, Ej. 9)",
+    "subtopic": "Binomios Conjugados"
+  },
+  {
+    "id": 36,
+    "topic": "productos_notables",
+    "topicName": "Productos Notables",
+    "difficulty": "F\u00e1cil",
+    "question": "Calcula el producto de binomios conjugados: $$(4m - 9n)(4m + 9n)$$",
+    "options": [
+      "$$16m^2 - 81n^2$$",
+      "$$16m^2 + 81n^2$$",
+      "$$8m^2 - 18n^2$$",
+      "$$16m^2 - 72mn + 81n^2$$"
+    ],
+    "correct": 0,
+    "explanation": "$(4m)^2 - (9n)^2 = 16m^2 - 81n^2$.",
+    "source": "Taller #2: Binomios Conjugados (P\u00e1g 1, Ej. 10)",
+    "subtopic": "Binomios Conjugados"
+  },
+  {
+    "id": 37,
+    "topic": "productos_notables",
+    "topicName": "Productos Notables",
+    "difficulty": "Medio",
+    "question": "Desarrolla el cubo de un binomio: $$(2x + 3)^3$$",
+    "options": [
+      "$$8x^3 + 36x^2 + 54x + 27$$",
+      "$$8x^3 + 12x^2 + 18x + 27$$",
+      "$$8x^3 + 27$$",
+      "$$8x^3 + 18x^2 + 36x + 27$$"
+    ],
+    "correct": 0,
+    "explanation": "$(2x)^3 + 3(2x)^2(3) + 3(2x)(3^2) + 3^3 = 8x^3 + 36x^2 + 54x + 27$.",
+    "source": "Taller #2: Cubo de un Binomio (P\u00e1g 1, Ej. 11)",
+    "subtopic": "Cubo de un Binomio"
+  },
+  {
+    "id": 38,
+    "topic": "productos_notables",
+    "topicName": "Productos Notables",
+    "difficulty": "Medio",
+    "question": "Desarrolla el cubo de un binomio: $$(1 - 4m)^3$$",
+    "options": [
+      "$$1 - 12m + 48m^2 - 64m^3$$",
+      "$$1 - 12m - 48m^2 - 64m^3$$",
+      "$$1 - 64m^3$$",
+      "$$1 - 4m + 16m^2 - 64m^3$$"
+    ],
+    "correct": 0,
+    "explanation": "F\u00f3rmula $(a-b)^3 = a^3 - 3a^2b + 3ab^2 - b^3$:\\n$1^3 - 3(1)^2(4m) + 3(1)(4m)^2 - (4m)^3 = 1 - 12m + 3(16m^2) - 64m^3 = 1 - 12m + 48m^2 - 64m^3$.",
+    "source": "Taller #2: Cubo de un Binomio (P\u00e1g 1, Ej. 12)",
+    "subtopic": "Cubo de un Binomio"
+  },
+  {
+    "id": 39,
+    "topic": "productos_notables",
+    "topicName": "Productos Notables",
+    "difficulty": "Dif\u00edcil",
+    "question": "Desarrolla el cuadrado del trinomio: $$(2a - 3b + 1)^2$$",
+    "options": [
+      "$$4a^2 + 9b^2 + 1 - 12ab + 4a - 6b$$",
+      "$$4a^2 - 9b^2 + 1 - 12ab + 4a - 6b$$",
+      "$$4a^2 + 9b^2 + 1 - 6ab + 2a - 3b$$",
+      "$$4a^2 + 9b^2 + 1$$"
+    ],
+    "correct": 0,
+    "explanation": "Cuadrados: $(2a)^2 + (-3b)^2 + (1)^2 = 4a^2 + 9b^2 + 1$.\\nDobles productos: $2(2a)(-3b) = -12ab$, $2(2a)(1) = 4a$, $2(-3b)(1) = -6b$.\\nTotal: $4a^2 + 9b^2 + 1 - 12ab + 4a - 6b$.",
+    "source": "Taller #2: Cuadrado de un Trinomio (P\u00e1g 1, Ej. 50)",
+    "subtopic": "Cuadrado de un Trinomio"
+  },
+  {
+    "id": 40,
+    "topic": "productos_notables",
+    "topicName": "Productos Notables",
+    "difficulty": "Dif\u00edcil",
+    "question": "Desarrolla el cuadrado de un trinomio: $$(4m + 5n + p)^2$$",
+    "options": [
+      "$$16m^2 + 25n^2 + p^2 + 40mn + 8mp + 10np$$",
+      "$$16m^2 + 25n^2 + p^2 + 20mn + 4mp + 5np$$",
+      "$$16m^2 + 25n^2 + p^2$$",
+      "$$16m^2 + 25n^2 + p^2 + 40mn - 8mp - 10np$$"
+    ],
+    "correct": 0,
+    "explanation": "$(4m)^2 + (5n)^2 + p^2 + 2(4m)(5n) + 2(4m)(p) + 2(5n)(p) = 16m^2 + 25n^2 + p^2 + 40mn + 8mp + 10np$.",
+    "source": "Taller #2: Cuadrado de un Trinomio (P\u00e1g 1, Ej. 51)",
+    "subtopic": "Cuadrado de un Trinomio"
+  },
+  {
+    "id": 41,
+    "topic": "factorizacion",
+    "topicName": "Factorizaci\u00f3n",
+    "difficulty": "F\u00e1cil",
+    "question": "Factoriza por factor com\u00fan monomio el binomio: $$7x^2 - 3x$$",
+    "options": [
+      "$$x(7x - 3)$$",
+      "$$7x(x - 3)$$",
+      "$$x^2(7 - 3)$$",
+      "$$(7x - 1)(x - 3)$$"
+    ],
+    "correct": 0,
+    "explanation": "El factor com\u00fan de mayor grado entre $7x^2$ y $-3x$ es $x$. Factorizado: $x(7x - 3)$.",
+    "source": "Taller Desigualdades (P\u00e1g 15, Ej. 3b)",
+    "subtopic": "Trinomio x\u00b2 + bx + c"
+  },
+  {
+    "id": 42,
+    "topic": "factorizacion",
+    "topicName": "Factorizaci\u00f3n",
+    "difficulty": "Medio",
+    "question": "Factoriza completamente el trinomio de la forma $x^2 + bx + c$: $$x^2 - 5x + 4$$",
+    "options": [
+      "$$(x - 4)(x - 1)$$",
+      "$$(x - 5)(x + 1)$$",
+      "$$(x + 4)(x + 1)$$",
+      "$$(x - 2)(x - 3)$$"
+    ],
+    "correct": 0,
+    "explanation": "Buscamos dos n\u00fameros cuyo producto sea $+4$ y cuya suma algebraica sea $-5$. Dichos n\u00fameros son $-4$ y $-1$. Por tanto: $(x - 4)(x - 1)$.",
+    "source": "Taller Desigualdades (P\u00e1g 6)",
+    "subtopic": "Trinomio x\u00b2 + bx + c"
+  },
+  {
+    "id": 43,
+    "topic": "factorizacion",
+    "topicName": "Factorizaci\u00f3n",
+    "difficulty": "Medio",
+    "question": "Factoriza el trinomio: $$x^2 + 8x + 12$$",
+    "options": [
+      "$$(x + 6)(x + 2)$$",
+      "$$(x + 4)(x + 3)$$",
+      "$$(x + 12)(x + 1)$$",
+      "$$(x - 6)(x - 2)$$"
+    ],
+    "correct": 0,
+    "explanation": "Dos n\u00fameros que multiplicados den $12$ y sumados den $8$ son $6$ y $2$. Factorizaci\u00f3n: $(x + 6)(x + 2)$.",
+    "source": "Taller Desigualdades (P\u00e1g 15, Ej. 4g)",
+    "subtopic": "Trinomio x\u00b2 + bx + c"
+  },
+  {
+    "id": 44,
+    "topic": "factorizacion",
+    "topicName": "Factorizaci\u00f3n",
+    "difficulty": "F\u00e1cil",
+    "question": "Factoriza la diferencia de cuadrados: $$4x^2 - 25y^2$$",
+    "options": [
+      "$$(2x - 5y)(2x + 5y)$$",
+      "$$(4x - 25y)(4x + 25y)$$",
+      "$$(2x - 5y)^2$$",
+      "$$(2x + 5y)^2$$"
+    ],
+    "correct": 0,
+    "explanation": "$\\sqrt{4x^2} = 2x$ y $\\sqrt{25y^2} = 5y$. Por regla de diferencia de cuadrados: $(2x - 5y)(2x + 5y)$.",
+    "source": "Fundamentos de Factorizaci\u00f3n",
+    "subtopic": "Diferencia de Cuadrados"
+  },
+  {
+    "id": 45,
+    "topic": "fracciones_alg",
+    "topicName": "Fracciones Algebraicas",
+    "difficulty": "F\u00e1cil",
+    "question": "Simplifica la fracci\u00f3n algebraica para $x \\neq -2$: $$\\frac{x^2 - 4}{x + 2}$$",
+    "options": [
+      "$$x - 2$$",
+      "$$x + 2$$",
+      "$$x - 4$$",
+      "$$\\frac{x - 2}{2}$$"
+    ],
+    "correct": 0,
+    "explanation": "Diferencia de cuadrados en el numerador: $x^2 - 4 = (x - 2)(x + 2)$.\\n$\\frac{(x - 2)(x + 2)}{x + 2} = x - 2$.",
+    "source": "Taller Desigualdades (P\u00e1g 7)",
+    "subtopic": "Simplificaci\u00f3n de Fracciones"
+  },
+  {
+    "id": 46,
+    "topic": "fracciones_alg",
+    "topicName": "Fracciones Algebraicas",
+    "difficulty": "Dif\u00edcil",
+    "question": "Efect\u00faa y simplifica la resta de fracciones algebraicas: $$\\frac{x - 1}{x + 1} - \\frac{x + 1}{x - 1}$$",
+    "options": [
+      "$$\\frac{-4x}{x^2 - 1}$$",
+      "$$\\frac{4x}{x^2 - 1}$$",
+      "$$\\frac{-2x}{x^2 - 1}$$",
+      "$$0$$"
+    ],
+    "correct": 0,
+    "explanation": "Denominador com\u00fan: $(x+1)(x-1) = x^2 - 1$.\\n$\\frac{(x-1)^2 - (x+1)^2}{x^2 - 1} = \\frac{(x^2 - 2x + 1) - (x^2 + 2x + 1)}{x^2 - 1} = \\frac{-4x}{x^2 - 1}$.",
+    "source": "Taller Desigualdades (P\u00e1g 7, Ej. Racional)",
+    "subtopic": "Operaciones con Fracciones"
+  },
+  {
+    "id": 47,
+    "topic": "desigualdades",
+    "topicName": "Desigualdades",
+    "difficulty": "F\u00e1cil",
+    "question": "\u00bfQu\u00e9 propiedad fundamental se aplica al dividir por un n\u00famero negativo en una desigualdad?",
+    "options": [
+      "El sentido de la desigualdad se INVIERTE (ej. de $<$ pasa a $>$).",
+      "El sentido de la desigualdad siempre se conserva.",
+      "La desigualdad se transforma obligatoriamente en igualdad.",
+      "Solo se invierte si el dividendo es cero."
+    ],
+    "correct": 0,
+    "explanation": "Propiedad: Al multiplicar o dividir ambos miembros de una desigualdad por un n\u00famero negativo ($c < 0$), el sentido de la desigualdad se invierte obligatoriamente.",
+    "source": "Taller Desigualdades UNIGUAJIRA (P\u00e1g 2)",
+    "subtopic": "Inecuaciones Lineales"
+  },
+  {
+    "id": 48,
+    "topic": "desigualdades",
+    "topicName": "Desigualdades",
+    "difficulty": "F\u00e1cil",
+    "question": "Resuelve la inecuaci\u00f3n lineal: $$3x + 1 > 2x + 5$$",
+    "options": [
+      "$$x > 4 \\quad \\text{\u00f3} \\quad x \\in (4, \\infty)$$",
+      "$$x < 4 \\quad \\text{\u00f3} \\quad x \\in (-\\infty, 4)$$",
+      "$$x \\ge 6$$",
+      "$$x > -4$$"
+    ],
+    "correct": 0,
+    "explanation": "$3x - 2x > 5 - 1 \\implies x > 4$. En intervalo: $(4, \\infty)$ (semirrecta abierta).",
+    "source": "Taller Desigualdades UNIGUAJIRA (P\u00e1g 3, Ej. 1)",
+    "subtopic": "Inecuaciones Lineales"
+  },
+  {
+    "id": 49,
+    "topic": "desigualdades",
+    "topicName": "Desigualdades",
+    "difficulty": "Medio",
+    "question": "Resuelve la inecuaci\u00f3n: $$\\frac{2x - 3}{4} \\ge 3x + 8$$",
+    "options": [
+      "$$x \\le -3.5 \\quad \\left(x \\le -\\frac{7}{2}\\right)$$",
+      "$$x \\ge -3.5$$",
+      "$$x \\le 3.5$$",
+      "$$x \\ge -5$$"
+    ],
+    "correct": 0,
+    "explanation": "1. Multiplicamos por 4: $2x - 3 \\ge 12x + 32$.\\n2. Transponemos: $2x - 12x \\ge 32 + 3 \\implies -10x \\ge 35$.\\n3. Dividimos entre $-10$ (invirtiendo el sentido): $x \\le \\frac{35}{-10} = -3.5$.",
+    "source": "Taller Desigualdades UNIGUAJIRA (P\u00e1g 3, Ej. 2)",
+    "subtopic": "Inecuaciones Racionales"
+  },
+  {
+    "id": 50,
+    "topic": "desigualdades",
+    "topicName": "Desigualdades",
+    "difficulty": "Medio",
+    "question": "Resuelve la inecuaci\u00f3n con fracciones: $$\\frac{3x - 1}{2} < \\frac{x + 2}{5}$$",
+    "options": [
+      "$$x < \\frac{9}{13}$$",
+      "$$x > \\frac{9}{13}$$",
+      "$$x < \\frac{5}{13}$$",
+      "$$x < 1$$"
+    ],
+    "correct": 0,
+    "explanation": "Multiplicando por el mcm(2,5) = 10:\\n$5(3x - 1) < 2(x + 2) \\implies 15x - 5 < 2x + 4 \\implies 13x < 9 \\implies x < \\frac{9}{13}$.",
+    "source": "Taller Desigualdades UNIGUAJIRA (P\u00e1g 15, Ej. 1b)",
+    "subtopic": "Inecuaciones Racionales"
+  },
+  {
+    "id": 51,
+    "topic": "desigualdades",
+    "topicName": "Desigualdades",
+    "difficulty": "Medio",
+    "question": "Resuelve el sistema de inecuaciones lineales: $$\\begin{cases} 3x - 1 \\le 5x + 7 \\\\ x + 4 > 2x - 1 \\end{cases}$$",
+    "options": [
+      "$$x \\in [-4, 5) \\quad \\text{\u00f3} \\quad -4 \\le x < 5$$",
+      "$$x \\in (-4, 5]$$",
+      "$$x \\in [4, 5)$$",
+      "No tiene soluci\u00f3n"
+    ],
+    "correct": 0,
+    "explanation": "1. $3x - 5x \\le 7 + 1 \\implies -2x \\le 8 \\implies x \\ge -4$.\\n2. $x - 2x > -1 - 4 \\implies -x > -5 \\implies x < 5$.\\nIntersecci\u00f3n: $-4 \\le x < 5$, es decir $[-4, 5)$.",
+    "source": "Taller Desigualdades UNIGUAJIRA (P\u00e1g 4)",
+    "subtopic": "Sistemas de Inecuaciones"
+  },
+  {
+    "id": 52,
+    "topic": "desigualdades",
+    "topicName": "Desigualdades",
+    "difficulty": "F\u00e1cil",
+    "question": "Determina el conjunto soluci\u00f3n del sistema: $$\\begin{cases} 3x \\ge 15 \\\\ -2x > 6 \\end{cases}$$",
+    "options": [
+      "No tiene soluci\u00f3n (conjunto vac\u00edo $\\emptyset$)",
+      "$$x \\in [-3, 5]$$",
+      "$$x \\in (-\\infty, -3) \\cup [5, \\infty)$$",
+      "$$x \\ge 5$$"
+    ],
+    "correct": 0,
+    "explanation": "De la 1ra: $x \\ge 5$. De la 2da: $x < -3$. No existe ning\u00fan n\u00famero que sea al mismo tiempo mayor o igual a 5 y menor estricto que -3. El conjunto soluci\u00f3n es vac\u00edo $\\emptyset$.",
+    "source": "Taller Desigualdades UNIGUAJIRA (P\u00e1g 5)",
+    "subtopic": "Sistemas de Inecuaciones"
+  },
+  {
+    "id": 53,
+    "topic": "desigualdades",
+    "topicName": "Desigualdades",
+    "difficulty": "Medio",
+    "question": "Resuelve la doble desigualdad: $$2 \\le 2x - 3 \\le 5$$",
+    "options": [
+      "$$x \\in \\left[\\frac{5}{2}, 4\\right]$$",
+      "$$x \\in \\left(\\frac{5}{2}, 4\\right)$$",
+      "$$x \\in [1, 4]$$",
+      "$$x \\in [2, 5]$$"
+    ],
+    "correct": 0,
+    "explanation": "Sumamos 3 en toda la desigualdad: $2 + 3 \\le 2x \\le 5 + 3 \\implies 5 \\le 2x \\le 8$.\\nDividimos entre 2: $\\frac{5}{2} \\le x \\le 4$, que en intervalo cerrado es $\\left[\\frac{5}{2}, 4\\right]$.",
+    "source": "Taller Desigualdades UNIGUAJIRA (P\u00e1g 5)",
+    "subtopic": "Inecuaciones Racionales"
+  },
+  {
+    "id": 54,
+    "topic": "desigualdades",
+    "topicName": "Desigualdades",
+    "difficulty": "Dif\u00edcil",
+    "question": "Resuelve la inecuaci\u00f3n cuadr\u00e1tica: $$x^2 - 5x + 4 > 0$$",
+    "options": [
+      "$$x \\in (-\\infty, 1) \\cup (4, \\infty)$$",
+      "$$x \\in (1, 4)$$",
+      "$$x \\in [1, 4]$$",
+      "$$x \\in (-\\infty, -4) \\cup (-1, \\infty)$$"
+    ],
+    "correct": 0,
+    "explanation": "Factorizamos: $(x - 1)(x - 4) > 0$. Ra\u00edces: $x = 1, x = 4$.\\nIntervalos: $(-\\infty, 1)$, $(1, 4)$, $(4, \\infty)$.\\nProbando valores ($x=0 \\to +4 > 0$; $x=2 \\to -2 < 0$; $x=5 \\to +4 > 0$).\\nSoluci\u00f3n: $(-\\infty, 1) \\cup (4, \\infty)$.",
+    "source": "Taller Desigualdades UNIGUAJIRA (P\u00e1g 6)",
+    "subtopic": "Inecuaciones Cuadr\u00e1ticas"
+  },
+  {
+    "id": 55,
+    "topic": "desigualdades",
+    "topicName": "Desigualdades",
+    "difficulty": "Dif\u00edcil",
+    "question": "Resuelve la inecuaci\u00f3n: $$(3 + x)(2 - x) < 0$$",
+    "options": [
+      "$$x \\in (-\\infty, -3) \\cup (2, \\infty)$$",
+      "$$x \\in (-3, 2)$$",
+      "$$x \\in [-3, 2]$$",
+      "$$x \\in (-\\infty, 2)$$"
+    ],
+    "correct": 0,
+    "explanation": "Ra\u00edces: $3+x = 0 \\implies x = -3$; $2-x = 0 \\implies x = 2$.\\nPara $x = 0$: $(3)(2) = 6 > 0$ (no cumple el $< 0$).\\nPara $x = -4$: $(-1)(6) = -6 < 0$ (cumple).\\nPara $x = 3$: $(6)(-1) = -6 < 0$ (cumple).\\nSoluci\u00f3n: $(-\\infty, -3) \\cup (2, \\infty)$.",
+    "source": "Taller Desigualdades UNIGUAJIRA (P\u00e1g 15, Ej. 3a)",
+    "subtopic": "Inecuaciones Lineales"
+  },
+  {
+    "id": 56,
+    "topic": "desigualdades",
+    "topicName": "Desigualdades",
+    "difficulty": "Dif\u00edcil",
+    "question": "Resuelve la inecuaci\u00f3n racional: $$\\frac{2x - 8}{3x + 9} \\ge 0$$",
+    "options": [
+      "$$x \\in (-\\infty, -3) \\cup [4, \\infty)$$",
+      "$$x \\in [-\\infty, -3] \\cup [4, \\infty)$$",
+      "$$x \\in (-3, 4]$$",
+      "$$x \\in (-\\infty, 4]$$"
+    ],
+    "correct": 0,
+    "explanation": "Ra\u00edz del numerador: $2x - 8 = 0 \\implies x = 4$.\\nRa\u00edz del denominador: $3x + 9 = 0 \\implies x = -3$.\\n\u00a1El denominador NUNCA puede ser cero!, por lo que en $-3$ el corchete SIEMPRE es abierto. En $x=4$ s\u00ed es cerrado por el signo $\\ge$.\\nEvaluando signos obtenemos $(-\\infty, -3) \\cup [4, \\infty)$.",
+    "source": "Taller Desigualdades UNIGUAJIRA (P\u00e1g 7)",
+    "subtopic": "Inecuaciones Racionales"
+  },
+  {
+    "id": 57,
+    "topic": "desigualdades",
+    "topicName": "Desigualdades",
+    "difficulty": "Dif\u00edcil",
+    "question": "Resuelve la inecuaci\u00f3n racional: $$\\frac{x^2 - 4}{x + 1} < 0$$",
+    "options": [
+      "$$x \\in (-\\infty, -2) \\cup (-1, 2)$$",
+      "$$x \\in (-2, -1) \\cup (2, \\infty)$$",
+      "$$x \\in [-2, 2]$$",
+      "$$x \\in (-\\infty, -1)$$"
+    ],
+    "correct": 0,
+    "explanation": "Puntos cr\u00edticos: numerador $x^2 - 4 = 0 \\implies x = \\pm 2$; denominador $x + 1 = 0 \\implies x = -1$.\\nPuntos en la recta: $-2, -1, 2$. Evaluando signos en cada subintervalo resulta negativo en $(-\\infty, -2)$ y en $(-1, 2)$.",
+    "source": "Taller Desigualdades UNIGUAJIRA (P\u00e1g 7)",
+    "subtopic": "Inecuaciones Racionales"
+  },
+  {
+    "id": 58,
+    "topic": "desigualdades",
+    "topicName": "Desigualdades",
+    "difficulty": "Dif\u00edcil",
+    "question": "Resuelve la inecuaci\u00f3n: $$\\frac{x^2 - 1}{x^2 + 1} > 0$$",
+    "options": [
+      "$$x \\in (-\\infty, -1) \\cup (1, \\infty)$$",
+      "$$x \\in (-1, 1)$$",
+      "$$x \\in [-1, 1]$$",
+      "Todos los reales $\\mathbb{R}$"
+    ],
+    "correct": 0,
+    "explanation": "El denominador $x^2 + 1$ siempre es estrictamente positivo para cualquier $x \\in \\mathbb{R}$. Por tanto, el signo depende \u00fanicamente del numerador: $x^2 - 1 > 0 \\implies (x - 1)(x + 1) > 0 \\implies x \\in (-\\infty, -1) \\cup (1, \\infty)$.",
+    "source": "Taller Desigualdades UNIGUAJIRA (P\u00e1g 15, Ej. 4d)",
+    "subtopic": "Inecuaciones Racionales"
+  },
+  {
+    "id": 59,
+    "topic": "linea_recta",
+    "topicName": "L\u00ednea Recta",
+    "difficulty": "F\u00e1cil",
+    "question": "Dada la ecuaci\u00f3n general de la recta $3x - 2y + 5 = 0$, \u00bfcu\u00e1l es su pendiente $m$?",
+    "options": [
+      "$$m = \\frac{3}{2}$$",
+      "$$m = -\\frac{3}{2}$$",
+      "$$m = \\frac{2}{3}$$",
+      "$$m = 3$$"
+    ],
+    "correct": 0,
+    "explanation": "Para $Ax + By + C = 0$, la pendiente es $m = -\\frac{A}{B}$. Con $A = 3, B = -2$: $m = -\\frac{3}{-2} = \\frac{3}{2}$.",
+    "source": "Taller Desigualdades & Rectas (P\u00e1g 9)",
+    "subtopic": "C\u00e1lculo de Pendiente (m)"
+  },
+  {
+    "id": 60,
+    "topic": "linea_recta",
+    "topicName": "L\u00ednea Recta",
+    "difficulty": "Medio",
+    "question": "Para graficar el semiplano soluci\u00f3n de $3x - 2y + 5 > 0$, evaluamos el origen $(0,0)$: $3(0) - 2(0) + 5 = 5 > 0$. \u00bfCu\u00e1l es la conclusi\u00f3n correcta?",
+    "options": [
+      "Como se verifica la desigualdad ($5 > 0$), la soluci\u00f3n es el semiplano abierto que CONTIENE al origen $(0,0)$, excluyendo los puntos sobre la recta.",
+      "La soluci\u00f3n es el semiplano que NO contiene al origen.",
+      "La soluci\u00f3n es un semiplano cerrado que incluye toda la recta.",
+      "No se puede utilizar el origen como punto de prueba."
+    ],
+    "correct": 0,
+    "explanation": "Al ser $(0,0)$ verdadero ($5 > 0$), el semiplano que contiene a dicho punto es la soluci\u00f3n. Como la desigualdad es estricta ($>$), los puntos sobre la recta no pertenecen a la soluci\u00f3n (semiplano abierto).",
+    "source": "Taller Desigualdades UNIGUAJIRA (P\u00e1g 9)",
+    "subtopic": "Semiplanos en el Plano"
+  },
+  {
+    "id": 61,
+    "topic": "linea_recta",
+    "topicName": "L\u00ednea Recta",
+    "difficulty": "F\u00e1cil",
+    "question": "En la inecuaci\u00f3n lineal con dos inc\u00f3gnitas $5x + y \\le 1$, la recta frontera $5x + y = 1$:",
+    "options": [
+      "S\u00cd pertenece a la soluci\u00f3n (semiplano cerrado) porque incluye la igualdad ($\\le$).",
+      "NO pertenece a la soluci\u00f3n porque es una desigualdad lineal.",
+      "Solo pertenece el origen $(0,0)$.",
+      "Pertenece \u00fanicamente para valores positivos de $x$."
+    ],
+    "correct": 0,
+    "explanation": "El s\u00edmbolo de desigualdad amplia ($\\le$ \u00f3 $\\ge$) incluye a todos los puntos que satisfacen la igualdad sobre la recta frontera (semiplano cerrado).",
+    "source": "Taller Desigualdades UNIGUAJIRA (P\u00e1g 10)",
+    "subtopic": "Semiplanos en el Plano"
+  },
+  {
+    "id": 62,
+    "topic": "linea_recta",
+    "topicName": "L\u00ednea Recta",
+    "difficulty": "F\u00e1cil",
+    "question": "\u00bfCu\u00e1l es la pendiente $m$ de la recta que pasa por los puntos $P_1(1, 2)$ y $P_2(4, 8)$?",
+    "options": [
+      "$$m = 2$$",
+      "$$m = \\frac{1}{2}$$",
+      "$$m = 3$$",
+      "$$m = -2$$"
+    ],
+    "correct": 0,
+    "explanation": "$m = \\frac{y_2 - y_1}{x_2 - x_1} = \\frac{8 - 2}{4 - 1} = \\frac{6}{3} = 2$.",
+    "source": "Fundamentos de Matem\u00e1ticas: L\u00ednea Recta",
+    "subtopic": "C\u00e1lculo de Pendiente (m)"
+  },
+  {
+    "id": 63,
+    "topic": "linea_recta",
+    "topicName": "L\u00ednea Recta",
+    "difficulty": "Medio",
+    "question": "Si una recta $L_1$ tiene pendiente $m_1 = -\\frac{2}{3}$, \u00bfcu\u00e1l debe ser la pendiente $m_2$ de una recta perpendicular a ella?",
+    "options": [
+      "$$m_2 = \\frac{3}{2}$$",
+      "$$m_2 = -\\frac{3}{2}$$",
+      "$$m_2 = -\\frac{2}{3}$$",
+      "$$m_2 = \\frac{2}{3}$$"
+    ],
+    "correct": 0,
+    "explanation": "Dos rectas son perpendiculares si $m_1 \\cdot m_2 = -1 \\implies m_2 = -\\frac{1}{m_1} = -\\frac{1}{-2/3} = \\frac{3}{2}$.",
+    "source": "Fundamentos de Matem\u00e1ticas: Rectas Perpendiculares",
+    "subtopic": "C\u00e1lculo de Pendiente (m)"
+  },
+  {
+    "id": 64,
+    "topic": "linea_recta",
+    "topicName": "L\u00ednea Recta",
+    "difficulty": "Medio",
+    "question": "\u00bfCu\u00e1l es el punto de corte con el eje $Y$ (intercepto $y$) de la recta $2x + 3y - 6 = 0$?",
+    "options": [
+      "$$(0, 2)$$",
+      "$$(0, 3)$$",
+      "$$(3, 0)$$",
+      "$$(0, -2)$$"
+    ],
+    "correct": 0,
+    "explanation": "Para hallar el corte con el eje $Y$, hacemos $x = 0$:\\n$2(0) + 3y - 6 = 0 \\implies 3y = 6 \\implies y = 2$. Por lo tanto, el punto es $(0, 2)$.",
+    "source": "Fundamentos de Matem\u00e1ticas: L\u00ednea Recta",
+    "subtopic": "Ecuaci\u00f3n General de la Recta"
+  },
+  {
+    "id": 65,
+    "topic": "ecuaciones",
+    "topicName": "Ecuaciones",
+    "difficulty": "F\u00e1cil",
+    "question": "Halla el valor de $x$ en la ecuaci\u00f3n lineal: $$4x + 12 = x + 24$$",
+    "options": [
+      "$$x = 4$$",
+      "$$x = 12$$",
+      "$$x = 3$$",
+      "$$x = -4$$"
+    ],
+    "correct": 0,
+    "explanation": "$4x - x = 24 - 12 \\implies 3x = 12 \\implies x = 4$.",
+    "source": "Taller Unidad 1: N\u00fameros Reales (P\u00e1g 3, Ej. 1)",
+    "subtopic": "Ecuaciones Lineales de 1er Grado"
+  },
+  {
+    "id": 66,
+    "topic": "ecuaciones",
+    "topicName": "Ecuaciones",
+    "difficulty": "F\u00e1cil",
+    "question": "Determina el valor de $x$ en la ecuaci\u00f3n: $$27 + 6x = 21 + 8x$$",
+    "options": [
+      "$$x = 3$$",
+      "$$x = -3$$",
+      "$$x = 6$$",
+      "$$x = 2$$"
+    ],
+    "correct": 0,
+    "explanation": "$27 - 21 = 8x - 6x \\implies 6 = 2x \\implies x = 3$.",
+    "source": "Taller Unidad 1: N\u00fameros Reales (P\u00e1g 13, Ej. 5k)",
+    "subtopic": "Ecuaciones Lineales de 1er Grado"
+  },
+  {
+    "id": 67,
+    "topic": "ecuaciones",
+    "topicName": "Ecuaciones",
+    "difficulty": "F\u00e1cil",
+    "question": "Halla el valor de $x$ en: $$17 - x = -6$$",
+    "options": [
+      "$$x = 23$$",
+      "$$x = 11$$",
+      "$$x = -23$$",
+      "$$x = -11$$"
+    ],
+    "correct": 0,
+    "explanation": "$17 + 6 = x \\implies x = 23$.",
+    "source": "Taller Unidad 1: N\u00fameros Reales (P\u00e1g 13, Ej. 5g)",
+    "subtopic": "Ecuaciones Lineales de 1er Grado"
+  },
+  {
+    "id": 68,
+    "topic": "ecuaciones",
+    "topicName": "Ecuaciones",
+    "difficulty": "Medio",
+    "question": "Resuelve la ecuaci\u00f3n: $$3(2 - 5x) = 18 - 12x$$",
+    "options": [
+      "$$x = -4$$",
+      "$$x = 4$$",
+      "$$x = -2$$",
+      "$$x = 1$$"
+    ],
+    "correct": 0,
+    "explanation": "$6 - 15x = 18 - 12x \\implies -15x + 12x = 18 - 6 \\implies -3x = 12 \\implies x = -4$.",
+    "source": "Taller Desigualdades UNIGUAJIRA (P\u00e1g 5)",
+    "subtopic": "Ecuaciones Lineales de 1er Grado"
+  },
+  {
+    "id": 69,
+    "topic": "ecuaciones",
+    "topicName": "Ecuaciones",
+    "difficulty": "Medio",
+    "question": "\u00bfCu\u00e1les son las soluciones de la ecuaci\u00f3n cuadr\u00e1tica $x^2 - 7x + 12 = 0$?",
+    "options": [
+      "$$x_1 = 3, \\quad x_2 = 4$$",
+      "$$x_1 = -3, \\quad x_2 = -4$$",
+      "$$x_1 = 6, \\quad x_2 = 2$$",
+      "$$x_1 = 1, \\quad x_2 = 12$$"
+    ],
+    "correct": 0,
+    "explanation": "Factorizando: $(x - 3)(x - 4) = 0 \\implies x_1 = 3, x_2 = 4$.",
+    "source": "Fundamentos de Matem\u00e1ticas: Ecuaci\u00f3n Cuadr\u00e1tica",
+    "subtopic": "Ecuaci\u00f3n Cuadr\u00e1tica"
+  },
+  {
+    "id": 70,
+    "topic": "ecuaciones",
+    "topicName": "Ecuaciones",
+    "difficulty": "Medio",
+    "question": "El discriminante de la ecuaci\u00f3n cuadr\u00e1tica $2x^2 - 4x + 5 = 0$ es $\\Delta = b^2 - 4ac$. \u00bfQu\u00e9 indica sobre sus ra\u00edces?",
+    "options": [
+      "$\\Delta = -24 < 0$, por lo que no tiene soluciones reales (ra\u00edces complejas conjugadas).",
+      "$\\Delta = 24 > 0$, tiene dos soluciones reales distintas.",
+      "$\\Delta = 0$, tiene una \u00fanica ra\u00edz real repetida.",
+      "$\\Delta = 56 > 0$, tiene soluciones racionales enteras."
+    ],
+    "correct": 0,
+    "explanation": "$\\Delta = (-4)^2 - 4(2)(5) = 16 - 40 = -24 < 0$. Al ser el discriminante estrictamente negativo, la ecuaci\u00f3n no tiene soluciones en el conjunto de los n\u00fameros reales.",
+    "source": "Fundamentos de Matem\u00e1ticas: Discriminante",
+    "subtopic": "Ecuaci\u00f3n Cuadr\u00e1tica"
+  },
+  {
+    "id": 71,
+    "topic": "ecuaciones",
+    "topicName": "Ecuaciones",
+    "difficulty": "Dif\u00edcil",
+    "question": "Aplica la f\u00f3rmula general $x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$ para resolver: $$2x^2 + 5x - 3 = 0$$",
+    "options": [
+      "$$x_1 = \\frac{1}{2}, \\quad x_2 = -3$$",
+      "$$x_1 = -\\frac{1}{2}, \\quad x_2 = 3$$",
+      "$$x_1 = 1, \\quad x_2 = -6$$",
+      "$$x_1 = \\frac{3}{2}, \\quad x_2 = -1$$"
+    ],
+    "correct": 0,
+    "explanation": "$a = 2, b = 5, c = -3$.\\n$\\Delta = 5^2 - 4(2)(-3) = 25 + 24 = 49$.\\n$x = \\frac{-5 \\pm 7}{4} \\implies x_1 = \\frac{2}{4} = \\frac{1}{2},\\ x_2 = \\frac{-12}{4} = -3$.",
+    "source": "Fundamentos de Matem\u00e1ticas: Ecuaci\u00f3n Cuadr\u00e1tica",
+    "subtopic": "Ecuaciones Lineales de 1er Grado"
+  },
+  {
+    "id": 72,
+    "topic": "factorizacion",
+    "topicName": "Factorizaci\u00f3n",
+    "difficulty": "F\u00e1cil",
+    "question": "Factoriza por factor com\u00fan monomio el polinomio: $$25x^7 - 10x^5 + 15x^3 - 5x^2$$",
+    "options": [
+      "$$5x^2(5x^5 - 2x^3 + 3x - 1)$$",
+      "$$5x^2(5x^5 - 2x^3 + 3x)$$",
+      "$$5x(5x^6 - 2x^4 + 3x^2 - 1)$$",
+      "$$x^2(25x^5 - 10x^3 + 15x - 5)$$"
+    ],
+    "correct": 0,
+    "explanation": "El MCD de los coeficientes (25, 10, 15, 5) es 5. La menor potencia de $x$ es $x^2$. Extrayendo $5x^2$:\\n$25x^7/5x^2 = 5x^5$, $-10x^5/5x^2 = -2x^3$, $15x^3/5x^2 = 3x$, $-5x^2/5x^2 = -1$.\\nResultado: $5x^2(5x^5 - 2x^3 + 3x - 1)$.",
+    "source": "Taller #3: Factorizaci\u00f3n (P\u00e1g 1, Ej. 15)",
+    "subtopic": "Trinomio x\u00b2 + bx + c"
+  },
+  {
+    "id": 73,
+    "topic": "factorizacion",
+    "topicName": "Factorizaci\u00f3n",
+    "difficulty": "Medio",
+    "question": "Factoriza extrayendo el factor com\u00fan polinomio: $$9(x + 1) - 3(x + 1)^2$$",
+    "options": [
+      "$$3(x + 1)(2 - x)$$",
+      "$$3(x + 1)(3 - x)$$",
+      "$$3(x + 1)(x + 2)$$",
+      "$$9(x + 1)(1 - x)$$"
+    ],
+    "correct": 0,
+    "explanation": "El factor com\u00fan es $3(x + 1)$:\\n$3(x + 1) [ 3 - (x + 1) ] = 3(x + 1)(3 - x - 1) = 3(x + 1)(2 - x)$.",
+    "source": "Taller #3: Factorizaci\u00f3n (P\u00e1g 1, Ej. 23)",
+    "subtopic": "Factor Com\u00fan Monomio / Polinomio"
+  },
+  {
+    "id": 74,
+    "topic": "factorizacion",
+    "topicName": "Factorizaci\u00f3n",
+    "difficulty": "Medio",
+    "question": "Factoriza por factor com\u00fan por agrupaci\u00f3n de t\u00e9rminos: $$3a - 2b - 2by^4 + 3ay^4$$",
+    "options": [
+      "$$(3a - 2b)(1 + y^4)$$",
+      "$$(3a + 2b)(1 - y^4)$$",
+      "$$(3a - 2b)(y^4 - 1)$$",
+      "$$(a - b)(3 + 2y^4)$$"
+    ],
+    "correct": 0,
+    "explanation": "Agrupamos t\u00e9rminos con coeficientes comunes:\\n$(3a + 3ay^4) - (2b + 2by^4) = 3a(1 + y^4) - 2b(1 + y^4) = (3a - 2b)(1 + y^4)$.",
+    "source": "Taller #3: Factor Com\u00fan por Agrupaci\u00f3n (P\u00e1g 2, Ej. 9)",
+    "subtopic": "Factor Com\u00fan por Agrupaci\u00f3n"
+  },
+  {
+    "id": 75,
+    "topic": "factorizacion",
+    "topicName": "Factorizaci\u00f3n",
+    "difficulty": "Medio",
+    "question": "Factoriza por agrupaci\u00f3n: $$2mx^4 + 3nx^4 + 10m + 15n$$",
+    "options": [
+      "$$(2m + 3n)(x^4 + 5)$$",
+      "$$(2m - 3n)(x^4 - 5)$$",
+      "$$(2m + 3n)(x^4 + 10)$$",
+      "$$(m + n)(2x^4 + 15)$$"
+    ],
+    "correct": 0,
+    "explanation": "Agrupamos los dos primeros y los dos \u00faltimos:\\n$x^4(2m + 3n) + 5(2m + 3n) = (2m + 3n)(x^4 + 5)$.",
+    "source": "Taller #3: Factor Com\u00fan por Agrupaci\u00f3n (P\u00e1g 2, Ej. 10)",
+    "subtopic": "Factor Com\u00fan por Agrupaci\u00f3n"
+  },
+  {
+    "id": 76,
+    "topic": "factorizacion",
+    "topicName": "Factorizaci\u00f3n",
+    "difficulty": "Medio",
+    "question": "Factoriza el polinomio por agrupaci\u00f3n de t\u00e9rminos: $$x^3 - 15 - 5x + 3x^2$$",
+    "options": [
+      "$$(x + 3)(x^2 - 5)$$",
+      "$$(x - 3)(x^2 + 5)$$",
+      "$$(x + 5)(x^2 - 3)$$",
+      "$$(x - 5)(x^2 + 3)$$"
+    ],
+    "correct": 0,
+    "explanation": "Reordenando: $(x^3 + 3x^2) - (5x + 15) = x^2(x + 3) - 5(x + 3) = (x + 3)(x^2 - 5)$.",
+    "source": "Taller #3: Factor Com\u00fan por Agrupaci\u00f3n (P\u00e1g 2, Ej. 12)",
+    "subtopic": "Factor Com\u00fan por Agrupaci\u00f3n"
+  },
+  {
+    "id": 77,
+    "topic": "factorizacion",
+    "topicName": "Factorizaci\u00f3n",
+    "difficulty": "F\u00e1cil",
+    "question": "Factoriza la diferencia de cuadrados con potencias literales: $$1 - x^{2a}$$",
+    "options": [
+      "$$(1 - x^a)(1 + x^a)$$",
+      "$$(1 - x^2)(1 + x^a)$$",
+      "$$(1 - x^{2a})(1 + x^{2a})$$",
+      "$$(1 - x^a)^2$$"
+    ],
+    "correct": 0,
+    "explanation": "La ra\u00edz cuadrada de $1$ es $1$ y la de $x^{2a}$ es $x^a$. Aplicando diferencia de cuadrados: $(1 - x^a)(1 + x^a)$.",
+    "source": "Taller #3: Diferencia de Cuadrados (P\u00e1g 3, Ej. 21)",
+    "subtopic": "Diferencia de Cuadrados"
+  },
+  {
+    "id": 78,
+    "topic": "factorizacion",
+    "topicName": "Factorizaci\u00f3n",
+    "difficulty": "Medio",
+    "question": "Factoriza la diferencia de cuadrados: $$16x^{6a} - 49y^{2b}$$",
+    "options": [
+      "$$(4x^{3a} - 7y^b)(4x^{3a} + 7y^b)$$",
+      "$$(4x^{3a} - 7y^b)^2$$",
+      "$$(8x^{3a} - 7y^b)(8x^{3a} + 7y^b)$$",
+      "$$(4x^{6a} - 7y^{2b})(4x^{6a} + 7y^{2b})$$"
+    ],
+    "correct": 0,
+    "explanation": "$\\sqrt{16x^{6a}} = 4x^{3a}$ y $\\sqrt{49y^{2b}} = 7y^b$. Por f\u00f3rmula: $(4x^{3a} - 7y^b)(4x^{3a} + 7y^b)$.",
+    "source": "Taller #3: Diferencia de Cuadrados (P\u00e1g 3, Ej. 23)",
+    "subtopic": "Diferencia de Cuadrados"
+  },
+  {
+    "id": 79,
+    "topic": "factorizacion",
+    "topicName": "Factorizaci\u00f3n",
+    "difficulty": "Dif\u00edcil",
+    "question": "Factoriza la diferencia de cuadrados de binomios: $$(x - 1)^2 - (y - 3)^2$$",
+    "options": [
+      "$$(x - y + 2)(x + y - 4)$$",
+      "$$(x - y - 4)(x + y + 2)$$",
+      "$$(x - y - 2)(x + y - 4)$$",
+      "$$(x - y + 4)(x + y - 2)$$"
+    ],
+    "correct": 0,
+    "explanation": "$[(x - 1) - (y - 3)][(x - 1) + (y - 3)] = (x - 1 - y + 3)(x - 1 + y - 3) = (x - y + 2)(x + y - 4)$.",
+    "source": "Taller #3: Diferencia de Cuadrados (P\u00e1g 3, Ej. 24)",
+    "subtopic": "Diferencia de Cuadrados"
+  },
+  {
+    "id": 80,
+    "topic": "factorizacion",
+    "topicName": "Factorizaci\u00f3n",
+    "difficulty": "Dif\u00edcil",
+    "question": "Factoriza el trinomio cuadrado perfecto: $$9(a - b)^2 + 12(a - b)(a + b) + 4(a + b)^2$$",
+    "options": [
+      "$$(5a - b)^2$$",
+      "$$(5a + b)^2$$",
+      "$$(a - 5b)^2$$",
+      "$$(a + b)^2$$"
+    ],
+    "correct": 0,
+    "explanation": "Es un TCP de la forma $u^2 + 2uv + v^2 = (u+v)^2$, con $u = 3(a-b)$ y $v = 2(a+b)$.\\n$[3(a - b) + 2(a + b)]^2 = [3a - 3b + 2a + 2b]^2 = (5a - b)^2$.",
+    "source": "Taller #3: Trinomio Cuadrado Perfecto (P\u00e1g 3, Ej. 26)",
+    "subtopic": "Trinomio Cuadrado Perfecto"
+  },
+  {
+    "id": 81,
+    "topic": "factorizacion",
+    "topicName": "Factorizaci\u00f3n",
+    "difficulty": "Medio",
+    "question": "Factoriza el trinomio de la forma $x^2 + bx + c$: $$m^2 - 4mn - 21n^2$$",
+    "options": [
+      "$$(m - 7n)(m + 3n)$$",
+      "$$(m + 7n)(m - 3n)$$",
+      "$$(m - 21n)(m + n)$$",
+      "$$(m - 4n)(m + 3n)$$"
+    ],
+    "correct": 0,
+    "explanation": "Buscamos dos n\u00fameros que multiplicados den $-21$ y sumados den $-4$: son $-7$ y $+3$. Factorizaci\u00f3n: $(m - 7n)(m + 3n)$.",
+    "source": "Taller #3: Trinomio $x^2 + bx + c$ (P\u00e1g 4, Ej. 28)",
+    "subtopic": "Trinomio x\u00b2 + bx + c"
+  },
+  {
+    "id": 82,
+    "topic": "factorizacion",
+    "topicName": "Factorizaci\u00f3n",
+    "difficulty": "Dif\u00edcil",
+    "question": "Factoriza el trinomio de la forma $ax^2 + bx + c$: $$6m^2 - 11mn + 4n^2$$",
+    "options": [
+      "$$(2m - n)(3m - 4n)$$",
+      "$$(6m - n)(m - 4n)$$",
+      "$$(2m + n)(3m + 4n)$$",
+      "$$(3m - n)(2m - 4n)$$"
+    ],
+    "correct": 0,
+    "explanation": "Multiplicamos $a \\cdot c = 6 \\cdot 4 = 24$. Buscamos dos n\u00fameros que multiplicados den $24$ y sumados den $-11$: son $-8$ y $-3$.\\n$6m^2 - 8mn - 3mn + 4n^2 = 2m(3m - 4n) - n(3m - 4n) = (2m - n)(3m - 4n)$.",
+    "source": "Taller #3: Trinomio $ax^2 + bx + c$ (P\u00e1g 4, Ej. 25)",
+    "subtopic": "Trinomio ax\u00b2 + bx + c"
+  },
+  {
+    "id": 83,
+    "topic": "desigualdades",
+    "topicName": "Desigualdades",
+    "difficulty": "F\u00e1cil",
+    "question": "Determina el conjunto soluci\u00f3n de la desigualdad lineal: $$12x - 4 > 7x + 11$$",
+    "options": [
+      "$$x > 3 \\quad \\text{\u00f3} \\quad (3, \\infty)$$",
+      "$$x < 3 \\quad \\text{\u00f3} \\quad (-\\infty, 3)$$",
+      "$$x > 15$$",
+      "$$x \\ge 3$$"
+    ],
+    "correct": 0,
+    "explanation": "$12x - 7x > 11 + 4 \\implies 5x > 15 \\implies x > 3$. En intervalo: $(3, \\infty)$.",
+    "source": "Taller #4: Desigualdades (P\u00e1g 1, Ej. 1)",
+    "subtopic": "Inecuaciones Lineales"
+  },
+  {
+    "id": 84,
+    "topic": "desigualdades",
+    "topicName": "Desigualdades",
+    "difficulty": "F\u00e1cil",
+    "question": "Resuelve la inecuaci\u00f3n: $$3x + 9 > 7x - 3$$",
+    "options": [
+      "$$x < 3 \\quad \\text{\u00f3} \\quad (-\\infty, 3)$$",
+      "$$x > 3 \\quad \\text{\u00f3} \\quad (3, \\infty)$$",
+      "$$x < -3$$",
+      "$$x > -3$$"
+    ],
+    "correct": 0,
+    "explanation": "$3x - 7x > -3 - 9 \\implies -4x > -12$. Al dividir entre $-4$, se invierte el sentido: $x < \\frac{-12}{-4} = 3$.",
+    "source": "Taller #4: Desigualdades (P\u00e1g 1, Ej. 2)",
+    "subtopic": "Inecuaciones Racionales"
+  },
+  {
+    "id": 85,
+    "topic": "desigualdades",
+    "topicName": "Desigualdades",
+    "difficulty": "Medio",
+    "question": "Resuelve la inecuaci\u00f3n con productos notables: $$x(x + 12) > (x - 4)^2$$",
+    "options": [
+      "$$x > \\frac{4}{5} \\quad \\left(x > 0.8\\right)$$",
+      "$$x < \\frac{4}{5}$$",
+      "$$x > 4$$",
+      "$$x > -\\frac{4}{5}$$"
+    ],
+    "correct": 0,
+    "explanation": "Desarrollamos ambos lados:\\n$x^2 + 12x > x^2 - 8x + 16$.\\nCancelando $x^2$: $12x + 8x > 16 \\implies 20x > 16 \\implies x > \\frac{16}{20} = \\frac{4}{5}$.",
+    "source": "Taller #4: Desigualdades (P\u00e1g 1, Ej. 13)",
+    "subtopic": "Inecuaciones Racionales"
+  },
+  {
+    "id": 86,
+    "topic": "desigualdades",
+    "topicName": "Desigualdades",
+    "difficulty": "Medio",
+    "question": "Resuelve la doble desigualdad: $$-7 < 4x + 1 < 13$$",
+    "options": [
+      "$$-2 < x < 3 \\quad \\text{\u00f3} \\quad x \\in (-2, 3)$$",
+      "$$-2 \\le x \\le 3$$",
+      "$$-8 < x < 12$$",
+      "$$0 < x < 3$$"
+    ],
+    "correct": 0,
+    "explanation": "Restamos 1 en todos los miembros: $-7 - 1 < 4x < 13 - 1 \\implies -8 < 4x < 12$.\\nDividimos entre 4: $-2 < x < 3$.",
+    "source": "Taller #4: Desigualdades (P\u00e1g 1, Ej. 23)",
+    "subtopic": "Desigualdades Dobles"
+  },
+  {
+    "id": 87,
+    "topic": "desigualdades",
+    "topicName": "Desigualdades",
+    "difficulty": "Dif\u00edcil",
+    "question": "Determina el conjunto soluci\u00f3n de: $$-1 < \\frac{5 - x}{3} \\le 7$$",
+    "options": [
+      "$$x \\in [-16, 8) \\quad \\text{\u00f3} \\quad -16 \\le x < 8$$",
+      "$$x \\in (-16, 8]$$",
+      "$$x \\in [-8, 16)$$",
+      "$$x \\in (-8, 16]$$"
+    ],
+    "correct": 0,
+    "explanation": "1. Multiplicamos por 3: $-3 < 5 - x \\le 21$.\\n2. Restamos 5: $-3 - 5 < -x \\le 21 - 5 \\implies -8 < -x \\le 16$.\\n3. Multiplicamos por $-1$ (se invierten ambos signos): $8 > x \\ge -16 \\implies -16 \\le x < 8$, intervalo $[-16, 8)$.",
+    "source": "Taller #4: Desigualdades (P\u00e1g 1, Ej. 33)",
+    "subtopic": "Inecuaciones Racionales"
+  },
+  {
+    "id": 88,
+    "topic": "linea_recta",
+    "topicName": "L\u00ednea Recta",
+    "difficulty": "F\u00e1cil",
+    "question": "Determina la pendiente $m$ de la recta que pasa por los puntos $A(-2, 4)$ y $B(6, 12)$:",
+    "options": [
+      "$$m = 1$$",
+      "$$m = 2$$",
+      "$$m = -1$$",
+      "$$m = \\frac{1}{2}$$"
+    ],
+    "correct": 0,
+    "explanation": "F\u00f3rmula: $m = \\frac{y_2 - y_1}{x_2 - x_1} = \\frac{12 - 4}{6 - (-2)} = \\frac{8}{6 + 2} = \\frac{8}{8} = 1$.",
+    "source": "Taller #4: L\u00edneas Rectas (P\u00e1g 2, Ej. 1)",
+    "subtopic": "C\u00e1lculo de Pendiente (m)"
+  },
+  {
+    "id": 89,
+    "topic": "linea_recta",
+    "topicName": "L\u00ednea Recta",
+    "difficulty": "F\u00e1cil",
+    "question": "Determina la pendiente de la recta que pasa por $M(1, 5)$ y $B(2, -7)$:",
+    "options": [
+      "$$m = -12$$",
+      "$$m = 12$$",
+      "$$m = -2$$",
+      "$$m = -6$$"
+    ],
+    "correct": 0,
+    "explanation": "$m = \\frac{-7 - 5}{2 - 1} = \\frac{-12}{1} = -12$.",
+    "source": "Taller #4: L\u00edneas Rectas (P\u00e1g 2, Ej. 2)",
+    "subtopic": "C\u00e1lculo de Pendiente (m)"
+  },
+  {
+    "id": 90,
+    "topic": "linea_recta",
+    "topicName": "L\u00ednea Recta",
+    "difficulty": "F\u00e1cil",
+    "question": "\u00bfCu\u00e1l es la gr\u00e1fica y la pendiente de la funci\u00f3n constante $y = -2$?",
+    "options": [
+      "Es una recta horizontal paralela al eje $X$ con pendiente $m = 0$.",
+      "Es una recta vertical paralela al eje $Y$ con pendiente indefinida.",
+      "Es una recta con pendiente $m = -2$ que pasa por el origen.",
+      "Es una recta oblicua descendente."
+    ],
+    "correct": 0,
+    "explanation": "Toda ecuaci\u00f3n de la forma $y = c$ (constante) representa una recta completamente horizontal en el plano cartesiano y su pendiente siempre es igual a 0.",
+    "source": "Taller #4: L\u00edneas Rectas (P\u00e1g 2, Ej. 3.1)",
+    "subtopic": "C\u00e1lculo de Pendiente (m)"
+  },
+  {
+    "id": 91,
+    "topic": "ecuaciones",
+    "topicName": "Sistemas de Ecuaciones",
+    "difficulty": "F\u00e1cil",
+    "question": "Resuelve el sistema lineal de $2 \\times 2$: $$\\begin{cases} x + y = 4 \\\\ x - y = 2 \\end{cases}$$",
+    "options": [
+      "$$x = 3, \\quad y = 1$$",
+      "$$x = 2, \\quad y = 2$$",
+      "$$x = 4, \\quad y = 0$$",
+      "$$x = 1, \\quad y = 3$$"
+    ],
+    "correct": 0,
+    "explanation": "Por reducci\u00f3n, sumamos ambas ecuaciones:\\n$(x + y) + (x - y) = 4 + 2 \\implies 2x = 6 \\implies x = 3$.\\nSustituyendo en la primera: $3 + y = 4 \\implies y = 1$.",
+    "source": "Taller #4: Sistemas de Ecuaciones (P\u00e1g 3, Ej. 1)",
+    "subtopic": "Sistemas Lineales 2x2"
+  },
+  {
+    "id": 92,
+    "topic": "ecuaciones",
+    "topicName": "Sistemas de Ecuaciones",
+    "difficulty": "Medio",
+    "question": "Halla la soluci\u00f3n del sistema: $$\\begin{cases} 3x - 2y = 0 \\\\ x - y = -1 \\end{cases}$$",
+    "options": [
+      "$$x = 2, \\quad y = 3$$",
+      "$$x = 3, \\quad y = 2$$",
+      "$$x = -2, \\quad y = -3$$",
+      "$$x = 1, \\quad y = 2$$"
+    ],
+    "correct": 0,
+    "explanation": "De la 2da ecuaci\u00f3n: $x = y - 1$.\\nSustituyendo en la 1ra: $3(y - 1) - 2y = 0 \\implies 3y - 3 - 2y = 0 \\implies y = 3$.\\nLuego: $x = 3 - 1 = 2$. Soluci\u00f3n: $(2, 3)$.",
+    "source": "Taller #4: Sistemas de Ecuaciones (P\u00e1g 3, Ej. 4)",
+    "subtopic": "Sistemas Lineales 2x2"
+  },
+  {
+    "id": 93,
+    "topic": "ecuaciones",
+    "topicName": "Sistemas de Ecuaciones",
+    "difficulty": "Medio",
+    "question": "Resuelve por reducci\u00f3n el sistema: $$\\begin{cases} 5x - 2y = 2 \\\\ 7x + 6y = 38 \\end{cases}$$",
+    "options": [
+      "$$x = 2, \\quad y = 4$$",
+      "$$x = 4, \\quad y = 2$$",
+      "$$x = 3, \\quad y = 3$$",
+      "$$x = 1, \\quad y = 5$$"
+    ],
+    "correct": 0,
+    "explanation": "Multiplicamos la primera ecuaci\u00f3n por 3:\\n$15x - 6y = 6$.\\nSumamos con la segunda: $(15x - 6y) + (7x + 6y) = 6 + 38 \\implies 22x = 44 \\implies x = 2$.\\nSustituyendo: $5(2) - 2y = 2 \\implies 10 - 2y = 2 \\implies 2y = 8 \\implies y = 4$.",
+    "source": "Taller #4: Sistemas de Ecuaciones (P\u00e1g 3, Ej. 5)",
+    "subtopic": "Sistemas Lineales 2x2"
+  },
+  {
+    "id": 94,
+    "topic": "ecuaciones",
+    "topicName": "Sistemas de Ecuaciones",
+    "difficulty": "Dif\u00edcil",
+    "question": "Resuelve el sistema de ecuaciones: $$\\begin{cases} 3x - 4y = -26 \\\\ 2x - 3y = -19 \\end{cases}$$",
+    "options": [
+      "$$x = -2, \\quad y = 5$$",
+      "$$x = 2, \\quad y = -5$$",
+      "$$x = -6, \\quad y = 2$$",
+      "$$x = 5, \\quad y = -2$$"
+    ],
+    "correct": 0,
+    "explanation": "Multiplicamos la 1ra por 2 y la 2da por $-3$:\\n$6x - 8y = -52$\\n$-6x + 9y = 57$\\nSumando: $y = 5$.\\nSustituyendo: $2x - 3(5) = -19 \\implies 2x - 15 = -19 \\implies 2x = -4 \\implies x = -2$.",
+    "source": "Taller #4: Sistemas de Ecuaciones (P\u00e1g 3, Ej. 3)",
+    "subtopic": "Sistemas Lineales 2x2"
+  },
+  {
+    "id": 95,
+    "topic": "fracciones_alg",
+    "topicName": "Fracciones Algebraicas",
+    "subtopic": "Simplificaci\u00f3n de Fracciones",
+    "difficulty": "Medio",
+    "question": "Simplifica la fracci\u00f3n algebraica factorizando ambos t\u00e9rminos: $$\\frac{x^2 + 8x + 12}{x^2 + 10x + 25}$$",
+    "options": [
+      "$$\\frac{(x + 6)(x + 2)}{(x + 5)^2}$$",
+      "$$\\frac{x + 6}{x + 5}$$",
+      "$$\\frac{(x + 4)(x + 3)}{(x + 5)^2}$$",
+      "$$\\frac{x + 2}{x + 5}$$"
+    ],
+    "correct": 0,
+    "explanation": "Numerador: $x^2 + 8x + 12 = (x + 6)(x + 2)$.\\nDenominador: Trinomio cuadrado perfecto $x^2 + 10x + 25 = (x + 5)^2$.\\nResultado: $\\frac{(x + 6)(x + 2)}{(x + 5)^2}$.",
+    "source": "Taller Desigualdades (P\u00e1g 15, Ej. 4g)"
+  },
+  {
+    "id": 96,
+    "topic": "fracciones_alg",
+    "topicName": "Fracciones Algebraicas",
+    "subtopic": "Simplificaci\u00f3n de Fracciones",
+    "difficulty": "Medio",
+    "question": "Simplifica para $x \\neq \\pm 3$: $$\\frac{4 - x^2}{x^2 - 9}$$",
+    "options": [
+      "$$-\\frac{(x - 2)(x + 2)}{(x - 3)(x + 3)}$$",
+      "$$\\frac{x - 2}{x - 3}$$",
+      "$$\\frac{2 - x}{x - 3}$$",
+      "$$\\frac{(x - 2)^2}{(x - 3)^2}$$"
+    ],
+    "correct": 0,
+    "explanation": "$4 - x^2 = -(x^2 - 4) = -(x - 2)(x + 2)$.\\nDenominador: $x^2 - 9 = (x - 3)(x + 3)$.\\nResultado: $-\\frac{(x - 2)(x + 2)}{(x - 3)(x + 3)}$.",
+    "source": "Taller Desigualdades (P\u00e1g 15, Ej. 4e)"
+  },
+  {
+    "id": 97,
+    "topic": "fracciones_alg",
+    "topicName": "Fracciones Algebraicas",
+    "subtopic": "Operaciones con Fracciones",
+    "difficulty": "Dif\u00edcil",
+    "question": "Efect\u00faa la suma de fracciones algebraicas con igual denominador: $$\\frac{3x - 2}{x - 1} + \\frac{2x - 1}{x - 1}$$",
+    "options": [
+      "$$\\frac{5x - 3}{x - 1}$$",
+      "$$\\frac{5x - 3}{(x - 1)^2}$$",
+      "$$\\frac{5x + 3}{x - 1}$$",
+      "$$\\frac{x - 1}{x - 1} = 1$$"
+    ],
+    "correct": 0,
+    "explanation": "Al tener el mismo denominador $(x - 1)$, sumamos directamente los numeradores:\\n$(3x - 2) + (2x - 1) = (3x + 2x) + (-2 - 1) = 5x - 3$.\\nResultado: $\\frac{5x - 3}{x - 1}$.",
+    "source": "Taller Desigualdades & Fracciones"
+  },
+  {
+    "id": 98,
+    "topic": "linea_recta",
+    "topicName": "L\u00ednea Recta",
+    "subtopic": "C\u00e1lculo de Pendiente (m)",
+    "difficulty": "Medio",
+    "question": "Calcula la pendiente $m$ de la recta que pasa por los puntos $R(-4, -2)$ y $B(5, 6)$:",
+    "options": [
+      "$$m = \\frac{8}{9}$$",
+      "$$m = \\frac{9}{8}$$",
+      "$$m = -\\frac{8}{9}$$",
+      "$$m = 4$$"
+    ],
+    "correct": 0,
+    "explanation": "$m = \\frac{y_2 - y_1}{x_2 - x_1} = \\frac{6 - (-2)}{5 - (-4)} = \\frac{6 + 2}{5 + 4} = \\frac{8}{9}$.",
+    "source": "Taller #4: L\u00edneas Rectas (P\u00e1g 2, Ej. 3)"
+  },
+  {
+    "id": 99,
+    "topic": "ecuaciones",
+    "topicName": "Sistemas de Ecuaciones",
+    "subtopic": "Sistemas Lineales 2x2",
+    "difficulty": "Medio",
+    "question": "Resuelve el sistema lineal de $2 \\times 2$: $$\\begin{cases} 5a + 3b = 21 \\\\ -2a + 4b = 2 \\end{cases}$$",
+    "options": [
+      "$$a = 3, \\quad b = 2$$",
+      "$$a = 2, \\quad b = 3$$",
+      "$$a = 1, \\quad b = 5$$",
+      "$$a = -3, \\quad b = 2$$"
+    ],
+    "correct": 0,
+    "explanation": "Dividimos la 2da ecuaci\u00f3n entre 2: $-a + 2b = 1 \\implies a = 2b - 1$.\\nSustituimos en la 1ra: $5(2b - 1) + 3b = 21 \\implies 10b - 5 + 3b = 21 \\implies 13b = 26 \\implies b = 2$.\\nLuego: $a = 2(2) - 1 = 3$. Soluci\u00f3n: $(a = 3, b = 2)$.",
+    "source": "Taller #4: Sistemas de Ecuaciones (P\u00e1g 3, Ej. 6)"
+  },
+  {
+    "id": 100,
+    "topic": "ecuaciones",
+    "topicName": "Ecuaciones",
+    "subtopic": "Ecuaciones Lineales de 1er Grado",
+    "difficulty": "Medio",
+    "question": "Halla el valor de $x$ en la ecuaci\u00f3n: $$5x - 5 = 10x - 6 + 11$$",
+    "options": [
+      "$$x = -2$$",
+      "$$x = 2$$",
+      "$$x = -1$$",
+      "$$x = 0$$"
+    ],
+    "correct": 0,
+    "explanation": "1. Simplificamos el miembro derecho: $-6 + 11 = 5 \\implies 5x - 5 = 10x + 5$.\\n2. Transponemos: $-5 - 5 = 10x - 5x \\implies -10 = 5x$.\\n3. Despejamos: $x = \\frac{-10}{5} = -2$.",
+    "source": "Taller Unidad 1: N\u00fameros Reales (P\u00e1g 13, Ej. 5m)"
+  }
+]
