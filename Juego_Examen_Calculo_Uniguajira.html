@@ -145,6 +145,179 @@
       position: relative;
     }
 
+    /* BADGE CONTADOR EN EL BOTON DE LA NAVBAR */
+    .chat-badge {
+      position: absolute;
+      top: -7px;
+      right: -7px;
+      background: var(--danger);
+      color: #ffffff;
+      font-size: 0.72rem;
+      font-weight: 800;
+      border-radius: 999px;
+      padding: 2px 7px;
+      min-width: 20px;
+      text-align: center;
+      box-shadow: 0 0 14px rgba(239, 71, 111, 0.85);
+      animation: pulse-chat-badge 1.5s infinite ease-in-out;
+      pointer-events: none;
+      line-height: 1.2;
+      border: 2px solid #060b14;
+    }
+
+    @keyframes pulse-chat-badge {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.18); }
+    }
+
+    /* BADGE CONTADOR DENTRO DE LAS PESTANAS DEL CHAT */
+    .chat-tab-count {
+      background: var(--danger);
+      color: #ffffff;
+      font-size: 0.68rem;
+      font-weight: 800;
+      border-radius: 999px;
+      padding: 1px 6px;
+      margin-left: 6px;
+      min-width: 17px;
+      text-align: center;
+      display: inline-block;
+      line-height: 1.3;
+    }
+
+    .chat-tab-btn.active .chat-tab-count {
+      background: #060b14;
+      color: var(--primary);
+    }
+
+    /* CONTENEDOR Y TOAST FLOTANTE DE NOTIFICACIONES PRIVADAS */
+    .private-toast-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 10000;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      pointer-events: none;
+    }
+
+    .private-toast {
+      pointer-events: auto;
+      background: rgba(18, 27, 46, 0.97);
+      border: 1.5px solid var(--primary);
+      box-shadow: 0 10px 32px rgba(0, 0, 0, 0.75), 0 0 20px var(--primary-glow);
+      border-radius: 14px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      max-width: 390px;
+      color: var(--text-main);
+      animation: slideInToast 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      backdrop-filter: blur(12px);
+    }
+
+    @keyframes slideInToast {
+      from { opacity: 0; transform: translateY(30px) scale(0.92); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .private-toast.hiding {
+      opacity: 0;
+      transform: translateY(20px) scale(0.9);
+    }
+
+    .toast-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 2px solid var(--primary);
+      background: #0b1325;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .toast-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .toast-body {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .toast-title {
+      font-size: 0.74rem;
+      font-weight: 800;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 2px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .toast-name {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .toast-text {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 200px;
+    }
+
+    .toast-action-btn {
+      background: var(--primary);
+      color: #060b14;
+      border: none;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 7px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: transform 0.15s ease, background 0.15s ease;
+    }
+
+    .toast-action-btn:hover {
+      transform: scale(1.05);
+      background: #38e1ed;
+    }
+
+    .toast-close-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 1.1rem;
+      padding: 2px 5px;
+      line-height: 1;
+      border-radius: 4px;
+    }
+
+    .toast-close-btn:hover {
+      color: #ffffff;
+    }
+
     .user-profile-badge {
       display: flex;
       align-items: center;
@@ -1194,9 +1367,10 @@
         <span id="onlineCountText">🟢 1 en línea</span>
       </div>
 
-      <!-- BOTÓN CHAT EN VIVO -->
+      <!-- BOTÓN CHAT EN VIVO CON CONTADOR DE MENSAJES -->
       <button class="icon-btn chat-btn-highlight" onclick="openChatModal()" title="Chat Mundial y Privado">
         <span>💬</span> Chat en Vivo
+        <span id="chatTotalBadge" class="chat-badge" style="display: none;">0</span>
       </button>
 
       <button class="icon-btn" onclick="openFormulaModal()" title="Formulario Oficial">
@@ -1570,6 +1744,9 @@
     </div>
   </div>
 
+  <!-- CONTENEDOR FLOTANTE PARA NOTIFICACIONES DE MENSAJES PRIVADOS -->
+  <div class="private-toast-container" id="privateToastContainer"></div>
+
   <!-- MODAL: CHAT EN VIVO (Mundial y Privado) -->
   <div class="modal-overlay" id="chatModal">
     <div class="modal-box chat-modal-box">
@@ -1820,6 +1997,11 @@
     let chatActiveFriend = null;
     let cachedChatData = { global: [], private: [] };
     let chatPollTimer = null;
+    let isInitialChatPoll = true;
+    let seenChatMessageIds = new Set();
+    let unreadGlobalCount = 0;
+    let unreadPrivateCounts = {}; // { [senderId]: number }
+    let knownPrivateChats = {};   // { [userId]: { id, name, avatar, customAvatar } }
 
     // Foto provisional para registro
     let selectedRegAvatar = '🎓';
@@ -2234,21 +2416,201 @@
       });
     }
 
-    // 4. CHAT MUNDIAL Y PRIVADO EN VIVO
+    // 4. CHAT MUNDIAL Y PRIVADO EN VIVO CON NOTIFICACIONES Y CONTADORES
     function startChatPolling() {
       pollChatMessages();
       clearInterval(chatPollTimer);
-      chatPollTimer = setInterval(pollChatMessages, 3500);
+      chatPollTimer = setInterval(pollChatMessages, 3000);
+      requestNotificationPermission();
+    }
+
+    function requestNotificationPermission() {
+      if ('Notification' in window && Notification.permission === 'default') {
+        Notification.requestPermission();
+      }
+    }
+
+    function triggerBrowserNotification(title, body, icon) {
+      if ('Notification' in window && Notification.permission === 'granted') {
+        try {
+          new Notification(title, {
+            body: body,
+            icon: icon || undefined
+          });
+        } catch (e) {}
+      }
+    }
+
+    function showPrivateMessageToast(msg) {
+      const container = document.getElementById('privateToastContainer');
+      if (!container) return;
+
+      const toast = document.createElement('div');
+      toast.className = 'private-toast';
+
+      const avatarHtml = msg.senderCustomAvatar 
+        ? `<img src="${msg.senderCustomAvatar}" alt="${msg.senderName}">`
+        : (msg.senderAvatar || '🎓');
+
+      const safeName = escapeHtml(msg.senderName);
+      const safeText = escapeHtml(msg.text);
+
+      toast.innerHTML = `
+        <div class="toast-avatar">${avatarHtml}</div>
+        <div class="toast-body">
+          <div class="toast-title">
+            <span>💬 Mensaje Privado</span>
+          </div>
+          <div class="toast-name">${safeName}</div>
+          <div class="toast-text">${safeText}</div>
+        </div>
+        <button class="toast-action-btn" onclick="openChatFromToast('${msg.senderId}')">
+          Responder
+        </button>
+        <button class="toast-close-btn" onclick="this.parentElement.remove()">✕</button>
+      `;
+
+      container.appendChild(toast);
+
+      // Desaparece automáticamente después de 6.5 segundos
+      setTimeout(() => {
+        if (toast.parentElement) {
+          toast.classList.add('hiding');
+          setTimeout(() => toast.remove(), 320);
+        }
+      }, 6500);
+    }
+
+    function openChatFromToast(senderId) {
+      const friend = knownPrivateChats[senderId] || { id: senderId, name: 'Compañero', avatar: '🎓' };
+      openChatModal(senderId, friend);
+      document.querySelectorAll('.private-toast').forEach(t => t.remove());
+    }
+
+    function updateChatBadgesUI() {
+      const totalPrivate = Object.values(unreadPrivateCounts).reduce((a, b) => a + b, 0);
+      const totalUnread = unreadGlobalCount + totalPrivate;
+
+      // 1. Contador total en el botón de la barra superior (Navbar)
+      const totalBadge = document.getElementById('chatTotalBadge');
+      if (totalBadge) {
+        if (totalUnread > 0) {
+          totalBadge.textContent = totalUnread > 99 ? '99+' : totalUnread;
+          totalBadge.style.display = 'inline-block';
+        } else {
+          totalBadge.style.display = 'none';
+        }
+      }
+
+      // 2. Contador en la pestaña del Chat Mundial
+      const globalBadge = document.getElementById('chatGlobalTabBadge');
+      if (globalBadge) {
+        if (unreadGlobalCount > 0) {
+          globalBadge.textContent = unreadGlobalCount > 99 ? '99+' : unreadGlobalCount;
+          globalBadge.style.display = 'inline-block';
+        } else {
+          globalBadge.style.display = 'none';
+        }
+      }
+
+      // 3. Contadores individuales en cada pestaña de chat privado
+      Object.keys(unreadPrivateCounts).forEach(fid => {
+        const pBadge = document.getElementById(`privBadge_${fid}`);
+        if (pBadge) {
+          const c = unreadPrivateCounts[fid] || 0;
+          if (c > 0) {
+            pBadge.textContent = c > 99 ? '99+' : c;
+            pBadge.style.display = 'inline-block';
+          } else {
+            pBadge.style.display = 'none';
+          }
+        }
+      });
     }
 
     function pollChatMessages() {
       fetch('/api/chat')
         .then(res => res.json())
         .then(data => {
-          if (data) {
-            cachedChatData = data;
-            renderChatMessages();
+          if (!data) return;
+          cachedChatData = data;
+
+          const isChatModalOpen = document.getElementById('chatModal') && document.getElementById('chatModal').classList.contains('active');
+
+          // --- Procesar Mensajes Globales ---
+          const globalList = data.global || [];
+          if (isInitialChatPoll) {
+            globalList.forEach(m => seenChatMessageIds.add(m.id));
+          } else {
+            globalList.forEach(m => {
+              if (!seenChatMessageIds.has(m.id)) {
+                seenChatMessageIds.add(m.id);
+                // Si el mensaje es de otro estudiante
+                if (!currentUser || m.senderId !== currentUser.id) {
+                  // Si el chat no está abierto en la pestaña global
+                  if (!isChatModalOpen || currentChatTab !== 'global') {
+                    unreadGlobalCount++;
+                  }
+                }
+              }
+            });
           }
+
+          // --- Procesar Mensajes Privados ---
+          const privList = data.private || [];
+          if (isInitialChatPoll) {
+            privList.forEach(m => {
+              seenChatMessageIds.add(m.id);
+              if (currentUser) {
+                if (m.senderId === currentUser.id && m.target) {
+                  if (!knownPrivateChats[m.target]) {
+                    knownPrivateChats[m.target] = { id: m.target, name: 'Compañero', avatar: '🎓' };
+                  }
+                } else if (m.target === currentUser.id && m.senderId) {
+                  knownPrivateChats[m.senderId] = {
+                    id: m.senderId,
+                    name: m.senderName || 'Compañero',
+                    avatar: m.senderAvatar || '🎓',
+                    customAvatar: m.senderCustomAvatar || ''
+                  };
+                }
+              }
+            });
+            isInitialChatPoll = false;
+          } else {
+            privList.forEach(m => {
+              if (!seenChatMessageIds.has(m.id)) {
+                seenChatMessageIds.add(m.id);
+
+                // ¿Este mensaje privado va dirigido a mí?
+                if (currentUser && m.target === currentUser.id) {
+                  knownPrivateChats[m.senderId] = {
+                    id: m.senderId,
+                    name: m.senderName || 'Compañero',
+                    avatar: m.senderAvatar || '🎓',
+                    customAvatar: m.senderCustomAvatar || ''
+                  };
+
+                  // Si tengo el chat abierto en la pestaña de este amigo
+                  if (isChatModalOpen && currentChatTab === m.senderId) {
+                    unreadPrivateCounts[m.senderId] = 0;
+                  } else {
+                    // Mensaje no leído: sumar al contador privado de este usuario
+                    unreadPrivateCounts[m.senderId] = (unreadPrivateCounts[m.senderId] || 0) + 1;
+
+                    // NOTIFICACIÓN: Sonido de campana + Popup interactivo + Notificación de navegador
+                    playSound('message');
+                    showPrivateMessageToast(m);
+                    triggerBrowserNotification(`💬 Mensaje de ${m.senderName}`, m.text, m.senderCustomAvatar);
+                  }
+                }
+              }
+            });
+          }
+
+          updateChatBadgesUI();
+          renderChatTabs();
+          renderChatMessages();
         })
         .catch(() => {});
     }
@@ -2259,13 +2621,20 @@
         openAuthModal();
         return;
       }
+
       document.getElementById('chatModal').classList.add('active');
+
       if (friendObj) {
         chatActiveFriend = friendObj;
+        knownPrivateChats[friendObj.id] = friendObj;
         switchChatTab(friendObj.id);
-      } else {
+      } else if (targetId !== 'global' && knownPrivateChats[targetId]) {
+        chatActiveFriend = knownPrivateChats[targetId];
         switchChatTab(targetId);
+      } else {
+        switchChatTab('global');
       }
+
       pollChatMessages();
     }
 
@@ -2275,34 +2644,58 @@
 
     function switchChatTab(tabId) {
       currentChatTab = tabId;
+
+      // Al cambiar a una pestaña, se marcan como leídos sus mensajes
+      if (tabId === 'global') {
+        unreadGlobalCount = 0;
+        document.getElementById('chatChannelSubtitle').textContent = 'Canal: Chat Mundial Uniguajira (Todos)';
+        document.getElementById('chatInputText').placeholder = 'Escribe un mensaje para todos los estudiantes...';
+      } else {
+        unreadPrivateCounts[tabId] = 0;
+        if (knownPrivateChats[tabId]) {
+          chatActiveFriend = knownPrivateChats[tabId];
+        }
+        const name = chatActiveFriend ? chatActiveFriend.name : 'Compañero';
+        document.getElementById('chatChannelSubtitle').textContent = `🔒 Chat Privado con: ${name}`;
+        document.getElementById('chatInputText').placeholder = `Escribe un mensaje privado a ${name}...`;
+      }
+
+      updateChatBadgesUI();
       renderChatTabs();
       renderChatMessages();
-      
-      const input = document.getElementById('chatInputText');
-      if (tabId === 'global') {
-        document.getElementById('chatChannelSubtitle').textContent = 'Canal: Chat Mundial Uniguajira (Todos)';
-        input.placeholder = 'Escribe un mensaje para todos...';
-      } else if (chatActiveFriend) {
-        document.getElementById('chatChannelSubtitle').textContent = `Chat Privado con: ${chatActiveFriend.name}`;
-        input.placeholder = `Escribe un mensaje privado a ${chatActiveFriend.name}...`;
-      }
     }
 
     function renderChatTabs() {
       const container = document.getElementById('chatTabsContainer');
+      if (!container) return;
+
       container.innerHTML = `
         <button class="chat-tab-btn ${currentChatTab === 'global' ? 'active' : ''}" onclick="switchChatTab('global')">
           <span>🌍</span> Chat Mundial
+          <span class="chat-tab-count" id="chatGlobalTabBadge" style="${unreadGlobalCount > 0 ? 'display:inline-block' : 'display:none'}">
+            ${unreadGlobalCount > 99 ? '99+' : unreadGlobalCount}
+          </span>
         </button>
       `;
 
-      if (chatActiveFriend) {
+      // Renderizar pestañas de amigos conocidos con quienes hay o ha habido chat privado
+      Object.keys(knownPrivateChats).forEach(fid => {
+        const friend = knownPrivateChats[fid];
+        const unreadForThis = unreadPrivateCounts[fid] || 0;
         const btn = document.createElement('button');
-        btn.className = `chat-tab-btn ${currentChatTab === chatActiveFriend.id ? 'active' : ''}`;
-        btn.innerHTML = `<span>🔒</span> ${chatActiveFriend.name}`;
-        btn.onclick = () => switchChatTab(chatActiveFriend.id);
+        btn.className = `chat-tab-btn ${currentChatTab === fid ? 'active' : ''}`;
+        btn.innerHTML = `
+          <span>🔒</span> ${escapeHtml(friend.name)}
+          <span class="chat-tab-count" id="privBadge_${fid}" style="${unreadForThis > 0 ? 'display:inline-block' : 'display:none'}">
+            ${unreadForThis > 99 ? '99+' : unreadForThis}
+          </span>
+        `;
+        btn.onclick = () => {
+          chatActiveFriend = friend;
+          switchChatTab(fid);
+        };
         container.appendChild(btn);
-      }
+      });
     }
 
     function renderChatMessages() {
@@ -2312,9 +2705,9 @@
       let messagesToShow = [];
       if (currentChatTab === 'global') {
         messagesToShow = cachedChatData.global || [];
-      } else if (chatActiveFriend && currentUser) {
+      } else if (currentUser) {
         const myId = currentUser.id;
-        const friendId = chatActiveFriend.id;
+        const friendId = currentChatTab;
         const allPriv = cachedChatData.private || [];
         messagesToShow = allPriv.filter(m => 
           (m.senderId === myId && m.target === friendId) ||
@@ -2324,7 +2717,7 @@
 
       box.innerHTML = '';
       if (messagesToShow.length === 0) {
-        box.innerHTML = `<div style="text-align: center; color: var(--text-muted); font-size: 0.85rem; padding: 20px;">No hay mensajes todavía. ¡Sé el primero en escribir!</div>`;
+        box.innerHTML = `<div style="text-align: center; color: var(--text-muted); font-size: 0.85rem; padding: 25px;">No hay mensajes todavía. ¡Sé el primero en escribir!</div>`;
         return;
       }
 
@@ -2335,9 +2728,13 @@
 
         const timeStr = m.timestamp ? new Date(m.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '';
 
+        const avatarMarkup = m.senderCustomAvatar 
+          ? `<img src="${m.senderCustomAvatar}" style="width: 18px; height: 18px; border-radius: 50%; object-fit: cover; vertical-align: middle;">`
+          : `<span>${m.senderAvatar || '🎓'}</span>`;
+
         div.innerHTML = `
-          ${!isMine ? `<div class="chat-sender-header"><span>${m.senderAvatar || '🎓'}</span> ${m.senderName}</div>` : ''}
-          <div>${escapeHtml(m.text)}</div>
+          ${!isMine ? `<div class="chat-sender-header">${avatarMarkup} ${escapeHtml(m.senderName)}</div>` : ''}
+          <div style="word-break: break-word;">${escapeHtml(m.text)}</div>
           <div class="chat-time">${timeStr}</div>
         `;
         box.appendChild(div);
@@ -2347,7 +2744,8 @@
     }
 
     function escapeHtml(text) {
-      return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      if (!text) return '';
+      return String(text).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
     }
 
     function handleChatKeyDown(e) {
@@ -2362,7 +2760,7 @@
       if (!text || !currentUser) return;
 
       const newMsg = {
-        id: 'msg_' + Date.now(),
+        id: 'msg_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4),
         senderId: currentUser.id,
         senderName: currentUser.name,
         senderAvatar: currentUser.avatar,
@@ -2371,6 +2769,7 @@
         target: currentChatTab
       };
 
+      seenChatMessageIds.add(newMsg.id);
       input.value = '';
 
       fetch('/api/chat', {
@@ -2398,6 +2797,7 @@
     function startPrivateChatWithFriend() {
       closeFriendProfileModal();
       if (chatActiveFriend) {
+        knownPrivateChats[chatActiveFriend.id] = chatActiveFriend;
         openChatModal(chatActiveFriend.id, chatActiveFriend);
       }
     }
@@ -2608,6 +3008,14 @@
           gain.gain.setValueAtTime(0.3, now);
           gain.gain.exponentialRampToValueAtTime(0.01, now + 0.45);
           osc.start(now); osc.stop(now + 0.45);
+        } else if (type === 'message') {
+          // Tono armonico agradable (doble campana suave) para notificacion de mensaje privado
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(587.33, now);       // D5
+          osc.frequency.setValueAtTime(880.00, now + 0.1); // A5
+          gain.gain.setValueAtTime(0.35, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.38);
+          osc.start(now); osc.stop(now + 0.38);
         }
       } catch (e) {}
     }
