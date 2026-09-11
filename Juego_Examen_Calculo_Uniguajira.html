@@ -8,7 +8,7 @@
   <!-- KaTeX para fórmulas matemáticas nítidas -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="initKaTeX()"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="window.initKaTeX && window.initKaTeX()"></script>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1346,6 +1346,270 @@
     .chat-input-bar input:focus {
       border-color: var(--primary);
     }
+  
+    /* ========================================================
+       MODO COMPETITIVO 1v1 Y DUELOS SINCRONIZADOS
+       ======================================================== */
+    .duel-modal-box {
+      max-width: 880px;
+      width: 96%;
+      background: radial-gradient(circle at 50% 0%, #17243c 0%, #070d18 100%);
+      border: 2px solid var(--accent);
+      box-shadow: 0 0 50px rgba(251, 133, 0, 0.35), 0 20px 60px rgba(0, 0, 0, 0.85);
+      padding: 0;
+      overflow: hidden;
+      border-radius: 20px;
+    }
+
+    .duel-top-bar {
+      background: rgba(6, 11, 20, 0.96);
+      border-bottom: 2px solid rgba(251, 133, 0, 0.4);
+      padding: 1rem 1.4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
+
+    .duel-vs-badge {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      background: linear-gradient(135deg, var(--accent), var(--danger));
+      color: #fff;
+      font-size: 0.95rem;
+      font-weight: 900;
+      padding: 4px 14px;
+      border-radius: 999px;
+      box-shadow: 0 0 16px rgba(251, 133, 0, 0.7);
+      letter-spacing: 1.5px;
+      border: 2px solid #060b14;
+    }
+
+    .duel-player-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      max-width: 42%;
+    }
+
+    .duel-player-card.rival {
+      flex-direction: row-reverse;
+      text-align: right;
+    }
+
+    .duel-score-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--secondary);
+      background: rgba(0, 0, 0, 0.45);
+      padding: 4px 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 183, 3, 0.35);
+      display: inline-block;
+      margin-top: 3px;
+    }
+
+    .duel-status-indicator {
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 99px;
+      display: inline-block;
+      margin-top: 4px;
+    }
+
+    .duel-status-thinking {
+      background: rgba(255, 183, 3, 0.2);
+      color: var(--secondary);
+      border: 1px solid rgba(255, 183, 3, 0.3);
+    }
+
+    .duel-status-answered {
+      background: rgba(6, 214, 160, 0.25);
+      color: var(--success);
+      border: 1px solid rgba(6, 214, 160, 0.4);
+    }
+
+    .duel-body {
+      padding: 1.4rem 1.6rem;
+      max-height: 72vh;
+      overflow-y: auto;
+    }
+
+    .duel-round-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      background: rgba(255, 255, 255, 0.04);
+      padding: 8px 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .duel-options-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 1.25rem;
+    }
+
+    @media (min-width: 650px) {
+      .duel-options-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .duel-option-btn {
+      background: rgba(18, 27, 46, 0.85);
+      border: 1.5px solid rgba(255, 255, 255, 0.12);
+      color: var(--text-main);
+      padding: 14px 16px;
+      border-radius: 12px;
+      text-align: left;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      position: relative;
+    }
+
+    .duel-option-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      background: rgba(0, 210, 223, 0.12);
+      transform: translateY(-2px);
+    }
+
+    .duel-option-btn.selected {
+      border-color: var(--primary);
+      background: rgba(0, 210, 223, 0.25);
+      box-shadow: 0 0 15px var(--primary-glow);
+    }
+
+    .duel-option-btn.correct-reveal {
+      border-color: var(--success) !important;
+      background: rgba(6, 214, 160, 0.3) !important;
+      box-shadow: 0 0 16px rgba(6, 214, 160, 0.6) !important;
+    }
+
+    .duel-option-btn.wrong-reveal {
+      border-color: var(--danger) !important;
+      background: rgba(239, 71, 111, 0.3) !important;
+      box-shadow: 0 0 16px rgba(239, 71, 111, 0.6) !important;
+    }
+
+    .duel-comm-bar {
+      background: rgba(10, 18, 32, 0.96);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 10px 1.4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .duel-reactions-row {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .reaction-btn {
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 999px;
+      padding: 5px 9px;
+      font-size: 1.15rem;
+      cursor: pointer;
+      transition: transform 0.15s ease, background 0.15s ease;
+      line-height: 1;
+    }
+
+    .reaction-btn:hover {
+      transform: scale(1.28);
+      background: rgba(255, 255, 255, 0.22);
+    }
+
+    .voice-mic-btn {
+      background: rgba(0, 210, 223, 0.15);
+      border: 1.5px solid var(--primary);
+      color: var(--primary);
+      padding: 6px 14px;
+      border-radius: 99px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .voice-mic-btn.active {
+      background: rgba(6, 214, 160, 0.25);
+      border-color: var(--success);
+      color: var(--success);
+      box-shadow: 0 0 15px rgba(6, 214, 160, 0.55);
+      animation: pulse-mic 1.5s infinite;
+    }
+
+    @keyframes pulse-mic {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .floating-emoji {
+      position: fixed;
+      font-size: 3rem;
+      pointer-events: none;
+      z-index: 100000;
+      animation: floatEmojiUp 2.4s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+    }
+
+    @keyframes floatEmojiUp {
+      0% { opacity: 1; transform: translateY(0) scale(0.6); }
+      25% { transform: translateY(-70px) scale(1.35); }
+      100% { opacity: 0; transform: translateY(-280px) scale(1.6); }
+    }
+
+    .duel-invite-modal-box {
+      max-width: 480px;
+      text-align: center;
+      border: 2px solid var(--accent);
+      box-shadow: 0 0 40px rgba(251, 133, 0, 0.65);
+      animation: shakeModal 0.5s ease;
+    }
+
+    @keyframes shakeModal {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-7px); }
+      40%, 80% { transform: translateX(7px); }
+    }
+
+    .action-btn-sm {
+      background: linear-gradient(135deg, var(--accent), var(--danger));
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 4px 10px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .action-btn-sm:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 10px rgba(251, 133, 0, 0.5);
+    }
+
   </style>
 </head>
 <body>
@@ -1912,22 +2176,22 @@
           <h4 style="color: var(--primary); margin-bottom: 6px;">1. Factorización Completa (Taller #3)</h4>
           <p style="font-size: 0.9rem; margin-bottom: 4px;">• <strong>Factor Común:</strong> $ax + bx = x(a+b)$</p>
           <p style="font-size: 0.9rem; margin-bottom: 4px;">• <strong>Diferencia de Cuadrados:</strong> $a^2 - b^2 = (a-b)(a+b)$, $1 - x^{2a} = (1-x^a)(1+x^a)$</p>
-          <p style="font-size: 0.9rem; margin-bottom: 4px;">• <strong>Trinomio Cuadrado Perfecto:</strong> $a^2 \pm 2ab + b^2 = (a \pm b)^2$</p>
-          <p style="font-size: 0.9rem; margin-bottom: 4px;">• <strong>Trinomio $x^2 + bx + c$:</strong> $(x+p)(x+q)$ donde $p \cdot q = c$ y $p+q = b$</p>
+          <p style="font-size: 0.9rem; margin-bottom: 4px;">• <strong>Trinomio Cuadrado Perfecto:</strong> $a^2 \\pm 2ab + b^2 = (a \\pm b)^2$</p>
+          <p style="font-size: 0.9rem; margin-bottom: 4px;">• <strong>Trinomio $x^2 + bx + c$:</strong> $(x+p)(x+q)$ donde $p \\cdot q = c$ y $p+q = b$</p>
         </div>
 
         <div style="margin-bottom: 1.25rem;">
           <h4 style="color: var(--primary); margin-bottom: 6px;">2. Desigualdades e Inecuaciones (Taller #4)</h4>
-          <p style="font-size: 0.9rem; margin-bottom: 4px;">• <strong>Suma/Resta:</strong> $a < b \implies a+c < b+c$</p>
-          <p style="font-size: 0.9rem; margin-bottom: 4px; color: var(--danger);">• <strong>Multiplicación Negativa:</strong> Si $c < 0$: $a < b \implies ac > bc$ (¡Se invierte!)</p>
+          <p style="font-size: 0.9rem; margin-bottom: 4px;">• <strong>Suma/Resta:</strong> $a < b \\implies a+c < b+c$</p>
+          <p style="font-size: 0.9rem; margin-bottom: 4px; color: var(--danger);">• <strong>Multiplicación Negativa:</strong> Si $c < 0$: $a < b \\implies ac > bc$ (¡Se invierte!)</p>
           <p style="font-size: 0.9rem; margin-bottom: 4px;">• <strong>Racionales:</strong> El denominador nunca es cero, sus raíces siempre van abiertas.</p>
         </div>
 
         <div style="margin-bottom: 1.25rem;">
           <h4 style="color: var(--primary); margin-bottom: 6px;">3. Línea Recta y Pendientes (Taller #4)</h4>
-          <p style="font-size: 0.9rem; margin-bottom: 4px;">• <strong>Pendiente:</strong> $m = \frac{y_2 - y_1}{x_2 - x_1}$</p>
-          <p style="font-size: 0.9rem; margin-bottom: 4px;">• <strong>Recta Horizontal:</strong> $y = c \implies m = 0$ | <strong>Vertical:</strong> $x = k \implies m$ indefinida</p>
-          <p style="font-size: 0.9rem; margin-bottom: 4px;">• <strong>Perpendiculares:</strong> $m_1 \cdot m_2 = -1$</p>
+          <p style="font-size: 0.9rem; margin-bottom: 4px;">• <strong>Pendiente:</strong> $m = \\frac{y_2 - y_1}{x_2 - x_1}$</p>
+          <p style="font-size: 0.9rem; margin-bottom: 4px;">• <strong>Recta Horizontal:</strong> $y = c \\implies m = 0$ | <strong>Vertical:</strong> $x = k \\implies m$ indefinida</p>
+          <p style="font-size: 0.9rem; margin-bottom: 4px;">• <strong>Perpendiculares:</strong> $m_1 \\cdot m_2 = -1$</p>
         </div>
 
         <div style="margin-bottom: 1.25rem;">
@@ -1937,8 +2201,8 @@
 
         <div>
           <h4 style="color: var(--primary); margin-bottom: 6px;">5. Productos Notables (Taller #2)</h4>
-          <p style="font-size: 0.9rem; margin-bottom: 4px;">• $(a \pm b)^2 = a^2 \pm 2ab + b^2$</p>
-          <p style="font-size: 0.9rem; margin-bottom: 4px;">• $(a \pm b)^3 = a^3 \pm 3a^2b + 3ab^2 \pm b^3$</p>
+          <p style="font-size: 0.9rem; margin-bottom: 4px;">• $(a \\pm b)^2 = a^2 \\pm 2ab + b^2$</p>
+          <p style="font-size: 0.9rem; margin-bottom: 4px;">• $(a \\pm b)^3 = a^3 \\pm 3a^2b + 3ab^2 \\pm b^3$</p>
           <p style="font-size: 0.9rem; margin-bottom: 4px;">• $(a+b+c)^2 = a^2 + b^2 + c^2 + 2ab + 2ac + 2bc$</p>
         </div>
       </div>
@@ -1946,6 +2210,7 @@
   </div>
 
   <script>
+    const API_BASE = (window.location.protocol.startsWith('http')) ? '' : 'http://localhost:8080';
     const ALL_QUESTIONS = [{"id": 1, "topic": "numeros_reales", "topicName": "N\u00fameros Reales", "difficulty": "F\u00e1cil", "question": "\u00bfA cu\u00e1l de los siguientes conjuntos num\u00e9ricos pertenece $\\sqrt{11}$?", "options": ["N\u00fameros Irracionales ($\\mathbb{I}$)", "N\u00fameros Racionales ($\\mathbb{Q}$)", "N\u00fameros Enteros ($\\mathbb{Z}$)", "N\u00fameros Naturales ($\\mathbb{N}$)"], "correct": 0, "explanation": "$\\sqrt{11} \\approx 3.31662479...$ tiene infinitas cifras decimales no peri\u00f3dicas y no se puede escribir como fracci\u00f3n de dos enteros. Por ende pertenece al conjunto de los n\u00fameros irracionales ($\\mathbb{I}$).", "source": "Taller Unidad 1: N\u00fameros Reales (P\u00e1g 15, Ej. 1a)", "subtopic": "Clasificaci\u00f3n Num\u00e9rica"}, {"id": 2, "topic": "numeros_reales", "topicName": "N\u00fameros Reales", "difficulty": "Medio", "question": "El n\u00famero decimal peri\u00f3dico puro $2.333333...$ expresado como fracci\u00f3n irreducible corresponde a:", "options": ["$$\\frac{7}{3}$$", "$$\\frac{23}{10}$$", "$$\\frac{21}{9}$$", "$$\\frac{14}{6}$$"], "correct": 0, "explanation": "Sea $x = 2.\\bar{3}$. Multiplicando por 10: $10x = 23.\\bar{3}$. Restando miembro a miembro: $10x - x = 23.\\bar{3} - 2.\\bar{3} \\implies 9x = 21 \\implies x = \\frac{21}{9} = \\frac{7}{3}$.", "source": "Taller Unidad 1: N\u00fameros Reales (P\u00e1g 1)", "subtopic": "Fracciones y Mixtos"}, {"id": 3, "topic": "numeros_reales", "topicName": "N\u00fameros Reales", "difficulty": "F\u00e1cil", "question": "Indique si la afirmaci\u00f3n es Verdadera o Falsa: *\"Todo n\u00famero entero es un n\u00famero racional ($\\mathbb{Z} \\subset \\mathbb{Q}$)\"*", "options": ["Verdadero, porque cualquier entero $z$ se puede escribir como $\\frac{z}{1}$ con denominador $1 \\neq 0$.", "Falso, porque los enteros no tienen parte decimal fraccionaria.", "Falso, porque los n\u00fameros racionales solo son n\u00fameros entre 0 y 1.", "Verdadero, pero solo aplica a los enteros estrictamente positivos."], "correct": 0, "explanation": "Cualquier entero $a \\in \\mathbb{Z}$ se puede escribir en la forma de cociente $\\frac{a}{1}$, cumpliendo exactamente la definici\u00f3n de n\u00famero racional $\\mathbb{Q}$.", "source": "Taller Unidad 1: N\u00fameros Reales (P\u00e1g 15, Ej. 2a)", "subtopic": "Clasificaci\u00f3n Num\u00e9rica"}, {"id": 4, "topic": "numeros_reales", "topicName": "N\u00fameros Reales", "difficulty": "F\u00e1cil", "question": "Calcula el valor de la expresi\u00f3n con valor absoluto: $$|-15| + |8| - |-9|$$", "options": ["14", "32", "-16", "18"], "correct": 0, "explanation": "$|-15| = 15$, $|8| = 8$, $|-9| = 9$.\\nSustituyendo: $15 + 8 - 9 = 23 - 9 = 14$.", "source": "Taller Unidad 1: N\u00fameros Reales (P\u00e1g 1 & 12)", "subtopic": "Valor Absoluto"}, {"id": 5, "topic": "numeros_reales", "topicName": "N\u00fameros Reales", "difficulty": "Medio", "question": "Resuelve el polinomio aritm\u00e9tico: $$100 - [(-4) + 7]$$", "options": ["97", "103", "89", "-97"], "correct": 0, "explanation": "Operaci\u00f3n dentro del corchete: $(-4) + 7 = 3$.\\nLuego: $100 - 3 = 97$.", "source": "Taller Unidad 1: N\u00fameros Reales (P\u00e1g 13, Ej. 4a)", "subtopic": "Operaciones Combinadas"}, {"id": 6, "topic": "numeros_reales", "topicName": "N\u00fameros Reales", "difficulty": "Medio", "question": "Calcula el valor del polinomio aritm\u00e9tico: $$12 + \\{ [(-5) + 2] - (3 + 4) \\}$$", "options": ["2", "-2", "22", "16"], "correct": 0, "explanation": "1. Corchete interno: $[(-5) + 2] = -3$.\\n2. Par\u00e9ntesis: $(3 + 4) = 7$.\\n3. En la llave: $\\{-3 - 7\\} = -10$.\\n4. Suma: $12 + (-10) = 2$.", "source": "Taller Unidad 1: N\u00fameros Reales (P\u00e1g 13, Ej. 4b)", "subtopic": "Operaciones Combinadas"}, {"id": 7, "topic": "numeros_reales", "topicName": "N\u00fameros Reales", "difficulty": "Dif\u00edcil", "question": "Efect\u00faa la operaci\u00f3n combinada: $$(14 - 7) + \\{ [13 - (-2)] - [7 + (-6)] \\}$$", "options": ["21", "19", "23", "15"], "correct": 0, "explanation": "1. $(14 - 7) = 7$.\\n2. Primer corchete: $13 - (-2) = 13 + 2 = 15$.\\n3. Segundo corchete: $7 + (-6) = 1$.\\n4. En la llave: $15 - 1 = 14$.\\n5. Total: $7 + 14 = 21$.", "source": "Taller Unidad 1: N\u00fameros Reales (P\u00e1g 13, Ej. 4c)", "subtopic": "Operaciones Combinadas"}, {"id": 8, "topic": "numeros_reales", "topicName": "N\u00fameros Reales", "difficulty": "F\u00e1cil", "question": "\u00bfCu\u00e1l es la conversi\u00f3n a n\u00famero mixto de la fracci\u00f3n impropia $\\frac{9}{4}$?", "options": ["$$2\\frac{1}{4}$$", "$$1\\frac{5}{4}$$", "$$2\\frac{3}{4}$$", "$$3\\frac{1}{4}$$"], "correct": 0, "explanation": "Dividiendo numerador entre denominador: $9 \\div 4 = 2$ con residuo $1$. Por tanto $\\frac{9}{4} = 2 + \\frac{1}{4} = 2\\frac{1}{4}$.", "source": "Taller Unidad 1: N\u00fameros Reales (P\u00e1g 5 & 14)", "subtopic": "Fracciones y Mixtos"}, {"id": 9, "topic": "numeros_reales", "topicName": "N\u00fameros Reales", "difficulty": "Medio", "question": "Calcula el valor de la operaci\u00f3n con potencias: $$(-3)^2 + (-2)^3 - (-1)^{100}$$", "options": ["0", "2", "-2", "16"], "correct": 0, "explanation": "$(-3)^2 = 9$ (base negativa con exponente par da positivo).\\n$(-2)^3 = -8$ (exponente impar conserva signo negativo).\\n$(-1)^{100} = 1$.\\nSustituyendo: $9 + (-8) - 1 = 1 - 1 = 0$.", "source": "Taller Unidad 1: N\u00fameros Reales (P\u00e1g 3)", "subtopic": "Potenciaci\u00f3n"}, {"id": 10, "topic": "numeros_reales", "topicName": "N\u00fameros Reales", "difficulty": "F\u00e1cil", "question": "Indique si la afirmaci\u00f3n es Verdadera o Falsa: *\"La ra\u00edz impar de un n\u00famero negativo no pertenece a los n\u00fameros reales ($\\mathbb{R}$)\"*", "options": ["Falso, porque la ra\u00edz de \u00edndice impar de un n\u00famero negativo s\u00ed es real (por ejemplo, $\\sqrt[3]{-8} = -2 \\in \\mathbb{R}$).", "Verdadero, cualquier ra\u00edz de un n\u00famero negativo siempre da imaginario.", "Verdadero, solo se pueden calcular ra\u00edces impares a n\u00fameros naturales positivos.", "Falso, solo aplica si el radicando es un n\u00famero fraccionario."], "correct": 0, "explanation": "La ra\u00edz impar de un negativo S\u00cd es un n\u00famero real: $(-2)^3 = -8 \\implies \\sqrt[3]{-8} = -2 \\in \\mathbb{R}$. Las que no son reales son las ra\u00edces de \u00edndice PAR de cantidades negativas.", "source": "Taller Unidad 1: N\u00fameros Reales (P\u00e1g 15, Ej. 2k)", "subtopic": "Potenciaci\u00f3n"}, {"id": 11, "topic": "numeros_reales", "topicName": "N\u00fameros Reales", "difficulty": "Medio", "question": "Simplifica la expresi\u00f3n con potencias: $$\\frac{(3b^2)^3}{(3b)^2}$$", "options": ["$$3b^4$$", "$$9b^4$$", "$$3b^3$$", "$$b^4$$"], "correct": 0, "explanation": "Numerador: $(3b^2)^3 = 3^3 \\cdot (b^2)^3 = 27b^6$.\\nDenominador: $(3b)^2 = 3^2 \\cdot b^2 = 9b^2$.\\nDivisi\u00f3n: $\\frac{27b^6}{9b^2} = 3b^{6-2} = 3b^4$.", "source": "Taller Unidad 1: N\u00fameros Reales (P\u00e1g 13, Ej. 6g)", "subtopic": "Potenciaci\u00f3n"}, {"id": 12, "topic": "numeros_reales", "topicName": "N\u00fameros Reales", "difficulty": "Medio", "question": "Desarrolla la operaci\u00f3n con potencias de misma base: $$[(2a)^2]^3 \\times (2a)^2$$", "options": ["$$256a^8 \\quad \\text{\u00f3} \\quad (2a)^8$$", "$$(2a)^7$$", "$$64a^8$$", "$$(2a)^{12}$$"], "correct": 0, "explanation": "$[(2a)^2]^3 = (2a)^{2 \\times 3} = (2a)^6$.\\nMultiplicando por $(2a)^2$: $(2a)^6 \\times (2a)^2 = (2a)^{6+2} = (2a)^8 = 2^8 a^8 = 256a^8$.", "source": "Taller Unidad 1: N\u00fameros Reales (P\u00e1g 13, Ej. 6k)", "subtopic": "Potenciaci\u00f3n"}, {"id": 13, "topic": "expresiones_alg", "topicName": "Expresiones Algebraicas", "difficulty": "F\u00e1cil", "question": "Realiza la suma de polinomios: $$(6x^2 + 3x - 2) + (-x^2 + 7x + 4)$$", "options": ["$$5x^2 + 10x + 2$$", "$$7x^2 + 10x + 2$$", "$$5x^2 + 4x - 6$$", "$$5x^2 - 4x + 2$$"], "correct": 0, "explanation": "T\u00e9rminos semejantes:\\n\u2022 $x^2$: $6 - 1 = 5 \\implies 5x^2$\\n\u2022 $x$: $3 + 7 = 10 \\implies 10x$\\n\u2022 Constante: $-2 + 4 = 2$\\nResultado: $5x^2 + 10x + 2$.", "source": "Taller \u00c1lgebra (Imagen de WhatsApp, Punto 1.1)", "subtopic": "Suma de Polinomios"}, {"id": 14, "topic": "expresiones_alg", "topicName": "Expresiones Algebraicas", "difficulty": "Medio", "question": "Efect\u00faa la suma: $$(8a^2 - 6a^3 + 4a) + (4a^3 + a^2 - 4a - 5)$$", "options": ["$$-2a^3 + 9a^2 - 5$$", "$$-10a^3 + 9a^2 + 8a - 5$$", "$$2a^3 + 7a^2 - 5$$", "$$-2a^3 + 7a^2 + 8a - 5$$"], "correct": 0, "explanation": "Ordenando por grado:\\n\u2022 $a^3$: $-6a^3 + 4a^3 = -2a^3$\\n\u2022 $a^2$: $8a^2 + a^2 = 9a^2$\\n\u2022 $a$: $4a - 4a = 0$\\n\u2022 Constante: $-5$\\nResultado: $-2a^3 + 9a^2 - 5$.", "source": "Taller \u00c1lgebra (Imagen de WhatsApp, Punto 1.2)", "subtopic": "Suma de Polinomios"}, {"id": 15, "topic": "expresiones_alg", "topicName": "Expresiones Algebraicas", "difficulty": "Medio", "question": "Efect\u00faa la suma de expresiones: $$(5x^4 - 3x^2 + 6x - 3) + (-3x^4 + x^3 + 5x^2 - 7x + 3)$$", "options": ["$$2x^4 + x^3 + 2x^2 - x$$", "$$2x^4 + x^3 + 8x^2 - x$$", "$$2x^4 - 2x^2 - x + 6$$", "$$8x^4 + x^3 + 2x^2 - 13x$$"], "correct": 0, "explanation": "\u2022 $x^4$: $5 - 3 = 2 \\implies 2x^4$\\n\u2022 $x^3$: $x^3$\\n\u2022 $x^2$: $-3 + 5 = 2 \\implies 2x^2$\\n\u2022 $x$: $6 - 7 = -1 \\implies -x$\\n\u2022 Constante: $-3 + 3 = 0$\\nTotal: $2x^4 + x^3 + 2x^2 - x$.", "source": "Taller \u00c1lgebra (Imagen de WhatsApp, Punto 1.3)", "subtopic": "Suma de Polinomios"}, {"id": 16, "topic": "expresiones_alg", "topicName": "Expresiones Algebraicas", "difficulty": "F\u00e1cil", "question": "De $5a^2 - 3a + 2$ resta $8a^2 - 5a + 7$. El resultado es:", "options": ["$$-3a^2 + 2a - 5$$", "$$3a^2 - 2a + 5$$", "$$-3a^2 - 8a + 9$$", "$$13a^2 - 8a + 9$$"], "correct": 0, "explanation": "$(5a^2 - 3a + 2) - (8a^2 - 5a + 7) = 5a^2 - 3a + 2 - 8a^2 + 5a - 7 = -3a^2 + 2a - 5$.", "source": "Taller \u00c1lgebra (Imagen de WhatsApp, Punto 2.1)", "subtopic": "Resta de Polinomios"}, {"id": 17, "topic": "expresiones_alg", "topicName": "Expresiones Algebraicas", "difficulty": "Medio", "question": "\u00bfCu\u00e1l es el resultado de la resta: $$(3x^3 - 5x^2 - 6x + 3) - (2x^3 + 4x - 8)$$?", "options": ["$$x^3 - 5x^2 - 10x + 11$$", "$$x^3 - 5x^2 - 2x - 5$$", "$$5x^3 - 5x^2 - 10x + 11$$", "$$x^3 - 5x^2 - 10x - 5$$"], "correct": 0, "explanation": "Cambiamos los signos del sustraendo:\\n$3x^3 - 5x^2 - 6x + 3 - 2x^3 - 4x + 8$\\n\u2022 $x^3$: $3 - 2 = 1 \\implies x^3$\\n\u2022 $x^2$: $-5x^2$\\n\u2022 $x$: $-6 - 4 = -10 \\implies -10x$\\n\u2022 Constante: $3 + 8 = 11$\\nResultado: $x^3 - 5x^2 - 10x + 11$.", "source": "Taller \u00c1lgebra (Imagen de WhatsApp, Punto 2.2)", "subtopic": "Resta de Polinomios"}, {"id": 18, "topic": "expresiones_alg", "topicName": "Expresiones Algebraicas", "difficulty": "F\u00e1cil", "question": "Resta $8x - 3y - 6$ de $5x + 4y - 1$.", "options": ["$$-3x + 7y + 5$$", "$$3x - 7y - 5$$", "$$13x + y - 7$$", "$$-3x + y - 7$$"], "correct": 0, "explanation": "'Resta A de B' significa $B - A$:\\n$(5x + 4y - 1) - (8x - 3y - 6) = 5x + 4y - 1 - 8x + 3y + 6 = -3x + 7y + 5$.", "source": "Taller #2: Expresiones Algebraicas (P\u00e1g 2)", "subtopic": "Resta de Polinomios"}, {"id": 19, "topic": "expresiones_alg", "topicName": "Expresiones Algebraicas", "difficulty": "F\u00e1cil", "question": "Realiza: $$(a^2 + a - 1) - (a^2 - a + 1)$$", "options": ["$$2a - 2$$", "$$0$$", "$$2a^2 + 2a$$", "$$2a$$"], "correct": 0, "explanation": "$a^2 + a - 1 - a^2 + a - 1 = (a^2 - a^2) + (a + a) + (-1 - 1) = 2a - 2$.", "source": "Taller #2: Expresiones Algebraicas (P\u00e1g 2)", "subtopic": "Multiplicaci\u00f3n Algebraica"}, {"id": 20, "topic": "expresiones_alg", "topicName": "Expresiones Algebraicas", "difficulty": "Medio", "question": "Suprime los signos de agrupaci\u00f3n y simplifica: $$3x - \\{2y - (5x + 3y)\\}$$", "options": ["$$8x + y$$", "$$-2x - y$$", "$$8x - y$$", "$$2x + 5y$$"], "correct": 0, "explanation": "1. Par\u00e9ntesis interno: $2y - (5x + 3y) = 2y - 5x - 3y = -5x - y$.\\n2. Sustituyendo en la llave: $3x - \\{-5x - y\\} = 3x + 5x + y = 8x + y$.", "source": "Taller #2 (P\u00e1g 3) y WhatsApp (Punto 3.1)", "subtopic": "Signos de Agrupaci\u00f3n"}, {"id": 21, "topic": "expresiones_alg", "topicName": "Expresiones Algebraicas", "difficulty": "Medio", "question": "Simplifica suprimiendo signos de agrupaci\u00f3n: $$-(6a - 3b) - \\{5a - 9b - (2c - 9b)\\}$$", "options": ["$$-11a + 3b + 2c$$", "$$-11a - 15b - 2c$$", "$$-a + 3b - 2c$$", "$$-11a + 3b - 2c$$"], "correct": 0, "explanation": "1. $-(6a - 3b) = -6a + 3b$.\\n2. En la llave: $5a - 9b - 2c + 9b = 5a - 2c$.\\n3. Menos exterior: $-\\{5a - 2c\\} = -5a + 2c$.\\n4. Suma: $(-6a + 3b) + (-5a + 2c) = -11a + 3b + 2c$.", "source": "Taller #2 (P\u00e1g 3) y WhatsApp (Punto 3.2)", "subtopic": "Suma de Polinomios"}, {"id": 22, "topic": "expresiones_alg", "topicName": "Expresiones Algebraicas", "difficulty": "Dif\u00edcil", "question": "Simplifica reduciendo t\u00e9rminos semejantes: $$4m + \\{(6m - 3n) - (9n - 5m) + (8m - 2n)\\}$$", "options": ["$$23m - 14n$$", "$$15m - 14n$$", "$$23m + 8n$$", "$$19m - 10n$$"], "correct": 0, "explanation": "1. Dentro de la llave:\\n$6m - 3n - 9n + 5m + 8m - 2n = (6+5+8)m + (-3-9-2)n = 19m - 14n$.\\n2. Sumamos $4m$: $4m + 19m - 14n = 23m - 14n$.", "source": "Taller #2 (P\u00e1g 3) y WhatsApp (Punto 3.4)", "subtopic": "Suma de Polinomios"}, {"id": 23, "topic": "expresiones_alg", "topicName": "Expresiones Algebraicas", "difficulty": "Medio", "question": "Simplifica la expresi\u00f3n: $$2a - \\{7a - (3a - 7b) + (10a - 9b)\\}$$", "options": ["$$-12a + 2b$$", "$$-12a - 16b$$", "$$8a + 2b$$", "$$-15a + 7b$$"], "correct": 0, "explanation": "1. Dentro de la llave: $7a - 3a + 7b + 10a - 9b = 14a - 2b$.\\n2. $2a - (14a - 2b) = 2a - 14a + 2b = -12a + 2b$.", "source": "Taller #2 (P\u00e1g 3) y WhatsApp (Punto 3.5)", "subtopic": "Signos de Agrupaci\u00f3n"}, {"id": 24, "topic": "expresiones_alg", "topicName": "Expresiones Algebraicas", "difficulty": "F\u00e1cil", "question": "Calcula el producto de los monomios: $$\\left(-\\frac{3}{5}mn\\right)\\left(-\\frac{5}{3}m^4np\\right)$$", "options": ["$$m^5n^2p$$", "$$-m^5n^2p$$", "$$\\frac{9}{25}m^5n^2p$$", "$$m^4n^2p$$"], "correct": 0, "explanation": "Signos y coeficientes: $\\left(-\\frac{3}{5}\\right)\\left(-\\frac{5}{3}\\right) = +1$.\\nVariables: $m^1 \\cdot m^4 = m^5$, $n^1 \\cdot n^1 = n^2$, $p = p$.\\nTotal: $m^5n^2p$.", "source": "Taller #2: Multiplicaci\u00f3n de Monomios (P\u00e1g 3, Ej. 9)", "subtopic": "Signos de Agrupaci\u00f3n"}, {"id": 25, "topic": "expresiones_alg", "topicName": "Expresiones Algebraicas", "difficulty": "Medio", "question": "Multiplica el monomio por el polinomio: $$(4a^3c - 7a^2b - 2c)(-3ac^4)$$", "options": ["$$-12a^4c^5 + 21a^3bc^4 + 6ac^5$$", "$$-12a^4c^4 + 21a^2bc^4 + 6ac^4$$", "$$12a^4c^5 - 21a^3bc^4 - 6ac^5$$", "$$-12a^3c^5 + 21a^3bc^4 + 6ac^5$$"], "correct": 0, "explanation": "Aplicamos propiedad distributiva t\u00e9rmino a t\u00e9rmino:\\n1. $(4a^3c)(-3ac^4) = -12a^{3+1}c^{1+4} = -12a^4c^5$\\n2. $(-7a^2b)(-3ac^4) = +21a^{2+1}bc^4 = 21a^3bc^4$\\n3. $(-2c)(-3ac^4) = +6ac^{1+4} = 6ac^5$\\nResultado: $-12a^4c^5 + 21a^3bc^4 + 6ac^5$.", "source": "Taller #2: Monomio por Polinomio (P\u00e1g 3, Ej. 8)", "subtopic": "Signos de Agrupaci\u00f3n"}, {"id": 26, "topic": "expresiones_alg", "topicName": "Expresiones Algebraicas", "difficulty": "F\u00e1cil", "question": "Efect\u00faa la divisi\u00f3n algebraica: $$\\frac{9a^6b^{10}}{3a^2b^5}$$", "options": ["$$3a^4b^5$$", "$$3a^3b^2$$", "$$6a^4b^5$$", "$$3a^8b^{15}$$"], "correct": 0, "explanation": "$\\frac{9}{3} = 3$, $a^{6-2} = a^4$, $b^{10-5} = b^5$. Resultado: $3a^4b^5$.", "source": "Taller #2: Divisi\u00f3n (P\u00e1g 4, Ej. 1)", "subtopic": "Signos de Agrupaci\u00f3n"}, {"id": 27, "topic": "expresiones_alg", "topicName": "Expresiones Algebraicas", "difficulty": "F\u00e1cil", "question": "Calcula el cociente: $$\\frac{42x^9y^2}{-7x^5y^2}$$", "options": ["$$-6x^4$$", "$$6x^4$$", "$$-6x^4y$$", "$$-6x^{14}y^4$$"], "correct": 0, "explanation": "$\\frac{42}{-7} = -6$, $x^{9-5} = x^4$, $y^{2-2} = y^0 = 1$. Resultado: $-6x^4$.", "source": "Taller #2: Divisi\u00f3n (P\u00e1g 4, Ej. 2)", "subtopic": "Signos de Agrupaci\u00f3n"}, {"id": 28, "topic": "expresiones_alg", "topicName": "Expresiones Algebraicas", "difficulty": "F\u00e1cil", "question": "Efect\u00faa la divisi\u00f3n: $$\\frac{-26a^5b^6}{-13b^3}$$", "options": ["$$2a^5b^3$$", "$$-2a^5b^3$$", "$$2a^5b^2$$", "$$13a^5b^3$$"], "correct": 0, "explanation": "$\\frac{-26}{-13} = +2$. El t\u00e9rmino $a^5$ permanece intacto y $b^{6-3} = b^3$. Total: $2a^5b^3$.", "source": "Taller #2: Divisi\u00f3n (P\u00e1g 4, Ej. 3)", "subtopic": "Signos de Agrupaci\u00f3n"}, {"id": 29, "topic": "expresiones_alg", "topicName": "Expresiones Algebraicas", "difficulty": "F\u00e1cil", "question": "Efect\u00faa la divisi\u00f3n: $$\\frac{32p^5q^6}{-8p^3q^2}$$", "options": ["$$-4p^2q^4$$", "$$4p^2q^4$$", "$$-4p^8q^8$$", "$$-24p^2q^4$$"], "correct": 0, "explanation": "$\\frac{32}{-8} = -4$, $p^{5-3} = p^2$, $q^{6-2} = q^4$. Resultado: $-4p^2q^4$.", "source": "Taller #2: Divisi\u00f3n (P\u00e1g 4, Ej. 4)", "subtopic": "Signos de Agrupaci\u00f3n"}, {"id": 30, "topic": "productos_notables", "topicName": "Productos Notables", "difficulty": "F\u00e1cil", "question": "Desarrolla el cuadrado del binomio: $$(x + 0.2)^2$$", "options": ["$$x^2 + 0.4x + 0.04$$", "$$x^2 + 0.2x + 0.04$$", "$$x^2 + 0.4x + 0.4$$", "$$x^2 + 0.04$$"], "correct": 0, "explanation": "$(x)^2 + 2(x)(0.2) + (0.2)^2 = x^2 + 0.4x + 0.04$.", "source": "Taller #2: Productos Notables (P\u00e1g 1, Ej. 20)", "subtopic": "Cuadrado de un Binomio"}, {"id": 31, "topic": "productos_notables", "topicName": "Productos Notables", "difficulty": "Medio", "question": "Calcula el cuadrado del binomio: $$(4x^3 + 5y)^2$$", "options": ["$$16x^6 + 40x^3y + 25y^2$$", "$$16x^5 + 40x^3y + 25y^2$$", "$$8x^6 + 20x^3y + 10y^2$$", "$$16x^6 + 25y^2$$"], "correct": 0, "explanation": "$(4x^3)^2 + 2(4x^3)(5y) + (5y)^2 = 16x^6 + 40x^3y + 25y^2$.", "source": "Taller #2: Productos Notables (P\u00e1g 1, Ej. 21)", "subtopic": "Cubo de un Binomio"}, {"id": 32, "topic": "productos_notables", "topicName": "Productos Notables", "difficulty": "Medio", "question": "Desarrolla: $$(9a^3 - a^2b)^2$$", "options": ["$$81a^6 - 18a^5b + a^4b^2$$", "$$81a^6 - 9a^5b + a^4b^2$$", "$$81a^9 - 18a^5b + a^4b^2$$", "$$81a^6 + 18a^5b - a^4b^2$$"], "correct": 0, "explanation": "$(9a^3)^2 - 2(9a^3)(a^2b) + (a^2b)^2 = 81a^6 - 18a^5b + a^4b^2$.", "source": "Taller #2: Productos Notables (P\u00e1g 1, Ej. 22)", "subtopic": "Cubo de un Binomio"}, {"id": 33, "topic": "productos_notables", "topicName": "Productos Notables", "difficulty": "Medio", "question": "Desarrolla el cuadrado del binomio con potencias: $$(a^5 - b^5)^2$$", "options": ["$$a^{10} - 2a^5b^5 + b^{10}$$", "$$a^{25} - 2a^5b^5 + b^{25}$$", "$$a^{10} - b^{10}$$", "$$a^{10} + 2a^5b^5 + b^{10}$$"], "correct": 0, "explanation": "$(a^5)^2 - 2(a^5)(b^5) + (b^5)^2 = a^{5 \\times 2} - 2a^5b^5 + b^{5 \\times 2} = a^{10} - 2a^5b^5 + b^{10}$.", "source": "Taller #2: Cuadrado de Binomio (P\u00e1g 1, Ej. 24)", "subtopic": "Cuadrado de un Binomio"}, {"id": 34, "topic": "productos_notables", "topicName": "Productos Notables", "difficulty": "Dif\u00edcil", "question": "Desarrolla el binomio con fracciones: $$\\left(1 - \\frac{3}{4}xy\\right)^2$$", "options": ["$$1 - \\frac{3}{2}xy + \\frac{9}{16}x^2y^2$$", "$$1 - \\frac{3}{4}xy + \\frac{9}{16}x^2y^2$$", "$$1 - \\frac{3}{2}xy + \\frac{6}{8}x^2y^2$$", "$$1 - \\frac{9}{16}x^2y^2$$"], "correct": 0, "explanation": "$(1)^2 - 2(1)\\left(\\frac{3}{4}xy\\right) + \\left(\\frac{3}{4}xy\\right)^2 = 1 - \\frac{6}{4}xy + \\frac{9}{16}x^2y^2 = 1 - \\frac{3}{2}xy + \\frac{9}{16}x^2y^2$.", "source": "Taller #2: Productos Notables (P\u00e1g 1, Ej. 25)", "subtopic": "Cuadrado de un Binomio"}, {"id": 35, "topic": "productos_notables", "topicName": "Productos Notables", "difficulty": "F\u00e1cil", "question": "Efect\u00faa el producto de binomios conjugados: $$(3x + 5y)(3x - 5y)$$", "options": ["$$9x^2 - 25y^2$$", "$$9x^2 + 25y^2$$", "$$9x^2 - 30xy + 25y^2$$", "$$6x^2 - 10y^2$$"], "correct": 0, "explanation": "$(3x)^2 - (5y)^2 = 9x^2 - 25y^2$ (diferencia de cuadrados).", "source": "Taller #2: Binomios Conjugados (P\u00e1g 1, Ej. 9)", "subtopic": "Binomios Conjugados"}, {"id": 36, "topic": "productos_notables", "topicName": "Productos Notables", "difficulty": "F\u00e1cil", "question": "Calcula el producto de binomios conjugados: $$(4m - 9n)(4m + 9n)$$", "options": ["$$16m^2 - 81n^2$$", "$$16m^2 + 81n^2$$", "$$8m^2 - 18n^2$$", "$$16m^2 - 72mn + 81n^2$$"], "correct": 0, "explanation": "$(4m)^2 - (9n)^2 = 16m^2 - 81n^2$.", "source": "Taller #2: Binomios Conjugados (P\u00e1g 1, Ej. 10)", "subtopic": "Binomios Conjugados"}, {"id": 37, "topic": "productos_notables", "topicName": "Productos Notables", "difficulty": "Medio", "question": "Desarrolla el cubo de un binomio: $$(2x + 3)^3$$", "options": ["$$8x^3 + 36x^2 + 54x + 27$$", "$$8x^3 + 12x^2 + 18x + 27$$", "$$8x^3 + 27$$", "$$8x^3 + 18x^2 + 36x + 27$$"], "correct": 0, "explanation": "$(2x)^3 + 3(2x)^2(3) + 3(2x)(3^2) + 3^3 = 8x^3 + 36x^2 + 54x + 27$.", "source": "Taller #2: Cubo de un Binomio (P\u00e1g 1, Ej. 11)", "subtopic": "Cubo de un Binomio"}, {"id": 38, "topic": "productos_notables", "topicName": "Productos Notables", "difficulty": "Medio", "question": "Desarrolla el cubo de un binomio: $$(1 - 4m)^3$$", "options": ["$$1 - 12m + 48m^2 - 64m^3$$", "$$1 - 12m - 48m^2 - 64m^3$$", "$$1 - 64m^3$$", "$$1 - 4m + 16m^2 - 64m^3$$"], "correct": 0, "explanation": "F\u00f3rmula $(a-b)^3 = a^3 - 3a^2b + 3ab^2 - b^3$:\\n$1^3 - 3(1)^2(4m) + 3(1)(4m)^2 - (4m)^3 = 1 - 12m + 3(16m^2) - 64m^3 = 1 - 12m + 48m^2 - 64m^3$.", "source": "Taller #2: Cubo de un Binomio (P\u00e1g 1, Ej. 12)", "subtopic": "Cubo de un Binomio"}, {"id": 39, "topic": "productos_notables", "topicName": "Productos Notables", "difficulty": "Dif\u00edcil", "question": "Desarrolla el cuadrado del trinomio: $$(2a - 3b + 1)^2$$", "options": ["$$4a^2 + 9b^2 + 1 - 12ab + 4a - 6b$$", "$$4a^2 - 9b^2 + 1 - 12ab + 4a - 6b$$", "$$4a^2 + 9b^2 + 1 - 6ab + 2a - 3b$$", "$$4a^2 + 9b^2 + 1$$"], "correct": 0, "explanation": "Cuadrados: $(2a)^2 + (-3b)^2 + (1)^2 = 4a^2 + 9b^2 + 1$.\\nDobles productos: $2(2a)(-3b) = -12ab$, $2(2a)(1) = 4a$, $2(-3b)(1) = -6b$.\\nTotal: $4a^2 + 9b^2 + 1 - 12ab + 4a - 6b$.", "source": "Taller #2: Cuadrado de un Trinomio (P\u00e1g 1, Ej. 50)", "subtopic": "Cuadrado de un Trinomio"}, {"id": 40, "topic": "productos_notables", "topicName": "Productos Notables", "difficulty": "Dif\u00edcil", "question": "Desarrolla el cuadrado de un trinomio: $$(4m + 5n + p)^2$$", "options": ["$$16m^2 + 25n^2 + p^2 + 40mn + 8mp + 10np$$", "$$16m^2 + 25n^2 + p^2 + 20mn + 4mp + 5np$$", "$$16m^2 + 25n^2 + p^2$$", "$$16m^2 + 25n^2 + p^2 + 40mn - 8mp - 10np$$"], "correct": 0, "explanation": "$(4m)^2 + (5n)^2 + p^2 + 2(4m)(5n) + 2(4m)(p) + 2(5n)(p) = 16m^2 + 25n^2 + p^2 + 40mn + 8mp + 10np$.", "source": "Taller #2: Cuadrado de un Trinomio (P\u00e1g 1, Ej. 51)", "subtopic": "Cuadrado de un Trinomio"}, {"id": 41, "topic": "factorizacion", "topicName": "Factorizaci\u00f3n", "difficulty": "F\u00e1cil", "question": "Factoriza por factor com\u00fan monomio el binomio: $$7x^2 - 3x$$", "options": ["$$x(7x - 3)$$", "$$7x(x - 3)$$", "$$x^2(7 - 3)$$", "$$(7x - 1)(x - 3)$$"], "correct": 0, "explanation": "El factor com\u00fan de mayor grado entre $7x^2$ y $-3x$ es $x$. Factorizado: $x(7x - 3)$.", "source": "Taller Desigualdades (P\u00e1g 15, Ej. 3b)", "subtopic": "Trinomio x\u00b2 + bx + c"}, {"id": 42, "topic": "factorizacion", "topicName": "Factorizaci\u00f3n", "difficulty": "Medio", "question": "Factoriza completamente el trinomio de la forma $x^2 + bx + c$: $$x^2 - 5x + 4$$", "options": ["$$(x - 4)(x - 1)$$", "$$(x - 5)(x + 1)$$", "$$(x + 4)(x + 1)$$", "$$(x - 2)(x - 3)$$"], "correct": 0, "explanation": "Buscamos dos n\u00fameros cuyo producto sea $+4$ y cuya suma algebraica sea $-5$. Dichos n\u00fameros son $-4$ y $-1$. Por tanto: $(x - 4)(x - 1)$.", "source": "Taller Desigualdades (P\u00e1g 6)", "subtopic": "Trinomio x\u00b2 + bx + c"}, {"id": 43, "topic": "factorizacion", "topicName": "Factorizaci\u00f3n", "difficulty": "Medio", "question": "Factoriza el trinomio: $$x^2 + 8x + 12$$", "options": ["$$(x + 6)(x + 2)$$", "$$(x + 4)(x + 3)$$", "$$(x + 12)(x + 1)$$", "$$(x - 6)(x - 2)$$"], "correct": 0, "explanation": "Dos n\u00fameros que multiplicados den $12$ y sumados den $8$ son $6$ y $2$. Factorizaci\u00f3n: $(x + 6)(x + 2)$.", "source": "Taller Desigualdades (P\u00e1g 15, Ej. 4g)", "subtopic": "Trinomio x\u00b2 + bx + c"}, {"id": 44, "topic": "factorizacion", "topicName": "Factorizaci\u00f3n", "difficulty": "F\u00e1cil", "question": "Factoriza la diferencia de cuadrados: $$4x^2 - 25y^2$$", "options": ["$$(2x - 5y)(2x + 5y)$$", "$$(4x - 25y)(4x + 25y)$$", "$$(2x - 5y)^2$$", "$$(2x + 5y)^2$$"], "correct": 0, "explanation": "$\\sqrt{4x^2} = 2x$ y $\\sqrt{25y^2} = 5y$. Por regla de diferencia de cuadrados: $(2x - 5y)(2x + 5y)$.", "source": "Fundamentos de Factorizaci\u00f3n", "subtopic": "Diferencia de Cuadrados"}, {"id": 45, "topic": "fracciones_alg", "topicName": "Fracciones Algebraicas", "difficulty": "F\u00e1cil", "question": "Simplifica la fracci\u00f3n algebraica para $x \\neq -2$: $$\\frac{x^2 - 4}{x + 2}$$", "options": ["$$x - 2$$", "$$x + 2$$", "$$x - 4$$", "$$\\frac{x - 2}{2}$$"], "correct": 0, "explanation": "Diferencia de cuadrados en el numerador: $x^2 - 4 = (x - 2)(x + 2)$.\\n$\\frac{(x - 2)(x + 2)}{x + 2} = x - 2$.", "source": "Taller Desigualdades (P\u00e1g 7)", "subtopic": "Simplificaci\u00f3n de Fracciones"}, {"id": 46, "topic": "fracciones_alg", "topicName": "Fracciones Algebraicas", "difficulty": "Dif\u00edcil", "question": "Efect\u00faa y simplifica la resta de fracciones algebraicas: $$\\frac{x - 1}{x + 1} - \\frac{x + 1}{x - 1}$$", "options": ["$$\\frac{-4x}{x^2 - 1}$$", "$$\\frac{4x}{x^2 - 1}$$", "$$\\frac{-2x}{x^2 - 1}$$", "$$0$$"], "correct": 0, "explanation": "Denominador com\u00fan: $(x+1)(x-1) = x^2 - 1$.\\n$\\frac{(x-1)^2 - (x+1)^2}{x^2 - 1} = \\frac{(x^2 - 2x + 1) - (x^2 + 2x + 1)}{x^2 - 1} = \\frac{-4x}{x^2 - 1}$.", "source": "Taller Desigualdades (P\u00e1g 7, Ej. Racional)", "subtopic": "Operaciones con Fracciones"}, {"id": 47, "topic": "desigualdades", "topicName": "Desigualdades", "difficulty": "F\u00e1cil", "question": "\u00bfQu\u00e9 propiedad fundamental se aplica al dividir por un n\u00famero negativo en una desigualdad?", "options": ["El sentido de la desigualdad se INVIERTE (ej. de $<$ pasa a $>$).", "El sentido de la desigualdad siempre se conserva.", "La desigualdad se transforma obligatoriamente en igualdad.", "Solo se invierte si el dividendo es cero."], "correct": 0, "explanation": "Propiedad: Al multiplicar o dividir ambos miembros de una desigualdad por un n\u00famero negativo ($c < 0$), el sentido de la desigualdad se invierte obligatoriamente.", "source": "Taller Desigualdades UNIGUAJIRA (P\u00e1g 2)", "subtopic": "Inecuaciones Lineales"}, {"id": 48, "topic": "desigualdades", "topicName": "Desigualdades", "difficulty": "F\u00e1cil", "question": "Resuelve la inecuaci\u00f3n lineal: $$3x + 1 > 2x + 5$$", "options": ["$$x > 4 \\quad \\text{\u00f3} \\quad x \\in (4, \\infty)$$", "$$x < 4 \\quad \\text{\u00f3} \\quad x \\in (-\\infty, 4)$$", "$$x \\ge 6$$", "$$x > -4$$"], "correct": 0, "explanation": "$3x - 2x > 5 - 1 \\implies x > 4$. En intervalo: $(4, \\infty)$ (semirrecta abierta).", "source": "Taller Desigualdades UNIGUAJIRA (P\u00e1g 3, Ej. 1)", "subtopic": "Inecuaciones Lineales"}, {"id": 49, "topic": "desigualdades", "topicName": "Desigualdades", "difficulty": "Medio", "question": "Resuelve la inecuaci\u00f3n: $$\\frac{2x - 3}{4} \\ge 3x + 8$$", "options": ["$$x \\le -3.5 \\quad \\left(x \\le -\\frac{7}{2}\\right)$$", "$$x \\ge -3.5$$", "$$x \\le 3.5$$", "$$x \\ge -5$$"], "correct": 0, "explanation": "1. Multiplicamos por 4: $2x - 3 \\ge 12x + 32$.\\n2. Transponemos: $2x - 12x \\ge 32 + 3 \\implies -10x \\ge 35$.\\n3. Dividimos entre $-10$ (invirtiendo el sentido): $x \\le \\frac{35}{-10} = -3.5$.", "source": "Taller Desigualdades UNIGUAJIRA (P\u00e1g 3, Ej. 2)", "subtopic": "Inecuaciones Racionales"}, {"id": 50, "topic": "desigualdades", "topicName": "Desigualdades", "difficulty": "Medio", "question": "Resuelve la inecuaci\u00f3n con fracciones: $$\\frac{3x - 1}{2} < \\frac{x + 2}{5}$$", "options": ["$$x < \\frac{9}{13}$$", "$$x > \\frac{9}{13}$$", "$$x < \\frac{5}{13}$$", "$$x < 1$$"], "correct": 0, "explanation": "Multiplicando por el mcm(2,5) = 10:\\n$5(3x - 1) < 2(x + 2) \\implies 15x - 5 < 2x + 4 \\implies 13x < 9 \\implies x < \\frac{9}{13}$.", "source": "Taller Desigualdades UNIGUAJIRA (P\u00e1g 15, Ej. 1b)", "subtopic": "Inecuaciones Racionales"}, {"id": 51, "topic": "desigualdades", "topicName": "Desigualdades", "difficulty": "Medio", "question": "Resuelve el sistema de inecuaciones lineales: $$\\begin{cases} 3x - 1 \\le 5x + 7 \\\\ x + 4 > 2x - 1 \\end{cases}$$", "options": ["$$x \\in [-4, 5) \\quad \\text{\u00f3} \\quad -4 \\le x < 5$$", "$$x \\in (-4, 5]$$", "$$x \\in [4, 5)$$", "No tiene soluci\u00f3n"], "correct": 0, "explanation": "1. $3x - 5x \\le 7 + 1 \\implies -2x \\le 8 \\implies x \\ge -4$.\\n2. $x - 2x > -1 - 4 \\implies -x > -5 \\implies x < 5$.\\nIntersecci\u00f3n: $-4 \\le x < 5$, es decir $[-4, 5)$.", "source": "Taller Desigualdades UNIGUAJIRA (P\u00e1g 4)", "subtopic": "Sistemas de Inecuaciones"}, {"id": 52, "topic": "desigualdades", "topicName": "Desigualdades", "difficulty": "F\u00e1cil", "question": "Determina el conjunto soluci\u00f3n del sistema: $$\\begin{cases} 3x \\ge 15 \\\\ -2x > 6 \\end{cases}$$", "options": ["No tiene soluci\u00f3n (conjunto vac\u00edo $\\emptyset$)", "$$x \\in [-3, 5]$$", "$$x \\in (-\\infty, -3) \\cup [5, \\infty)$$", "$$x \\ge 5$$"], "correct": 0, "explanation": "De la 1ra: $x \\ge 5$. De la 2da: $x < -3$. No existe ning\u00fan n\u00famero que sea al mismo tiempo mayor o igual a 5 y menor estricto que -3. El conjunto soluci\u00f3n es vac\u00edo $\\emptyset$.", "source": "Taller Desigualdades UNIGUAJIRA (P\u00e1g 5)", "subtopic": "Sistemas de Inecuaciones"}, {"id": 53, "topic": "desigualdades", "topicName": "Desigualdades", "difficulty": "Medio", "question": "Resuelve la doble desigualdad: $$2 \\le 2x - 3 \\le 5$$", "options": ["$$x \\in \\left[\\frac{5}{2}, 4\\right]$$", "$$x \\in \\left(\\frac{5}{2}, 4\\right)$$", "$$x \\in [1, 4]$$", "$$x \\in [2, 5]$$"], "correct": 0, "explanation": "Sumamos 3 en toda la desigualdad: $2 + 3 \\le 2x \\le 5 + 3 \\implies 5 \\le 2x \\le 8$.\\nDividimos entre 2: $\\frac{5}{2} \\le x \\le 4$, que en intervalo cerrado es $\\left[\\frac{5}{2}, 4\\right]$.", "source": "Taller Desigualdades UNIGUAJIRA (P\u00e1g 5)", "subtopic": "Inecuaciones Racionales"}, {"id": 54, "topic": "desigualdades", "topicName": "Desigualdades", "difficulty": "Dif\u00edcil", "question": "Resuelve la inecuaci\u00f3n cuadr\u00e1tica: $$x^2 - 5x + 4 > 0$$", "options": ["$$x \\in (-\\infty, 1) \\cup (4, \\infty)$$", "$$x \\in (1, 4)$$", "$$x \\in [1, 4]$$", "$$x \\in (-\\infty, -4) \\cup (-1, \\infty)$$"], "correct": 0, "explanation": "Factorizamos: $(x - 1)(x - 4) > 0$. Ra\u00edces: $x = 1, x = 4$.\\nIntervalos: $(-\\infty, 1)$, $(1, 4)$, $(4, \\infty)$.\\nProbando valores ($x=0 \\to +4 > 0$; $x=2 \\to -2 < 0$; $x=5 \\to +4 > 0$).\\nSoluci\u00f3n: $(-\\infty, 1) \\cup (4, \\infty)$.", "source": "Taller Desigualdades UNIGUAJIRA (P\u00e1g 6)", "subtopic": "Inecuaciones Cuadr\u00e1ticas"}, {"id": 55, "topic": "desigualdades", "topicName": "Desigualdades", "difficulty": "Dif\u00edcil", "question": "Resuelve la inecuaci\u00f3n: $$(3 + x)(2 - x) < 0$$", "options": ["$$x \\in (-\\infty, -3) \\cup (2, \\infty)$$", "$$x \\in (-3, 2)$$", "$$x \\in [-3, 2]$$", "$$x \\in (-\\infty, 2)$$"], "correct": 0, "explanation": "Ra\u00edces: $3+x = 0 \\implies x = -3$; $2-x = 0 \\implies x = 2$.\\nPara $x = 0$: $(3)(2) = 6 > 0$ (no cumple el $< 0$).\\nPara $x = -4$: $(-1)(6) = -6 < 0$ (cumple).\\nPara $x = 3$: $(6)(-1) = -6 < 0$ (cumple).\\nSoluci\u00f3n: $(-\\infty, -3) \\cup (2, \\infty)$.", "source": "Taller Desigualdades UNIGUAJIRA (P\u00e1g 15, Ej. 3a)", "subtopic": "Inecuaciones Lineales"}, {"id": 56, "topic": "desigualdades", "topicName": "Desigualdades", "difficulty": "Dif\u00edcil", "question": "Resuelve la inecuaci\u00f3n racional: $$\\frac{2x - 8}{3x + 9} \\ge 0$$", "options": ["$$x \\in (-\\infty, -3) \\cup [4, \\infty)$$", "$$x \\in [-\\infty, -3] \\cup [4, \\infty)$$", "$$x \\in (-3, 4]$$", "$$x \\in (-\\infty, 4]$$"], "correct": 0, "explanation": "Ra\u00edz del numerador: $2x - 8 = 0 \\implies x = 4$.\\nRa\u00edz del denominador: $3x + 9 = 0 \\implies x = -3$.\\n\u00a1El denominador NUNCA puede ser cero!, por lo que en $-3$ el corchete SIEMPRE es abierto. En $x=4$ s\u00ed es cerrado por el signo $\\ge$.\\nEvaluando signos obtenemos $(-\\infty, -3) \\cup [4, \\infty)$.", "source": "Taller Desigualdades UNIGUAJIRA (P\u00e1g 7)", "subtopic": "Inecuaciones Racionales"}, {"id": 57, "topic": "desigualdades", "topicName": "Desigualdades", "difficulty": "Dif\u00edcil", "question": "Resuelve la inecuaci\u00f3n racional: $$\\frac{x^2 - 4}{x + 1} < 0$$", "options": ["$$x \\in (-\\infty, -2) \\cup (-1, 2)$$", "$$x \\in (-2, -1) \\cup (2, \\infty)$$", "$$x \\in [-2, 2]$$", "$$x \\in (-\\infty, -1)$$"], "correct": 0, "explanation": "Puntos cr\u00edticos: numerador $x^2 - 4 = 0 \\implies x = \\pm 2$; denominador $x + 1 = 0 \\implies x = -1$.\\nPuntos en la recta: $-2, -1, 2$. Evaluando signos en cada subintervalo resulta negativo en $(-\\infty, -2)$ y en $(-1, 2)$.", "source": "Taller Desigualdades UNIGUAJIRA (P\u00e1g 7)", "subtopic": "Inecuaciones Racionales"}, {"id": 58, "topic": "desigualdades", "topicName": "Desigualdades", "difficulty": "Dif\u00edcil", "question": "Resuelve la inecuaci\u00f3n: $$\\frac{x^2 - 1}{x^2 + 1} > 0$$", "options": ["$$x \\in (-\\infty, -1) \\cup (1, \\infty)$$", "$$x \\in (-1, 1)$$", "$$x \\in [-1, 1]$$", "Todos los reales $\\mathbb{R}$"], "correct": 0, "explanation": "El denominador $x^2 + 1$ siempre es estrictamente positivo para cualquier $x \\in \\mathbb{R}$. Por tanto, el signo depende \u00fanicamente del numerador: $x^2 - 1 > 0 \\implies (x - 1)(x + 1) > 0 \\implies x \\in (-\\infty, -1) \\cup (1, \\infty)$.", "source": "Taller Desigualdades UNIGUAJIRA (P\u00e1g 15, Ej. 4d)", "subtopic": "Inecuaciones Racionales"}, {"id": 59, "topic": "linea_recta", "topicName": "L\u00ednea Recta", "difficulty": "F\u00e1cil", "question": "Dada la ecuaci\u00f3n general de la recta $3x - 2y + 5 = 0$, \u00bfcu\u00e1l es su pendiente $m$?", "options": ["$$m = \\frac{3}{2}$$", "$$m = -\\frac{3}{2}$$", "$$m = \\frac{2}{3}$$", "$$m = 3$$"], "correct": 0, "explanation": "Para $Ax + By + C = 0$, la pendiente es $m = -\\frac{A}{B}$. Con $A = 3, B = -2$: $m = -\\frac{3}{-2} = \\frac{3}{2}$.", "source": "Taller Desigualdades & Rectas (P\u00e1g 9)", "subtopic": "C\u00e1lculo de Pendiente (m)"}, {"id": 60, "topic": "linea_recta", "topicName": "L\u00ednea Recta", "difficulty": "Medio", "question": "Para graficar el semiplano soluci\u00f3n de $3x - 2y + 5 > 0$, evaluamos el origen $(0,0)$: $3(0) - 2(0) + 5 = 5 > 0$. \u00bfCu\u00e1l es la conclusi\u00f3n correcta?", "options": ["Como se verifica la desigualdad ($5 > 0$), la soluci\u00f3n es el semiplano abierto que CONTIENE al origen $(0,0)$, excluyendo los puntos sobre la recta.", "La soluci\u00f3n es el semiplano que NO contiene al origen.", "La soluci\u00f3n es un semiplano cerrado que incluye toda la recta.", "No se puede utilizar el origen como punto de prueba."], "correct": 0, "explanation": "Al ser $(0,0)$ verdadero ($5 > 0$), el semiplano que contiene a dicho punto es la soluci\u00f3n. Como la desigualdad es estricta ($>$), los puntos sobre la recta no pertenecen a la soluci\u00f3n (semiplano abierto).", "source": "Taller Desigualdades UNIGUAJIRA (P\u00e1g 9)", "subtopic": "Semiplanos en el Plano"}, {"id": 61, "topic": "linea_recta", "topicName": "L\u00ednea Recta", "difficulty": "F\u00e1cil", "question": "En la inecuaci\u00f3n lineal con dos inc\u00f3gnitas $5x + y \\le 1$, la recta frontera $5x + y = 1$:", "options": ["S\u00cd pertenece a la soluci\u00f3n (semiplano cerrado) porque incluye la igualdad ($\\le$).", "NO pertenece a la soluci\u00f3n porque es una desigualdad lineal.", "Solo pertenece el origen $(0,0)$.", "Pertenece \u00fanicamente para valores positivos de $x$."], "correct": 0, "explanation": "El s\u00edmbolo de desigualdad amplia ($\\le$ \u00f3 $\\ge$) incluye a todos los puntos que satisfacen la igualdad sobre la recta frontera (semiplano cerrado).", "source": "Taller Desigualdades UNIGUAJIRA (P\u00e1g 10)", "subtopic": "Semiplanos en el Plano"}, {"id": 62, "topic": "linea_recta", "topicName": "L\u00ednea Recta", "difficulty": "F\u00e1cil", "question": "\u00bfCu\u00e1l es la pendiente $m$ de la recta que pasa por los puntos $P_1(1, 2)$ y $P_2(4, 8)$?", "options": ["$$m = 2$$", "$$m = \\frac{1}{2}$$", "$$m = 3$$", "$$m = -2$$"], "correct": 0, "explanation": "$m = \\frac{y_2 - y_1}{x_2 - x_1} = \\frac{8 - 2}{4 - 1} = \\frac{6}{3} = 2$.", "source": "Fundamentos de Matem\u00e1ticas: L\u00ednea Recta", "subtopic": "C\u00e1lculo de Pendiente (m)"}, {"id": 63, "topic": "linea_recta", "topicName": "L\u00ednea Recta", "difficulty": "Medio", "question": "Si una recta $L_1$ tiene pendiente $m_1 = -\\frac{2}{3}$, \u00bfcu\u00e1l debe ser la pendiente $m_2$ de una recta perpendicular a ella?", "options": ["$$m_2 = \\frac{3}{2}$$", "$$m_2 = -\\frac{3}{2}$$", "$$m_2 = -\\frac{2}{3}$$", "$$m_2 = \\frac{2}{3}$$"], "correct": 0, "explanation": "Dos rectas son perpendiculares si $m_1 \\cdot m_2 = -1 \\implies m_2 = -\\frac{1}{m_1} = -\\frac{1}{-2/3} = \\frac{3}{2}$.", "source": "Fundamentos de Matem\u00e1ticas: Rectas Perpendiculares", "subtopic": "C\u00e1lculo de Pendiente (m)"}, {"id": 64, "topic": "linea_recta", "topicName": "L\u00ednea Recta", "difficulty": "Medio", "question": "\u00bfCu\u00e1l es el punto de corte con el eje $Y$ (intercepto $y$) de la recta $2x + 3y - 6 = 0$?", "options": ["$$(0, 2)$$", "$$(0, 3)$$", "$$(3, 0)$$", "$$(0, -2)$$"], "correct": 0, "explanation": "Para hallar el corte con el eje $Y$, hacemos $x = 0$:\\n$2(0) + 3y - 6 = 0 \\implies 3y = 6 \\implies y = 2$. Por lo tanto, el punto es $(0, 2)$.", "source": "Fundamentos de Matem\u00e1ticas: L\u00ednea Recta", "subtopic": "Ecuaci\u00f3n General de la Recta"}, {"id": 65, "topic": "ecuaciones", "topicName": "Ecuaciones", "difficulty": "F\u00e1cil", "question": "Halla el valor de $x$ en la ecuaci\u00f3n lineal: $$4x + 12 = x + 24$$", "options": ["$$x = 4$$", "$$x = 12$$", "$$x = 3$$", "$$x = -4$$"], "correct": 0, "explanation": "$4x - x = 24 - 12 \\implies 3x = 12 \\implies x = 4$.", "source": "Taller Unidad 1: N\u00fameros Reales (P\u00e1g 3, Ej. 1)", "subtopic": "Ecuaciones Lineales de 1er Grado"}, {"id": 66, "topic": "ecuaciones", "topicName": "Ecuaciones", "difficulty": "F\u00e1cil", "question": "Determina el valor de $x$ en la ecuaci\u00f3n: $$27 + 6x = 21 + 8x$$", "options": ["$$x = 3$$", "$$x = -3$$", "$$x = 6$$", "$$x = 2$$"], "correct": 0, "explanation": "$27 - 21 = 8x - 6x \\implies 6 = 2x \\implies x = 3$.", "source": "Taller Unidad 1: N\u00fameros Reales (P\u00e1g 13, Ej. 5k)", "subtopic": "Ecuaciones Lineales de 1er Grado"}, {"id": 67, "topic": "ecuaciones", "topicName": "Ecuaciones", "difficulty": "F\u00e1cil", "question": "Halla el valor de $x$ en: $$17 - x = -6$$", "options": ["$$x = 23$$", "$$x = 11$$", "$$x = -23$$", "$$x = -11$$"], "correct": 0, "explanation": "$17 + 6 = x \\implies x = 23$.", "source": "Taller Unidad 1: N\u00fameros Reales (P\u00e1g 13, Ej. 5g)", "subtopic": "Ecuaciones Lineales de 1er Grado"}, {"id": 68, "topic": "ecuaciones", "topicName": "Ecuaciones", "difficulty": "Medio", "question": "Resuelve la ecuaci\u00f3n: $$3(2 - 5x) = 18 - 12x$$", "options": ["$$x = -4$$", "$$x = 4$$", "$$x = -2$$", "$$x = 1$$"], "correct": 0, "explanation": "$6 - 15x = 18 - 12x \\implies -15x + 12x = 18 - 6 \\implies -3x = 12 \\implies x = -4$.", "source": "Taller Desigualdades UNIGUAJIRA (P\u00e1g 5)", "subtopic": "Ecuaciones Lineales de 1er Grado"}, {"id": 69, "topic": "ecuaciones", "topicName": "Ecuaciones", "difficulty": "Medio", "question": "\u00bfCu\u00e1les son las soluciones de la ecuaci\u00f3n cuadr\u00e1tica $x^2 - 7x + 12 = 0$?", "options": ["$$x_1 = 3, \\quad x_2 = 4$$", "$$x_1 = -3, \\quad x_2 = -4$$", "$$x_1 = 6, \\quad x_2 = 2$$", "$$x_1 = 1, \\quad x_2 = 12$$"], "correct": 0, "explanation": "Factorizando: $(x - 3)(x - 4) = 0 \\implies x_1 = 3, x_2 = 4$.", "source": "Fundamentos de Matem\u00e1ticas: Ecuaci\u00f3n Cuadr\u00e1tica", "subtopic": "Ecuaci\u00f3n Cuadr\u00e1tica"}, {"id": 70, "topic": "ecuaciones", "topicName": "Ecuaciones", "difficulty": "Medio", "question": "El discriminante de la ecuaci\u00f3n cuadr\u00e1tica $2x^2 - 4x + 5 = 0$ es $\\Delta = b^2 - 4ac$. \u00bfQu\u00e9 indica sobre sus ra\u00edces?", "options": ["$\\Delta = -24 < 0$, por lo que no tiene soluciones reales (ra\u00edces complejas conjugadas).", "$\\Delta = 24 > 0$, tiene dos soluciones reales distintas.", "$\\Delta = 0$, tiene una \u00fanica ra\u00edz real repetida.", "$\\Delta = 56 > 0$, tiene soluciones racionales enteras."], "correct": 0, "explanation": "$\\Delta = (-4)^2 - 4(2)(5) = 16 - 40 = -24 < 0$. Al ser el discriminante estrictamente negativo, la ecuaci\u00f3n no tiene soluciones en el conjunto de los n\u00fameros reales.", "source": "Fundamentos de Matem\u00e1ticas: Discriminante", "subtopic": "Ecuaci\u00f3n Cuadr\u00e1tica"}, {"id": 71, "topic": "ecuaciones", "topicName": "Ecuaciones", "difficulty": "Dif\u00edcil", "question": "Aplica la f\u00f3rmula general $x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$ para resolver: $$2x^2 + 5x - 3 = 0$$", "options": ["$$x_1 = \\frac{1}{2}, \\quad x_2 = -3$$", "$$x_1 = -\\frac{1}{2}, \\quad x_2 = 3$$", "$$x_1 = 1, \\quad x_2 = -6$$", "$$x_1 = \\frac{3}{2}, \\quad x_2 = -1$$"], "correct": 0, "explanation": "$a = 2, b = 5, c = -3$.\\n$\\Delta = 5^2 - 4(2)(-3) = 25 + 24 = 49$.\\n$x = \\frac{-5 \\pm 7}{4} \\implies x_1 = \\frac{2}{4} = \\frac{1}{2},\\ x_2 = \\frac{-12}{4} = -3$.", "source": "Fundamentos de Matem\u00e1ticas: Ecuaci\u00f3n Cuadr\u00e1tica", "subtopic": "Ecuaciones Lineales de 1er Grado"}, {"id": 72, "topic": "factorizacion", "topicName": "Factorizaci\u00f3n", "difficulty": "F\u00e1cil", "question": "Factoriza por factor com\u00fan monomio el polinomio: $$25x^7 - 10x^5 + 15x^3 - 5x^2$$", "options": ["$$5x^2(5x^5 - 2x^3 + 3x - 1)$$", "$$5x^2(5x^5 - 2x^3 + 3x)$$", "$$5x(5x^6 - 2x^4 + 3x^2 - 1)$$", "$$x^2(25x^5 - 10x^3 + 15x - 5)$$"], "correct": 0, "explanation": "El MCD de los coeficientes (25, 10, 15, 5) es 5. La menor potencia de $x$ es $x^2$. Extrayendo $5x^2$:\\n$25x^7/5x^2 = 5x^5$, $-10x^5/5x^2 = -2x^3$, $15x^3/5x^2 = 3x$, $-5x^2/5x^2 = -1$.\\nResultado: $5x^2(5x^5 - 2x^3 + 3x - 1)$.", "source": "Taller #3: Factorizaci\u00f3n (P\u00e1g 1, Ej. 15)", "subtopic": "Trinomio x\u00b2 + bx + c"}, {"id": 73, "topic": "factorizacion", "topicName": "Factorizaci\u00f3n", "difficulty": "Medio", "question": "Factoriza extrayendo el factor com\u00fan polinomio: $$9(x + 1) - 3(x + 1)^2$$", "options": ["$$3(x + 1)(2 - x)$$", "$$3(x + 1)(3 - x)$$", "$$3(x + 1)(x + 2)$$", "$$9(x + 1)(1 - x)$$"], "correct": 0, "explanation": "El factor com\u00fan es $3(x + 1)$:\\n$3(x + 1) [ 3 - (x + 1) ] = 3(x + 1)(3 - x - 1) = 3(x + 1)(2 - x)$.", "source": "Taller #3: Factorizaci\u00f3n (P\u00e1g 1, Ej. 23)", "subtopic": "Factor Com\u00fan Monomio / Polinomio"}, {"id": 74, "topic": "factorizacion", "topicName": "Factorizaci\u00f3n", "difficulty": "Medio", "question": "Factoriza por factor com\u00fan por agrupaci\u00f3n de t\u00e9rminos: $$3a - 2b - 2by^4 + 3ay^4$$", "options": ["$$(3a - 2b)(1 + y^4)$$", "$$(3a + 2b)(1 - y^4)$$", "$$(3a - 2b)(y^4 - 1)$$", "$$(a - b)(3 + 2y^4)$$"], "correct": 0, "explanation": "Agrupamos t\u00e9rminos con coeficientes comunes:\\n$(3a + 3ay^4) - (2b + 2by^4) = 3a(1 + y^4) - 2b(1 + y^4) = (3a - 2b)(1 + y^4)$.", "source": "Taller #3: Factor Com\u00fan por Agrupaci\u00f3n (P\u00e1g 2, Ej. 9)", "subtopic": "Factor Com\u00fan por Agrupaci\u00f3n"}, {"id": 75, "topic": "factorizacion", "topicName": "Factorizaci\u00f3n", "difficulty": "Medio", "question": "Factoriza por agrupaci\u00f3n: $$2mx^4 + 3nx^4 + 10m + 15n$$", "options": ["$$(2m + 3n)(x^4 + 5)$$", "$$(2m - 3n)(x^4 - 5)$$", "$$(2m + 3n)(x^4 + 10)$$", "$$(m + n)(2x^4 + 15)$$"], "correct": 0, "explanation": "Agrupamos los dos primeros y los dos \u00faltimos:\\n$x^4(2m + 3n) + 5(2m + 3n) = (2m + 3n)(x^4 + 5)$.", "source": "Taller #3: Factor Com\u00fan por Agrupaci\u00f3n (P\u00e1g 2, Ej. 10)", "subtopic": "Factor Com\u00fan por Agrupaci\u00f3n"}, {"id": 76, "topic": "factorizacion", "topicName": "Factorizaci\u00f3n", "difficulty": "Medio", "question": "Factoriza el polinomio por agrupaci\u00f3n de t\u00e9rminos: $$x^3 - 15 - 5x + 3x^2$$", "options": ["$$(x + 3)(x^2 - 5)$$", "$$(x - 3)(x^2 + 5)$$", "$$(x + 5)(x^2 - 3)$$", "$$(x - 5)(x^2 + 3)$$"], "correct": 0, "explanation": "Reordenando: $(x^3 + 3x^2) - (5x + 15) = x^2(x + 3) - 5(x + 3) = (x + 3)(x^2 - 5)$.", "source": "Taller #3: Factor Com\u00fan por Agrupaci\u00f3n (P\u00e1g 2, Ej. 12)", "subtopic": "Factor Com\u00fan por Agrupaci\u00f3n"}, {"id": 77, "topic": "factorizacion", "topicName": "Factorizaci\u00f3n", "difficulty": "F\u00e1cil", "question": "Factoriza la diferencia de cuadrados con potencias literales: $$1 - x^{2a}$$", "options": ["$$(1 - x^a)(1 + x^a)$$", "$$(1 - x^2)(1 + x^a)$$", "$$(1 - x^{2a})(1 + x^{2a})$$", "$$(1 - x^a)^2$$"], "correct": 0, "explanation": "La ra\u00edz cuadrada de $1$ es $1$ y la de $x^{2a}$ es $x^a$. Aplicando diferencia de cuadrados: $(1 - x^a)(1 + x^a)$.", "source": "Taller #3: Diferencia de Cuadrados (P\u00e1g 3, Ej. 21)", "subtopic": "Diferencia de Cuadrados"}, {"id": 78, "topic": "factorizacion", "topicName": "Factorizaci\u00f3n", "difficulty": "Medio", "question": "Factoriza la diferencia de cuadrados: $$16x^{6a} - 49y^{2b}$$", "options": ["$$(4x^{3a} - 7y^b)(4x^{3a} + 7y^b)$$", "$$(4x^{3a} - 7y^b)^2$$", "$$(8x^{3a} - 7y^b)(8x^{3a} + 7y^b)$$", "$$(4x^{6a} - 7y^{2b})(4x^{6a} + 7y^{2b})$$"], "correct": 0, "explanation": "$\\sqrt{16x^{6a}} = 4x^{3a}$ y $\\sqrt{49y^{2b}} = 7y^b$. Por f\u00f3rmula: $(4x^{3a} - 7y^b)(4x^{3a} + 7y^b)$.", "source": "Taller #3: Diferencia de Cuadrados (P\u00e1g 3, Ej. 23)", "subtopic": "Diferencia de Cuadrados"}, {"id": 79, "topic": "factorizacion", "topicName": "Factorizaci\u00f3n", "difficulty": "Dif\u00edcil", "question": "Factoriza la diferencia de cuadrados de binomios: $$(x - 1)^2 - (y - 3)^2$$", "options": ["$$(x - y + 2)(x + y - 4)$$", "$$(x - y - 4)(x + y + 2)$$", "$$(x - y - 2)(x + y - 4)$$", "$$(x - y + 4)(x + y - 2)$$"], "correct": 0, "explanation": "$[(x - 1) - (y - 3)][(x - 1) + (y - 3)] = (x - 1 - y + 3)(x - 1 + y - 3) = (x - y + 2)(x + y - 4)$.", "source": "Taller #3: Diferencia de Cuadrados (P\u00e1g 3, Ej. 24)", "subtopic": "Diferencia de Cuadrados"}, {"id": 80, "topic": "factorizacion", "topicName": "Factorizaci\u00f3n", "difficulty": "Dif\u00edcil", "question": "Factoriza el trinomio cuadrado perfecto: $$9(a - b)^2 + 12(a - b)(a + b) + 4(a + b)^2$$", "options": ["$$(5a - b)^2$$", "$$(5a + b)^2$$", "$$(a - 5b)^2$$", "$$(a + b)^2$$"], "correct": 0, "explanation": "Es un TCP de la forma $u^2 + 2uv + v^2 = (u+v)^2$, con $u = 3(a-b)$ y $v = 2(a+b)$.\\n$[3(a - b) + 2(a + b)]^2 = [3a - 3b + 2a + 2b]^2 = (5a - b)^2$.", "source": "Taller #3: Trinomio Cuadrado Perfecto (P\u00e1g 3, Ej. 26)", "subtopic": "Trinomio Cuadrado Perfecto"}, {"id": 81, "topic": "factorizacion", "topicName": "Factorizaci\u00f3n", "difficulty": "Medio", "question": "Factoriza el trinomio de la forma $x^2 + bx + c$: $$m^2 - 4mn - 21n^2$$", "options": ["$$(m - 7n)(m + 3n)$$", "$$(m + 7n)(m - 3n)$$", "$$(m - 21n)(m + n)$$", "$$(m - 4n)(m + 3n)$$"], "correct": 0, "explanation": "Buscamos dos n\u00fameros que multiplicados den $-21$ y sumados den $-4$: son $-7$ y $+3$. Factorizaci\u00f3n: $(m - 7n)(m + 3n)$.", "source": "Taller #3: Trinomio $x^2 + bx + c$ (P\u00e1g 4, Ej. 28)", "subtopic": "Trinomio x\u00b2 + bx + c"}, {"id": 82, "topic": "factorizacion", "topicName": "Factorizaci\u00f3n", "difficulty": "Dif\u00edcil", "question": "Factoriza el trinomio de la forma $ax^2 + bx + c$: $$6m^2 - 11mn + 4n^2$$", "options": ["$$(2m - n)(3m - 4n)$$", "$$(6m - n)(m - 4n)$$", "$$(2m + n)(3m + 4n)$$", "$$(3m - n)(2m - 4n)$$"], "correct": 0, "explanation": "Multiplicamos $a \\cdot c = 6 \\cdot 4 = 24$. Buscamos dos n\u00fameros que multiplicados den $24$ y sumados den $-11$: son $-8$ y $-3$.\\n$6m^2 - 8mn - 3mn + 4n^2 = 2m(3m - 4n) - n(3m - 4n) = (2m - n)(3m - 4n)$.", "source": "Taller #3: Trinomio $ax^2 + bx + c$ (P\u00e1g 4, Ej. 25)", "subtopic": "Trinomio ax\u00b2 + bx + c"}, {"id": 83, "topic": "desigualdades", "topicName": "Desigualdades", "difficulty": "F\u00e1cil", "question": "Determina el conjunto soluci\u00f3n de la desigualdad lineal: $$12x - 4 > 7x + 11$$", "options": ["$$x > 3 \\quad \\text{\u00f3} \\quad (3, \\infty)$$", "$$x < 3 \\quad \\text{\u00f3} \\quad (-\\infty, 3)$$", "$$x > 15$$", "$$x \\ge 3$$"], "correct": 0, "explanation": "$12x - 7x > 11 + 4 \\implies 5x > 15 \\implies x > 3$. En intervalo: $(3, \\infty)$.", "source": "Taller #4: Desigualdades (P\u00e1g 1, Ej. 1)", "subtopic": "Inecuaciones Lineales"}, {"id": 84, "topic": "desigualdades", "topicName": "Desigualdades", "difficulty": "F\u00e1cil", "question": "Resuelve la inecuaci\u00f3n: $$3x + 9 > 7x - 3$$", "options": ["$$x < 3 \\quad \\text{\u00f3} \\quad (-\\infty, 3)$$", "$$x > 3 \\quad \\text{\u00f3} \\quad (3, \\infty)$$", "$$x < -3$$", "$$x > -3$$"], "correct": 0, "explanation": "$3x - 7x > -3 - 9 \\implies -4x > -12$. Al dividir entre $-4$, se invierte el sentido: $x < \\frac{-12}{-4} = 3$.", "source": "Taller #4: Desigualdades (P\u00e1g 1, Ej. 2)", "subtopic": "Inecuaciones Racionales"}, {"id": 85, "topic": "desigualdades", "topicName": "Desigualdades", "difficulty": "Medio", "question": "Resuelve la inecuaci\u00f3n con productos notables: $$x(x + 12) > (x - 4)^2$$", "options": ["$$x > \\frac{4}{5} \\quad \\left(x > 0.8\\right)$$", "$$x < \\frac{4}{5}$$", "$$x > 4$$", "$$x > -\\frac{4}{5}$$"], "correct": 0, "explanation": "Desarrollamos ambos lados:\\n$x^2 + 12x > x^2 - 8x + 16$.\\nCancelando $x^2$: $12x + 8x > 16 \\implies 20x > 16 \\implies x > \\frac{16}{20} = \\frac{4}{5}$.", "source": "Taller #4: Desigualdades (P\u00e1g 1, Ej. 13)", "subtopic": "Inecuaciones Racionales"}, {"id": 86, "topic": "desigualdades", "topicName": "Desigualdades", "difficulty": "Medio", "question": "Resuelve la doble desigualdad: $$-7 < 4x + 1 < 13$$", "options": ["$$-2 < x < 3 \\quad \\text{\u00f3} \\quad x \\in (-2, 3)$$", "$$-2 \\le x \\le 3$$", "$$-8 < x < 12$$", "$$0 < x < 3$$"], "correct": 0, "explanation": "Restamos 1 en todos los miembros: $-7 - 1 < 4x < 13 - 1 \\implies -8 < 4x < 12$.\\nDividimos entre 4: $-2 < x < 3$.", "source": "Taller #4: Desigualdades (P\u00e1g 1, Ej. 23)", "subtopic": "Desigualdades Dobles"}, {"id": 87, "topic": "desigualdades", "topicName": "Desigualdades", "difficulty": "Dif\u00edcil", "question": "Determina el conjunto soluci\u00f3n de: $$-1 < \\frac{5 - x}{3} \\le 7$$", "options": ["$$x \\in [-16, 8) \\quad \\text{\u00f3} \\quad -16 \\le x < 8$$", "$$x \\in (-16, 8]$$", "$$x \\in [-8, 16)$$", "$$x \\in (-8, 16]$$"], "correct": 0, "explanation": "1. Multiplicamos por 3: $-3 < 5 - x \\le 21$.\\n2. Restamos 5: $-3 - 5 < -x \\le 21 - 5 \\implies -8 < -x \\le 16$.\\n3. Multiplicamos por $-1$ (se invierten ambos signos): $8 > x \\ge -16 \\implies -16 \\le x < 8$, intervalo $[-16, 8)$.", "source": "Taller #4: Desigualdades (P\u00e1g 1, Ej. 33)", "subtopic": "Inecuaciones Racionales"}, {"id": 88, "topic": "linea_recta", "topicName": "L\u00ednea Recta", "difficulty": "F\u00e1cil", "question": "Determina la pendiente $m$ de la recta que pasa por los puntos $A(-2, 4)$ y $B(6, 12)$:", "options": ["$$m = 1$$", "$$m = 2$$", "$$m = -1$$", "$$m = \\frac{1}{2}$$"], "correct": 0, "explanation": "F\u00f3rmula: $m = \\frac{y_2 - y_1}{x_2 - x_1} = \\frac{12 - 4}{6 - (-2)} = \\frac{8}{6 + 2} = \\frac{8}{8} = 1$.", "source": "Taller #4: L\u00edneas Rectas (P\u00e1g 2, Ej. 1)", "subtopic": "C\u00e1lculo de Pendiente (m)"}, {"id": 89, "topic": "linea_recta", "topicName": "L\u00ednea Recta", "difficulty": "F\u00e1cil", "question": "Determina la pendiente de la recta que pasa por $M(1, 5)$ y $B(2, -7)$:", "options": ["$$m = -12$$", "$$m = 12$$", "$$m = -2$$", "$$m = -6$$"], "correct": 0, "explanation": "$m = \\frac{-7 - 5}{2 - 1} = \\frac{-12}{1} = -12$.", "source": "Taller #4: L\u00edneas Rectas (P\u00e1g 2, Ej. 2)", "subtopic": "C\u00e1lculo de Pendiente (m)"}, {"id": 90, "topic": "linea_recta", "topicName": "L\u00ednea Recta", "difficulty": "F\u00e1cil", "question": "\u00bfCu\u00e1l es la gr\u00e1fica y la pendiente de la funci\u00f3n constante $y = -2$?", "options": ["Es una recta horizontal paralela al eje $X$ con pendiente $m = 0$.", "Es una recta vertical paralela al eje $Y$ con pendiente indefinida.", "Es una recta con pendiente $m = -2$ que pasa por el origen.", "Es una recta oblicua descendente."], "correct": 0, "explanation": "Toda ecuaci\u00f3n de la forma $y = c$ (constante) representa una recta completamente horizontal en el plano cartesiano y su pendiente siempre es igual a 0.", "source": "Taller #4: L\u00edneas Rectas (P\u00e1g 2, Ej. 3.1)", "subtopic": "C\u00e1lculo de Pendiente (m)"}, {"id": 91, "topic": "ecuaciones", "topicName": "Sistemas de Ecuaciones", "difficulty": "F\u00e1cil", "question": "Resuelve el sistema lineal de $2 \\times 2$: $$\\begin{cases} x + y = 4 \\\\ x - y = 2 \\end{cases}$$", "options": ["$$x = 3, \\quad y = 1$$", "$$x = 2, \\quad y = 2$$", "$$x = 4, \\quad y = 0$$", "$$x = 1, \\quad y = 3$$"], "correct": 0, "explanation": "Por reducci\u00f3n, sumamos ambas ecuaciones:\\n$(x + y) + (x - y) = 4 + 2 \\implies 2x = 6 \\implies x = 3$.\\nSustituyendo en la primera: $3 + y = 4 \\implies y = 1$.", "source": "Taller #4: Sistemas de Ecuaciones (P\u00e1g 3, Ej. 1)", "subtopic": "Sistemas Lineales 2x2"}, {"id": 92, "topic": "ecuaciones", "topicName": "Sistemas de Ecuaciones", "difficulty": "Medio", "question": "Halla la soluci\u00f3n del sistema: $$\\begin{cases} 3x - 2y = 0 \\\\ x - y = -1 \\end{cases}$$", "options": ["$$x = 2, \\quad y = 3$$", "$$x = 3, \\quad y = 2$$", "$$x = -2, \\quad y = -3$$", "$$x = 1, \\quad y = 2$$"], "correct": 0, "explanation": "De la 2da ecuaci\u00f3n: $x = y - 1$.\\nSustituyendo en la 1ra: $3(y - 1) - 2y = 0 \\implies 3y - 3 - 2y = 0 \\implies y = 3$.\\nLuego: $x = 3 - 1 = 2$. Soluci\u00f3n: $(2, 3)$.", "source": "Taller #4: Sistemas de Ecuaciones (P\u00e1g 3, Ej. 4)", "subtopic": "Sistemas Lineales 2x2"}, {"id": 93, "topic": "ecuaciones", "topicName": "Sistemas de Ecuaciones", "difficulty": "Medio", "question": "Resuelve por reducci\u00f3n el sistema: $$\\begin{cases} 5x - 2y = 2 \\\\ 7x + 6y = 38 \\end{cases}$$", "options": ["$$x = 2, \\quad y = 4$$", "$$x = 4, \\quad y = 2$$", "$$x = 3, \\quad y = 3$$", "$$x = 1, \\quad y = 5$$"], "correct": 0, "explanation": "Multiplicamos la primera ecuaci\u00f3n por 3:\\n$15x - 6y = 6$.\\nSumamos con la segunda: $(15x - 6y) + (7x + 6y) = 6 + 38 \\implies 22x = 44 \\implies x = 2$.\\nSustituyendo: $5(2) - 2y = 2 \\implies 10 - 2y = 2 \\implies 2y = 8 \\implies y = 4$.", "source": "Taller #4: Sistemas de Ecuaciones (P\u00e1g 3, Ej. 5)", "subtopic": "Sistemas Lineales 2x2"}, {"id": 94, "topic": "ecuaciones", "topicName": "Sistemas de Ecuaciones", "difficulty": "Dif\u00edcil", "question": "Resuelve el sistema de ecuaciones: $$\\begin{cases} 3x - 4y = -26 \\\\ 2x - 3y = -19 \\end{cases}$$", "options": ["$$x = -2, \\quad y = 5$$", "$$x = 2, \\quad y = -5$$", "$$x = -6, \\quad y = 2$$", "$$x = 5, \\quad y = -2$$"], "correct": 0, "explanation": "Multiplicamos la 1ra por 2 y la 2da por $-3$:\\n$6x - 8y = -52$\\n$-6x + 9y = 57$\\nSumando: $y = 5$.\\nSustituyendo: $2x - 3(5) = -19 \\implies 2x - 15 = -19 \\implies 2x = -4 \\implies x = -2$.", "source": "Taller #4: Sistemas de Ecuaciones (P\u00e1g 3, Ej. 3)", "subtopic": "Sistemas Lineales 2x2"}, {"id": 95, "topic": "fracciones_alg", "topicName": "Fracciones Algebraicas", "subtopic": "Simplificaci\u00f3n de Fracciones", "difficulty": "Medio", "question": "Simplifica la fracci\u00f3n algebraica factorizando ambos t\u00e9rminos: $$\\frac{x^2 + 8x + 12}{x^2 + 10x + 25}$$", "options": ["$$\\frac{(x + 6)(x + 2)}{(x + 5)^2}$$", "$$\\frac{x + 6}{x + 5}$$", "$$\\frac{(x + 4)(x + 3)}{(x + 5)^2}$$", "$$\\frac{x + 2}{x + 5}$$"], "correct": 0, "explanation": "Numerador: $x^2 + 8x + 12 = (x + 6)(x + 2)$.\\nDenominador: Trinomio cuadrado perfecto $x^2 + 10x + 25 = (x + 5)^2$.\\nResultado: $\\frac{(x + 6)(x + 2)}{(x + 5)^2}$.", "source": "Taller Desigualdades (P\u00e1g 15, Ej. 4g)"}, {"id": 96, "topic": "fracciones_alg", "topicName": "Fracciones Algebraicas", "subtopic": "Simplificaci\u00f3n de Fracciones", "difficulty": "Medio", "question": "Simplifica para $x \\neq \\pm 3$: $$\\frac{4 - x^2}{x^2 - 9}$$", "options": ["$$-\\frac{(x - 2)(x + 2)}{(x - 3)(x + 3)}$$", "$$\\frac{x - 2}{x - 3}$$", "$$\\frac{2 - x}{x - 3}$$", "$$\\frac{(x - 2)^2}{(x - 3)^2}$$"], "correct": 0, "explanation": "$4 - x^2 = -(x^2 - 4) = -(x - 2)(x + 2)$.\\nDenominador: $x^2 - 9 = (x - 3)(x + 3)$.\\nResultado: $-\\frac{(x - 2)(x + 2)}{(x - 3)(x + 3)}$.", "source": "Taller Desigualdades (P\u00e1g 15, Ej. 4e)"}, {"id": 97, "topic": "fracciones_alg", "topicName": "Fracciones Algebraicas", "subtopic": "Operaciones con Fracciones", "difficulty": "Dif\u00edcil", "question": "Efect\u00faa la suma de fracciones algebraicas con igual denominador: $$\\frac{3x - 2}{x - 1} + \\frac{2x - 1}{x - 1}$$", "options": ["$$\\frac{5x - 3}{x - 1}$$", "$$\\frac{5x - 3}{(x - 1)^2}$$", "$$\\frac{5x + 3}{x - 1}$$", "$$\\frac{x - 1}{x - 1} = 1$$"], "correct": 0, "explanation": "Al tener el mismo denominador $(x - 1)$, sumamos directamente los numeradores:\\n$(3x - 2) + (2x - 1) = (3x + 2x) + (-2 - 1) = 5x - 3$.\\nResultado: $\\frac{5x - 3}{x - 1}$.", "source": "Taller Desigualdades & Fracciones"}, {"id": 98, "topic": "linea_recta", "topicName": "L\u00ednea Recta", "subtopic": "C\u00e1lculo de Pendiente (m)", "difficulty": "Medio", "question": "Calcula la pendiente $m$ de la recta que pasa por los puntos $R(-4, -2)$ y $B(5, 6)$:", "options": ["$$m = \\frac{8}{9}$$", "$$m = \\frac{9}{8}$$", "$$m = -\\frac{8}{9}$$", "$$m = 4$$"], "correct": 0, "explanation": "$m = \\frac{y_2 - y_1}{x_2 - x_1} = \\frac{6 - (-2)}{5 - (-4)} = \\frac{6 + 2}{5 + 4} = \\frac{8}{9}$.", "source": "Taller #4: L\u00edneas Rectas (P\u00e1g 2, Ej. 3)"}, {"id": 99, "topic": "ecuaciones", "topicName": "Sistemas de Ecuaciones", "subtopic": "Sistemas Lineales 2x2", "difficulty": "Medio", "question": "Resuelve el sistema lineal de $2 \\times 2$: $$\\begin{cases} 5a + 3b = 21 \\\\ -2a + 4b = 2 \\end{cases}$$", "options": ["$$a = 3, \\quad b = 2$$", "$$a = 2, \\quad b = 3$$", "$$a = 1, \\quad b = 5$$", "$$a = -3, \\quad b = 2$$"], "correct": 0, "explanation": "Dividimos la 2da ecuaci\u00f3n entre 2: $-a + 2b = 1 \\implies a = 2b - 1$.\\nSustituimos en la 1ra: $5(2b - 1) + 3b = 21 \\implies 10b - 5 + 3b = 21 \\implies 13b = 26 \\implies b = 2$.\\nLuego: $a = 2(2) - 1 = 3$. Soluci\u00f3n: $(a = 3, b = 2)$.", "source": "Taller #4: Sistemas de Ecuaciones (P\u00e1g 3, Ej. 6)"}, {"id": 100, "topic": "ecuaciones", "topicName": "Ecuaciones", "subtopic": "Ecuaciones Lineales de 1er Grado", "difficulty": "Medio", "question": "Halla el valor de $x$ en la ecuaci\u00f3n: $$5x - 5 = 10x - 6 + 11$$", "options": ["$$x = -2$$", "$$x = 2$$", "$$x = -1$$", "$$x = 0$$"], "correct": 0, "explanation": "1. Simplificamos el miembro derecho: $-6 + 11 = 5 \\implies 5x - 5 = 10x + 5$.\\n2. Transponemos: $-5 - 5 = 10x - 5x \\implies -10 = 5x$.\\n3. Despejamos: $x = \\frac{-10}{5} = -2$.", "source": "Taller Unidad 1: N\u00fameros Reales (P\u00e1g 13, Ej. 5m)"}];
 
     const TOPICS_META = {
@@ -2040,7 +2305,7 @@
 
           subChipsHtml += `
             <label class="subtopic-chip checked" id="chip_${fullKey.replace(/[^a-zA-Z0-9]/g, '_')}">
-              <input type="checkbox" checked onchange="toggleSubtopic('${tKey}', '${subName.replace(/'/g, "\'")}', this.checked)">
+              <input type="checkbox" checked onchange="toggleSubtopic('${tKey}', '${subName.replace(/'/g, "\\'")}', this.checked)">
               <span>${subName} (${count})</span>
             </label>
           `;
@@ -2248,7 +2513,7 @@
         customAvatar: selectedRegCustomAvatar
       };
 
-      fetch('/api/auth', {
+      fetch(API_BASE + '/api/auth', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -2304,7 +2569,7 @@
 
     function saveUserProfileToServer() {
       localStorage.setItem('uniguajira_auth_user_v5', JSON.stringify(currentUser));
-      fetch('/api/ranking', {
+      fetch(API_BASE + '/api/ranking', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(currentUser)
@@ -2321,7 +2586,7 @@
 
     function sendHeartbeat() {
       if (!currentUser) return;
-      fetch('/api/heartbeat', {
+      fetch(API_BASE + '/api/heartbeat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(currentUser)
@@ -2338,7 +2603,7 @@
         updateOnlineBadge(1, false);
       });
 
-      fetch('/api/ranking')
+      fetch(API_BASE + '/api/ranking')
         .then(res => res.json())
         .then(data => {
           if (Array.isArray(data)) {
@@ -2529,7 +2794,7 @@
     }
 
     function pollChatMessages() {
-      fetch('/api/chat')
+      fetch(API_BASE + '/api/chat')
         .then(res => res.json())
         .then(data => {
           if (!data) return;
@@ -2772,7 +3037,7 @@
       seenChatMessageIds.add(newMsg.id);
       input.value = '';
 
-      fetch('/api/chat', {
+      fetch(API_BASE + '/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newMsg)
@@ -2850,10 +3115,13 @@
     }
 
     let currentLeaderboardTab = 'global';
-    function openLeaderboardModal() {
+    async function openLeaderboardModal() {
       document.getElementById('leaderboardModal').classList.add('active');
-      sendHeartbeat();
-      renderLeaderboard(currentLeaderboardTab);
+      const tbody = document.getElementById('leaderboardTbody');
+      if (!remotePlayers || remotePlayers.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding: 25px; color: var(--primary);"><span class="pulse-dot" style="display:inline-block; margin-right:8px;"></span> Cargando compañeros del ranking...</td></tr>';
+      }
+      await refreshLeaderboardData();
     }
 
     function closeLeaderboardModal() {
@@ -2867,17 +3135,39 @@
       renderLeaderboard(tab);
     }
 
+    async function refreshLeaderboardData() {
+      try {
+        const res = await fetch(`${API_BASE}/api/ranking`, { cache: 'no-store' });
+        if (res.ok) {
+          const data = await res.json();
+          if (Array.isArray(data)) {
+            remotePlayers = data.filter(p => !String(p.id).startsWith('bot_'));
+            try { localStorage.setItem('uniguajira_cached_ranking_v5', JSON.stringify(remotePlayers)); } catch(e){}
+          }
+        }
+      } catch (e) {
+        try {
+          const cached = localStorage.getItem('uniguajira_cached_ranking_v5');
+          if (cached) remotePlayers = JSON.parse(cached);
+        } catch(err){}
+      }
+      renderLeaderboard(currentLeaderboardTab);
+    }
+
     function renderLeaderboard(tab) {
       const tbody = document.getElementById('leaderboardTbody');
+      if (!tbody) return;
       tbody.innerHTML = '';
 
       let participantsMap = new Map();
 
-      remotePlayers.forEach(r => {
-        if (!String(r.id).startsWith('bot_')) {
-          participantsMap.set(r.id || r.name, { ...r, isUser: currentUser && (r.id === currentUser.id) });
-        }
-      });
+      if (Array.isArray(remotePlayers)) {
+        remotePlayers.forEach(r => {
+          if (!String(r.id).startsWith('bot_')) {
+            participantsMap.set(r.id || r.name, { ...r, isUser: currentUser && (r.id === currentUser.id) });
+          }
+        });
+      }
 
       if (currentUser) {
         participantsMap.set(currentUser.id, { ...currentUser, isUser: true });
@@ -2886,14 +3176,14 @@
       let participants = Array.from(participantsMap.values());
 
       if (participants.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding: 25px; color: var(--text-muted);">Aún no hay compañeros registrados. ¡Inicia sesión con tu cuenta!</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding: 25px; color: var(--text-muted);">Aún no hay compañeros registrados. ¡Sé el primero en hacer un examen!</td></tr>';
         return;
       }
 
       participants.forEach(p => {
         p.displayXp = tab === 'global' ? (p.xp || 0) : (p.topicScores ? (p.topicScores[tab] || 0) : 0);
       });
-      participants.sort((a, b) => b.displayXp - a.displayXp);
+      participants.sort((a, b) => (b.displayXp || 0) - (a.displayXp || 0));
 
       participants.forEach((p, idx) => {
         const tr = document.createElement('tr');
@@ -2907,20 +3197,25 @@
         const rank = getCurrentRank(p.xp || 0);
         const avgDisplay = p.avgGrade ? Number(p.avgGrade).toFixed(1) : "0.0";
 
+        const challengeBtnHtml = !p.isUser 
+          ? `<button class="action-btn-sm" onclick="event.stopPropagation(); challengePlayerFromList('${p.id}', '${escapeHtml(p.name).replace(/'/g, "\\'")}')">⚔️ Retar</button>`
+          : `<span style="color:var(--primary); font-size:0.75rem; font-weight:700;">(Tú)</span>`;
+
         tr.innerHTML = `
           <td class="rank-cell-pos">${posBadge}</td>
           <td>
             <div class="rank-user-name">
-              <div class="avatar-circle" style="width:26px; height:26px; font-size:0.85rem;">
+              <div class="avatar-circle" style="width:28px; height:28px; font-size:0.88rem; flex-shrink:0;">
                 ${p.customAvatar ? `<img src="${p.customAvatar}">` : (p.avatar || '🎓')}
               </div>
-              <span>${p.name} ${p.isUser ? '<span style="color:var(--primary); font-size:0.75rem;">(Tú)</span>' : ''}</span>
+              <span style="font-weight:700;">${escapeHtml(p.name)} ${p.isUser ? '<span style="color:var(--primary); font-size:0.75rem;">(Tú)</span>' : ''}</span>
             </div>
           </td>
-          <td><span style="font-size:0.8rem; color:var(--secondary);">${rank.icon} ${rank.name}</span></td>
+          <td><span style="font-size:0.8rem; color:var(--secondary); font-weight:600;">${rank.icon} ${rank.name}</span></td>
           <td>${p.examsCount || 0}</td>
           <td><strong style="color: ${parseFloat(avgDisplay) >= 3.0 ? 'var(--success)' : 'var(--danger)'};">${avgDisplay}</strong></td>
-          <td><strong style="color:var(--primary); font-family:monospace;">${p.displayXp} XP</strong></td>
+          <td><strong style="color:var(--primary); font-family:monospace;">${p.displayXp || 0} XP</strong></td>
+          <td style="text-align: center;">${challengeBtnHtml}</td>
         `;
 
         tr.onclick = () => openFriendProfile(p);
@@ -3009,13 +3304,28 @@
           gain.gain.exponentialRampToValueAtTime(0.01, now + 0.45);
           osc.start(now); osc.stop(now + 0.45);
         } else if (type === 'message') {
-          // Tono armonico agradable (doble campana suave) para notificacion de mensaje privado
           osc.type = 'sine';
-          osc.frequency.setValueAtTime(587.33, now);       // D5
-          osc.frequency.setValueAtTime(880.00, now + 0.1); // A5
+          osc.frequency.setValueAtTime(587.33, now);
+          osc.frequency.setValueAtTime(880.00, now + 0.1);
           gain.gain.setValueAtTime(0.35, now);
           gain.gain.exponentialRampToValueAtTime(0.01, now + 0.38);
           osc.start(now); osc.stop(now + 0.38);
+        } else if (type === 'challenge') {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(440.00, now);
+          osc.frequency.setValueAtTime(554.37, now + 0.12);
+          osc.frequency.setValueAtTime(659.25, now + 0.24);
+          osc.frequency.setValueAtTime(880.00, now + 0.36);
+          gain.gain.setValueAtTime(0.35, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.65);
+          osc.start(now); osc.stop(now + 0.65);
+        } else if (type === 'pop') {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(320, now);
+          osc.frequency.exponentialRampToValueAtTime(950, now + 0.08);
+          gain.gain.setValueAtTime(0.25, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
+          osc.start(now); osc.stop(now + 0.1);
         }
       } catch (e) {}
     }
@@ -3480,13 +3790,909 @@
       }
     }
 
+
+    // ========================================================
+    // MODO COMPETITIVO 1v1: DUELOS EN TIEMPO REAL
+    // ========================================================
+    let activeDuelId = null;
+    let activeDuelState = null;
+    let duelPollTimer = null;
+    let duelInvitationPollTimer = null;
+    let pendingSentInviteId = null;
+    let pendingSentInviteTimer = null;
+    let currentIncomingInvite = null;
+    let incomingInviteCountdown = 30;
+    let incomingInviteTimer = null;
+    let hasSubmittedCurrentDuelRound = false;
+    let currentDuelRoundIndex = -1;
+    let isDuelRoundRevealed = false;
+    let seenDuelReactions = new Set();
+    let duelSyncCountdownInterval = null;
+
+    let localAudioStream = null;
+    let duelPeerConnection = null;
+    let isDuelMicActive = false;
+    let mediaRecorder = null;
+    let audioRecordChunks = [];
+
+    function startDuelInvitationPolling() {
+      clearInterval(duelInvitationPollTimer);
+      pollDuelInvitations();
+      duelInvitationPollTimer = setInterval(pollDuelInvitations, 3000);
+    }
+
+    async function pollDuelInvitations() {
+      if (!currentUser || activeDuelId) return;
+      try {
+        const res = await fetch(`${API_BASE}/api/duels?action=get_invitations&userId=${currentUser.id}`);
+        if (!res.ok) return;
+        const data = await res.json();
+        if (data && data.invitations && data.invitations.length > 0) {
+          const inv = data.invitations[0];
+          if (!currentIncomingInvite || currentIncomingInvite.id !== inv.id) {
+            currentIncomingInvite = inv;
+            showIncomingDuelModal(inv);
+          }
+        }
+      } catch (e) {}
+    }
+
+    function showIncomingDuelModal(inv) {
+      playSound('challenge');
+      const modal = document.getElementById('duelInviteModal');
+      const avatarBox = document.getElementById('duelInviteAvatar');
+      const nameEl = document.getElementById('duelInviteName');
+      const rankEl = document.getElementById('duelInviteRank');
+      const timerEl = document.getElementById('duelInviteTimer');
+
+      const challenger = inv.fromUser || { name: 'Compañero', avatar: '🎓' };
+      renderUserAvatarElement(challenger, avatarBox);
+      nameEl.textContent = challenger.name;
+      const rank = getCurrentRank(challenger.xp || 0);
+      rankEl.textContent = `${rank.icon} ${rank.name}`;
+
+      incomingInviteCountdown = 30;
+      timerEl.textContent = `${incomingInviteCountdown}s`;
+      clearInterval(incomingInviteTimer);
+      incomingInviteTimer = setInterval(() => {
+        incomingInviteCountdown--;
+        timerEl.textContent = `${incomingInviteCountdown}s`;
+        if (incomingInviteCountdown <= 0) {
+          clearInterval(incomingInviteTimer);
+          declineDuelChallenge();
+        }
+      }, 1000);
+
+      modal.classList.add('active');
+    }
+
+    async function acceptDuelChallenge() {
+      clearInterval(incomingInviteTimer);
+      document.getElementById('duelInviteModal').classList.remove('active');
+      if (!currentIncomingInvite) return;
+
+      try {
+        const payload = {
+          action: 'respond_invite',
+          inviteId: currentIncomingInvite.id,
+          response: 'accept',
+          responderUser: currentUser
+        };
+        const res = await fetch(`${API_BASE}/api/duels`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (data.status === 'ok' && data.duelId) {
+          currentIncomingInvite = null;
+          enterDuelArena(data.duelId);
+        }
+      } catch (e) {
+        alert("Error al conectar con la sala del duelo.");
+      }
+    }
+
+    async function declineDuelChallenge() {
+      clearInterval(incomingInviteTimer);
+      document.getElementById('duelInviteModal').classList.remove('active');
+      if (!currentIncomingInvite) return;
+
+      try {
+        await fetch(`${API_BASE}/api/duels`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'respond_invite',
+            inviteId: currentIncomingInvite.id,
+            response: 'decline'
+          })
+        });
+      } catch (e) {}
+      currentIncomingInvite = null;
+    }
+
+    function challengeActiveFriend() {
+      closeFriendProfileModal();
+      if (chatActiveFriend) {
+        challengePlayerFromList(chatActiveFriend.id, chatActiveFriend.name);
+      }
+    }
+
+    async function challengePlayerFromList(targetId, targetName) {
+      if (!currentUser) {
+        alert("Debes iniciar sesión con tu cuenta para jugar duelos.");
+        openAuthModal();
+        return;
+      }
+
+      if (targetId === currentUser.id) {
+        alert("No puedes desafiarte a ti mismo. ¡Invita a un compañero!");
+        return;
+      }
+
+      try {
+        const payload = {
+          action: 'invite',
+          fromUser: currentUser,
+          toUserId: targetId
+        };
+        const res = await fetch(`${API_BASE}/api/duels`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (data.status === 'ok') {
+          pendingSentInviteId = data.inviteId;
+          showWaitingForRivalModal(targetName);
+        }
+      } catch (e) {
+        alert("No se pudo enviar el reto. Asegúrate de que el servidor esté activo.");
+      }
+    }
+
+    function showWaitingForRivalModal(targetName) {
+      const modal = document.getElementById('duelWaitingModal');
+      document.getElementById('duelWaitingSubtitle').textContent = `Esperando a que ${targetName} acepte el desafío 1v1...`;
+      modal.classList.add('active');
+
+      let secondsLeft = 35;
+      const timerEl = document.getElementById('duelWaitingTimer');
+      timerEl.textContent = `${secondsLeft}s`;
+
+      clearInterval(pendingSentInviteTimer);
+      pendingSentInviteTimer = setInterval(async () => {
+        secondsLeft--;
+        timerEl.textContent = `${secondsLeft}s`;
+
+        try {
+          const res = await fetch(`${API_BASE}/api/duels?action=check_invite&inviteId=${pendingSentInviteId}`);
+          if (res.ok) {
+            const data = await res.json();
+            if (data.status === 'ok' && data.invitation) {
+              const status = data.invitation.status;
+              if (status === 'accepted' && data.invitation.duelId) {
+                clearInterval(pendingSentInviteTimer);
+                modal.classList.remove('active');
+                enterDuelArena(data.invitation.duelId);
+                return;
+              } else if (status === 'declined') {
+                clearInterval(pendingSentInviteTimer);
+                modal.classList.remove('active');
+                alert(`${targetName} rechazó el duelo.`);
+                return;
+              }
+            }
+          }
+        } catch (e) {}
+
+        if (secondsLeft <= 0) {
+          clearInterval(pendingSentInviteTimer);
+          modal.classList.remove('active');
+          alert("El desafío expiró sin respuesta.");
+        }
+      }, 1500);
+    }
+
+    function cancelDuelInvitation() {
+      clearInterval(pendingSentInviteTimer);
+      document.getElementById('duelWaitingModal').classList.remove('active');
+      pendingSentInviteId = null;
+    }
+
+    function enterDuelArena(duelId) {
+      activeDuelId = duelId;
+      hasSubmittedCurrentDuelRound = false;
+      currentDuelRoundIndex = -1;
+      isDuelRoundRevealed = false;
+      seenDuelReactions.clear();
+
+      document.getElementById('duelArenaModal').classList.add('active');
+      playSound('challenge');
+
+      clearInterval(duelPollTimer);
+      pollDuelGameState();
+      duelPollTimer = setInterval(pollDuelGameState, 850);
+    }
+
+    async function pollDuelGameState() {
+      if (!activeDuelId || !currentUser) return;
+      try {
+        const res = await fetch(`${API_BASE}/api/duels?action=game_state&duelId=${activeDuelId}&userId=${currentUser.id}`);
+        if (!res.ok) return;
+        const data = await res.json();
+        if (data.status === 'ok' && data.state) {
+          activeDuelState = data.state;
+          updateDuelArenaUI(data.state);
+        }
+      } catch (e) {}
+    }
+
+    function updateDuelArenaUI(state) {
+      const isP1 = (state.player1.id === currentUser.id);
+      const me = isP1 ? state.player1 : state.player2;
+      const rival = isP1 ? state.player2 : state.player1;
+
+      const myScore = isP1 ? state.p1_score : state.p2_score;
+      const rivalScore = isP1 ? state.p2_score : state.p1_score;
+
+      const myAnswered = isP1 ? state.p1_answered : state.p2_answered;
+      const rivalAnswered = isP1 ? state.p2_answered : state.p1_answered;
+
+      renderUserAvatarElement(me, document.getElementById('duelP1Avatar'));
+      renderUserAvatarElement(rival, document.getElementById('duelP2Avatar'));
+
+      document.getElementById('duelP1Name').textContent = `${me.name} (Tú)`;
+      document.getElementById('duelP2Name').textContent = rival.name;
+
+      document.getElementById('duelP1Score').textContent = `${myScore} pts`;
+      document.getElementById('duelP2Score').textContent = `${rivalScore} pts`;
+
+      const p1Status = document.getElementById('duelP1Status');
+      const p2Status = document.getElementById('duelP2Status');
+
+      p1Status.className = `duel-status-indicator ${myAnswered ? 'duel-status-answered' : 'duel-status-thinking'}`;
+      p1Status.textContent = myAnswered ? '✅ Listo' : 'Pensando...';
+
+      p2Status.className = `duel-status-indicator ${rivalAnswered ? 'duel-status-answered' : 'duel-status-thinking'}`;
+      p2Status.textContent = rivalAnswered ? '✅ Listo' : 'Pensando...';
+
+      if (Array.isArray(state.reactions)) {
+        state.reactions.forEach(rx => {
+          const rxKey = `${rx.fromId}_${rx.timestamp}_${rx.emoji}`;
+          if (!seenDuelReactions.has(rxKey)) {
+            seenDuelReactions.add(rxKey);
+            triggerFloatingEmoji(rx.emoji);
+          }
+        });
+      }
+
+      if (state.voiceClip && state.voiceClip.fromId !== currentUser.id) {
+        if (!window.lastPlayedClipTs || window.lastPlayedClipTs < state.voiceClip.timestamp) {
+          window.lastPlayedClipTs = state.voiceClip.timestamp;
+          playVoiceAudioClip(state.voiceClip.audioData);
+        }
+      }
+
+      if (Array.isArray(state.voiceSignals) && state.voiceSignals.length > 0) {
+        handleIncomingWebRTCSignals(state.voiceSignals);
+      }
+
+      if (state.status === 'completed') {
+        clearInterval(duelPollTimer);
+        finishDuelMatch(state);
+        return;
+      }
+
+      if (state.currentRound !== currentDuelRoundIndex) {
+        currentDuelRoundIndex = state.currentRound;
+        hasSubmittedCurrentDuelRound = false;
+        isDuelRoundRevealed = false;
+        renderDuelQuestion(state.currentQuestion, state);
+      }
+
+      if (state.roundRevealed && !isDuelRoundRevealed) {
+        isDuelRoundRevealed = true;
+        revealDuelRoundResults(state);
+      }
+    }
+
+    function renderDuelQuestion(q, state) {
+      if (!q) return;
+
+      document.getElementById('duelRoundIndicator').textContent = `Pregunta ${q.roundIndex + 1} de ${q.totalRounds}`;
+      document.getElementById('duelTopicIndicator').textContent = q.topic || 'Cálculo';
+      document.getElementById('duelQuestionText').innerHTML = q.question;
+
+      document.getElementById('duelWaitingBanner').style.display = 'none';
+      document.getElementById('duelRevealBanner').style.display = 'none';
+
+      const grid = document.getElementById('duelOptionsGrid');
+      grid.innerHTML = '';
+
+      const letters = ['A', 'B', 'C', 'D'];
+      q.options.forEach((optText, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'duel-option-btn';
+        btn.id = `duelOptBtn_${idx}`;
+        btn.innerHTML = `
+          <strong style="color: var(--primary); font-size: 1rem; width: 22px;">${letters[idx]})</strong>
+          <span style="flex: 1;">${optText}</span>
+        `;
+        btn.onclick = () => submitDuelAnswer(idx);
+        grid.appendChild(btn);
+      });
+
+      if (typeof renderMathInElement === 'function') {
+        renderMathInElement(document.getElementById('duelArenaModal'), {
+          delimiters: [
+            { left: "$$", right: "$$", display: true },
+            { left: "$", right: "$", display: false }
+          ],
+          throwOnError: false
+        });
+      }
+    }
+
+    async function submitDuelAnswer(optionIndex) {
+      if (hasSubmittedCurrentDuelRound) return;
+      hasSubmittedCurrentDuelRound = true;
+
+      document.querySelectorAll('.duel-option-btn').forEach((b, i) => {
+        b.disabled = true;
+        if (i === optionIndex) b.classList.add('selected');
+      });
+
+      document.getElementById('duelWaitingBanner').style.display = 'block';
+
+      try {
+        await fetch(`${API_BASE}/api/duels`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'submit_answer',
+            duelId: activeDuelId,
+            userId: currentUser.id,
+            optionIndex: optionIndex
+          })
+        });
+        pollDuelGameState();
+      } catch (e) {}
+    }
+
+    function revealDuelRoundResults(state) {
+      const results = state.roundResults;
+      if (!results) return;
+
+      document.getElementById('duelWaitingBanner').style.display = 'none';
+
+      const isP1 = (state.player1.id === currentUser.id);
+      const myChoice = isP1 ? results.p1_choice : results.p2_choice;
+      const rivalChoice = isP1 ? results.p2_choice : results.p1_choice;
+      const myCorrect = isP1 ? results.p1_correct : results.p2_correct;
+      const rivalCorrect = isP1 ? results.p2_correct : results.p1_correct;
+
+      document.querySelectorAll('.duel-option-btn').forEach((b, idx) => {
+        b.disabled = true;
+        if (idx === results.correctIndex) {
+          b.classList.add('correct-reveal');
+          b.innerHTML += ` <span style="margin-left:auto; font-weight:800; color:var(--success);">✅ Correcta</span>`;
+        } else if (idx === myChoice) {
+          b.classList.add('wrong-reveal');
+          b.innerHTML += ` <span style="margin-left:auto; font-weight:800; color:var(--danger);">❌ Tu elección</span>`;
+        }
+
+        if (idx === rivalChoice) {
+          const rivalTag = document.createElement('span');
+          rivalTag.style = "position:absolute; right:8px; bottom:2px; font-size:0.72rem; color:var(--accent); font-weight:700;";
+          rivalTag.textContent = `🎯 Rival eligió esta`;
+          b.appendChild(rivalTag);
+        }
+      });
+
+      if (myCorrect) {
+        playSound('correct');
+      } else {
+        playSound('wrong');
+      }
+
+      const revealBanner = document.getElementById('duelRevealBanner');
+      revealBanner.style.display = 'block';
+
+      const verdictEl = document.getElementById('duelRevealVerdict');
+      if (myCorrect && !rivalCorrect) {
+        verdictEl.innerHTML = `🌟 ¡Punto para ti! (+100 pts)`;
+        verdictEl.style.color = "var(--success)";
+      } else if (!myCorrect && rivalCorrect) {
+        verdictEl.innerHTML = `⚠️ Tu rival acertó este punto`;
+        verdictEl.style.color = "var(--danger)";
+      } else if (myCorrect && rivalCorrect) {
+        verdictEl.innerHTML = `🔥 ¡Ambos acertaron!`;
+        verdictEl.style.color = "var(--primary)";
+      } else {
+        verdictEl.innerHTML = `❌ Ninguno acertó esta pregunta`;
+        verdictEl.style.color = "var(--text-muted)";
+      }
+
+      const rivalName = isP1 ? state.player2.name : state.player1.name;
+      document.getElementById('duelRevealDetails').textContent = 
+        `Tú: ${myCorrect ? 'Correcto' : 'Incorrecto'} | ${rivalName}: ${rivalCorrect ? 'Correcto' : 'Incorrecto'}`;
+
+      document.getElementById('duelExplanationBox').innerHTML = `
+        <strong>💡 Solución Paso a Paso:</strong><br>
+        ${results.explanation || 'Respuesta correcta oficial.'}
+      `;
+
+      if (typeof renderMathInElement === 'function') {
+        renderMathInElement(document.getElementById('duelExplanationBox'), {
+          delimiters: [
+            { left: "$$", right: "$$", display: true },
+            { left: "$", right: "$", display: false }
+          ],
+          throwOnError: false
+        });
+      }
+
+      let countdown = 4;
+      const countdownEl = document.getElementById('duelNextRoundCountdown');
+      countdownEl.textContent = `Siguiente pregunta en ${countdown}s...`;
+
+      clearInterval(duelSyncCountdownInterval);
+      duelSyncCountdownInterval = setInterval(async () => {
+        countdown--;
+        countdownEl.textContent = `Siguiente pregunta en ${countdown}s...`;
+        if (countdown <= 0) {
+          clearInterval(duelSyncCountdownInterval);
+          try {
+            await fetch(`${API_BASE}/api/duels`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ action: 'next_round', duelId: activeDuelId })
+            });
+            pollDuelGameState();
+          } catch(e) {}
+        }
+      }, 1000);
+    }
+
+    async function sendDuelEmoji(emoji) {
+      if (!activeDuelId || !currentUser) return;
+      triggerFloatingEmoji(emoji);
+      try {
+        await fetch(`${API_BASE}/api/duels`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'send_reaction',
+            duelId: activeDuelId,
+            fromUserId: currentUser.id,
+            emoji: emoji
+          })
+        });
+      } catch (e) {}
+    }
+
+    function triggerFloatingEmoji(emoji) {
+      playSound('pop');
+      const el = document.createElement('div');
+      el.className = 'floating-emoji';
+      el.textContent = emoji;
+
+      const leftPos = Math.floor(Math.random() * 60) + 20;
+      el.style.left = `${leftPos}vw`;
+      el.style.bottom = `120px`;
+
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 2500);
+    }
+
+    async function promptDuelQuickChat() {
+      if (!activeDuelId || !currentUser) return;
+      const text = prompt("Escribe un mensaje rápido para el duelo:");
+      if (!text || !text.trim()) return;
+
+      try {
+        await fetch(`${API_BASE}/api/duels`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'send_chat',
+            duelId: activeDuelId,
+            senderId: currentUser.id,
+            senderName: currentUser.name,
+            text: text.trim()
+          })
+        });
+      } catch(e) {}
+    }
+
+    async function toggleDuelVoiceMic() {
+      if (isDuelMicActive) {
+        stopDuelMic();
+      } else {
+        startDuelMic();
+      }
+    }
+
+    async function startDuelMic() {
+      try {
+        localAudioStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        isDuelMicActive = true;
+        updateMicBtnUI();
+        initWebRTCConnection();
+        startWalkieTalkieFallback();
+      } catch (e) {
+        alert("Permiso de micrófono no otorgado o no disponible en este dispositivo. Puedes comunicarte por chat y emojis.");
+      }
+    }
+
+    function stopDuelMic() {
+      if (localAudioStream) {
+        localAudioStream.getTracks().forEach(t => t.stop());
+        localAudioStream = null;
+      }
+      if (duelPeerConnection) {
+        duelPeerConnection.close();
+        duelPeerConnection = null;
+      }
+      if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+        try { mediaRecorder.stop(); } catch(e){}
+      }
+      isDuelMicActive = false;
+      updateMicBtnUI();
+    }
+
+    function updateMicBtnUI() {
+      const btn = document.getElementById('duelMicBtn');
+      if (!btn) return;
+      if (isDuelMicActive) {
+        btn.classList.add('active');
+        btn.innerHTML = '<span>🎙️</span> Mic Activo';
+      } else {
+        btn.classList.remove('active');
+        btn.innerHTML = '<span>🎤</span> Activar Mic';
+      }
+    }
+
+    function initWebRTCConnection() {
+      if (!window.RTCPeerConnection || !localAudioStream || !activeDuelState) return;
+      try {
+        const isP1 = (activeDuelState.player1.id === currentUser.id);
+        const targetUserId = isP1 ? activeDuelState.player2.id : activeDuelState.player1.id;
+
+        duelPeerConnection = new RTCPeerConnection({
+          iceServers: [{ urls: 'stun:stun.l.google.com:19302' }]
+        });
+
+        localAudioStream.getTracks().forEach(track => {
+          duelPeerConnection.addTrack(track, localAudioStream);
+        });
+
+        duelPeerConnection.ontrack = (event) => {
+          const remoteAudio = document.createElement('audio');
+          remoteAudio.srcObject = event.streams[0];
+          remoteAudio.autoplay = true;
+          document.body.appendChild(remoteAudio);
+        };
+
+        duelPeerConnection.onicecandidate = (event) => {
+          if (event.candidate) {
+            sendWebRTCSignal(targetUserId, { candidate: event.candidate });
+          }
+        };
+
+        if (isP1) {
+          duelPeerConnection.createOffer().then(offer => {
+            return duelPeerConnection.setLocalDescription(offer);
+          }).then(() => {
+            sendWebRTCSignal(targetUserId, { sdp: duelPeerConnection.localDescription });
+          }).catch(() => {});
+        }
+      } catch(e) {}
+    }
+
+    async function sendWebRTCSignal(targetUserId, signal) {
+      if (!activeDuelId) return;
+      try {
+        await fetch(`${API_BASE}/api/duels`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'voice_signal',
+            duelId: activeDuelId,
+            fromId: currentUser.id,
+            toId: targetUserId,
+            signal: signal
+          })
+        });
+      } catch(e) {}
+    }
+
+    function handleIncomingWebRTCSignals(signals) {
+      if (!duelPeerConnection) return;
+      signals.forEach(async s => {
+        try {
+          if (s.signal && s.signal.sdp) {
+            await duelPeerConnection.setRemoteDescription(new RTCSessionDescription(s.signal.sdp));
+            if (s.signal.sdp.type === 'offer') {
+              const answer = await duelPeerConnection.createAnswer();
+              await duelPeerConnection.setLocalDescription(answer);
+              sendWebRTCSignal(s.fromId, { sdp: duelPeerConnection.localDescription });
+            }
+          } else if (s.signal && s.signal.candidate) {
+            await duelPeerConnection.addIceCandidate(new RTCIceCandidate(s.signal.candidate));
+          }
+        } catch(e) {}
+      });
+    }
+
+    function startWalkieTalkieFallback() {
+      if (!localAudioStream || !window.MediaRecorder) return;
+      try {
+        mediaRecorder = new MediaRecorder(localAudioStream);
+        audioRecordChunks = [];
+
+        mediaRecorder.ondataavailable = (e) => {
+          if (e.data.size > 0) audioRecordChunks.push(e.data);
+        };
+
+        mediaRecorder.onstop = () => {
+          if (audioRecordChunks.length > 0) {
+            const blob = new Blob(audioRecordChunks, { type: 'audio/webm' });
+            audioRecordChunks = [];
+            const reader = new FileReader();
+            reader.onloadend = async () => {
+              const base64Audio = reader.result;
+              if (activeDuelId && currentUser && isDuelMicActive) {
+                try {
+                  await fetch(`${API_BASE}/api/duels`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                      action: 'voice_clip',
+                      duelId: activeDuelId,
+                      fromId: currentUser.id,
+                      fromName: currentUser.name,
+                      audioData: base64Audio
+                    })
+                  });
+                } catch(e) {}
+              }
+            };
+            reader.readAsDataURL(blob);
+          }
+          if (isDuelMicActive) {
+            try { mediaRecorder.start(); setTimeout(() => { if (mediaRecorder.state === 'recording') mediaRecorder.stop(); }, 3000); } catch(e){}
+          }
+        };
+
+        mediaRecorder.start();
+        setTimeout(() => { if (mediaRecorder.state === 'recording') mediaRecorder.stop(); }, 3000);
+      } catch(e) {}
+    }
+
+    function playVoiceAudioClip(dataUrl) {
+      if (!dataUrl) return;
+      try {
+        const audio = new Audio(dataUrl);
+        audio.play().catch(() => {});
+      } catch(e) {}
+    }
+
+    function finishDuelMatch(state) {
+      document.getElementById('duelArenaModal').classList.remove('active');
+      stopDuelMic();
+
+      const isP1 = (state.player1.id === currentUser.id);
+      const myScore = isP1 ? state.p1_score : state.p2_score;
+      const rivalScore = isP1 ? state.p2_score : state.p1_score;
+      const winnerId = state.winnerId;
+
+      const titleEl = document.getElementById('duelOutcomeTitle');
+      const subEl = document.getElementById('duelOutcomeSubtitle');
+      const iconEl = document.getElementById('duelOutcomeIcon');
+      const xpEl = document.getElementById('duelXpAwardText');
+
+      document.getElementById('duelFinalMyScore').textContent = `${myScore} pts`;
+      document.getElementById('duelFinalRivalScore').textContent = `${rivalScore} pts`;
+
+      if (winnerId === currentUser.id) {
+        iconEl.textContent = '👑';
+        titleEl.textContent = '¡VICTORIA TOTAL EN EL DUELO!';
+        titleEl.style.color = "var(--secondary)";
+        subEl.textContent = "Has derrotado a tu rival con superioridad analítica.";
+        xpEl.textContent = "+150 Puntos XP ganados para tu Ranking Oficial 🌟";
+        playSound('complete');
+      } else if (winnerId === 'draw') {
+        iconEl.textContent = '🤝';
+        titleEl.textContent = '¡EMPATE TÉCNICO!';
+        titleEl.style.color = "var(--primary)";
+        subEl.textContent = "Ambos demostraron el mismo nivel en este enfrentamiento.";
+        xpEl.textContent = "+75 Puntos XP ganados para tu Ranking Oficial 🌟";
+      } else {
+        iconEl.textContent = '⚔️';
+        titleEl.textContent = 'Derrota en el Duelo';
+        titleEl.style.color = "var(--danger)";
+        subEl.textContent = "Buen intento. Repasa los temas débiles y vuelve a intentarlo.";
+        xpEl.textContent = "+40 Puntos XP de participación otorgados 🌟";
+      }
+
+      document.getElementById('duelVictoryModal').classList.add('active');
+      activeDuelId = null;
+
+      setTimeout(() => {
+        refreshLeaderboardData();
+      }, 1200);
+    }
+
+    function closeDuelVictoryModal() {
+      document.getElementById('duelVictoryModal').classList.remove('active');
+      openLeaderboardModal();
+    }
+
     window.addEventListener('DOMContentLoaded', () => {
       const savedTheme = localStorage.getItem('calc_uniguajira_theme_v5') || 'dark';
       document.documentElement.setAttribute('data-theme', savedTheme);
       initTopicFilters();
       loadSavedSession();
+      startDuelInvitationPolling();
       initKaTeX();
     });
   </script>
+
+  <!-- MODAL: INVITACIÓN A DUELO ENTRANTE -->
+  <div class="modal-overlay" id="duelInviteModal">
+    <div class="modal-box duel-invite-modal-box">
+      <div style="font-size: 3rem; margin-bottom: 8px;">⚔️</div>
+      <h3 style="color: var(--accent); font-size: 1.4rem; margin-bottom: 6px;">¡DESAFÍO A DUELO 1v1!</h3>
+      <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.25rem;">
+        Un compañero te ha desafiado a una batalla de 5 preguntas de Cálculo Diferencial.
+      </p>
+      <div style="display: flex; align-items: center; justify-content: center; gap: 14px; background: rgba(0,0,0,0.3); padding: 12px; border-radius: 12px; margin-bottom: 1.25rem;">
+        <div class="avatar-circle" id="duelInviteAvatar" style="width: 52px; height: 52px; font-size: 1.6rem; border: 2px solid var(--accent);">🎓</div>
+        <div style="text-align: left;">
+          <div style="font-weight: 800; font-size: 1.1rem; color: #fff;" id="duelInviteName">Compañero</div>
+          <div style="font-size: 0.8rem; color: var(--secondary);" id="duelInviteRank">Calculista</div>
+        </div>
+      </div>
+      <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.25rem;">
+        ⏳ Tiempo para responder: <strong id="duelInviteTimer" style="color: var(--accent);">30s</strong>
+      </div>
+      <div style="display: flex; gap: 12px; justify-content: center;">
+        <button class="primary-btn" onclick="acceptDuelChallenge()" style="background: linear-gradient(135deg, var(--success), #00b4d8); border:none; padding: 12px 24px; font-size: 1rem;">
+          <span>⚔️</span> ¡Aceptar Duelo!
+        </button>
+        <button class="danger-btn" onclick="declineDuelChallenge()" style="padding: 12px 20px;">
+          Rechazar ✕
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: ESPERANDO A QUE EL RIVAL ACEPTE -->
+  <div class="modal-overlay" id="duelWaitingModal">
+    <div class="modal-box" style="max-width: 440px; text-align: center;">
+      <div class="pulse-dot" style="width: 24px; height: 24px; margin: 0 auto 15px auto; background: var(--accent);"></div>
+      <h3 style="color: var(--accent); margin-bottom: 8px;">Enviando Desafío...</h3>
+      <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px;" id="duelWaitingSubtitle">
+        Esperando a que tu rival acepte la batalla.
+      </p>
+      <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">
+        ⏳ Expirando en: <strong id="duelWaitingTimer">30s</strong>
+      </div>
+      <button class="danger-btn" onclick="cancelDuelInvitation()">
+        Cancelar Desafío ✕
+      </button>
+    </div>
+  </div>
+
+  <!-- MODAL: ARENA DE DUELO COMPETITIVO (Sincronizado) -->
+  <div class="modal-overlay" id="duelArenaModal">
+    <div class="modal-box duel-modal-box">
+      <div class="duel-top-bar">
+        <div class="duel-player-card">
+          <div class="avatar-circle" id="duelP1Avatar" style="width: 44px; height: 44px; font-size: 1.3rem; border: 2px solid var(--primary);">🎓</div>
+          <div>
+            <div style="font-weight: 800; font-size: 0.95rem; color: #fff;" id="duelP1Name">Tú</div>
+            <div class="duel-score-pill" id="duelP1Score">0 pts</div>
+            <div><span class="duel-status-indicator duel-status-thinking" id="duelP1Status">Pensando...</span></div>
+          </div>
+        </div>
+        <div class="duel-vs-badge">VS</div>
+        <div class="duel-player-card rival">
+          <div class="avatar-circle" id="duelP2Avatar" style="width: 44px; height: 44px; font-size: 1.3rem; border: 2px solid var(--danger);">🎓</div>
+          <div>
+            <div style="font-weight: 800; font-size: 0.95rem; color: #fff;" id="duelP2Name">Rival</div>
+            <div class="duel-score-pill" id="duelP2Score">0 pts</div>
+            <div><span class="duel-status-indicator duel-status-thinking" id="duelP2Status">Pensando...</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="duel-body">
+        <div class="duel-round-header">
+          <div>
+            <span style="font-weight: 800; color: var(--accent);" id="duelRoundIndicator">Pregunta 1 de 5</span>
+            <span style="font-size: 0.8rem; color: var(--text-muted); margin-left: 8px;" id="duelTopicIndicator">Álgebra</span>
+          </div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--primary);" id="duelSyncTimer">
+            ⏱️ 40s
+          </div>
+        </div>
+
+        <div style="font-size: 1.15rem; font-weight: 700; line-height: 1.5; margin-bottom: 1rem; color: #fff;" id="duelQuestionText">
+          Cargando ejercicio...
+        </div>
+
+        <div class="duel-options-grid" id="duelOptionsGrid"></div>
+
+        <div id="duelWaitingBanner" style="display:none; margin-top: 1.25rem; padding: 12px; border-radius: 10px; background: rgba(0, 210, 223, 0.12); border: 1px solid var(--primary); text-align: center; font-weight: 700; font-size: 0.9rem; color: var(--primary);">
+          ⏳ Tu respuesta ha sido enviada. Esperando a que tu rival elija...
+        </div>
+
+        <div id="duelRevealBanner" style="display:none; margin-top: 1.25rem; padding: 14px; border-radius: 12px; background: rgba(18, 27, 46, 0.95); border: 2px solid var(--primary); text-align: center;">
+          <div style="font-size: 1.1rem; font-weight: 800; margin-bottom: 6px;" id="duelRevealVerdict">¡Ambos respondieron!</div>
+          <div style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 10px;" id="duelRevealDetails"></div>
+          <div style="text-align: left; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 8px; font-size: 0.85rem; color: var(--text-main);" id="duelExplanationBox"></div>
+          <div style="font-weight: 800; color: var(--secondary); margin-top: 10px; font-size: 0.95rem;" id="duelNextRoundCountdown">Siguiente ronda en 4s...</div>
+        </div>
+      </div>
+
+      <div class="duel-comm-bar">
+        <div class="duel-reactions-row">
+          <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; margin-right: 4px;">Reaccionar:</span>
+          <button class="reaction-btn" onclick="sendDuelEmoji('🔥')" title="Fuego">🔥</button>
+          <button class="reaction-btn" onclick="sendDuelEmoji('😂')" title="Risa">😂</button>
+          <button class="reaction-btn" onclick="sendDuelEmoji('🧠')" title="Cerebro">🧠</button>
+          <button class="reaction-btn" onclick="sendDuelEmoji('⚡')" title="Rayo">⚡</button>
+          <button class="reaction-btn" onclick="sendDuelEmoji('🤯')" title="Explosión">🤯</button>
+          <button class="reaction-btn" onclick="sendDuelEmoji('👏')" title="Aplausos">👏</button>
+          <button class="reaction-btn" onclick="sendDuelEmoji('💀')" title="Muerto">💀</button>
+        </div>
+
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <button class="voice-mic-btn" id="duelMicBtn" onclick="toggleDuelVoiceMic()">
+            <span>🎤</span> Activar Mic
+          </button>
+          <button class="icon-btn" onclick="promptDuelQuickChat()" title="Mensaje rápido" style="padding: 6px 12px; font-size: 0.82rem;">
+            <span>💬</span> Mensaje
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: RESULTADO FINAL DEL DUELO -->
+  <div class="modal-overlay" id="duelVictoryModal">
+    <div class="modal-box" style="max-width: 520px; text-align: center; border: 2px solid var(--secondary);">
+      <div style="font-size: 3.5rem; margin-bottom: 8px;" id="duelOutcomeIcon">🏆</div>
+      <h2 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 6px;" id="duelOutcomeTitle">¡VICTORIA TOTAL!</h2>
+      <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1.5rem;" id="duelOutcomeSubtitle">
+        Has demostrado gran dominio en Cálculo Diferencial.
+      </p>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; background: rgba(0,0,0,0.35); padding: 14px; border-radius: 14px; margin-bottom: 1.5rem;">
+        <div style="border-right: 1px solid rgba(255,255,255,0.1);">
+          <div style="font-size: 0.8rem; color: var(--primary); font-weight: 700;">TU PUNTAJE</div>
+          <div style="font-size: 1.6rem; font-weight: 800; color: #fff;" id="duelFinalMyScore">0 pts</div>
+        </div>
+        <div>
+          <div style="font-size: 0.8rem; color: var(--danger); font-weight: 700;">PUNTAJE RIVAL</div>
+          <div style="font-size: 1.6rem; font-weight: 800; color: #fff;" id="duelFinalRivalScore">0 pts</div>
+        </div>
+      </div>
+      <div style="background: rgba(6, 214, 160, 0.15); border: 1px solid var(--success); padding: 10px; border-radius: 10px; margin-bottom: 1.5rem;">
+        <span style="font-size: 0.9rem; font-weight: 800; color: var(--success);" id="duelXpAwardText">
+          +150 XP añadidos a tu perfil y Ranking 🌟
+        </span>
+      </div>
+      <div style="display: flex; gap: 10px; justify-content: center;">
+        <button class="primary-btn" onclick="closeDuelVictoryModal()" style="padding: 10px 24px;">
+          <span>Continuar</span> 🚀
+        </button>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>
