@@ -23,7 +23,11 @@ if sys.platform == "win32":
     except Exception:
         pass
 
-PORT = 8080
+# --- LO ÚNICO QUE FALTABA PARA RENDER ---
+# Leer el puerto que asigna Render automáticamente, si no hay (como en tu PC), usa el 8080
+PORT = int(os.environ.get("PORT", 8080))
+# -----------------------------------------
+
 DATA_FILE = "jugadores_ranking.json"
 CHAT_FILE = "chat_mensajes.json"
 
@@ -258,7 +262,6 @@ class UniguajiraHandler(http.server.SimpleHTTPRequestHandler):
             body = self.rfile.read(content_length).decode('utf-8')
             try:
                 msg = json.loads(body)
-                # Formato msg: { id, senderId, senderName, senderAvatar, senderCustomAvatar, text, timestamp, target: 'global' o targetUserId }
                 chat_data = load_chat()
                 msg['timestamp'] = int(time.time() * 1000)
                 
