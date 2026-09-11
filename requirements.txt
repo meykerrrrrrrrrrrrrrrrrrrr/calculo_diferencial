@@ -1,3 +1,6 @@
 # Servidor Web Local y API de Cálculo Diferencial Uniguajira
 # Este proyecto utiliza únicamente librerías estándar nativas de Python.
 # No se requieren dependencias externas.
+flask
+gunicorn
+supabase
