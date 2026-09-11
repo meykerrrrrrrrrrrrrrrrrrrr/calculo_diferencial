@@ -1,2 +1,0 @@
-# calculo_diferencial
-calculo
