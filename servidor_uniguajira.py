@@ -146,6 +146,10 @@ def get_active_online_users():
                 "name": udata.get('name', 'Estudiante'),
                 "avatar": udata.get('avatar', '🎓'),
                 "customAvatar": udata.get('customAvatar', ''),
+                "profileColor": udata.get('profileColor', ''),
+                "statusEmoji": udata.get('statusEmoji', ''),
+                "bio": udata.get('bio', ''),
+                "stickers": udata.get('stickers', []),
                 "xp": udata.get('xp', 0),
                 "last_seen": udata.get('last_seen')
             })
@@ -469,6 +473,10 @@ class UniguajiraHandler(http.server.SimpleHTTPRequestHandler):
                     "name": data.get('name', 'Estudiante'),
                     "avatar": data.get('avatar', '🎓'),
                     "customAvatar": data.get('customAvatar', ''),
+                    "profileColor": data.get('profileColor', ''),
+                    "statusEmoji": data.get('statusEmoji', ''),
+                    "bio": data.get('bio', ''),
+                    "stickers": data.get('stickers', []),
                     "xp": data.get('xp', 0),
                     "last_seen": time.time()
                 }
@@ -484,6 +492,10 @@ class UniguajiraHandler(http.server.SimpleHTTPRequestHandler):
                     "name": data.get('name', 'Estudiante'),
                     "avatar": data.get('avatar', '🎓'),
                     "customAvatar": data.get('customAvatar', ''),
+                    "profileColor": data.get('profileColor', ''),
+                    "statusEmoji": data.get('statusEmoji', ''),
+                    "bio": data.get('bio', ''),
+                    "stickers": data.get('stickers', []),
                     "xp": data.get('xp', 0),
                     "last_seen": time.time()
                 }

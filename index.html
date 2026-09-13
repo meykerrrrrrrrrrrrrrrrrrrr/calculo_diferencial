@@ -2178,16 +2178,132 @@
       word-break: break-word;
     }
 
+    
     /* ========================================================
-       MEDIA QUERIES RESPONSIVAS (MÓVILES, TABLETS Y PCS)
+       SISTEMA DE STICKERS / PINS PARA EL PERFIL
+       ======================================================== */
+    .profile-stickers-container {
+      position: relative;
+      background: rgba(18, 27, 46, 0.7);
+      border: 1.5px dashed var(--card-border);
+      border-radius: 14px;
+      min-height: 140px;
+      width: 100%;
+      margin: 12px 0;
+      padding: 10px;
+      overflow: hidden;
+      touch-action: none;
+    }
+    .profile-stickers-badge-header {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+    .profile-sticker-item {
+      position: absolute;
+      user-select: none;
+      cursor: grab;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.15s;
+    }
+    .profile-sticker-item:active {
+      cursor: grabbing;
+      transform: scale(1.18);
+    }
+    .profile-sticker-item img {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      pointer-events: none;
+      filter: drop-shadow(0 3px 6px rgba(0,0,0,0.6));
+    }
+    .profile-sticker-item .sticker-emoji {
+      font-size: 2.2rem;
+      line-height: 1;
+      pointer-events: none;
+      filter: drop-shadow(0 3px 6px rgba(0,0,0,0.6));
+    }
+    .profile-sticker-del-btn {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: #ef476f;
+      color: #fff;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      font-size: 11px;
+      font-weight: bold;
+      border: 1px solid #fff;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    .profile-stickers-container.editing .profile-sticker-del-btn {
+      display: flex;
+    }
+
+    /* Sticker catalog selector */
+    .stickers-selector-row {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 6px 2px;
+      margin-bottom: 8px;
+      scrollbar-width: thin;
+    }
+    .sticker-chip-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      font-size: 1.4rem;
+      padding: 6px 10px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.2s, background 0.2s;
+    }
+    .sticker-chip-btn:hover {
+      transform: scale(1.15);
+      background: rgba(0, 210, 223, 0.2);
+    }
+
+    /* ========================================================
+       MEDIA QUERIES RESPONSIVAS UNIVERSALES (MÓVILES, TABLETS Y PCS)
        ======================================================== */
     
+    html, body {
+      width: 100%;
+      max-width: 100vw;
+      overflow-x: hidden !important;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
     /* 1. Tablets y Pantallas Medianas (<= 900px) */
     @media (max-width: 900px) {
       .navbar {
-        padding: 0.75rem 1rem;
+        padding: 0.6rem 0.85rem;
         flex-wrap: wrap;
         gap: 8px;
+        width: 100%;
+        max-width: 100vw;
+        box-sizing: border-box;
       }
       .brand-text h1 {
         font-size: 1rem;
@@ -2214,98 +2330,211 @@
 
     /* 2. Móviles y Celulares (<= 640px) */
     @media (max-width: 640px) {
+      html, body {
+        overflow-x: hidden !important;
+        width: 100% !important;
+        max-width: 100vw !important;
+      }
+
+      /* Navbar Mobile: Compacto y deslizable horizontal sin romper la pantalla */
       .navbar {
-        padding: 0.6rem 0.85rem;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 0.5rem 0.65rem;
+        width: 100% !important;
+        max-width: 100vw !important;
+        gap: 6px;
       }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+      }
+
       .brand-icon {
-        width: 36px;
-        height: 36px;
-        font-size: 1.1rem;
+        width: 34px;
+        height: 34px;
+        font-size: 1rem;
+        border-radius: 8px;
       }
+
+      .brand-text h1 {
+        font-size: 0.95rem;
+      }
+
+      .nav-actions {
+        display: flex;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        white-space: nowrap;
+        gap: 6px;
+        padding: 4px 0 6px 0;
+        scrollbar-width: none;
+      }
+
+      .nav-actions::-webkit-scrollbar {
+        display: none;
+      }
+
       .nav-btn, .icon-btn {
         padding: 6px 10px;
-        font-size: 0.78rem;
+        font-size: 0.76rem;
+        flex-shrink: 0;
       }
+
+      .online-indicator-pill {
+        flex-shrink: 0;
+        padding: 4px 8px;
+        font-size: 0.72rem;
+      }
+
       .user-profile-badge {
+        flex-shrink: 0;
         padding: 4px 8px;
       }
+
       .user-rank {
         display: none;
       }
-      
-      /* Tarjeta de Inicio / Modos */
-      .welcome-hero h2 {
-        font-size: 1.4rem;
+
+      /* Contenedor principal sin desbordamiento */
+      .container {
+        width: 100% !important;
+        max-width: 100vw !important;
+        padding: 0.75rem 0.75rem 3rem !important;
+        margin: 0 !important;
       }
-      .welcome-hero p {
-        font-size: 0.85rem;
+
+      /* Tarjeta de Rango / XP */
+      .rank-banner {
+        width: 100% !important;
+        padding: 14px 12px !important;
+        border-radius: 12px;
       }
+      .rank-info {
+        gap: 10px;
+      }
+      .rank-icon-large {
+        width: 46px;
+        height: 46px;
+        font-size: 1.5rem;
+      }
+      .rank-text h3 {
+        font-size: 1.05rem;
+      }
+      .rank-text p {
+        font-size: 0.76rem;
+      }
+
+      /* Tarjetas de Modos de Juego */
+      .modes-grid {
+        width: 100% !important;
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+      }
+      .mode-card {
+        padding: 16px 14px !important;
+      }
+
+      /* Modales Responsivos */
+      .modal-overlay {
+        padding: 6px !important;
+      }
+      .modal-box {
+        width: 98vw !important;
+        max-width: 98vw !important;
+        max-height: 94vh !important;
+        padding: 14px !important;
+        margin: 5px auto !important;
+        border-radius: 14px !important;
+      }
+
+      /* Tabla de Clasificación / Rankings en Celular */
+      .leaderboard-table-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        width: 100%;
+      }
+      .leaderboard-table {
+        min-width: 540px;
+      }
+
+      /* Examen / Pregunta */
+      .question-card {
+        width: 100% !important;
+        padding: 14px 12px !important;
+      }
+      .question-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+      .question-body {
+        font-size: 1rem;
+        line-height: 1.45;
+      }
+      .options-grid {
+        grid-template-columns: 1fr !important;
+        gap: 8px;
+      }
+      .option-btn {
+        padding: 10px 12px !important;
+        font-size: 0.88rem !important;
+      }
+
+      /* Biblioteca Teórica */
       .theory-library-banner {
+        width: 100% !important;
         flex-direction: column;
         align-items: stretch;
-        padding: 16px;
+        padding: 14px 12px;
       }
       .theory-library-banner button {
         width: 100%;
         margin-top: 8px;
       }
-
-      /* Modales Responsivos */
-      .modal-box {
-        width: 95vw !important;
-        max-width: 95vw !important;
-        max-height: 92vh !important;
-        padding: 16px !important;
-        margin: 10px auto !important;
-      }
-
-      /* Examen / Pregunta */
-      .question-card {
-        padding: 16px;
-      }
-      .question-body {
-        font-size: 1.05rem;
-      }
-      .option-btn {
-        padding: 12px 14px;
-        font-size: 0.9rem;
-      }
-
-      /* Biblioteca Teórica */
       .theory-library-hero {
-        padding: 16px;
+        padding: 14px 12px;
       }
       .theory-library-hero h2 {
-        font-size: 1.35rem;
+        font-size: 1.25rem;
       }
       .formula-badge-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr !important;
       }
       .theory-tabs-nav {
-        gap: 6px;
+        gap: 4px;
+        overflow-x: auto;
+        padding-bottom: 4px;
       }
       .theory-topic-tab {
-        padding: 8px 12px;
-        font-size: 0.8rem;
+        padding: 7px 10px;
+        font-size: 0.78rem;
+        white-space: nowrap;
       }
 
       /* Duelo 1v1 Arena */
       .duel-arena-box {
-        width: 96vw !important;
-        padding: 14px !important;
+        width: 98vw !important;
+        padding: 12px !important;
       }
       .duel-hud-top {
         flex-direction: column;
-        gap: 10px;
+        gap: 8px;
       }
       .duel-vs-badge {
         margin: 0 auto;
       }
       .duel-qcount-selector {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr) !important;
       }
       .duel-topics-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr !important;
       }
 
       /* Chat Modal */
@@ -2315,7 +2544,7 @@
       }
       .chat-tabs-sidebar {
         width: 100%;
-        max-height: 100px;
+        max-height: 95px;
         display: flex;
         overflow-x: auto;
       }
@@ -3411,6 +3640,40 @@
               Elige tu color personal, tu emoji de estado y escribe una frase que verán tus rivales:
             </p>
 
+            <!-- Lienzo de Stickers Personalizados y Decoración -->
+            <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 4px;">
+              🎨 TUS STICKERS E INSIGNIAS (Colócalos y arrástralos en cualquier parte):
+            </label>
+            <div class="stickers-selector-row">
+              <button type="button" class="sticker-chip-btn" onclick="addUserSticker('🚀')" title="Cohete">🚀</button>
+              <button type="button" class="sticker-chip-btn" onclick="addUserSticker('👑')" title="Corona">👑</button>
+              <button type="button" class="sticker-chip-btn" onclick="addUserSticker('🏆')" title="Trofeo">🏆</button>
+              <button type="button" class="sticker-chip-btn" onclick="addUserSticker('🔥')" title="Fuego">🔥</button>
+              <button type="button" class="sticker-chip-btn" onclick="addUserSticker('⚡')" title="Rayo">⚡</button>
+              <button type="button" class="sticker-chip-btn" onclick="addUserSticker('🎯')" title="Diana">🎯</button>
+              <button type="button" class="sticker-chip-btn" onclick="addUserSticker('💎')" title="Diamante">💎</button>
+              <button type="button" class="sticker-chip-btn" onclick="addUserSticker('🐉')" title="Dragón">🐉</button>
+              <button type="button" class="sticker-chip-btn" onclick="addUserSticker('🐺')" title="Lobo">🐺</button>
+              <button type="button" class="sticker-chip-btn" onclick="addUserSticker('🐱')" title="Gatito">🐱</button>
+              <button type="button" class="sticker-chip-btn" onclick="addUserSticker('🌟')" title="Estrella">🌟</button>
+              <button type="button" class="sticker-chip-btn" onclick="document.getElementById('inputStickerUpload').click()" title="Subir foto de galería como sticker" style="font-size: 0.82rem; font-weight: 700; padding: 6px 12px; gap: 4px;">
+                <span>➕🖼️</span> Subir Imagen
+              </button>
+              <input type="file" id="inputStickerUpload" accept="image/*" style="display: none;" onchange="handleStickerImageUpload(event)">
+            </div>
+            
+            <div class="profile-stickers-container editing" id="myStickersCanvas" style="min-height: 130px;">
+              <span id="emptyStickersNotice" style="position: absolute; top: 40%; left: 0; right: 0; text-align: center; color: var(--text-muted); font-size: 0.78rem; pointer-events: none;">
+                Toca cualquier sticker arriba para agregarlo. ¡Luego arrástralo a donde quieras!
+              </span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <span style="font-size: 0.72rem; color: var(--text-muted);">Puedes moverlos arrastrando con tu dedo o mouse.</span>
+              <button type="button" class="action-btn-sm" onclick="clearAllUserStickers()" style="background: rgba(239, 71, 111, 0.2); color: #ef476f; font-size: 0.72rem; padding: 3px 8px;">
+                🗑️ Limpiar Stickers
+              </button>
+            </div>
+
             <!-- Color de Acento del Perfil -->
             <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted);">COLOR DE TU TARJETA:</label>
             <div class="profile-color-row">
@@ -3627,6 +3890,16 @@
           </div>
           <div class="user-bio-badge" id="friendBioText" style="display: none;">
             "¡Apuntándole al 5.0!"
+          </div>
+
+          <!-- Lienzo de Stickers e Insignias del Compañero -->
+          <div style="margin: 12px 0 6px 0; text-align: left;">
+            <div class="profile-stickers-badge-header">
+              <span>🎨 Stickers e Insignias Decorativas</span>
+            </div>
+            <div class="profile-stickers-container" id="friendStickersCanvas" style="min-height: 120px;">
+              <!-- Stickers de otros usuarios se renderizan aquí -->
+            </div>
           </div>
 
           
@@ -3985,6 +4258,202 @@
       updateUserUI();
     }
 
+    
+    // ========================================================
+    // SISTEMA COMPLETO DE STICKERS E IMÁGENES EN EL PERFIL
+    // ========================================================
+    function addUserSticker(emoji) {
+      if (!currentUser) return;
+      if (!Array.isArray(currentUser.stickers)) currentUser.stickers = [];
+      if (currentUser.stickers.length >= 15) {
+        alert("Has alcanzado el límite máximo de 15 stickers.");
+        return;
+      }
+
+      const newSticker = {
+        id: 'stk_' + Date.now() + '_' + Math.floor(Math.random() * 1000),
+        type: 'emoji',
+        content: emoji,
+        x: Math.floor(Math.random() * 60) + 15,
+        y: Math.floor(Math.random() * 45) + 15
+      };
+
+      currentUser.stickers.push(newSticker);
+      renderStickersOnCanvas(currentUser.stickers, 'myStickersCanvas', true);
+      saveUserProfileToServer();
+    }
+
+    function handleStickerImageUpload(e) {
+      if (!currentUser) return;
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        const img = new Image();
+        img.onload = function() {
+          const cv = document.createElement('canvas');
+          cv.width = 120;
+          cv.height = 120;
+          const ctx = cv.getContext('2d');
+          const minDim = Math.min(img.width, img.height);
+          const sx = (img.width - minDim) / 2;
+          const sy = (img.height - minDim) / 2;
+          ctx.drawImage(img, sx, sy, minDim, minDim, 0, 0, 120, 120);
+
+          const compressed = cv.toDataURL('image/png');
+          if (!Array.isArray(currentUser.stickers)) currentUser.stickers = [];
+          if (currentUser.stickers.length >= 15) {
+            alert("Has alcanzado el límite máximo de 15 stickers.");
+            return;
+          }
+
+          currentUser.stickers.push({
+            id: 'stk_' + Date.now() + '_' + Math.floor(Math.random() * 1000),
+            type: 'image',
+            content: compressed,
+            x: Math.floor(Math.random() * 55) + 15,
+            y: Math.floor(Math.random() * 45) + 15
+          });
+
+          renderStickersOnCanvas(currentUser.stickers, 'myStickersCanvas', true);
+          saveUserProfileToServer();
+        };
+        img.src = evt.target.result;
+      };
+      reader.readAsDataURL(file);
+      e.target.value = '';
+    }
+
+    function removeUserSticker(stkId) {
+      if (!currentUser || !Array.isArray(currentUser.stickers)) return;
+      currentUser.stickers = currentUser.stickers.filter(s => s.id !== stkId);
+      renderStickersOnCanvas(currentUser.stickers, 'myStickersCanvas', true);
+      saveUserProfileToServer();
+    }
+
+    function clearAllUserStickers() {
+      if (!currentUser) return;
+      currentUser.stickers = [];
+      renderStickersOnCanvas([], 'myStickersCanvas', true);
+      saveUserProfileToServer();
+    }
+
+    function renderStickersOnCanvas(stickers, canvasId, isEditable) {
+      const container = document.getElementById(canvasId);
+      if (!container) return;
+      container.innerHTML = '';
+
+      if (!stickers || stickers.length === 0) {
+        if (isEditable) {
+          container.innerHTML = `
+            <span style="position: absolute; top: 40%; left: 0; right: 0; text-align: center; color: var(--text-muted); font-size: 0.78rem; pointer-events: none;">
+              Toca cualquier sticker arriba para agregarlo. ¡Luego arrástralo a donde quieras!
+            </span>
+          `;
+        } else {
+          container.innerHTML = `
+            <span style="position: absolute; top: 40%; left: 0; right: 0; text-align: center; color: var(--text-muted); font-size: 0.78rem; pointer-events: none;">
+              Este compañero aún no ha colocado stickers en su perfil.
+            </span>
+          `;
+        }
+        return;
+      }
+
+      stickers.forEach(s => {
+        const item = document.createElement('div');
+        item.className = 'profile-sticker-item';
+        item.style.left = `${s.x || 10}%`;
+        item.style.top = `${s.y || 10}%`;
+
+        if (s.type === 'image') {
+          item.innerHTML = `<img src="${s.content}" alt="sticker">`;
+        } else {
+          item.innerHTML = `<span class="sticker-emoji">${s.content}</span>`;
+        }
+
+        if (isEditable) {
+          const delBtn = document.createElement('div');
+          delBtn.className = 'profile-sticker-del-btn';
+          delBtn.innerHTML = '✕';
+          delBtn.onclick = (ev) => {
+            ev.stopPropagation();
+            removeUserSticker(s.id);
+          };
+          item.appendChild(delBtn);
+
+          // Touch / Mouse Dragging logic
+          let isDragging = false;
+          let startX, startY, initialLeft, initialTop;
+
+          const onStart = (clientX, clientY) => {
+            isDragging = true;
+            startX = clientX;
+            startY = clientY;
+            initialLeft = parseFloat(item.style.left) || 10;
+            initialTop = parseFloat(item.style.top) || 10;
+          };
+
+          const onMove = (clientX, clientY) => {
+            if (!isDragging) return;
+            const rect = container.getBoundingClientRect();
+            const dxPercent = ((clientX - startX) / rect.width) * 100;
+            const dyPercent = ((clientY - startY) / rect.height) * 100;
+
+            let nextX = Math.max(2, Math.min(88, initialLeft + dxPercent));
+            let nextY = Math.max(2, Math.min(80, initialTop + dyPercent));
+
+            item.style.left = `${nextX}%`;
+            item.style.top = `${nextY}%`;
+
+            s.x = Math.round(nextX);
+            s.y = Math.round(nextY);
+          };
+
+          const onEnd = () => {
+            if (isDragging) {
+              isDragging = false;
+              saveUserProfileToServer();
+            }
+          };
+
+          // Mouse Listeners
+          item.addEventListener('mousedown', (ev) => {
+            if (ev.target === delBtn) return;
+            onStart(ev.clientX, ev.clientY);
+            const moveHandler = (e) => onMove(e.clientX, e.clientY);
+            const upHandler = () => {
+              onEnd();
+              window.removeEventListener('mousemove', moveHandler);
+              window.removeEventListener('mouseup', upHandler);
+            };
+            window.addEventListener('mousemove', moveHandler);
+            window.addEventListener('mouseup', upHandler);
+          });
+
+          // Touch Listeners for Smartphones
+          item.addEventListener('touchstart', (ev) => {
+            if (ev.target === delBtn) return;
+            const touch = ev.touches[0];
+            onStart(touch.clientX, touch.clientY);
+          }, { passive: true });
+
+          item.addEventListener('touchmove', (ev) => {
+            if (!isDragging) return;
+            const touch = ev.touches[0];
+            onMove(touch.clientX, touch.clientY);
+          }, { passive: true });
+
+          item.addEventListener('touchend', () => {
+            onEnd();
+          });
+        }
+
+        container.appendChild(item);
+      });
+    }
+
     function openAuthModal() {
       document.getElementById('authModal').classList.add('active');
       if (currentUser) {
@@ -4000,6 +4469,7 @@
         renderUserAvatarElement(currentUser, document.getElementById('authAvatarPreview'));
         const bioInput = document.getElementById('userBioInput');
         if (bioInput) bioInput.value = currentUser.bio || '';
+        renderStickersOnCanvas(currentUser.stickers || [], 'myStickersCanvas', true);
 
         if (currentUser.profileColor) {
           document.querySelectorAll('.profile-color-dot').forEach(d => {
@@ -4789,7 +5259,15 @@
 
       participants.forEach((p, idx) => {
         const tr = document.createElement('tr');
-        if (p.isUser) tr.style.background = 'rgba(0, 210, 223, 0.12)';
+        const pColor = p.profileColor || (p.isUser ? 'var(--primary)' : null);
+        if (pColor) {
+          tr.style.borderLeft = `4px solid ${pColor}`;
+          tr.style.background = p.isUser 
+            ? `linear-gradient(90deg, ${pColor}28 0%, rgba(18, 27, 46, 0.85) 100%)` 
+            : `linear-gradient(90deg, ${pColor}18 0%, rgba(18, 27, 46, 0.6) 100%)`;
+        } else if (p.isUser) {
+          tr.style.background = 'rgba(0, 210, 223, 0.12)';
+        }
         
         let posBadge = `${idx + 1}`;
         if (idx === 0) posBadge = '🥇 1';
@@ -4855,10 +5333,31 @@
       }
 
       const avBox = document.getElementById('friendAvatarBox');
-      if (avBox && player.profileColor) {
-        avBox.style.borderColor = player.profileColor;
-        avBox.style.boxShadow = `0 0 15px ${player.profileColor}66`;
+      const friendModalBox = document.querySelector('#friendProfileModal .modal-box');
+      if (player.profileColor) {
+        if (avBox) {
+          avBox.style.borderColor = player.profileColor;
+          avBox.style.boxShadow = `0 0 20px ${player.profileColor}88`;
+        }
+        if (friendModalBox) {
+          friendModalBox.style.borderColor = player.profileColor;
+          friendModalBox.style.boxShadow = `0 0 25px ${player.profileColor}33`;
+        }
+        document.getElementById('friendName').style.color = player.profileColor;
+      } else {
+        if (avBox) {
+          avBox.style.borderColor = 'var(--primary)';
+          avBox.style.boxShadow = 'none';
+        }
+        if (friendModalBox) {
+          friendModalBox.style.borderColor = 'var(--card-border)';
+          friendModalBox.style.boxShadow = 'none';
+        }
+        document.getElementById('friendName').style.color = '#fff';
       }
+      
+      // Render stickers in friend's profile
+      renderStickersOnCanvas(player.stickers || [], 'friendStickersCanvas', false);
       document.getElementById('friendExams').textContent = player.examsCount || 0;
       document.getElementById('friendAvg').textContent = player.avgGrade ? Number(player.avgGrade).toFixed(1) : "0.0";
       document.getElementById('friendXp').textContent = `${player.xp || 0} XP`;
