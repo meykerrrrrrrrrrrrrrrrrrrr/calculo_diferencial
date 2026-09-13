@@ -3784,9 +3784,14 @@
   <div class="modal-overlay" id="chatModal">
     <div class="modal-box chat-modal-box">
       <div class="chat-header-bar">
-        <div>
-          <h3 style="display: inline-block;">💬 Chat Interactivo en Vivo</h3>
-          <p style="font-size: 0.78rem; color: var(--primary);" id="chatChannelSubtitle">Canal: Chat Mundial Uniguajira</p>
+        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+          <div>
+            <h3 style="display: inline-block;">💬 Chat Interactivo en Vivo</h3>
+            <p style="font-size: 0.78rem; color: var(--primary);" id="chatChannelSubtitle">Canal: Chat Mundial Uniguajira</p>
+          </div>
+          <button id="chatHeaderDuelBtn" class="action-btn-sm" onclick="challengeFromChatHeader()" style="display: none; background: linear-gradient(135deg, #ef476f, #f72585); border: none; padding: 6px 14px; font-weight: 700; color: #fff; box-shadow: 0 0 10px rgba(239, 71, 111, 0.5);">
+            ⚔️ Retar a Duelo
+          </button>
         </div>
         <button class="close-btn" onclick="closeChatModal()">✕</button>
       </div>
@@ -3820,9 +3825,23 @@
         <button class="close-btn" onclick="closeOnlineUsersModal()">✕</button>
       </div>
       <div class="modal-body">
-        <p style="font-size: 0.85rem; color: var(--text-muted);">
-          Compañeros en tu misma red. Haz clic sobre uno para hablar por <strong>chat privado</strong> o ver su perfil:
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px;">
+          Encuentra a cualquier estudiante registrado (en línea o desconectado) para hablar por <strong>chat privado</strong>, ver su perfil o <strong>retarlo a duelo</strong>:
         </p>
+        
+        <!-- BUSCADOR UNIVERSAL DE ESTUDIANTES -->
+        <div style="margin-bottom: 12px; position: relative;">
+          <input type="text" id="onlineSearchInput" placeholder="🔍 Buscar compañeros (en línea o todos los registrados)..." 
+                 oninput="renderOnlineUsersModal(this.value)"
+                 style="width: 100%; padding: 10px 14px; border-radius: 10px; background: rgba(0,0,0,0.35); border: 1.5px solid var(--card-border); color: #fff; font-size: 0.88rem; outline: none;">
+        </div>
+
+        <!-- FILTRO ONLINE / TODOS -->
+        <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+          <button class="leader-tab active" id="tabFilterOnlineOnly" onclick="setOnlineUsersFilter('all_with_status', this)">👥 Todos los Compañeros</button>
+          <button class="leader-tab" id="tabFilterOnlineActive" onclick="setOnlineUsersFilter('active_only', this)">🟢 Solo En Línea Ahora</button>
+        </div>
+
         <div class="online-users-grid" id="onlineUsersGrid">
         </div>
       </div>
@@ -3841,6 +3860,13 @@
       </div>
       <div class="modal-body">
         
+        <!-- BUSCADOR DE COMPAÑEROS EN RANKING -->
+        <div style="margin-bottom: 12px; position: relative;">
+          <input type="text" id="leaderboardSearchInput" placeholder="🔍 Buscar compañero por nombre o rango en la clasificación..." 
+                 oninput="filterLeaderboardUsers(this.value)"
+                 style="width: 100%; padding: 10px 14px; border-radius: 10px; background: rgba(0,0,0,0.35); border: 1.5px solid var(--card-border); color: #fff; font-size: 0.88rem; outline: none; transition: border-color 0.2s;">
+        </div>
+
         <div class="leaderboard-tabs">
           <button class="leader-tab active" onclick="switchLeaderboardTab('global', this)">🌍 Global General</button>
           <button class="leader-tab" onclick="switchLeaderboardTab('factorizacion', this)">Factorización (T3)</button>
@@ -3921,7 +3947,10 @@
             </div>
           </div>
 
-          <div style="margin-top: 1.5rem; display: flex; justify-content: center; gap: 10px;">
+          <div style="margin-top: 1.5rem; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <button class="primary-btn" id="btnChallengeFromProfile" onclick="challengeActiveFriendFromProfile()" style="background: linear-gradient(135deg, #ef476f, #f72585); box-shadow: 0 0 15px rgba(239, 71, 111, 0.4); border: none;">
+              <span>⚔️</span> Retar a Duelo 1v1
+            </button>
             <button class="primary-btn" id="btnStartPrivateChat" onclick="startPrivateChatWithFriend()">
               <span>💬</span> Enviar Mensaje Privado
             </button>
@@ -4640,12 +4669,21 @@
     }
 
     function saveUserProfileToServer() {
+      if (!currentUser) return;
       localStorage.setItem('uniguajira_auth_user_v5', JSON.stringify(currentUser));
       fetch(API_BASE + '/api/ranking', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(currentUser)
-      }).catch(() => {});
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data && Array.isArray(data.players)) {
+          remotePlayers = data.players.filter(p => !String(p.id).startsWith('bot_'));
+          try { localStorage.setItem('uniguajira_cached_ranking_v5', JSON.stringify(remotePlayers)); } catch(e){}
+        }
+      })
+      .catch(() => {});
     }
 
     // 3. HEARTBEAT Y PRESENCIA EN TIEMPO REAL
@@ -4711,39 +4749,110 @@
       document.getElementById('onlineUsersModal').classList.remove('active');
     }
 
-    function renderOnlineUsersModal() {
+    function renderOnlineUsersModal(searchQuery = '') {
       const grid = document.getElementById('onlineUsersGrid');
+      if (!grid) return;
       grid.innerHTML = '';
 
-      const count = liveOnlineUsers.length;
-      document.getElementById('onlineModalSubtitle').textContent = `${count} ${count === 1 ? 'estudiante conectado' : 'estudiantes conectados'} en tiempo real`;
+      const query = (searchQuery || '').toLowerCase().trim();
+      const onlineIdSet = new Set((liveOnlineUsers || []).map(u => String(u.id)));
 
-      if (liveOnlineUsers.length === 0) {
-        grid.innerHTML = '<p style="color: var(--text-muted); font-size: 0.9rem;">No se detectaron otros compañeros en este momento.</p>';
+      // Mapa para unir a todos los estudiantes registrados con su estado de presencia
+      const allStudentsMap = new Map();
+
+      // 1. Agregar todos los registrados
+      if (Array.isArray(remotePlayers)) {
+        remotePlayers.forEach(p => {
+          if (!String(p.id).startsWith('bot_')) {
+            allStudentsMap.set(String(p.id), { ...p, isOnline: onlineIdSet.has(String(p.id)) });
+          }
+        });
+      }
+
+      // 2. Asegurar que los activos en línea también figuren
+      if (Array.isArray(liveOnlineUsers)) {
+        liveOnlineUsers.forEach(u => {
+          if (!String(u.id).startsWith('bot_')) {
+            const existing = allStudentsMap.get(String(u.id)) || {};
+            allStudentsMap.set(String(u.id), { ...existing, ...u, isOnline: true });
+          }
+        });
+      }
+
+      // 3. Incluir al usuario actual
+      if (currentUser) {
+        const existing = allStudentsMap.get(String(currentUser.id)) || {};
+        allStudentsMap.set(String(currentUser.id), { ...existing, ...currentUser, isOnline: true, isUser: true });
+      }
+
+      let studentsList = Array.from(allStudentsMap.values());
+
+      // Filtrar según pestaña (Solo en línea vs Todos)
+      if (onlineUsersFilterMode === 'active_only') {
+        studentsList = studentsList.filter(s => s.isOnline);
+      }
+
+      // Filtrar por texto de búsqueda
+      if (query) {
+        studentsList = studentsList.filter(s => {
+          const rank = getCurrentRank(s.xp || 0);
+          return (s.name && s.name.toLowerCase().includes(query)) ||
+                 (rank.name && rank.name.toLowerCase().includes(query)) ||
+                 (s.bio && s.bio.toLowerCase().includes(query));
+        });
+      }
+
+      // Ordenar: primero los que están en línea, luego por XP descendente
+      studentsList.sort((a, b) => {
+        if (a.isOnline !== b.isOnline) return a.isOnline ? -1 : 1;
+        return (b.xp || 0) - (a.xp || 0);
+      });
+
+      const onlineCount = Array.from(allStudentsMap.values()).filter(s => s.isOnline).length;
+      const subtitleEl = document.getElementById('onlineModalSubtitle');
+      if (subtitleEl) {
+        subtitleEl.textContent = `${onlineCount} en línea • ${allStudentsMap.size} estudiantes registrados en total`;
+      }
+
+      if (studentsList.length === 0) {
+        grid.innerHTML = '<p style="color: var(--text-muted); font-size: 0.9rem; grid-column: 1 / -1; text-align: center; padding: 20px;">No se encontraron compañeros con ese criterio.</p>';
         return;
       }
 
-      liveOnlineUsers.forEach(u => {
-        const isMe = currentUser && (u.id === currentUser.id);
+      studentsList.forEach(u => {
+        const isMe = currentUser && (String(u.id) === String(currentUser.id));
         const rank = getCurrentRank(u.xp || 0);
         const card = document.createElement('div');
         card.className = 'online-user-card';
+        if (u.profileColor) {
+          card.style.borderLeft = `4px solid ${u.profileColor}`;
+        }
+
         card.innerHTML = `
-          <div class="avatar-circle" style="width: 40px; height: 40px; font-size: 1.2rem;">
+          <div class="avatar-circle" style="width: 40px; height: 40px; font-size: 1.2rem; flex-shrink: 0; border: 2px solid ${u.profileColor || 'var(--primary)'};">
             ${u.customAvatar ? `<img src="${u.customAvatar}">` : (u.avatar || '🎓')}
           </div>
-          <div style="flex: 1;">
-            <div style="font-weight: 700; font-size: 0.95rem; color: #fff;">
-              ${u.name} ${isMe ? '<span style="color: var(--primary); font-size: 0.75rem;">(Tú)</span>' : ''}
+          <div style="flex: 1; min-width: 0;">
+            <div style="font-weight: 700; font-size: 0.95rem; color: #fff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+              ${escapeHtml(u.name)} ${isMe ? '<span style="color: var(--primary); font-size: 0.75rem;">(Tú)</span>' : ''}
             </div>
             <div style="font-size: 0.75rem; color: var(--secondary); font-weight: 600;">
-              ${rank.icon} ${rank.name}
+              ${rank.icon} ${rank.name} • ${u.xp || 0} XP
             </div>
-            <div style="font-size: 0.72rem; color: var(--success); font-weight: 700; margin-top: 2px;">
-              ● Activo ahora
+            <div style="font-size: 0.72rem; font-weight: 700; margin-top: 2px; color: ${u.isOnline ? 'var(--success)' : 'var(--text-muted)'};">
+              ${u.isOnline ? '🟢 En línea ahora' : '⚪ Desconectado'}
             </div>
           </div>
-          ${!isMe ? '<button class="icon-btn" style="padding: 4px 8px; font-size: 0.75rem;" title="Chat Privado">💬</button>' : ''}
+          ${!isMe ? `
+            <div style="display: flex; gap: 4px;" onclick="event.stopPropagation();">
+              <button class="action-btn-sm" style="padding: 4px 8px; font-size: 0.72rem; background: linear-gradient(135deg, #ef476f, #f72585); color: #fff; border: none;" onclick="openDuelConfigModal('${u.id}', '${escapeHtml(u.name).replace(/'/g, "\'")}')" title="Retar a Duelo">
+                ⚔️ Retar
+              </button>
+              <button class="action-btn-sm" style="padding: 4px 8px; font-size: 0.72rem;" onclick="knownPrivateChats['${u.id}'] = ${JSON.stringify(u).replace(/"/g, '&quot;')}; openChatModal('${u.id}', knownPrivateChats['${u.id}']); closeOnlineUsersModal();" title="Chat Privado">
+                💬
+              </button>
+            </div>
+          ` : ''}
         `;
         card.onclick = () => {
           closeOnlineUsersModal();
@@ -4997,6 +5106,11 @@
         document.getElementById('chatInputText').placeholder = `Escribe un mensaje privado a ${name}...`;
       }
 
+      const duelHeaderBtn = document.getElementById('chatHeaderDuelBtn');
+      if (duelHeaderBtn) {
+        duelHeaderBtn.style.display = (tabId !== 'global' && chatActiveFriend && (!currentUser || chatActiveFriend.id !== currentUser.id)) ? 'inline-flex' : 'none';
+      }
+
       updateChatBadgesUI();
       renderChatTabs();
       renderChatMessages();
@@ -5189,6 +5303,11 @@
     let currentLeaderboardTab = 'global';
     async function openLeaderboardModal() {
       document.getElementById('leaderboardModal').classList.add('active');
+      const searchInput = document.getElementById('leaderboardSearchInput');
+      if (searchInput) {
+        searchInput.value = '';
+        leaderboardSearchQuery = '';
+      }
       const tbody = document.getElementById('leaderboardTbody');
       if (!remotePlayers || remotePlayers.length === 0) {
         tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding: 25px; color: var(--primary);"><span class="pulse-dot" style="display:inline-block; margin-right:8px;"></span> Cargando compañeros del ranking...</td></tr>';
@@ -5209,7 +5328,7 @@
 
     async function refreshLeaderboardData() {
       try {
-        const res = await fetch(`${API_BASE}/api/ranking`, { cache: 'no-store' });
+        const res = await fetch(`${API_BASE}/api/ranking?t=${Date.now()}`, { cache: 'no-store' });
         if (res.ok) {
           const data = await res.json();
           if (Array.isArray(data)) {
@@ -5226,6 +5345,46 @@
       renderLeaderboard(currentLeaderboardTab);
     }
 
+    
+    // ========================================================
+    // BUSCADOR UNIVERSAL, RETO DESDE PERFIL Y CHAT PRIVADO
+    // ========================================================
+    let leaderboardSearchQuery = '';
+    let onlineUsersFilterMode = 'all_with_status';
+
+    function filterLeaderboardUsers(val) {
+      leaderboardSearchQuery = (val || '').toLowerCase().trim();
+      renderLeaderboard(currentLeaderboardTab);
+    }
+
+    function setOnlineUsersFilter(mode, btn) {
+      onlineUsersFilterMode = mode;
+      document.querySelectorAll('#onlineUsersModal .leader-tab').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      const searchVal = document.getElementById('onlineSearchInput') ? document.getElementById('onlineSearchInput').value : '';
+      renderOnlineUsersModal(searchVal);
+    }
+
+    function challengeActiveFriendFromProfile() {
+      if (!chatActiveFriend) return;
+      if (currentUser && chatActiveFriend.id === currentUser.id) {
+        alert("No puedes retarte a ti mismo a un duelo.");
+        return;
+      }
+      closeFriendProfileModal();
+      openDuelConfigModal(chatActiveFriend.id, chatActiveFriend.name);
+    }
+
+    function challengeFromChatHeader() {
+      if (currentChatTab === 'global' || !chatActiveFriend) return;
+      if (currentUser && chatActiveFriend.id === currentUser.id) {
+        alert("No puedes retarte a ti mismo a un duelo.");
+        return;
+      }
+      closeChatModal();
+      openDuelConfigModal(chatActiveFriend.id, chatActiveFriend.name);
+    }
+
     function renderLeaderboard(tab) {
       const tbody = document.getElementById('leaderboardTbody');
       if (!tbody) return;
@@ -5233,6 +5392,7 @@
 
       let participantsMap = new Map();
 
+      // Cargar absolutamente a todos los participantes remotos (registrados)
       if (Array.isArray(remotePlayers)) {
         remotePlayers.forEach(r => {
           if (!String(r.id).startsWith('bot_')) {
@@ -5241,8 +5401,10 @@
         });
       }
 
+      // Asegurar que el usuario activo actual siempre figure con sus datos más actualizados
       if (currentUser) {
-        participantsMap.set(currentUser.id, { ...currentUser, isUser: true });
+        const existing = participantsMap.get(currentUser.id) || {};
+        participantsMap.set(currentUser.id, { ...existing, ...currentUser, isUser: true });
       }
 
       let participants = Array.from(participantsMap.values());
@@ -5256,6 +5418,21 @@
         p.displayXp = tab === 'global' ? (p.xp || 0) : (p.topicScores ? (p.topicScores[tab] || 0) : 0);
       });
       participants.sort((a, b) => (b.displayXp || 0) - (a.displayXp || 0));
+
+      // Filtro de búsqueda en tiempo real
+      if (leaderboardSearchQuery) {
+        participants = participants.filter(p => {
+          const rank = getCurrentRank(p.xp || 0);
+          return (p.name && p.name.toLowerCase().includes(leaderboardSearchQuery)) ||
+                 (rank.name && rank.name.toLowerCase().includes(leaderboardSearchQuery)) ||
+                 (p.statusEmoji && p.statusEmoji.toLowerCase().includes(leaderboardSearchQuery));
+        });
+      }
+
+      if (participants.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding: 25px; color: var(--text-muted);">No se encontraron compañeros que coincidan con "' + escapeHtml(leaderboardSearchQuery) + '".</td></tr>';
+        return;
+      }
 
       participants.forEach((p, idx) => {
         const tr = document.createElement('tr');
@@ -6885,6 +7062,7 @@
       loadSavedWebThemeColor();
       startDuelInvitationPolling();
       initKaTeX();
+      refreshLeaderboardData(); // Cargar ranking completo inmediatamente al iniciar
     });
   </script>
 

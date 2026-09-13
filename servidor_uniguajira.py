@@ -311,6 +311,36 @@ class UniguajiraHandler(http.server.SimpleHTTPRequestHandler):
                         duel['winnerId'] = duel['player2']['id']
                     else:
                         duel['winnerId'] = 'draw'
+                    
+                    # Premiar XP a los duelistas en el ranking oficial
+                    if not duel.get('xpAwarded', False):
+                        duel['xpAwarded'] = True
+                        try:
+                            players = load_players()
+                            p1_id = duel['player1']['id']
+                            p2_id = duel['player2']['id']
+                            for p in players:
+                                if p.get('id') == p1_id:
+                                    if duel['winnerId'] == p1_id:
+                                        p['xp'] = p.get('xp', 0) + 150
+                                        p['duelWins'] = p.get('duelWins', 0) + 1
+                                    elif duel['winnerId'] == 'draw':
+                                        p['xp'] = p.get('xp', 0) + 75
+                                    else:
+                                        p['xp'] = p.get('xp', 0) + 40
+                                        p['duelLosses'] = p.get('duelLosses', 0) + 1
+                                elif p.get('id') == p2_id:
+                                    if duel['winnerId'] == p2_id:
+                                        p['xp'] = p.get('xp', 0) + 150
+                                        p['duelWins'] = p.get('duelWins', 0) + 1
+                                    elif duel['winnerId'] == 'draw':
+                                        p['xp'] = p.get('xp', 0) + 75
+                                    else:
+                                        p['xp'] = p.get('xp', 0) + 40
+                                        p['duelLosses'] = p.get('duelLosses', 0) + 1
+                            save_players(players)
+                        except Exception as e:
+                            print("Error awarding duel XP:", e)
 
                 is_completed = (duel['status'] == 'completed')
                 q_data = None
