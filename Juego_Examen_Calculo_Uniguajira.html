@@ -5108,7 +5108,6 @@
       }
     }
 
-    async 
     // ========================================================
     // CONFIGURACIÓN DE DUELOS (TEMAS Y CANTIDAD DE PREGUNTAS)
     // ========================================================
@@ -5255,37 +5254,7 @@
     }
 
     function challengePlayerFromList(targetId, targetName) {
-      if (!currentUser) {
-        alert("Debes iniciar sesión con tu cuenta para jugar duelos.");
-        openAuthModal();
-        return;
-      }
-
-      if (targetId === currentUser.id) {
-        alert("No puedes desafiarte a ti mismo. ¡Invita a un compañero!");
-        return;
-      }
-
-      try {
-        const payload = {
-          action: 'invite',
-          fromUser: currentUser,
-          toUserId: targetId,
-          toUserName: targetName
-        };
-        const res = await fetch(`${API_BASE}/api/duels`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-        const data = await res.json();
-        if (data.status === 'ok') {
-          pendingSentInviteId = data.inviteId;
-          showWaitingForRivalModal(targetName);
-        }
-      } catch (e) {
-        alert("No se pudo enviar el reto. Asegúrate de que el servidor esté activo.");
-      }
+      openDuelConfigModal(targetId, targetName);
     }
 
     function showWaitingForRivalModal(targetName, topicNames = 'Todos los temas', qCount = 5) {
