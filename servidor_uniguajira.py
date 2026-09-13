@@ -110,6 +110,8 @@ def load_players():
 def save_players(players):
     try:
         clean_players = [p for p in players if not str(p.get('id', '')).startswith('bot_') and p.get('name') not in ['Sara Morales', 'Kevin Díaz', 'Laura Ramos']]
+        if not clean_players and os.path.exists(DATA_FILE) and os.path.getsize(DATA_FILE) > 5:
+            return
         with open(DATA_FILE, "w", encoding="utf-8") as f:
             json.dump(clean_players, f, ensure_ascii=False, indent=2)
     except Exception as e:
@@ -245,12 +247,24 @@ class UniguajiraHandler(http.server.SimpleHTTPRequestHandler):
             if action == 'get_invitations':
                 now = time.time()
                 pending = []
+                user_id = str(query_params.get('userId', [''])[0]).strip()
+                user_name = str(query_params.get('userName', [''])[0]).strip().lower()
+
                 for inv_id, inv in list(PENDING_INVITATIONS.items()):
-                    if now - inv.get('createdAt', 0) > 40:
-                        # Expirar invitación tras 40 segundos
+                    if now - inv.get('createdAt', 0) > 45:
                         inv['status'] = 'expired'
-                    elif inv.get('toUserId') == user_id and inv.get('status') == 'pending':
-                        pending.append(inv)
+                    elif inv.get('status') == 'pending':
+                        t_id = str(inv.get('toUserId', '')).strip()
+                        t_name = str(inv.get('toUserName', '')).strip().lower()
+
+                        match = False
+                        if user_id and (user_id == t_id or user_id.lower() == t_name):
+                            match = True
+                        if user_name and (user_name == t_name or user_name == t_id.lower()):
+                            match = True
+
+                        if match:
+                            pending.append(inv)
                 self.send_json({ "status": "ok", "invitations": pending })
                 return
 
@@ -492,8 +506,9 @@ class UniguajiraHandler(http.server.SimpleHTTPRequestHandler):
             if action == 'invite':
                 from_user = data.get('fromUser')
                 to_user_id = data.get('toUserId')
-                
-                if not from_user or not to_user_id:
+                to_user_name = data.get('toUserName', '')
+
+                if not from_user or (not to_user_id and not to_user_name):
                     self.send_json({"status": "error", "message": "Datos incompletos"}, 400)
                     return
 
@@ -502,6 +517,7 @@ class UniguajiraHandler(http.server.SimpleHTTPRequestHandler):
                     "id": inv_id,
                     "fromUser": from_user,
                     "toUserId": to_user_id,
+                    "toUserName": to_user_name,
                     "createdAt": time.time(),
                     "status": "pending",
                     "duelId": None

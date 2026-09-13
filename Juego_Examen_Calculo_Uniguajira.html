@@ -1610,8 +1610,345 @@
       box-shadow: 0 0 10px rgba(251, 133, 0, 0.5);
     }
 
+  
+    /* --- BIBLIOTECA DE APRENDIZAJE TEÓRICO --- */
+    .theory-library-hero {
+      background: linear-gradient(135deg, rgba(0, 210, 223, 0.12) 0%, rgba(255, 183, 3, 0.08) 100%);
+      border: 1.5px solid var(--primary);
+      border-radius: 20px;
+      padding: 24px;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-elevation);
+    }
+
+    .theory-search-bar {
+      display: flex;
+      gap: 12px;
+      margin-top: 1rem;
+      position: relative;
+    }
+
+    .theory-search-input {
+      flex: 1;
+      background: rgba(6, 11, 20, 0.85);
+      border: 1.5px solid var(--card-border);
+      color: #fff;
+      padding: 12px 18px 12px 42px;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .theory-search-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 15px var(--primary-glow);
+    }
+
+    .theory-search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    .theory-tabs-nav {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      margin-bottom: 1.5rem;
+      scrollbar-width: thin;
+    }
+
+    .theory-topic-tab {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 10px 16px;
+      border-radius: 12px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .theory-topic-tab:hover {
+      color: #fff;
+      background: rgba(0, 210, 223, 0.1);
+      border-color: var(--primary);
+    }
+
+    .theory-topic-tab.active {
+      color: #060b14;
+      background: var(--primary);
+      border-color: var(--primary);
+      box-shadow: 0 4px 15px var(--primary-glow);
+    }
+
+    .theory-content-block {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .theory-content-block.active {
+      display: block;
+    }
+
+    .theory-topic-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 1.25rem;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .theory-section-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 22px;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+
+    .theory-section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .formula-badge-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 14px;
+      margin-bottom: 1.25rem;
+    }
+
+    .formula-item-card {
+      background: rgba(6, 11, 20, 0.6);
+      border: 1px solid rgba(0, 210, 223, 0.25);
+      border-radius: 12px;
+      padding: 14px;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .formula-item-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .formula-label {
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+
+    .formula-math {
+      font-size: 1.15rem;
+      color: #fff;
+      margin-bottom: 8px;
+      overflow-x: auto;
+      padding: 4px 0;
+    }
+
+    .formula-desc {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .rule-box-warning {
+      background: rgba(239, 71, 111, 0.1);
+      border-left: 4px solid var(--danger);
+      border-radius: 0 12px 12px 0;
+      padding: 14px 18px;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .rule-box-tip {
+      background: rgba(255, 183, 3, 0.1);
+      border-left: 4px solid var(--secondary);
+      border-radius: 0 12px 12px 0;
+      padding: 14px 18px;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .step-procedure-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 1rem 0;
+    }
+
+    .step-procedure-item {
+      display: flex;
+      gap: 14px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 12px;
+      padding: 14px;
+    }
+
+    .step-number-badge {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #060b14;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 0.95rem;
+    }
+
+    .step-text-body {
+      flex: 1;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .worked-example-card {
+      background: rgba(18, 27, 46, 0.95);
+      border: 1.5px solid rgba(6, 214, 160, 0.35);
+      border-radius: 14px;
+      padding: 18px;
+      margin-top: 1.25rem;
+    }
+
+    .worked-example-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .worked-example-title {
+      font-weight: 800;
+      font-size: 0.98rem;
+      color: var(--success);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .worked-example-problem {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      background: rgba(0, 0, 0, 0.35);
+      padding: 12px 16px;
+      border-radius: 10px;
+      margin-bottom: 12px;
+    }
+
+    .worked-step-row {
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      padding-left: 12px;
+      border-left: 2px solid rgba(0, 210, 223, 0.3);
+    }
+
+    .worked-final-answer {
+      background: rgba(6, 214, 160, 0.15);
+      border: 1.5px solid var(--success);
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin-top: 12px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #fff;
+    }
+
+    /* --- TOAST FLOTANTE DE RETO ENTRANTE --- */
+    .duel-incoming-toast {
+      position: fixed;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 99999;
+      background: rgba(13, 21, 39, 0.98);
+      border: 2.5px solid var(--accent);
+      border-radius: 18px;
+      box-shadow: 0 10px 40px rgba(251, 133, 0, 0.45);
+      padding: 14px 22px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      max-width: 92vw;
+      animation: slideDownToast 0.35s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    }
+
+    @keyframes slideDownToast {
+      from { transform: translate(-50%, -100px); opacity: 0; }
+      to { transform: translate(-50%, 0); opacity: 1; }
+    }
+
+    .duel-toast-pulsing-icon {
+      font-size: 2.2rem;
+      animation: pulseRivalIcon 1s infinite alternate;
+    }
+
+    @keyframes pulseRivalIcon {
+      from { transform: scale(1); }
+      to { transform: scale(1.22); }
+    }
+
   </style>
 </head>
+
+  <!-- BANNER / TOAST FLOTANTE SUPERIOR DE DESAFÍO ENTRANTE (100% VISIBLE Y CON SONIDO) -->
+  <div id="duelIncomingToastBanner" class="duel-incoming-toast" style="display: none;">
+    <div class="duel-toast-pulsing-icon">⚔️</div>
+    <div style="flex: 1;">
+      <div style="font-size: 0.8rem; font-weight: 800; color: var(--accent); text-transform: uppercase; letter-spacing: 0.5px;">
+        ¡DESAFÍO A DUELO 1V1 ENTRANTE!
+      </div>
+      <div style="font-size: 1.05rem; font-weight: 800; color: #fff; margin: 2px 0;" id="duelToastChallengerName">
+        Compañero
+      </div>
+      <div style="font-size: 0.78rem; color: var(--text-muted);" id="duelToastChallengerRank">
+        Te ha desafiado a una batalla de 5 preguntas
+      </div>
+    </div>
+    <div style="text-align: center; background: rgba(0,0,0,0.4); padding: 6px 10px; border-radius: 10px;">
+      <div style="font-size: 0.65rem; color: var(--text-muted); font-weight: 700;">EXPIRA EN</div>
+      <div style="font-size: 1.15rem; font-weight: 800; color: var(--secondary); font-family: 'JetBrains Mono', monospace;" id="duelToastTimerVal">30s</div>
+    </div>
+    <div style="display: flex; gap: 8px; align-items: center;">
+      <button class="primary-btn" onclick="acceptDuelChallenge()" style="padding: 9px 18px; font-size: 0.88rem; box-shadow: 0 4px 15px rgba(0,210,223,0.4);">
+        ⚔️ Aceptar
+      </button>
+      <button class="icon-btn" onclick="declineDuelChallenge()" style="padding: 9px 14px; font-size: 0.88rem; color: var(--danger); border-color: var(--danger);">
+        ✕
+      </button>
+    </div>
+  </div>
+
 <body>
 
   <!-- TOP NAVBAR -->
@@ -1655,6 +1992,10 @@
 
       <button class="icon-btn" onclick="toggleTheme()" title="Cambiar Tema">
         <span>🌓</span>
+      </button>
+
+            <button class="icon-btn" onclick="openLibraryScreen()" style="background: rgba(0, 210, 223, 0.15); border: 1.5px solid var(--primary); font-weight: 700; color: #fff;" title="Ver Fórmulas, Teoría y Ejemplos">
+        <span>📚</span> Biblioteca Teórica
       </button>
 
       <div class="user-profile-badge" onclick="openAuthModal()" title="Mi Cuenta & Sesión">
@@ -1760,6 +2101,25 @@
       </div>
 
       <!-- Mode Cards -->
+            <!-- Tarjeta Destacada: Biblioteca de Aprendizaje Teórico -->
+      <div class="theory-library-banner" onclick="openLibraryScreen()" style="margin: 1.25rem 0; background: linear-gradient(135deg, rgba(0, 210, 223, 0.16) 0%, rgba(255, 183, 3, 0.12) 100%); border: 2px solid var(--primary); border-radius: 18px; padding: 20px 24px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 18px; box-shadow: 0 8px 30px rgba(0,210,223,0.18); transition: transform 0.2s, box-shadow 0.2s;">
+        <div style="display: flex; gap: 16px; align-items: center;">
+          <div style="font-size: 3rem; line-height: 1; filter: drop-shadow(0 0 10px rgba(0,210,223,0.5));">📖</div>
+          <div>
+            <div style="font-size: 1.3rem; font-weight: 800; color: #fff; margin-bottom: 4px; display: flex; align-items: center; gap: 8px;">
+              <span>Biblioteca de Aprendizaje Teórico Oficial</span>
+              <span style="font-size: 0.75rem; background: var(--primary); color: #060b14; font-weight: 800; padding: 2px 8px; border-radius: 8px;">8 TEMAS COMPLETOS</span>
+            </div>
+            <div style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.45;">
+              Consulta todas las <strong style="color: #fff;">fórmulas oficiales</strong>, resúmenes teóricos, <strong style="color: var(--secondary);">reglas de oro</strong> y <strong style="color: var(--success);">ejemplos resueltos paso a paso</strong> de los Talleres #1, #2, #3 y #4 del profesor Edwind Aguilar.
+            </div>
+          </div>
+        </div>
+        <button class="primary-btn" style="white-space: nowrap; padding: 12px 24px; font-size: 0.95rem; flex-shrink: 0; box-shadow: 0 4px 15px var(--primary-glow);">
+          <span>Abrir Biblioteca</span> ➔
+        </button>
+      </div>
+
       <div class="modes-grid">
         <div class="mode-card" onclick="startExamMode(15)">
           <div>
@@ -1905,6 +2265,631 @@
         <div class="review-section" id="reviewSection" style="display: none; text-align: left; margin-top: 1.75rem; border-top: 1px solid var(--card-border); padding-top: 1.5rem;">
           <h3 style="margin-bottom: 1.25rem; font-size: 1.3rem;">📋 Revisión Completa de Respuestas:</h3>
           <div id="reviewList"></div>
+        </div>
+      </div>
+    </section>
+
+  
+    <!-- 4. BIBLIOTECA DE APRENDIZAJE TEÓRICO COMPLETA -->
+    <section class="view-screen" id="screenLibrary">
+      <div class="theory-library-hero">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+          <div>
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
+              <button class="icon-btn" onclick="returnToHome()" style="padding: 6px 14px; font-size: 0.85rem;">
+                ← Volver al Inicio
+              </button>
+              <span class="meta-tag" style="background: rgba(0, 210, 223, 0.18); color: var(--primary); font-weight: 800;">FACULTAD DE INGENIERÍA - UNIGUAJIRA</span>
+            </div>
+            <h2 style="font-size: 1.8rem; font-weight: 800; color: #fff;">📚 Biblioteca de Aprendizaje Teórico</h2>
+            <p style="font-size: 0.92rem; color: var(--text-muted); margin-top: 4px;">
+              Fórmulas oficiales, fundamentos conceptuales, reglas infalibles y procedimientos paso a paso para el primer parcial.
+            </p>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button class="icon-btn" onclick="openFormulaModal()" style="padding: 10px 16px; font-size: 0.85rem;">
+              <span>📋</span> Formulario Rápido
+            </button>
+            <button class="primary-btn" onclick="startExamMode(15)" style="padding: 10px 18px; font-size: 0.85rem;">
+              <span>📝</span> Ir a Examen
+            </button>
+          </div>
+        </div>
+
+        <!-- Buscador en tiempo real de teoría y fórmulas -->
+        <div class="theory-search-bar">
+          <span class="theory-search-icon">🔍</span>
+          <input type="text" id="theorySearchInput" class="theory-search-input" placeholder="Buscar fórmulas o temas: ej. diferencia de cuadrados, pendiente, inecuación racional, cramer..." oninput="filterTheoryLibrary(this.value)">
+        </div>
+      </div>
+
+      <!-- Navegador de Pestañas de los 8 Temas -->
+      <div class="theory-tabs-nav" id="theoryTabsNav">
+        <button class="theory-topic-tab active" data-topic="reales" onclick="switchTheoryTopic('reales')">
+          <span>🔢</span> 1. Números Reales
+        </button>
+        <button class="theory-topic-tab" data-topic="expresiones" onclick="switchTheoryTopic('expresiones')">
+          <span>📐</span> 2. Expresiones Alg.
+        </button>
+        <button class="theory-topic-tab" data-topic="productos" onclick="switchTheoryTopic('productos')">
+          <span>⚡</span> 3. Productos Notables
+        </button>
+        <button class="theory-topic-tab" data-topic="factorizacion" onclick="switchTheoryTopic('factorizacion')">
+          <span>🧩</span> 4. Factorización (T3)
+        </button>
+        <button class="theory-topic-tab" data-topic="fracciones" onclick="switchTheoryTopic('fracciones')">
+          <span>➗</span> 5. Fracciones Alg.
+        </button>
+        <button class="theory-topic-tab" data-topic="desigualdades" onclick="switchTheoryTopic('desigualdades')">
+          <span>⚖️</span> 6. Desigualdades (T4)
+        </button>
+        <button class="theory-topic-tab" data-topic="linea_recta" onclick="switchTheoryTopic('linea_recta')">
+          <span>📈</span> 7. Línea Recta (T4)
+        </button>
+        <button class="theory-topic-tab" data-topic="sistemas" onclick="switchTheoryTopic('sistemas')">
+          <span>🎯</span> 8. Sistemas 2x2 (T4)
+        </button>
+      </div>
+
+      <!-- BLOQUE 1: NÚMEROS REALES -->
+      <div class="theory-content-block active" id="topicBlock_reales">
+        <div class="theory-section-card">
+          <div class="theory-section-title">
+            <span>🔢</span> Tema 1: Números Reales y Aritmética Fundamental (Taller #1)
+          </div>
+          
+          <p style="font-size: 0.92rem; line-height: 1.6; color: var(--text-muted); margin-bottom: 1.25rem;">
+            El conjunto de los números reales $\mathbb{R}$ está compuesto por los números racionales $\mathbb{Q}$ y los números irracionales $\mathbb{I}$. Su estructura jerárquica es: $\mathbb{N} \subset \mathbb{Z} \subset \mathbb{Q} \subset \mathbb{R}$.
+          </p>
+
+          <div class="formula-badge-grid">
+            <div class="formula-item-card">
+              <div class="formula-label">Clasificación Numérica</div>
+              <div class="formula-math">$$\mathbb{N} \subset \mathbb{Z} \subset \mathbb{Q} \subset \mathbb{R}$$</div>
+              <div class="formula-desc">Todo entero $z$ es racional porque $z = \frac{z}{1}$. Los irracionales como $\sqrt{2}, \sqrt{11}, \pi, e$ tienen cifras infinitas no periódicas.</div>
+            </div>
+
+            <div class="formula-item-card">
+              <div class="formula-label">Valor Absoluto</div>
+              <div class="formula-math">$$|x| = \begin{cases} x & \text{si } x \ge 0 \\ -x & \text{si } x < 0 \end{cases}$$</div>
+              <div class="formula-desc">Representa distancia en la recta real. Propiedades: $|a \cdot b| = |a||b|$ y Desigualdad Triangular: $|a+b| \le |a| + |b|$.</div>
+            </div>
+
+            <div class="formula-item-card">
+              <div class="formula-label">Leyes de Potenciación</div>
+              <div class="formula-math">$$a^m \cdot a^n = a^{m+n}, \quad \frac{a^m}{a^n} = a^{m-n}$$</div>
+              <div class="formula-desc">$(a^m)^n = a^{m \cdot n}$, $(ab)^n = a^n b^n$, $a^{-n} = \frac{1}{a^n}$, $a^{m/n} = \sqrt[n]{a^m}$, $a^0 = 1$ ($a \neq 0$).</div>
+            </div>
+
+            <div class="formula-item-card">
+              <div class="formula-label">Fracción Generatriz</div>
+              <div class="formula-math">$$x = 2.\bar{3} \implies 10x - x = 23.\bar{3} - 2.\bar{3}$$</div>
+              <div class="formula-desc">Para convertir un decimal periódico a fracción, se multiplica por potencias de 10 según el periodo y se resta algebraicamente: $9x = 21 \implies x = \frac{7}{3}$.</div>
+            </div>
+          </div>
+
+          <div class="rule-box-tip">
+            <strong>💡 Regla de Oro en Operaciones Combinadas (Signos de Agrupación):</strong><br>
+            Se resuelven de adentro hacia afuera: primero paréntesis redondos $( )$, luego corchetes $[ ]$ y finalmente llaves $\{ \}$. Presta atención especial al signo menos $(-)$ que precede a un signo de agrupación, ya que <strong>invierte el signo de todos los términos en su interior</strong>.
+          </div>
+
+          <!-- Ejemplo Resuelto Paso a Paso -->
+          <div class="worked-example-card">
+            <div class="worked-example-header">
+              <span class="worked-example-title"><span>📝</span> Ejercicio Típico de Parcial: Polinomio Aritmético con Agrupación</span>
+              <span class="meta-tag" style="background: rgba(0, 210, 223, 0.15); color: var(--primary);">Taller #1 - Pág 13</span>
+            </div>
+            <div class="worked-example-problem">
+              Calcular el valor exacto de: $$(14 - 7) + \{ [13 - (-2)] - [7 + (-6)] \}$$
+            </div>
+            <div class="step-procedure-list">
+              <div class="worked-step-row">
+                <strong>Paso 1 (Paréntesis más internos):</strong> Resolvemos las operaciones simples dentro de paréntesis redondos:
+                <br>• $(14 - 7) = 7$
+                <br>• En el primer corchete: $13 - (-2) = 13 + 2 = 15$
+                <br>• En el segundo corchete: $7 + (-6) = 7 - 6 = 1$
+              </div>
+              <div class="worked-step-row">
+                <strong>Paso 2 (Corchetes y Llaves):</strong> Sustituimos los resultados dentro de la llave $\{ \}$:
+                <br>• $\{ 15 - 1 \} = 14$
+              </div>
+              <div class="worked-step-row">
+                <strong>Paso 3 (Suma final):</strong> Efectuamos la suma exterior:
+                <br>• $7 + 14 = 21$
+              </div>
+            </div>
+            <div class="worked-final-answer">
+              ✅ <strong>Resultado Final:</strong> $21$
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BLOQUE 2: EXPRESIONES ALGEBRAICAS -->
+      <div class="theory-content-block" id="topicBlock_expresiones">
+        <div class="theory-section-card">
+          <div class="theory-section-title">
+            <span>📐</span> Tema 2: Expresiones Algebraicas y Reducción (Taller #2)
+          </div>
+
+          <p style="font-size: 0.92rem; line-height: 1.6; color: var(--text-muted); margin-bottom: 1.25rem;">
+            Una expresión algebraica está formada por números y letras unidos por operaciones. Dos o más términos son <strong>semejantes</strong> cuando tienen idéntica parte literal con los mismos exponentes, sin importar su coeficiente numérico.
+          </p>
+
+          <div class="formula-badge-grid">
+            <div class="formula-item-card">
+              <div class="formula-label">Términos Semejantes</div>
+              <div class="formula-math">$$5x^2y - 8x^2y = (5-8)x^2y = -3x^2y$$</div>
+              <div class="formula-desc">Solo se pueden sumar o restar coeficientes entre términos con exactamente la misma base y exponente.</div>
+            </div>
+
+            <div class="formula-item-card">
+              <div class="formula-label">Resta de Polinomios ("De A restar B")</div>
+              <div class="formula-math">$$\text{De } A \text{ restar } B \implies A - B$$</div>
+              <div class="formula-desc">El sustraendo $B$ cambia completamente de signo al aplicar el signo negativo exterior: $A - (b_1 + b_2) = A - b_1 - b_2$.</div>
+            </div>
+
+            <div class="formula-item-card">
+              <div class="formula-label">Multiplicación de Monomios</div>
+              <div class="formula-math">$$\left(-\frac{3}{5}mn\right)\left(-\frac{5}{3}m^4np\right) = m^5n^2p$$</div>
+              <div class="formula-desc">Se multiplican signos, coeficientes y se <strong>suman los exponentes</strong> de las mismas variables ($m^{1+4} = m^5$).</div>
+            </div>
+
+            <div class="formula-item-card">
+              <div class="formula-label">División Algebraica</div>
+              <div class="formula-math">$$\frac{42x^9y^2}{-7x^5y^2} = -6x^{9-5}y^{2-2} = -6x^4$$</div>
+              <div class="formula-desc">Se dividen coeficientes y se <strong>restan los exponentes</strong> del numerador menos el denominador ($y^0 = 1$).</div>
+            </div>
+          </div>
+
+          <!-- Ejemplo Resuelto Paso a Paso -->
+          <div class="worked-example-card">
+            <div class="worked-example-header">
+              <span class="worked-example-title"><span>📝</span> Ejercicio Modelo: Supresión de Signos de Agrupación</span>
+              <span class="meta-tag" style="background: rgba(0, 210, 223, 0.15); color: var(--primary);">Taller #2 - Ejercicio Oficial</span>
+            </div>
+            <div class="worked-example-problem">
+              Simplificar la expresión eliminando signos de agrupación: $$3x - \{2y - (5x + 3y)\}$$
+            </div>
+            <div class="step-procedure-list">
+              <div class="worked-step-row">
+                <strong>Paso 1:</strong> Suprimimos el paréntesis redondo interior $(5x + 3y)$ aplicando el signo negativo:
+                <br>• $2y - (5x + 3y) = 2y - 5x - 3y$
+              </div>
+              <div class="worked-step-row">
+                <strong>Paso 2:</strong> Reducimos términos semejantes dentro de la llave $\{ \}$:
+                <br>• $2y - 3y = -y \implies -5x - y$
+              </div>
+              <div class="worked-step-row">
+                <strong>Paso 3:</strong> Eliminamos la llave exterior afectada por el signo menos $-(-5x - y)$:
+                <br>• $3x - \{-5x - y\} = 3x + 5x + y$
+              </div>
+              <div class="worked-step-row">
+                <strong>Paso 4:</strong> Reducimos los términos en $x$:
+                <br>• $3x + 5x = 8x \implies 8x + y$
+              </div>
+            </div>
+            <div class="worked-final-answer">
+              ✅ <strong>Resultado Final:</strong> $8x + y$
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BLOQUE 3: PRODUCTOS NOTABLES -->
+      <div class="theory-content-block" id="topicBlock_productos">
+        <div class="theory-section-card">
+          <div class="theory-section-title">
+            <span>⚡</span> Tema 3: Productos Notables (Taller #2)
+          </div>
+
+          <p style="font-size: 0.92rem; line-height: 1.6; color: var(--text-muted); margin-bottom: 1.25rem;">
+            Los productos notables son multiplicaciones algebraicas cuyo resultado puede escribirse directamente por simple inspección, sin necesidad de efectuar la multiplicación distributiva término a término.
+          </p>
+
+          <div class="formula-badge-grid">
+            <div class="formula-item-card">
+              <div class="formula-label">Cuadrado de un Binomio</div>
+              <div class="formula-math">$$(a \pm b)^2 = a^2 \pm 2ab + b^2$$</div>
+              <div class="formula-desc">El cuadrado del primero, más/menos el <strong>doble producto</strong> del primero por el segundo, más el cuadrado del segundo.</div>
+            </div>
+
+            <div class="formula-item-card">
+              <div class="formula-label">Binomios Conjugados</div>
+              <div class="formula-math">$$(a + b)(a - b) = a^2 - b^2$$</div>
+              <div class="formula-desc">Da como resultado una <strong>diferencia de cuadrados</strong>: cuadrado del término que no cambia de signo menos cuadrado del que cambia.</div>
+            </div>
+
+            <div class="formula-item-card">
+              <div class="formula-label">Cubo de un Binomio</div>
+              <div class="formula-math">$$(a \pm b)^3 = a^3 \pm 3a^2b + 3ab^2 \pm b^3$$</div>
+              <div class="formula-desc">Los coeficientes numéricos siguen el triángulo de Pascal: $1, 3, 3, 1$. En la resta los signos van alternados ($+ - + -$).</div>
+            </div>
+
+            <div class="formula-item-card">
+              <div class="formula-label">Cuadrado de un Trinomio</div>
+              <div class="formula-math">$$(a+b+c)^2 = a^2 + b^2 + c^2 + 2ab + 2ac + 2bc$$</div>
+              <div class="formula-desc">Suma de los cuadrados de cada término más el doble producto de todas las combinaciones posibles de pares de términos.</div>
+            </div>
+          </div>
+
+          <div class="rule-box-warning">
+            <strong>⚠️ Trampa Clásica del Parcial:</strong><br>
+            Nunca olvides el <strong>doble producto</strong> en $(a+b)^2$. Decir que $(a+b)^2 = a^2 + b^2$ es un error grave. Siempre es: $a^2 + 2ab + b^2$.
+          </div>
+
+          <!-- Ejemplo Resuelto Paso a Paso -->
+          <div class="worked-example-card">
+            <div class="worked-example-header">
+              <span class="worked-example-title"><span>📝</span> Ejercicio Resuelto: Cuadrado de un Trinomio con Signos Negativos</span>
+              <span class="meta-tag" style="background: rgba(0, 210, 223, 0.15); color: var(--primary);">Taller #2 - Ejercicio 50</span>
+            </div>
+            <div class="worked-example-problem">
+              Desarrollar por inspección: $$(2a - 3b + 1)^2$$
+            </div>
+            <div class="step-procedure-list">
+              <div class="worked-step-row">
+                <strong>Paso 1 (Elevar cada término al cuadrado):</strong>
+                <br>• $(2a)^2 = 4a^2$
+                <br>• $(-3b)^2 = +9b^2$ (cualquier cantidad al cuadrado es positiva)
+                <br>• $(1)^2 = 1$
+              </div>
+              <div class="worked-step-row">
+                <strong>Paso 2 (Calcular los dobles productos con sus signos):</strong>
+                <br>• $2 \cdot (2a) \cdot (-3b) = -12ab$
+                <br>• $2 \cdot (2a) \cdot (1) = +4a$
+                <br>• $2 \cdot (-3b) \cdot (1) = -6b$
+              </div>
+              <div class="worked-step-row">
+                <strong>Paso 3 (Unir todos los términos ordenados):</strong>
+                <br>• $4a^2 + 9b^2 + 1 - 12ab + 4a - 6b$
+              </div>
+            </div>
+            <div class="worked-final-answer">
+              ✅ <strong>Resultado Final:</strong> $4a^2 + 9b^2 + 1 - 12ab + 4a - 6b$
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BLOQUE 4: FACTORIZACIÓN -->
+      <div class="theory-content-block" id="topicBlock_factorizacion">
+        <div class="theory-section-card">
+          <div class="theory-section-title">
+            <span>🧩</span> Tema 4: Métodos de Factorización Completa (Taller #3)
+          </div>
+
+          <p style="font-size: 0.92rem; line-height: 1.6; color: var(--text-muted); margin-bottom: 1.25rem;">
+            Factorizar consiste en transformar una suma o resta algebraica en un producto de factores irreducibles. Es el tema más evaluado en el parcial de Cálculo Diferencial.
+          </p>
+
+          <div class="formula-badge-grid">
+            <div class="formula-item-card">
+              <div class="formula-label">1. Factor Común Monomio / Polinomio</div>
+              <div class="formula-math">$$ax + bx = x(a+b)$$</div>
+              <div class="formula-desc">Se extrae el Máximo Común Divisor (MCD) de los coeficientes y las letras comunes elevadas a su <strong>menor exponente</strong>.</div>
+            </div>
+
+            <div class="formula-item-card">
+              <div class="formula-label">2. Factor Común por Agrupación</div>
+              <div class="formula-math">$$ax + ay + bx + by = (a+b)(x+y)$$</div>
+              <div class="formula-desc">Se agrupan términos en bloques de igual cantidad que tengan factores comunes, hasta dejar un binomio idéntico entre paréntesis.</div>
+            </div>
+
+            <div class="formula-item-card">
+              <div class="formula-label">3. Diferencia de Cuadrados</div>
+              <div class="formula-math">$$a^2 - b^2 = (a - b)(a + b)$$</div>
+              <div class="formula-desc">Se extrae la raíz cuadrada exacta de ambos términos y se expresa como el producto de su suma por su diferencia. Ej: $4x^2 - 25 = (2x-5)(2x+5)$.</div>
+            </div>
+
+            <div class="formula-item-card">
+              <div class="formula-label">4. Trinomio de la forma $x^2 + bx + c$</div>
+              <div class="formula-math">$$x^2 + bx + c = (x + p)(x + q)$$</div>
+              <div class="formula-desc">Se buscan dos números $p$ y $q$ tales que su producto sea $c$ ($p \cdot q = c$) y su suma algebraica sea $b$ ($p + q = b$).</div>
+            </div>
+
+            <div class="formula-item-card">
+              <div class="formula-label">5. Suma y Diferencia de Cubos</div>
+              <div class="formula-math">$$a^3 \pm b^3 = (a \pm b)(a^2 \mp ab + b^2)$$</div>
+              <div class="formula-desc">Binomio con las raíces cúbicas multiplicado por el trinomio formado por: cuadrado del primero, producto opuesto, y cuadrado del segundo.</div>
+            </div>
+
+            <div class="formula-item-card">
+              <div class="formula-label">6. Trinomio Cuadrado Perfecto (TCP)</div>
+              <div class="formula-math">$$a^2 \pm 2ab + b^2 = (a \pm b)^2$$</div>
+              <div class="formula-desc">El primer y tercer término tienen raíces cuadradas exactas positivas, y el término central es el doble producto de dichas raíces.</div>
+            </div>
+          </div>
+
+          <!-- Ejemplo Resuelto Paso a Paso -->
+          <div class="worked-example-card">
+            <div class="worked-example-header">
+              <span class="worked-example-title"><span>📝</span> Ejercicio Modelo: Factor Común por Agrupación</span>
+              <span class="meta-tag" style="background: rgba(0, 210, 223, 0.15); color: var(--primary);">Taller #3 - Ejercicio 12</span>
+            </div>
+            <div class="worked-example-problem">
+              Factorizar completamente el polinomio: $$x^3 - 15 - 5x + 3x^2$$
+            </div>
+            <div class="step-procedure-list">
+              <div class="worked-step-row">
+                <strong>Paso 1 (Ordenar convenientemente):</strong> Reordenamos los términos para asociar coeficientes proporcionales:
+                <br>• $(x^3 + 3x^2) + (-5x - 15)$
+              </div>
+              <div class="worked-step-row">
+                <strong>Paso 2 (Extraer factor común de cada grupo):</strong>
+                <br>• Del primer grupo $(x^3 + 3x^2)$ el factor común es $x^2$: $x^2(x + 3)$
+                <br>• Del segundo grupo $(-5x - 15)$ extraemos $-5$: $-5(x + 3)$
+              </div>
+              <div class="worked-step-row">
+                <strong>Paso 3 (Extraer el binomio común $(x + 3)$):</strong>
+                <br>• Ambos términos contienen $(x + 3)$: $(x + 3)(x^2 - 5)$
+              </div>
+            </div>
+            <div class="worked-final-answer">
+              ✅ <strong>Resultado Factorizado:</strong> $(x + 3)(x^2 - 5)$
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BLOQUE 5: FRACCIONES ALGEBRAICAS -->
+      <div class="theory-content-block" id="topicBlock_fracciones">
+        <div class="theory-section-card">
+          <div class="theory-section-title">
+            <span>➗</span> Tema 5: Fracciones Algebraicas y Simplificación
+          </div>
+
+          <p style="font-size: 0.92rem; line-height: 1.6; color: var(--text-muted); margin-bottom: 1.25rem;">
+            Una fracción algebraica es el cociente de dos polinomios $\frac{P(x)}{Q(x)}$. La condición indispensable de existencia es que el denominador sea distinto de cero: $Q(x) \neq 0$.
+          </p>
+
+          <div class="formula-badge-grid">
+            <div class="formula-item-card">
+              <div class="formula-label">Simplificación de Fracciones</div>
+              <div class="formula-math">$$\frac{x^2 - 4}{x + 2} = \frac{(x - 2)(x + 2)}{x + 2} = x - 2$$</div>
+              <div class="formula-desc">Se factorizan numerador y denominador, y se cancelan los factores idénticos comunes (para $x \neq -2$).</div>
+            </div>
+
+            <div class="formula-item-card">
+              <div class="formula-label">Suma / Resta con MCM</div>
+              <div class="formula-math">$$\frac{A}{B} \pm \frac{C}{D} = \frac{A \cdot D \pm B \cdot C}{B \cdot D}$$</div>
+              <div class="formula-desc">Se halla el Mínimo Común Múltiplo (MCM) de los denominadores factorizados y se amplifican los numeradores.</div>
+            </div>
+
+            <div class="formula-item-card">
+              <div class="formula-label">Multiplicación y División</div>
+              <div class="formula-math">$$\frac{A}{B} \div \frac{C}{D} = \frac{A \cdot D}{B \cdot C}$$</div>
+              <div class="formula-desc">La división se convierte en multiplicación invirtiendo la segunda fracción (Ley de la oreja o extremos sobre medios).</div>
+            </div>
+          </div>
+
+          <!-- Ejemplo Resuelto Paso a Paso -->
+          <div class="worked-example-card">
+            <div class="worked-example-header">
+              <span class="worked-example-title"><span>📝</span> Ejercicio Resuelto: Resta de Fracciones Algebraicas</span>
+              <span class="meta-tag" style="background: rgba(0, 210, 223, 0.15); color: var(--primary);">Taller Desigualdades - Pág 7</span>
+            </div>
+            <div class="worked-example-problem">
+              Efectuar y reducir a su mínima expresión: $$\frac{x - 1}{x + 1} - \frac{x + 1}{x - 1}$$
+            </div>
+            <div class="step-procedure-list">
+              <div class="worked-step-row">
+                <strong>Paso 1 (Común denominador MCM):</strong> El MCM entre $(x+1)$ y $(x-1)$ es su producto: $(x+1)(x-1) = x^2 - 1$.
+              </div>
+              <div class="worked-step-row">
+                <strong>Paso 2 (Operar numeradores en cruz):</strong>
+                <br>• $\frac{(x-1)^2 - (x+1)^2}{x^2 - 1}$
+              </div>
+              <div class="worked-step-row">
+                <strong>Paso 3 (Desarrollar productos notables):</strong>
+                <br>• $(x-1)^2 = x^2 - 2x + 1$
+                <br>• $(x+1)^2 = x^2 + 2x + 1$
+                <br>• Resta: $(x^2 - 2x + 1) - (x^2 + 2x + 1) = x^2 - 2x + 1 - x^2 - 2x - 1 = -4x$
+              </div>
+            </div>
+            <div class="worked-final-answer">
+              ✅ <strong>Resultado Final:</strong> $\frac{-4x}{x^2 - 1}$
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BLOQUE 6: DESIGUALDADES E INECUACIONES -->
+      <div class="theory-content-block" id="topicBlock_desigualdades">
+        <div class="theory-section-card">
+          <div class="theory-section-title">
+            <span>⚖️</span> Tema 6: Desigualdades e Inecuaciones (Taller #4)
+          </div>
+
+          <p style="font-size: 0.92rem; line-height: 1.6; color: var(--text-muted); margin-bottom: 1.25rem;">
+            Una inecuación es una desigualdad algebraica donde el objetivo es hallar el conjunto de valores de $x$ (intervalo) que hacen verdadera la proposición.
+          </p>
+
+          <div class="formula-badge-grid">
+            <div class="formula-item-card">
+              <div class="formula-label">Inversión por Número Negativo</div>
+              <div class="formula-math">$$a < b \iff -a > -b$$</div>
+              <div class="formula-desc">Al multiplicar o dividir ambos miembros por un número negativo ($c < 0$), el sentido de la desigualdad <strong>se invierte obligatoriamente</strong>.</div>
+            </div>
+
+            <div class="formula-item-card">
+              <div class="formula-label">Inecuaciones Racionales</div>
+              <div class="formula-math">$$\frac{P(x)}{Q(x)} \ge 0 \implies Q(x) \neq 0$$</div>
+              <div class="formula-desc">El denominador <strong>NUNCA puede ser cero</strong>. Por tanto, los puntos críticos del denominador <strong>siempre llevan intervalo abierto</strong> $($ o $)$.</div>
+            </div>
+
+            <div class="formula-item-card">
+              <div class="formula-label">Método de Zonas / Cementerio</div>
+              <div class="formula-math">$$(x - 1)(x - 4) > 0$$</div>
+              <div class="formula-desc">Se colocan las raíces en la recta real y se analiza el signo resultante en cada intervalo probando valores de prueba.</div>
+            </div>
+
+            <div class="formula-item-card">
+              <div class="formula-label">Doble Desigualdad</div>
+              <div class="formula-math">$$a \le f(x) \le b$$</div>
+              <div class="formula-desc">Lo que se opera (sumar, restar, dividir) se efectúa simultáneamente en los tres miembros de la desigualdad.</div>
+            </div>
+          </div>
+
+          <!-- Ejemplo Resuelto Paso a Paso -->
+          <div class="worked-example-card">
+            <div class="worked-example-header">
+              <span class="worked-example-title"><span>📝</span> Ejercicio de Examen: Inecuación Racional con Restricción</span>
+              <span class="meta-tag" style="background: rgba(0, 210, 223, 0.15); color: var(--primary);">Taller #4 - Pág 7</span>
+            </div>
+            <div class="worked-example-problem">
+              Resolver la inecuación y dar el intervalo solución: $$\frac{2x - 8}{3x + 9} \ge 0$$
+            </div>
+            <div class="step-procedure-list">
+              <div class="worked-step-row">
+                <strong>Paso 1 (Puntos Críticos):</strong>
+                <br>• Numerador: $2x - 8 = 0 \implies 2x = 8 \implies x = 4$
+                <br>• Denominador: $3x + 9 = 0 \implies 3x = -9 \implies x = -3$
+              </div>
+              <div class="worked-step-row">
+                <strong>Paso 2 (Restricción Fundamental):</strong>
+                <br>• Como el denominador no puede anularse, en $x = -3$ el intervalo es <strong>estrictamente abierto</strong> $(-3)$.
+                <br>• Como la inecuación incluye igualdad ($\ge$), en el numerador $x = 4$ es <strong>cerrado</strong> $[4]$.
+              </div>
+              <div class="worked-step-row">
+                <strong>Paso 3 (Análisis de Signos en la Recta):</strong>
+                <br>• Zona 1 $(-\infty, -3)$: con $x = -4 \to \frac{-16}{-3} = (+) \ge 0$ (CUMPLE)
+                <br>• Zona 2 $(-3, 4)$: con $x = 0 \to \frac{-8}{9} = (-) < 0$ (NO CUMPLE)
+                <br>• Zona 3 $(4, \infty)$: con $x = 5 \to \frac{2}{24} = (+) \ge 0$ (CUMPLE)
+              </div>
+            </div>
+            <div class="worked-final-answer">
+              ✅ <strong>Conjunto Solución:</strong> $x \in (-\infty, -3) \cup [4, \infty)$
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BLOQUE 7: LA LÍNEA RECTA -->
+      <div class="theory-content-block" id="topicBlock_linea_recta">
+        <div class="theory-section-card">
+          <div class="theory-section-title">
+            <span>📈</span> Tema 7: La Línea Recta y Pendientes (Taller #4)
+          </div>
+
+          <p style="font-size: 0.92rem; line-height: 1.6; color: var(--text-muted); margin-bottom: 1.25rem;">
+            La recta en el plano euclidiano está determinada por su pendiente $m$ (grado de inclinación) y sus puntos de intersección con los ejes coordenados.
+          </p>
+
+          <div class="formula-badge-grid">
+            <div class="formula-item-card">
+              <div class="formula-label">Fórmula de Pendiente ($m$)</div>
+              <div class="formula-math">$$m = \frac{y_2 - y_1}{x_2 - x_1}$$</div>
+              <div class="formula-desc">Inclinación entre dos puntos $(x_1, y_1)$ y $(x_2, y_2)$. Recta horizontal: $m = 0$. Recta vertical: $m$ indefinida (división por cero).</div>
+            </div>
+
+            <div class="formula-item-card">
+              <div class="formula-label">Ecuación General y Pendiente Rápida</div>
+              <div class="formula-math">$$Ax + By + C = 0 \implies m = -\frac{A}{B}$$</div>
+              <div class="formula-desc">El corte con el eje $Y$ (intercepto) es $(0, -C/B)$ y el corte con el eje $X$ es $(-C/A, 0)$.</div>
+            </div>
+
+            <div class="formula-item-card">
+              <div class="formula-label">Rectas Paralelas y Perpendiculares</div>
+              <div class="formula-math">$$\text{Paralelas: } m_1 = m_2 \quad | \quad \text{Perpendiculares: } m_1 \cdot m_2 = -1$$</div>
+              <div class="formula-desc">La pendiente perpendicular es el recíproco negativo: $m_2 = -\frac{1}{m_1}$. Ejemplo: si $m_1 = -\frac{2}{3} \implies m_2 = \frac{3}{2}$.</div>
+            </div>
+
+            <div class="formula-item-card">
+              <div class="formula-label">Semiplanos (Inecuaciones Lineales 2D)</div>
+              <div class="formula-math">$$Ax + By + C > 0$$</div>
+              <div class="formula-desc">Se evalúa el punto de prueba origen $(0,0)$. Si cumple, la solución es el semiplano que contiene al origen; de lo contrario, el opuesto.</div>
+            </div>
+          </div>
+
+          <!-- Ejemplo Resuelto Paso a Paso -->
+          <div class="worked-example-card">
+            <div class="worked-example-header">
+              <span class="worked-example-title"><span>📝</span> Ejercicio Resuelto: Pendiente y Recta Perpendicular</span>
+              <span class="meta-tag" style="background: rgba(0, 210, 223, 0.15); color: var(--primary);">Taller #4 - Ejercicios 9 y 10</span>
+            </div>
+            <div class="worked-example-problem">
+              Dada la recta $3x - 2y + 5 = 0$, hallar: (a) Su pendiente $m_1$, y (b) La pendiente $m_2$ de una recta perpendicular a ella.
+            </div>
+            <div class="step-procedure-list">
+              <div class="worked-step-row">
+                <strong>Paso 1 (Pendiente $m_1$ de la ecuación general):</strong>
+                <br>• Identificamos: $A = 3, B = -2, C = 5$.
+                <br>• Despejando $y$: $-2y = -3x - 5 \implies y = \frac{-3}{-2}x + \frac{-5}{-2} \implies y = \frac{3}{2}x + \frac{5}{2}$.
+                <br>• Por tanto, la pendiente es $m_1 = \frac{3}{2}$.
+              </div>
+              <div class="worked-step-row">
+                <strong>Paso 2 (Condición de perpendicularidad):</strong>
+                <br>• $m_1 \cdot m_2 = -1 \implies m_2 = -\frac{1}{m_1}$
+                <br>• $m_2 = -\frac{1}{3/2} = -\frac{2}{3}$.
+              </div>
+            </div>
+            <div class="worked-final-answer">
+              ✅ <strong>Respuestas:</strong> (a) $m_1 = \frac{3}{2}$ | (b) $m_2 = -\frac{2}{3}$
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BLOQUE 8: SISTEMAS DE ECUACIONES -->
+      <div class="theory-content-block" id="topicBlock_sistemas">
+        <div class="theory-section-card">
+          <div class="theory-section-title">
+            <span>🎯</span> Tema 8: Sistemas de Ecuaciones Lineales 2x2 (Taller #4)
+          </div>
+
+          <p style="font-size: 0.92rem; line-height: 1.6; color: var(--text-muted); margin-bottom: 1.25rem;">
+            Un sistema lineal de dos ecuaciones con dos incógnitas representa dos rectas en el plano cartesiano. Su solución es el punto de intersección $(x, y)$ de ambas rectas.
+          </p>
+
+          <div class="formula-badge-grid">
+            <div class="formula-item-card">
+              <div class="formula-label">1. Método de Reducción (Eliminación)</div>
+              <div class="formula-math">$$a_1x + b_1y = c_1 \quad | \quad a_2x + b_2y = c_2$$</div>
+              <div class="formula-desc">Se multiplican las ecuaciones por números convenientes para que los coeficientes de una incógnita sean opuestos y se cancelen al sumar.</div>
+            </div>
+
+            <div class="formula-item-card">
+              <div class="formula-label">2. Regla de Cramer (Determinantes)</div>
+              <div class="formula-math">$$x = \frac{\Delta_x}{\Delta}, \quad y = \frac{\Delta_y}{\Delta}$$</div>
+              <div class="formula-desc">Donde $\Delta = \begin{vmatrix} a_1 & b_1 \\ a_2 & b_2 \end{vmatrix} = a_1b_2 - a_2b_1 \neq 0$. Si $\Delta = 0$, el sistema es paralelo o coincidente.</div>
+            </div>
+
+            <div class="formula-item-card">
+              <div class="formula-label">3. Método de Sustitución</div>
+              <div class="formula-math">$$y = f(x) \implies a_2x + b_2(f(x)) = c_2$$</div>
+              <div class="formula-desc">Se despeja una incógnita en una de las ecuaciones y se sustituye su valor en la otra ecuación.</div>
+            </div>
+          </div>
+
+          <!-- Ejemplo Resuelto Paso a Paso -->
+          <div class="worked-example-card">
+            <div class="worked-example-header">
+              <span class="worked-example-title"><span>📝</span> Ejercicio Resuelto: Sistema Lineal 2x2 por Reducción</span>
+              <span class="meta-tag" style="background: rgba(0, 210, 223, 0.15); color: var(--primary);">Taller #4 - Métodos Oficiales</span>
+            </div>
+            <div class="worked-example-problem">
+              Resolver el sistema lineal: $$\begin{cases} 2x + 3y = 12 \\ x - y = 1 \end{cases}$$
+            </div>
+            <div class="step-procedure-list">
+              <div class="worked-step-row">
+                <strong>Paso 1:</strong> Multiplicamos la segunda ecuación por 3 para igualar los coeficientes de $y$ con signos opuestos:
+                <br>• $3(x - y = 1) \implies 3x - 3y = 3$
+              </div>
+              <div class="worked-step-row">
+                <strong>Paso 2 (Sumar miembro a miembro):</strong>
+                <br>• $(2x + 3y) + (3x - 3y) = 12 + 3$
+                <br>• $5x + 0 = 15 \implies 5x = 15 \implies x = 3$
+              </div>
+              <div class="worked-step-row">
+                <strong>Paso 3 (Hallar $y$ sustituyendo):</strong>
+                <br>• De $x - y = 1 \implies 3 - y = 1 \implies y = 3 - 1 = 2$
+              </div>
+            </div>
+            <div class="worked-final-answer">
+              ✅ <strong>Punto Solución:</strong> $(x = 3, \ y = 2)$
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -2392,6 +3377,7 @@
           updateUserUI();
           startHeartbeat();
           startChatPolling();
+          startDuelInvitationPolling();
         } else {
           openAuthModal();
         }
@@ -2532,6 +3518,7 @@
         closeAuthModal();
         startHeartbeat();
         startChatPolling();
+        startDuelInvitationPolling();
       })
       .catch(err => {
         if (err.message.includes('Failed to fetch') || err.message.includes('NetworkError')) {
@@ -3271,6 +4258,14 @@
       if (btn) btn.classList.add('active');
     }
 
+    
+    // ALIAS UNIVERSAL DE AUDIO (Garantiza compatibilidad total)
+    window.playSound = function(type) {
+      if (typeof playBeep === 'function') {
+        playBeep(type);
+      }
+    };
+
     function playBeep(type) {
       if (!audioEnabled) return;
       try {
@@ -3664,6 +4659,67 @@
       document.getElementById('btnToggleReview').innerHTML = isHidden ? '<span>▲</span> Ocultar Revisión' : '<span>📋</span> Ver Revisión Detallada';
     }
 
+    
+    // ========================================================
+    // FUNCIONES DE LA BIBLIOTECA DE APRENDIZAJE TEÓRICO
+    // ========================================================
+    function openLibraryScreen(initialTopic = 'reales') {
+      showScreen('screenLibrary');
+      switchTheoryTopic(initialTopic);
+      setTimeout(() => initKaTeX(), 100);
+    }
+
+    function switchTheoryTopic(topicKey) {
+      document.querySelectorAll('.theory-topic-tab').forEach(tab => {
+        tab.classList.toggle('active', tab.getAttribute('data-topic') === topicKey);
+      });
+
+      document.querySelectorAll('.theory-content-block').forEach(block => {
+        block.classList.remove('active');
+      });
+
+      const target = document.getElementById(`topicBlock_${topicKey}`);
+      if (target) {
+        target.classList.add('active');
+      }
+
+      initKaTeX();
+    }
+
+    function filterTheoryLibrary(query) {
+      const q = query.trim().toLowerCase();
+      if (!q) {
+        document.querySelectorAll('.theory-section-card, .formula-item-card, .worked-example-card').forEach(el => {
+          el.style.display = '';
+        });
+        return;
+      }
+
+      // Buscar en los bloques
+      let foundAnyInActive = false;
+      const activeBlock = document.querySelector('.theory-content-block.active');
+
+      document.querySelectorAll('.formula-item-card, .worked-example-card').forEach(card => {
+        const text = card.textContent.toLowerCase();
+        const matches = text.includes(q);
+        card.style.display = matches ? '' : 'none';
+        if (matches) foundAnyInActive = true;
+      });
+
+      // Si no encuentra en la pestaña activa, buscar qué pestaña contiene el término
+      if (!foundAnyInActive) {
+        const topics = ['reales', 'expresiones', 'productos', 'factorizacion', 'fracciones', 'desigualdades', 'linea_recta', 'sistemas'];
+        for (const tk of topics) {
+          const b = document.getElementById(`topicBlock_${tk}`);
+          if (b && b.textContent.toLowerCase().includes(q)) {
+            switchTheoryTopic(tk);
+            filterTheoryLibrary(query);
+            break;
+          }
+        }
+      }
+    }
+
     function showScreen(screenId) {
       document.querySelectorAll('.view-screen').forEach(s => s.classList.remove('active'));
       document.getElementById(screenId).classList.add('active');
@@ -3818,57 +4874,82 @@
     function startDuelInvitationPolling() {
       clearInterval(duelInvitationPollTimer);
       pollDuelInvitations();
-      duelInvitationPollTimer = setInterval(pollDuelInvitations, 3000);
+      duelInvitationPollTimer = setInterval(pollDuelInvitations, 1500);
     }
 
     async function pollDuelInvitations() {
       if (!currentUser || activeDuelId) return;
       try {
-        const res = await fetch(`${API_BASE}/api/duels?action=get_invitations&userId=${currentUser.id}`);
+        const myId = encodeURIComponent(currentUser.id || '');
+        const myName = encodeURIComponent(currentUser.name || '');
+        const res = await fetch(`${API_BASE}/api/duels?action=get_invitations&userId=${myId}&userName=${myName}`);
         if (!res.ok) return;
         const data = await res.json();
-        if (data && data.invitations && data.invitations.length > 0) {
+        if (data && Array.isArray(data.invitations) && data.invitations.length > 0) {
           const inv = data.invitations[0];
           if (!currentIncomingInvite || currentIncomingInvite.id !== inv.id) {
             currentIncomingInvite = inv;
             showIncomingDuelModal(inv);
           }
         }
-      } catch (e) {}
+      } catch (e) {
+        console.warn("pollDuelInvitations error:", e);
+      }
     }
 
     function showIncomingDuelModal(inv) {
-      playSound('challenge');
-      const modal = document.getElementById('duelInviteModal');
-      const avatarBox = document.getElementById('duelInviteAvatar');
-      const nameEl = document.getElementById('duelInviteName');
-      const rankEl = document.getElementById('duelInviteRank');
-      const timerEl = document.getElementById('duelInviteTimer');
+      try {
+        if (typeof playSound === 'function') playSound('challenge');
+        else if (typeof playBeep === 'function') playBeep('challenge');
+      } catch(e){}
 
       const challenger = inv.fromUser || { name: 'Compañero', avatar: '🎓' };
-      renderUserAvatarElement(challenger, avatarBox);
-      nameEl.textContent = challenger.name;
       const rank = getCurrentRank(challenger.xp || 0);
-      rankEl.textContent = `${rank.icon} ${rank.name}`;
+
+      // 1. Mostrar Toast Banner superior flotante
+      const toastBanner = document.getElementById('duelIncomingToastBanner');
+      if (toastBanner) {
+        document.getElementById('duelToastChallengerName').textContent = challenger.name;
+        document.getElementById('duelToastChallengerRank').textContent = `${rank.icon} ${rank.name} te ha desafiado`;
+        document.getElementById('duelToastTimerVal').textContent = '30s';
+        toastBanner.style.display = 'flex';
+      }
+
+      // 2. Mostrar Modal central interactivo
+      const modal = document.getElementById('duelInviteModal');
+      if (modal) {
+        renderUserAvatarElement(challenger, document.getElementById('duelInviteAvatar'));
+        document.getElementById('duelInviteName').textContent = challenger.name;
+        document.getElementById('duelInviteRank').textContent = `${rank.icon} ${rank.name}`;
+        document.getElementById('duelInviteTimer').textContent = '30s';
+        modal.classList.add('active');
+      }
+
+      // 3. Notificación de navegador si está minimizado
+      triggerBrowserNotification('⚔️ ¡Desafío a Duelo 1v1!', `${challenger.name} te ha retado a un duelo de 5 preguntas de Cálculo`);
 
       incomingInviteCountdown = 30;
-      timerEl.textContent = `${incomingInviteCountdown}s`;
       clearInterval(incomingInviteTimer);
       incomingInviteTimer = setInterval(() => {
         incomingInviteCountdown--;
-        timerEl.textContent = `${incomingInviteCountdown}s`;
+        const tStr = `${incomingInviteCountdown}s`;
+        const tModal = document.getElementById('duelInviteTimer');
+        const tToast = document.getElementById('duelToastTimerVal');
+        if (tModal) tModal.textContent = tStr;
+        if (tToast) tToast.textContent = tStr;
+
         if (incomingInviteCountdown <= 0) {
           clearInterval(incomingInviteTimer);
           declineDuelChallenge();
         }
       }, 1000);
-
-      modal.classList.add('active');
     }
 
     async function acceptDuelChallenge() {
       clearInterval(incomingInviteTimer);
       document.getElementById('duelInviteModal').classList.remove('active');
+      const _tBanner = document.getElementById('duelIncomingToastBanner');
+      if (_tBanner) _tBanner.style.display = 'none';
       if (!currentIncomingInvite) return;
 
       try {
@@ -3896,6 +4977,8 @@
     async function declineDuelChallenge() {
       clearInterval(incomingInviteTimer);
       document.getElementById('duelInviteModal').classList.remove('active');
+      const _tBanner = document.getElementById('duelIncomingToastBanner');
+      if (_tBanner) _tBanner.style.display = 'none';
       if (!currentIncomingInvite) return;
 
       try {
@@ -3935,7 +5018,8 @@
         const payload = {
           action: 'invite',
           fromUser: currentUser,
-          toUserId: targetId
+          toUserId: targetId,
+          toUserName: targetName
         };
         const res = await fetch(`${API_BASE}/api/duels`, {
           method: 'POST',
