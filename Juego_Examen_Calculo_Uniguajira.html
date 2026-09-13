@@ -1918,6 +1918,108 @@
       to { transform: scale(1.22); }
     }
 
+  
+    /* --- MODAL CONFIGURACIÓN DE DUELO 1V1 (TEMAS Y CANTIDAD DE PREGUNTAS) --- */
+    .duel-config-box {
+      max-width: 540px;
+      border: 2px solid var(--primary);
+      box-shadow: 0 10px 40px rgba(0, 210, 223, 0.25);
+    }
+
+    .duel-qcount-selector {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .duel-qcount-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1.5px solid var(--card-border);
+      border-radius: 12px;
+      padding: 10px 6px;
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+    .duel-qcount-btn:hover {
+      border-color: var(--primary);
+      color: #fff;
+    }
+
+    .duel-qcount-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #060b14;
+      box-shadow: 0 4px 15px var(--primary-glow);
+    }
+
+    .duel-topics-mode-row {
+      display: flex;
+      gap: 10px;
+      margin: 12px 0 10px 0;
+    }
+
+    .duel-mode-pill {
+      flex: 1;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1.5px solid var(--card-border);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+    .duel-mode-pill.active {
+      background: rgba(0, 210, 223, 0.15);
+      border-color: var(--primary);
+      color: #fff;
+    }
+
+    .duel-topics-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin: 10px 0;
+      max-height: 220px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .duel-topic-checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #f1f5f9;
+      cursor: pointer;
+      transition: all 0.18s;
+      user-select: none;
+    }
+
+    .duel-topic-checkbox-label:hover {
+      background: rgba(0, 210, 223, 0.08);
+      border-color: rgba(0, 210, 223, 0.3);
+    }
+
+    .duel-topic-checkbox-label input:checked + span {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
   </style>
 </head>
 
@@ -4905,12 +5007,16 @@
 
       const challenger = inv.fromUser || { name: 'Compañero', avatar: '🎓' };
       const rank = getCurrentRank(challenger.xp || 0);
+      const qCount = inv.numQuestions || 5;
+      const tNames = inv.topicNames || 'Todos los temas';
 
       // 1. Mostrar Toast Banner superior flotante
       const toastBanner = document.getElementById('duelIncomingToastBanner');
       if (toastBanner) {
+        const qCount = inv.numQuestions || 5;
+        const tNames = inv.topicNames || 'Todos los temas';
         document.getElementById('duelToastChallengerName').textContent = challenger.name;
-        document.getElementById('duelToastChallengerRank').textContent = `${rank.icon} ${rank.name} te ha desafiado`;
+        document.getElementById('duelToastChallengerRank').textContent = `${rank.icon} ${rank.name} • ${qCount} preguntas (${tNames})`;
         document.getElementById('duelToastTimerVal').textContent = '30s';
         toastBanner.style.display = 'flex';
       }
@@ -4920,7 +5026,7 @@
       if (modal) {
         renderUserAvatarElement(challenger, document.getElementById('duelInviteAvatar'));
         document.getElementById('duelInviteName').textContent = challenger.name;
-        document.getElementById('duelInviteRank').textContent = `${rank.icon} ${rank.name}`;
+        document.getElementById('duelInviteRank').textContent = `${rank.icon} ${rank.name} • ${qCount} preguntas [${tNames}]`;
         document.getElementById('duelInviteTimer').textContent = '30s';
         modal.classList.add('active');
       }
@@ -5002,7 +5108,153 @@
       }
     }
 
-    async function challengePlayerFromList(targetId, targetName) {
+    async 
+    // ========================================================
+    // CONFIGURACIÓN DE DUELOS (TEMAS Y CANTIDAD DE PREGUNTAS)
+    // ========================================================
+    let configuredDuelRival = null;
+    let selectedDuelQuestionCount = 5;
+    let selectedDuelTopicsMode = 'all'; // 'all' o 'custom'
+
+    function openDuelConfigModal(targetId, targetName) {
+      if (!currentUser) {
+        alert("Debes iniciar sesión con tu cuenta para jugar duelos.");
+        openAuthModal();
+        return;
+      }
+
+      if (targetId === currentUser.id) {
+        alert("No puedes desafiarte a ti mismo. ¡Invita a un compañero!");
+        return;
+      }
+
+      // Buscar datos del rival
+      let rivalObj = { id: targetId, name: targetName, avatar: '🎓', xp: 0 };
+      if (Array.isArray(remotePlayers)) {
+        const found = remotePlayers.find(p => p.id === targetId || p.name === targetName);
+        if (found) rivalObj = found;
+      }
+
+      configuredDuelRival = rivalObj;
+
+      document.getElementById('duelConfigRivalNameDisplay').textContent = targetName;
+      const rank = getCurrentRank(rivalObj.xp || 0);
+      document.getElementById('duelConfigRivalRankDisplay').textContent = `${rank.icon} ${rank.name}`;
+      renderUserAvatarElement(rivalObj, document.getElementById('duelConfigRivalAvatar'));
+
+      // Restablecer valores por defecto (5 preguntas, todos los temas)
+      selectedDuelQuestionCount = 5;
+      document.getElementById('duelConfigQCountLabel').textContent = '5 Preguntas';
+      document.querySelectorAll('.duel-qcount-btn').forEach(b => {
+        b.classList.toggle('active', b.textContent.includes('5'));
+      });
+
+      toggleDuelTopicsMode('all');
+      setDuelQuickTopics('all');
+
+      document.getElementById('duelConfigModal').classList.add('active');
+    }
+
+    function closeDuelConfigModal() {
+      document.getElementById('duelConfigModal').classList.remove('active');
+      configuredDuelRival = null;
+    }
+
+    function setDuelQuestionsCount(num, btn) {
+      selectedDuelQuestionCount = num;
+      document.querySelectorAll('.duel-qcount-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      document.getElementById('duelConfigQCountLabel').textContent = `${num} Preguntas`;
+    }
+
+    function toggleDuelTopicsMode(mode) {
+      selectedDuelTopicsMode = mode;
+      document.getElementById('duelModePillAll').classList.toggle('active', mode === 'all');
+      document.getElementById('duelModePillCustom').classList.toggle('active', mode === 'custom');
+      document.getElementById('duelCustomTopicsBlock').style.display = (mode === 'custom') ? 'block' : 'none';
+    }
+
+    function setDuelQuickTopics(type) {
+      const chks = document.querySelectorAll('.duel-chk-topic');
+      if (type === 'all') {
+        chks.forEach(c => c.checked = true);
+      } else if (type === 't3') {
+        chks.forEach(c => {
+          c.checked = ['factorizacion', 'expresiones_alg', 'productos_notables'].includes(c.value);
+        });
+      } else if (type === 't4') {
+        chks.forEach(c => {
+          c.checked = ['desigualdades', 'linea_recta', 'ecuaciones'].includes(c.value);
+        });
+      }
+    }
+
+    async function sendConfiguredDuelChallenge() {
+      if (!configuredDuelRival || !currentUser) return;
+
+      let chosenTopics = ['all'];
+      let topicNamesSummary = 'Todos los temas';
+
+      if (selectedDuelTopicsMode === 'custom') {
+        const checked = Array.from(document.querySelectorAll('.duel-chk-topic:checked')).map(c => c.value);
+        if (checked.length === 0) {
+          alert("Debes seleccionar al menos un tema para el duelo.");
+          return;
+        }
+        chosenTopics = checked;
+
+        const topicLabels = {
+          'numeros_reales': 'Números Reales',
+          'expresiones_alg': 'Expresiones Alg.',
+          'productos_notables': 'Productos Notables',
+          'factorizacion': 'Factorización (T3)',
+          'fracciones_alg': 'Fracciones Alg.',
+          'desigualdades': 'Desigualdades (T4)',
+          'linea_recta': 'Línea Recta (T4)',
+          'ecuaciones': 'Sistemas 2x2 (T4)'
+        };
+
+        if (checked.length === 8) {
+          topicNamesSummary = 'Todos los temas';
+        } else if (checked.length <= 2) {
+          topicNamesSummary = checked.map(k => topicLabels[k] || k).join(' y ');
+        } else {
+          topicNamesSummary = `${checked.length} temas seleccionados`;
+        }
+      }
+
+      const rival = configuredDuelRival;
+      closeDuelConfigModal();
+
+      try {
+        const payload = {
+          action: 'invite',
+          fromUser: currentUser,
+          toUserId: rival.id,
+          toUserName: rival.name,
+          topics: chosenTopics,
+          topicNames: topicNamesSummary,
+          numQuestions: selectedDuelQuestionCount
+        };
+
+        const res = await fetch(`${API_BASE}/api/duels`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (data.status === 'ok') {
+          pendingSentInviteId = data.inviteId;
+          showWaitingForRivalModal(rival.name, topicNamesSummary, selectedDuelQuestionCount);
+        } else {
+          alert(data.message || "Error al enviar el reto.");
+        }
+      } catch (e) {
+        alert("No se pudo enviar el reto. Asegúrate de que el servidor esté activo.");
+      }
+    }
+
+    function challengePlayerFromList(targetId, targetName) {
       if (!currentUser) {
         alert("Debes iniciar sesión con tu cuenta para jugar duelos.");
         openAuthModal();
@@ -5036,9 +5288,9 @@
       }
     }
 
-    function showWaitingForRivalModal(targetName) {
+    function showWaitingForRivalModal(targetName, topicNames = 'Todos los temas', qCount = 5) {
       const modal = document.getElementById('duelWaitingModal');
-      document.getElementById('duelWaitingSubtitle').textContent = `Esperando a que ${targetName} acepte el desafío 1v1...`;
+      document.getElementById('duelWaitingSubtitle').textContent = `Esperando a que ${targetName} acepte el desafío de ${qCount} preguntas en [${topicNames}]...`;
       modal.classList.add('active');
 
       let secondsLeft = 35;
@@ -5624,6 +5876,125 @@
       initKaTeX();
     });
   </script>
+
+  
+  <!-- MODAL: CONFIGURAR TEMAS Y CANTIDAD DE PREGUNTAS DEL DUELO 1V1 -->
+  <div class="modal-overlay" id="duelConfigModal">
+    <div class="modal-box duel-config-box">
+      <div class="modal-header">
+        <h3 style="font-size: 1.25rem; display: flex; align-items: center; gap: 8px;">
+          <span>⚔️</span> Configurar Duelo 1v1
+        </h3>
+        <button class="close-btn" onclick="closeDuelConfigModal()">✕</button>
+      </div>
+
+      <div class="modal-body" style="padding: 18px 22px;">
+        <!-- Tarjeta del Rival -->
+        <div style="display: flex; align-items: center; gap: 14px; background: rgba(0, 210, 223, 0.08); border: 1px solid var(--primary); border-radius: 14px; padding: 12px 16px; margin-bottom: 1.25rem;">
+          <div class="avatar-circle" id="duelConfigRivalAvatar" style="width: 44px; height: 44px; font-size: 1.3rem;">🎓</div>
+          <div>
+            <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">DESAFIANDO A:</div>
+            <div style="font-size: 1.15rem; font-weight: 800; color: #fff;" id="duelConfigRivalNameDisplay">Compañero</div>
+            <div style="font-size: 0.78rem; color: var(--secondary); font-weight: 600;" id="duelConfigRivalRankDisplay">Rango</div>
+          </div>
+        </div>
+
+        <!-- 1. Selector de Cantidad de Preguntas -->
+        <div style="margin-bottom: 1.25rem;">
+          <div style="font-size: 0.85rem; font-weight: 800; color: #fff; display: flex; justify-content: space-between;">
+            <span>📊 Cantidad de Preguntas:</span>
+            <span id="duelConfigQCountLabel" style="color: var(--secondary); font-weight: 800;">5 Preguntas</span>
+          </div>
+          <div class="duel-qcount-selector">
+            <button class="duel-qcount-btn" onclick="setDuelQuestionsCount(3, this)">⚡ 3 Rápidas</button>
+            <button class="duel-qcount-btn active" onclick="setDuelQuestionsCount(5, this)">⭐ 5 Normal</button>
+            <button class="duel-qcount-btn" onclick="setDuelQuestionsCount(10, this)">🔥 10 Desafío</button>
+            <button class="duel-qcount-btn" onclick="setDuelQuestionsCount(15, this)">👑 15 Parcial</button>
+          </div>
+        </div>
+
+        <!-- 2. Selector de Temas a Evaluar -->
+        <div>
+          <div style="font-size: 0.85rem; font-weight: 800; color: #fff; margin-bottom: 4px;">
+            📚 Temas a Evaluar en la Batalla:
+          </div>
+
+          <div class="duel-topics-mode-row">
+            <button class="duel-mode-pill active" id="duelModePillAll" onclick="toggleDuelTopicsMode('all')">
+              🌐 Todos los Temas (Mixto)
+            </button>
+            <button class="duel-mode-pill" id="duelModePillCustom" onclick="toggleDuelTopicsMode('custom')">
+              🎯 Temas Específicos
+            </button>
+          </div>
+
+          <!-- Bloque de temas específicos con checkboxes -->
+          <div id="duelCustomTopicsBlock" style="display: none; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 12px; border: 1px solid var(--card-border);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700;">MARCAR TEMAS:</span>
+              <div style="display: flex; gap: 6px;">
+                <button type="button" class="icon-btn" onclick="setDuelQuickTopics('all')" style="padding: 2px 8px; font-size: 0.7rem;">Todos</button>
+                <button type="button" class="icon-btn" onclick="setDuelQuickTopics('t3')" style="padding: 2px 8px; font-size: 0.7rem;">Solo Taller 3</button>
+                <button type="button" class="icon-btn" onclick="setDuelQuickTopics('t4')" style="padding: 2px 8px; font-size: 0.7rem;">Solo Taller 4</button>
+              </div>
+            </div>
+
+            <div class="duel-topics-grid">
+              <label class="duel-topic-checkbox-label">
+                <input type="checkbox" class="duel-chk-topic" value="numeros_reales" checked>
+                <span>🔢 Números Reales</span>
+              </label>
+
+              <label class="duel-topic-checkbox-label">
+                <input type="checkbox" class="duel-chk-topic" value="expresiones_alg" checked>
+                <span>📐 Expresiones Alg.</span>
+              </label>
+
+              <label class="duel-topic-checkbox-label">
+                <input type="checkbox" class="duel-chk-topic" value="productos_notables" checked>
+                <span>⚡ Prod. Notables</span>
+              </label>
+
+              <label class="duel-topic-checkbox-label">
+                <input type="checkbox" class="duel-chk-topic" value="factorizacion" checked>
+                <span>🧩 Factorización (T3)</span>
+              </label>
+
+              <label class="duel-topic-checkbox-label">
+                <input type="checkbox" class="duel-chk-topic" value="fracciones_alg" checked>
+                <span>➗ Fracciones Alg.</span>
+              </label>
+
+              <label class="duel-topic-checkbox-label">
+                <input type="checkbox" class="duel-chk-topic" value="desigualdades" checked>
+                <span>⚖️ Desigualdades (T4)</span>
+              </label>
+
+              <label class="duel-topic-checkbox-label">
+                <input type="checkbox" class="duel-chk-topic" value="linea_recta" checked>
+                <span>📈 Línea Recta (T4)</span>
+              </label>
+
+              <label class="duel-topic-checkbox-label">
+                <input type="checkbox" class="duel-chk-topic" value="ecuaciones" checked>
+                <span>🎯 Sistemas 2x2 (T4)</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Botones de Acción -->
+        <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 1.5rem;">
+          <button class="icon-btn" onclick="closeDuelConfigModal()" style="padding: 10px 18px;">
+            Cancelar
+          </button>
+          <button class="primary-btn" onclick="sendConfiguredDuelChallenge()" style="padding: 10px 24px; font-weight: 800;">
+            <span>⚔️</span> ¡Enviar Desafío!
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- MODAL: INVITACIÓN A DUELO ENTRANTE -->
   <div class="modal-overlay" id="duelInviteModal">

@@ -157,12 +157,21 @@ def get_active_online_users():
         
     return active
 
-def prepare_duel_questions(num=5):
+def prepare_duel_questions(topics=None, num=5):
     """Selecciona y mezcla las opciones para que la respuesta correcta sea aleatoria (A, B, C o D)"""
-    if len(QUESTION_BANK) < num:
-        selected = QUESTION_BANK.copy()
+    pool = QUESTION_BANK
+    if topics and isinstance(topics, list) and len(topics) > 0 and 'all' not in topics:
+        filtered = [q for q in QUESTION_BANK if q.get('topic') in topics]
+        if len(filtered) >= num:
+            pool = filtered
+        elif len(filtered) > 0:
+            remaining = [q for q in QUESTION_BANK if q.get('topic') not in topics]
+            pool = filtered + remaining
+
+    if len(pool) < num:
+        selected = pool.copy()
     else:
-        selected = random.sample(QUESTION_BANK, num)
+        selected = random.sample(pool, num)
     
     duel_qs = []
     for q in selected:
@@ -325,6 +334,8 @@ class UniguajiraHandler(http.server.SimpleHTTPRequestHandler):
                     "id": duel['id'],
                     "player1": duel['player1'],
                     "player2": duel['player2'],
+                    "topicNames": duel.get('topicNames', 'Todos los temas'),
+                    "totalRounds": len(duel['questions']),
                     "p1_score": duel['p1_score'],
                     "p2_score": duel['p2_score'],
                     "currentRound": curr_round,
@@ -507,6 +518,12 @@ class UniguajiraHandler(http.server.SimpleHTTPRequestHandler):
                 from_user = data.get('fromUser')
                 to_user_id = data.get('toUserId')
                 to_user_name = data.get('toUserName', '')
+                topics = data.get('topics', ['all'])
+                topic_names = data.get('topicNames', 'Todos los temas')
+                try:
+                    num_questions = max(3, min(20, int(data.get('numQuestions', 5))))
+                except Exception:
+                    num_questions = 5
 
                 if not from_user or (not to_user_id and not to_user_name):
                     self.send_json({"status": "error", "message": "Datos incompletos"}, 400)
@@ -518,6 +535,9 @@ class UniguajiraHandler(http.server.SimpleHTTPRequestHandler):
                     "fromUser": from_user,
                     "toUserId": to_user_id,
                     "toUserName": to_user_name,
+                    "topics": topics,
+                    "topicNames": topic_names,
+                    "numQuestions": num_questions,
                     "createdAt": time.time(),
                     "status": "pending",
                     "duelId": None
@@ -540,13 +560,17 @@ class UniguajiraHandler(http.server.SimpleHTTPRequestHandler):
                     inv['status'] = 'accepted'
                     duel_id = "duel_" + str(int(time.time() * 1000))
                     
-                    # Preparar 5 preguntas sincronizadas
-                    duel_questions = prepare_duel_questions(5)
+                    # Preparar preguntas sincronizadas filtradas por los temas acordados y la cantidad elegida
+                    topics = inv.get('topics', ['all'])
+                    num_questions = int(inv.get('numQuestions', 5))
+                    duel_questions = prepare_duel_questions(topics, num_questions)
                     
                     ACTIVE_DUELS[duel_id] = {
                         "id": duel_id,
                         "player1": inv['fromUser'],
                         "player2": responder_user,
+                        "topicNames": inv.get('topicNames', 'Todos los temas'),
+                        "numQuestions": num_questions,
                         "p1_score": 0,
                         "p2_score": 0,
                         "questions": duel_questions,
