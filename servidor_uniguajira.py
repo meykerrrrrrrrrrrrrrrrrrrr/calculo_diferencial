@@ -102,14 +102,14 @@ def load_players():
                     return []
                 players = json.loads(content)
                 if isinstance(players, list):
-                    return [p for p in players if not str(p.get('id', '')).startswith('bot_') and p.get('name') not in ['Sara Morales', 'Kevin Díaz', 'Laura Ramos']]
+                    return [p for p in players if not str(p.get('id', '')).startswith('bot_')]
         except Exception as e:
             print("Error parsing players JSON:", e)
     return []
 
 def save_players(players):
     try:
-        clean_players = [p for p in players if not str(p.get('id', '')).startswith('bot_') and p.get('name') not in ['Sara Morales', 'Kevin Díaz', 'Laura Ramos']]
+        clean_players = [p for p in players if not str(p.get('id', '')).startswith('bot_')]
         if not clean_players and os.path.exists(DATA_FILE) and os.path.getsize(DATA_FILE) > 5:
             return
         with open(DATA_FILE, "w", encoding="utf-8") as f:

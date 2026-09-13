@@ -4051,7 +4051,7 @@
     ];
 
     let currentUser = null;
-    let remotePlayers = [];
+    let remotePlayers = [{"id": "user_1789159972880", "name": "meyker", "password": "326247878", "avatar": "👑", "customAvatar": "", "profileColor": "#a855f7", "statusEmoji": "🔥 En Racha", "bio": "¡Apuntándole al 5.0 en Cálculo Diferencial! 🚀", "stickers": [{"id": "stk_1", "type": "emoji", "content": "👑", "x": 20, "y": 25}, {"id": "stk_2", "type": "emoji", "content": "🔥", "x": 65, "y": 30}], "xp": 520, "examsCount": 4, "totalGradeSum": 18.2, "avgGrade": 4.6, "bestTopic": "Factorización", "worstTopic": "Desigualdades", "duelWins": 3, "duelLosses": 1, "topicScores": {"numeros_reales": 120, "expresiones_alg": 90, "productos_notables": 110, "factorizacion": 140, "fracciones_alg": 60, "desigualdades": 50, "linea_recta": 80, "ecuaciones": 70}}, {"id": "user_est_andres", "name": "Andrés Cotes", "password": "pass_andres_123", "avatar": "👨‍💻", "customAvatar": "", "profileColor": "#00d2df", "statusEmoji": "🧠 Modo Genio", "bio": "Ingeniería de Sistemas - Grupo 1", "stickers": [{"id": "stk_3", "type": "emoji", "content": "⚡", "x": 25, "y": 20}, {"id": "stk_4", "type": "emoji", "content": "🚀", "x": 70, "y": 35}], "xp": 480, "examsCount": 3, "totalGradeSum": 13.5, "avgGrade": 4.5, "bestTopic": "Línea Recta", "worstTopic": "Fracciones Alg.", "duelWins": 2, "duelLosses": 2, "topicScores": {"numeros_reales": 80, "expresiones_alg": 90, "productos_notables": 70, "factorizacion": 80, "fracciones_alg": 40, "desigualdades": 60, "linea_recta": 110, "ecuaciones": 50}}, {"id": "user_est_valen", "name": "Valentina Freyle", "password": "pass_valen_123", "avatar": "👩‍🎓", "customAvatar": "", "profileColor": "#ec4899", "statusEmoji": "🎯 Enfoque Total", "bio": "Estudiando con toda para el parcial con el Prof. Edwind", "stickers": [{"id": "stk_5", "type": "emoji", "content": "🌟", "x": 15, "y": 30}, {"id": "stk_6", "type": "emoji", "content": "💎", "x": 60, "y": 25}], "xp": 390, "examsCount": 3, "totalGradeSum": 12.6, "avgGrade": 4.2, "bestTopic": "Productos Notables", "worstTopic": "Factorización", "duelWins": 1, "duelLosses": 1, "topicScores": {"numeros_reales": 70, "expresiones_alg": 60, "productos_notables": 95, "factorizacion": 45, "fracciones_alg": 40, "desigualdades": 40, "linea_recta": 35, "ecuaciones": 5}}, {"id": "user_est_carlos", "name": "Carlos Mendoza", "password": "pass_carlos_123", "avatar": "🐺", "customAvatar": "", "profileColor": "#10b981", "statusEmoji": "⚡ Listo para el Duelo", "bio": "¡Retame a un duelo 1v1 si te atreves! ⚔️", "stickers": [{"id": "stk_7", "type": "emoji", "content": "🐉", "x": 30, "y": 20}, {"id": "stk_8", "type": "emoji", "content": "🏆", "x": 65, "y": 40}], "xp": 340, "examsCount": 2, "totalGradeSum": 7.8, "avgGrade": 3.9, "bestTopic": "Desigualdades", "worstTopic": "Línea Recta", "duelWins": 3, "duelLosses": 0, "topicScores": {"numeros_reales": 50, "expresiones_alg": 40, "productos_notables": 45, "factorizacion": 55, "fracciones_alg": 30, "desigualdades": 80, "linea_recta": 20, "ecuaciones": 20}}, {"id": "user_est_mariana", "name": "Mariana Gómez", "password": "pass_mariana_123", "avatar": "🐱", "customAvatar": "", "profileColor": "#f97316", "statusEmoji": "📚 Estudiando", "bio": "Repasando la biblioteca teórica paso a paso 📖", "stickers": [{"id": "stk_9", "type": "emoji", "content": "🎯", "x": 25, "y": 30}], "xp": 280, "examsCount": 2, "totalGradeSum": 7.4, "avgGrade": 3.7, "bestTopic": "Expresiones Alg.", "worstTopic": "Factorización", "duelWins": 1, "duelLosses": 2, "topicScores": {"numeros_reales": 40, "expresiones_alg": 70, "productos_notables": 50, "factorizacion": 30, "fracciones_alg": 30, "desigualdades": 25, "linea_recta": 25, "ecuaciones": 10}}];
     let liveOnlineUsers = [];
     let currentDifficulty = 'mixed';
     let currentMode = 'exam';
@@ -5339,8 +5339,14 @@
       } catch (e) {
         try {
           const cached = localStorage.getItem('uniguajira_cached_ranking_v5');
-          if (cached) remotePlayers = JSON.parse(cached);
+          if (cached) {
+            const parsed = JSON.parse(cached);
+            if (Array.isArray(parsed) && parsed.length > 0) remotePlayers = parsed;
+          }
         } catch(err){}
+        if (!remotePlayers || remotePlayers.length === 0) {
+          remotePlayers = [{"id": "user_1789159972880", "name": "meyker", "password": "326247878", "avatar": "👑", "customAvatar": "", "profileColor": "#a855f7", "statusEmoji": "🔥 En Racha", "bio": "¡Apuntándole al 5.0 en Cálculo Diferencial! 🚀", "stickers": [{"id": "stk_1", "type": "emoji", "content": "👑", "x": 20, "y": 25}, {"id": "stk_2", "type": "emoji", "content": "🔥", "x": 65, "y": 30}], "xp": 520, "examsCount": 4, "totalGradeSum": 18.2, "avgGrade": 4.6, "bestTopic": "Factorización", "worstTopic": "Desigualdades", "duelWins": 3, "duelLosses": 1, "topicScores": {"numeros_reales": 120, "expresiones_alg": 90, "productos_notables": 110, "factorizacion": 140, "fracciones_alg": 60, "desigualdades": 50, "linea_recta": 80, "ecuaciones": 70}}, {"id": "user_est_andres", "name": "Andrés Cotes", "password": "pass_andres_123", "avatar": "👨‍💻", "customAvatar": "", "profileColor": "#00d2df", "statusEmoji": "🧠 Modo Genio", "bio": "Ingeniería de Sistemas - Grupo 1", "stickers": [{"id": "stk_3", "type": "emoji", "content": "⚡", "x": 25, "y": 20}, {"id": "stk_4", "type": "emoji", "content": "🚀", "x": 70, "y": 35}], "xp": 480, "examsCount": 3, "totalGradeSum": 13.5, "avgGrade": 4.5, "bestTopic": "Línea Recta", "worstTopic": "Fracciones Alg.", "duelWins": 2, "duelLosses": 2, "topicScores": {"numeros_reales": 80, "expresiones_alg": 90, "productos_notables": 70, "factorizacion": 80, "fracciones_alg": 40, "desigualdades": 60, "linea_recta": 110, "ecuaciones": 50}}, {"id": "user_est_valen", "name": "Valentina Freyle", "password": "pass_valen_123", "avatar": "👩‍🎓", "customAvatar": "", "profileColor": "#ec4899", "statusEmoji": "🎯 Enfoque Total", "bio": "Estudiando con toda para el parcial con el Prof. Edwind", "stickers": [{"id": "stk_5", "type": "emoji", "content": "🌟", "x": 15, "y": 30}, {"id": "stk_6", "type": "emoji", "content": "💎", "x": 60, "y": 25}], "xp": 390, "examsCount": 3, "totalGradeSum": 12.6, "avgGrade": 4.2, "bestTopic": "Productos Notables", "worstTopic": "Factorización", "duelWins": 1, "duelLosses": 1, "topicScores": {"numeros_reales": 70, "expresiones_alg": 60, "productos_notables": 95, "factorizacion": 45, "fracciones_alg": 40, "desigualdades": 40, "linea_recta": 35, "ecuaciones": 5}}, {"id": "user_est_carlos", "name": "Carlos Mendoza", "password": "pass_carlos_123", "avatar": "🐺", "customAvatar": "", "profileColor": "#10b981", "statusEmoji": "⚡ Listo para el Duelo", "bio": "¡Retame a un duelo 1v1 si te atreves! ⚔️", "stickers": [{"id": "stk_7", "type": "emoji", "content": "🐉", "x": 30, "y": 20}, {"id": "stk_8", "type": "emoji", "content": "🏆", "x": 65, "y": 40}], "xp": 340, "examsCount": 2, "totalGradeSum": 7.8, "avgGrade": 3.9, "bestTopic": "Desigualdades", "worstTopic": "Línea Recta", "duelWins": 3, "duelLosses": 0, "topicScores": {"numeros_reales": 50, "expresiones_alg": 40, "productos_notables": 45, "factorizacion": 55, "fracciones_alg": 30, "desigualdades": 80, "linea_recta": 20, "ecuaciones": 20}}, {"id": "user_est_mariana", "name": "Mariana Gómez", "password": "pass_mariana_123", "avatar": "🐱", "customAvatar": "", "profileColor": "#f97316", "statusEmoji": "📚 Estudiando", "bio": "Repasando la biblioteca teórica paso a paso 📖", "stickers": [{"id": "stk_9", "type": "emoji", "content": "🎯", "x": 25, "y": 30}], "xp": 280, "examsCount": 2, "totalGradeSum": 7.4, "avgGrade": 3.7, "bestTopic": "Expresiones Alg.", "worstTopic": "Factorización", "duelWins": 1, "duelLosses": 2, "topicScores": {"numeros_reales": 40, "expresiones_alg": 70, "productos_notables": 50, "factorizacion": 30, "fracciones_alg": 30, "desigualdades": 25, "linea_recta": 25, "ecuaciones": 10}}];
+        }
       }
       renderLeaderboard(currentLeaderboardTab);
     }
@@ -6591,6 +6597,11 @@
         });
       }
 
+      // Renderizar mensajes de chat en vivo del duelo en pantalla
+      if (Array.isArray(state.chat)) {
+        renderDuelLiveChat(state.chat);
+      }
+
       if (state.voiceClip && state.voiceClip.fromId !== currentUser.id) {
         if (!window.lastPlayedClipTs || window.lastPlayedClipTs < state.voiceClip.timestamp) {
           window.lastPlayedClipTs = state.voiceClip.timestamp;
@@ -6808,6 +6819,72 @@
 
       document.body.appendChild(el);
       setTimeout(() => el.remove(), 2500);
+    }
+
+    
+    let seenDuelChatCount = 0;
+    function renderDuelLiveChat(chatMessages) {
+      const container = document.getElementById('duelChatMessagesList');
+      if (!container) return;
+      if (!Array.isArray(chatMessages) || chatMessages.length === 0) return;
+
+      if (chatMessages.length !== seenDuelChatCount) {
+        seenDuelChatCount = chatMessages.length;
+        container.innerHTML = '';
+        chatMessages.forEach(msg => {
+          const isMe = currentUser && (msg.senderId === currentUser.id);
+          const row = document.createElement('div');
+          row.style.display = 'flex';
+          row.style.justifyContent = isMe ? 'flex-end' : 'flex-start';
+          row.style.margin = '2px 0';
+
+          const bubble = document.createElement('div');
+          bubble.style.padding = '4px 10px';
+          bubble.style.borderRadius = '8px';
+          bubble.style.fontSize = '0.8rem';
+          bubble.style.maxWidth = '85%';
+          bubble.style.wordBreak = 'break-word';
+
+          if (isMe) {
+            bubble.style.background = 'var(--primary)';
+            bubble.style.color = '#060b14';
+            bubble.style.fontWeight = '600';
+            bubble.innerHTML = `<strong>Tú:</strong> ${escapeHtml(msg.text)}`;
+          } else {
+            bubble.style.background = 'rgba(255, 255, 255, 0.12)';
+            bubble.style.color = '#fff';
+            bubble.innerHTML = `<strong style="color: var(--secondary);">${escapeHtml(msg.senderName || 'Rival')}:</strong> ${escapeHtml(msg.text)}`;
+          }
+
+          row.appendChild(bubble);
+          container.appendChild(row);
+        });
+
+        const box = document.getElementById('duelLiveChatBox');
+        if (box) box.scrollTop = box.scrollHeight;
+      }
+    }
+
+    async function sendDuelQuickChatInput() {
+      const input = document.getElementById('duelQuickInput');
+      if (!input || !input.value.trim() || !activeDuelId || !currentUser) return;
+      const text = input.value.trim();
+      input.value = '';
+
+      try {
+        await fetch(`${API_BASE}/api/duels`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'send_chat',
+            duelId: activeDuelId,
+            senderId: currentUser.id,
+            senderName: currentUser.name,
+            text: text
+          })
+        });
+        pollDuelGameState();
+      } catch(e) {}
     }
 
     async function promptDuelQuickChat() {
@@ -7283,6 +7360,17 @@
         </div>
       </div>
 
+      <!-- CHAT EN VIVO DE LA BATALLA / DUELO 1V1 (MENSAJES VISIBLES EN PANTALLA) -->
+      <div class="duel-live-chat-box" id="duelLiveChatBox" style="background: rgba(6, 11, 20, 0.85); border-top: 1px solid var(--card-border); max-height: 110px; overflow-y: auto; padding: 8px 14px; font-size: 0.85rem; display: flex; flex-direction: column; gap: 4px;">
+        <div style="font-size: 0.72rem; color: var(--text-muted); font-weight: 700; display: flex; justify-content: space-between;">
+          <span>💬 Mensajes del Duelo en Vivo</span>
+          <span style="color: var(--primary);">En tiempo real</span>
+        </div>
+        <div id="duelChatMessagesList" style="display: flex; flex-direction: column; gap: 4px;">
+          <div style="font-style: italic; color: var(--text-muted); font-size: 0.78rem;">Escribe un mensaje abajo para comunicarte con tu rival...</div>
+        </div>
+      </div>
+
       <div class="duel-comm-bar">
         <div class="duel-reactions-row">
           <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; margin-right: 4px;">Reaccionar:</span>
@@ -7299,9 +7387,14 @@
           <button class="voice-mic-btn" id="duelMicBtn" onclick="toggleDuelVoiceMic()">
             <span>🎤</span> Activar Mic
           </button>
-          <button class="icon-btn" onclick="promptDuelQuickChat()" title="Mensaje rápido" style="padding: 6px 12px; font-size: 0.82rem;">
-            <span>💬</span> Mensaje
-          </button>
+          <div style="display: flex; gap: 4px; align-items: center;">
+            <input type="text" id="duelQuickInput" placeholder="Mensaje..." maxlength="80" 
+                   onkeydown="if(event.key === 'Enter') sendDuelQuickChatInput()" 
+                   style="width: 130px; padding: 5px 8px; border-radius: 8px; background: rgba(0,0,0,0.5); border: 1px solid var(--card-border); color: #fff; font-size: 0.78rem; outline: none;">
+            <button class="icon-btn" onclick="sendDuelQuickChatInput()" title="Enviar mensaje en el duelo" style="padding: 5px 10px; font-size: 0.82rem; background: var(--primary); color: #060b14; font-weight: 700; border: none;">
+              💬 Enviar
+            </button>
+          </div>
         </div>
       </div>
     </div>
