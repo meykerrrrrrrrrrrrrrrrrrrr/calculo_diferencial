@@ -2020,6 +2020,315 @@
       font-weight: 700;
     }
 
+  
+    /* ========================================================
+       DISEÑO RESPONSIVO Y ADAPTABILIDAD UNIVERSAL A PANTALLAS
+       ======================================================== */
+    
+    /* Scrollbar personalizada estética */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(6, 11, 20, 0.6);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--card-border);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--primary);
+    }
+
+    /* Contenedor fluido con padding seguro */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+
+    /* Ajustes táctiles universales */
+    button, input, select, textarea {
+      touch-action: manipulation;
+    }
+
+    /* Modal de Selector de Color Global de la Web */
+    .color-palette-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: 1rem 0;
+    }
+
+    .color-swatch-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 10px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1.5px solid rgba(255, 255, 255, 0.08);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .color-swatch-btn:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .color-swatch-btn.active {
+      border-color: #fff;
+      background: rgba(255, 255, 255, 0.12);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    }
+
+    .color-dot {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    }
+
+    .color-swatch-name {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    /* Personalización Avanzada de Perfil (Color, Bio, Emojis) */
+    .profile-custom-section {
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 16px;
+      margin: 1.25rem 0;
+      text-align: left;
+    }
+
+    .profile-color-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 8px 0 14px 0;
+    }
+
+    .profile-color-dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: 2px solid transparent;
+    }
+
+    .profile-color-dot:hover {
+      transform: scale(1.2);
+    }
+
+    .profile-color-dot.active {
+      border-color: #fff;
+      transform: scale(1.15);
+      box-shadow: 0 0 12px currentColor;
+    }
+
+    .profile-status-grid {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 8px 0 14px 0;
+    }
+
+    .status-chip-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .status-chip-btn:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .status-chip-btn.active {
+      background: var(--primary);
+      color: #060b14;
+      border-color: var(--primary);
+      box-shadow: 0 0 10px var(--primary-glow);
+    }
+
+    .user-bio-badge {
+      font-style: italic;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      background: rgba(0, 0, 0, 0.3);
+      padding: 8px 12px;
+      border-radius: 10px;
+      border-left: 3px solid var(--primary);
+      margin: 8px 0;
+      word-break: break-word;
+    }
+
+    /* ========================================================
+       MEDIA QUERIES RESPONSIVAS (MÓVILES, TABLETS Y PCS)
+       ======================================================== */
+    
+    /* 1. Tablets y Pantallas Medianas (<= 900px) */
+    @media (max-width: 900px) {
+      .navbar {
+        padding: 0.75rem 1rem;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .brand-text h1 {
+        font-size: 1rem;
+      }
+      .brand-text p {
+        display: none;
+      }
+      .rank-banner {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        padding: 16px;
+      }
+      .modes-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .settings-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+    }
+
+    /* 2. Móviles y Celulares (<= 640px) */
+    @media (max-width: 640px) {
+      .navbar {
+        padding: 0.6rem 0.85rem;
+      }
+      .brand-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 1.1rem;
+      }
+      .nav-btn, .icon-btn {
+        padding: 6px 10px;
+        font-size: 0.78rem;
+      }
+      .user-profile-badge {
+        padding: 4px 8px;
+      }
+      .user-rank {
+        display: none;
+      }
+      
+      /* Tarjeta de Inicio / Modos */
+      .welcome-hero h2 {
+        font-size: 1.4rem;
+      }
+      .welcome-hero p {
+        font-size: 0.85rem;
+      }
+      .theory-library-banner {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 16px;
+      }
+      .theory-library-banner button {
+        width: 100%;
+        margin-top: 8px;
+      }
+
+      /* Modales Responsivos */
+      .modal-box {
+        width: 95vw !important;
+        max-width: 95vw !important;
+        max-height: 92vh !important;
+        padding: 16px !important;
+        margin: 10px auto !important;
+      }
+
+      /* Examen / Pregunta */
+      .question-card {
+        padding: 16px;
+      }
+      .question-body {
+        font-size: 1.05rem;
+      }
+      .option-btn {
+        padding: 12px 14px;
+        font-size: 0.9rem;
+      }
+
+      /* Biblioteca Teórica */
+      .theory-library-hero {
+        padding: 16px;
+      }
+      .theory-library-hero h2 {
+        font-size: 1.35rem;
+      }
+      .formula-badge-grid {
+        grid-template-columns: 1fr;
+      }
+      .theory-tabs-nav {
+        gap: 6px;
+      }
+      .theory-topic-tab {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+      }
+
+      /* Duelo 1v1 Arena */
+      .duel-arena-box {
+        width: 96vw !important;
+        padding: 14px !important;
+      }
+      .duel-hud-top {
+        flex-direction: column;
+        gap: 10px;
+      }
+      .duel-vs-badge {
+        margin: 0 auto;
+      }
+      .duel-qcount-selector {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .duel-topics-grid {
+        grid-template-columns: 1fr;
+      }
+
+      /* Chat Modal */
+      .chat-modal-body {
+        flex-direction: column;
+        height: 65vh;
+      }
+      .chat-tabs-sidebar {
+        width: 100%;
+        max-height: 100px;
+        display: flex;
+        overflow-x: auto;
+      }
+    }
+
+    /* Fórmulas matemáticas que no rompen pantalla en celulares */
+    .katex-display {
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 4px 0;
+      max-width: 100%;
+    }
+
   </style>
 </head>
 
@@ -2094,6 +2403,10 @@
 
       <button class="icon-btn" onclick="toggleTheme()" title="Cambiar Tema">
         <span>🌓</span>
+      </button>
+
+      <button class="icon-btn" onclick="openThemeColorModal()" title="Personalizar Color de la Web">
+        <span>🎨</span>
       </button>
 
             <button class="icon-btn" onclick="openLibraryScreen()" style="background: rgba(0, 210, 223, 0.15); border: 1.5px solid var(--primary); font-weight: 700; color: #fff;" title="Ver Fórmulas, Teoría y Ejemplos">
@@ -2998,6 +3311,73 @@
 
   </main>
 
+  
+  <!-- MODAL: PERSONALIZAR COLOR DE LA WEB -->
+  <div class="modal-overlay" id="themeColorModal">
+    <div class="modal-box" style="max-width: 460px; text-align: center;">
+      <div class="modal-header">
+        <h3 style="font-size: 1.25rem; display: flex; align-items: center; gap: 8px;">
+          <span>🎨</span> Personalizar Color de la Web
+        </h3>
+        <button class="close-btn" onclick="closeThemeColorModal()">✕</button>
+      </div>
+
+      <div class="modal-body" style="padding: 16px 20px;">
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.25rem;">
+          Elige tu paleta favorita. Cambiará el brillo, botones, acentos y luces de toda la página para adaptarla a tu gusto:
+        </p>
+
+        <div class="color-palette-grid">
+          <div class="color-swatch-btn active" data-color="#00d2df" onclick="setWebThemeColor('#00d2df', 'rgba(0, 210, 223, 0.35)', this)">
+            <div class="color-dot" style="background: #00d2df;"></div>
+            <span class="color-swatch-name">Cyan Uniguajira</span>
+          </div>
+
+          <div class="color-swatch-btn" data-color="#a855f7" onclick="setWebThemeColor('#a855f7', 'rgba(168, 85, 247, 0.35)', this)">
+            <div class="color-dot" style="background: #a855f7;"></div>
+            <span class="color-swatch-name">Púrpura Élite</span>
+          </div>
+
+          <div class="color-swatch-btn" data-color="#10b981" onclick="setWebThemeColor('#10b981', 'rgba(16, 185, 129, 0.35)', this)">
+            <div class="color-dot" style="background: #10b981;"></div>
+            <span class="color-swatch-name">Verde Esmeralda</span>
+          </div>
+
+          <div class="color-swatch-btn" data-color="#f97316" onclick="setWebThemeColor('#f97316', 'rgba(249, 115, 22, 0.35)', this)">
+            <div class="color-dot" style="background: #f97316;"></div>
+            <span class="color-swatch-name">Naranja Solar</span>
+          </div>
+
+          <div class="color-swatch-btn" data-color="#ec4899" onclick="setWebThemeColor('#ec4899', 'rgba(236, 72, 153, 0.35)', this)">
+            <div class="color-dot" style="background: #ec4899;"></div>
+            <span class="color-swatch-name">Rosa Neón</span>
+          </div>
+
+          <div class="color-swatch-btn" data-color="#ffb703" onclick="setWebThemeColor('#ffb703', 'rgba(255, 183, 3, 0.35)', this)">
+            <div class="color-dot" style="background: #ffb703;"></div>
+            <span class="color-swatch-name">Ámbar Dorado</span>
+          </div>
+
+          <div class="color-swatch-btn" data-color="#3b82f6" onclick="setWebThemeColor('#3b82f6', 'rgba(59, 130, 246, 0.35)', this)">
+            <div class="color-dot" style="background: #3b82f6;"></div>
+            <span class="color-swatch-name">Azul Zafiro</span>
+          </div>
+
+          <div class="color-swatch-btn" data-color="#ef476f" onclick="setWebThemeColor('#ef476f', 'rgba(239, 71, 111, 0.35)', this)">
+            <div class="color-dot" style="background: #ef476f;"></div>
+            <span class="color-swatch-name">Carmesí Pasión</span>
+          </div>
+        </div>
+
+        <div style="margin-top: 1.25rem;">
+          <button class="primary-btn" onclick="closeThemeColorModal()" style="width: 100%; justify-content: center;">
+            ¡Aplicar y Guardar Color! ✨
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- MODAL: INICIO DE SESIÓN Y REGISTRO CON CONTRASEÑA Y FOTO DE DISPOSITIVO -->
   <div class="modal-overlay" id="authModal">
     <div class="modal-box" style="max-width: 500px;">
@@ -3019,6 +3399,45 @@
             <p style="margin-bottom: 6px;">● <strong>Exámenes Realizados:</strong> <span id="authExamsDisplay" style="color:#fff; font-weight:700;">0</span></p>
             <p style="margin-bottom: 6px;">● <strong>Puntos XP Totales:</strong> <span id="authXpDisplay" style="color: var(--primary); font-weight: 700;">0 XP</span></p>
             <p>● <strong>Promedio de Calificación:</strong> <span id="authAvgDisplay" style="color: var(--success); font-weight: 700;">0.0</span></p>
+          </div>
+
+          
+          <!-- PERSONALIZACIÓN COMPLETA DEL PERFIL (COLOR, EMOJI DE ESTADO Y BIO) -->
+          <div class="profile-custom-section">
+            <div style="font-size: 0.85rem; font-weight: 800; color: #fff; margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
+              <span>✨</span> Personalización de tu Perfil
+            </div>
+            <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 10px;">
+              Elige tu color personal, tu emoji de estado y escribe una frase que verán tus rivales:
+            </p>
+
+            <!-- Color de Acento del Perfil -->
+            <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted);">COLOR DE TU TARJETA:</label>
+            <div class="profile-color-row">
+              <span class="profile-color-dot active" style="background:#00d2df;" onclick="selectUserProfileColor('#00d2df', this)"></span>
+              <span class="profile-color-dot" style="background:#a855f7;" onclick="selectUserProfileColor('#a855f7', this)"></span>
+              <span class="profile-color-dot" style="background:#10b981;" onclick="selectUserProfileColor('#10b981', this)"></span>
+              <span class="profile-color-dot" style="background:#f97316;" onclick="selectUserProfileColor('#f97316', this)"></span>
+              <span class="profile-color-dot" style="background:#ec4899;" onclick="selectUserProfileColor('#ec4899', this)"></span>
+              <span class="profile-color-dot" style="background:#ffb703;" onclick="selectUserProfileColor('#ffb703', this)"></span>
+              <span class="profile-color-dot" style="background:#3b82f6;" onclick="selectUserProfileColor('#3b82f6', this)"></span>
+              <span class="profile-color-dot" style="background:#ef476f;" onclick="selectUserProfileColor('#ef476f', this)"></span>
+            </div>
+
+            <!-- Emoji de Estado / Mood -->
+            <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted);">ESTADO / MOOD:</label>
+            <div class="profile-status-grid">
+              <button type="button" class="status-chip-btn active" onclick="selectUserStatusEmoji('🔥 En Racha', this)">🔥 En Racha</button>
+              <button type="button" class="status-chip-btn" onclick="selectUserStatusEmoji('🧠 Modo Genio', this)">🧠 Modo Genio</button>
+              <button type="button" class="status-chip-btn" onclick="selectUserStatusEmoji('⚡ Imparable', this)">⚡ Imparable</button>
+              <button type="button" class="status-chip-btn" onclick="selectUserStatusEmoji('☕ Con Café', this)">☕ Con Café</button>
+              <button type="button" class="status-chip-btn" onclick="selectUserStatusEmoji('🎓 Futuro Ing.', this)">🎓 Futuro Ing.</button>
+              <button type="button" class="status-chip-btn" onclick="selectUserStatusEmoji('⚔️ Listo al Duelo', this)">⚔️ Listo al Duelo</button>
+            </div>
+
+            <!-- Frase o Descripción Personal (Bio) -->
+            <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 4px;">DESCRIPCIÓN / META (BIO):</label>
+            <input type="text" id="userBioInput" maxlength="85" placeholder="Escribe tu frase (ej. ¡Vamos por el 5.0 en Cálculo! 🚀)" style="width: 100%; padding: 8px 12px; border-radius: 8px; border: 1px solid var(--card-border); background: rgba(0,0,0,0.35); color: #fff; font-size: 0.85rem;" onchange="saveUserBio(this.value)">
           </div>
 
           <!-- Opción Destacada para Cambiar Foto de Galería -->
@@ -3202,6 +3621,14 @@
           </div>
           <h3 id="friendName" style="font-size: 1.35rem; color: #fff; margin-bottom: 2px;">Nombre</h3>
           <span class="user-rank" id="friendRankBadge" style="font-size: 0.95rem;">Rango</span>
+          <!-- Bio y Estado del Compañero -->
+          <div id="friendStatusBadge" style="display:inline-block; font-size: 0.78rem; font-weight: 800; padding: 3px 10px; border-radius: 12px; background: rgba(0, 210, 223, 0.15); color: var(--primary); margin: 6px 0;">
+            🔥 En Racha
+          </div>
+          <div class="user-bio-badge" id="friendBioText" style="display: none;">
+            "¡Apuntándole al 5.0!"
+          </div>
+
           
           <div style="display: flex; justify-content: center; gap: 15px; margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);">
             <span>📝 <strong id="friendExams" style="color: #fff;">0</strong> exámenes</span>
@@ -3488,6 +3915,76 @@
       }
     }
 
+    
+    // ========================================================
+    // PERSONALIZACIÓN DEL COLOR GLOBAL DE LA WEB Y DEL PERFIL
+    // ========================================================
+    function openThemeColorModal() {
+      document.getElementById('themeColorModal').classList.add('active');
+    }
+
+    function closeThemeColorModal() {
+      document.getElementById('themeColorModal').classList.remove('active');
+    }
+
+    function setWebThemeColor(primaryHex, glowRgba, btn) {
+      document.documentElement.style.setProperty('--primary', primaryHex);
+      document.documentElement.style.setProperty('--primary-glow', glowRgba);
+      document.documentElement.style.setProperty('--btn-hover', glowRgba.replace('0.35', '0.15'));
+
+      document.querySelectorAll('.color-swatch-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+
+      localStorage.setItem('calc_theme_primary_hex', primaryHex);
+      localStorage.setItem('calc_theme_glow_rgba', glowRgba);
+    }
+
+    function loadSavedWebThemeColor() {
+      try {
+        const savedHex = localStorage.getItem('calc_theme_primary_hex');
+        const savedGlow = localStorage.getItem('calc_theme_glow_rgba');
+        if (savedHex && savedGlow) {
+          document.documentElement.style.setProperty('--primary', savedHex);
+          document.documentElement.style.setProperty('--primary-glow', savedGlow);
+          document.documentElement.style.setProperty('--btn-hover', savedGlow.replace('0.35', '0.15'));
+
+          document.querySelectorAll('.color-swatch-btn').forEach(b => {
+            b.classList.toggle('active', b.getAttribute('data-color') === savedHex);
+          });
+        }
+      } catch(e) {}
+    }
+
+    function selectUserProfileColor(hex, dot) {
+      if (!currentUser) return;
+      currentUser.profileColor = hex;
+      document.querySelectorAll('.profile-color-dot').forEach(d => d.classList.remove('active'));
+      if (dot) dot.classList.add('active');
+
+      const card = document.querySelector('#authLoggedInView .friend-avatar');
+      if (card) card.style.borderColor = hex;
+
+      saveUserProfileToServer();
+      updateUserUI();
+    }
+
+    function selectUserStatusEmoji(statusText, btn) {
+      if (!currentUser) return;
+      currentUser.statusEmoji = statusText;
+      document.querySelectorAll('.status-chip-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+
+      saveUserProfileToServer();
+      updateUserUI();
+    }
+
+    function saveUserBio(text) {
+      if (!currentUser) return;
+      currentUser.bio = text.trim();
+      saveUserProfileToServer();
+      updateUserUI();
+    }
+
     function openAuthModal() {
       document.getElementById('authModal').classList.add('active');
       if (currentUser) {
@@ -3501,6 +3998,22 @@
         document.getElementById('authXpDisplay').textContent = `${currentUser.xp || 0} XP`;
         document.getElementById('authAvgDisplay').textContent = currentUser.avgGrade ? Number(currentUser.avgGrade).toFixed(1) : "0.0";
         renderUserAvatarElement(currentUser, document.getElementById('authAvatarPreview'));
+        const bioInput = document.getElementById('userBioInput');
+        if (bioInput) bioInput.value = currentUser.bio || '';
+
+        if (currentUser.profileColor) {
+          document.querySelectorAll('.profile-color-dot').forEach(d => {
+            d.classList.toggle('active', d.style.background === currentUser.profileColor);
+          });
+          const av = document.getElementById('authAvatarPreview');
+          if (av) av.style.borderColor = currentUser.profileColor;
+        }
+
+        if (currentUser.statusEmoji) {
+          document.querySelectorAll('.status-chip-btn').forEach(b => {
+            b.classList.toggle('active', b.textContent === currentUser.statusEmoji);
+          });
+        }
       } else {
         document.getElementById('authLoggedInView').style.display = 'none';
         document.getElementById('authFormView').style.display = 'block';
@@ -4297,7 +4810,10 @@
               <div class="avatar-circle" style="width:28px; height:28px; font-size:0.88rem; flex-shrink:0;">
                 ${p.customAvatar ? `<img src="${p.customAvatar}">` : (p.avatar || '🎓')}
               </div>
-              <span style="font-weight:700;">${escapeHtml(p.name)} ${p.isUser ? '<span style="color:var(--primary); font-size:0.75rem;">(Tú)</span>' : ''}</span>
+              <div>
+                <span style="font-weight:700;">${escapeHtml(p.name)} ${p.isUser ? '<span style="color:var(--primary); font-size:0.75rem;">(Tú)</span>' : ''}</span>
+                ${p.statusEmoji ? `<div style="font-size:0.72rem; color:var(--text-muted); font-weight:600;">${escapeHtml(p.statusEmoji)}</div>` : ''}
+              </div>
             </div>
           </td>
           <td><span style="font-size:0.8rem; color:var(--secondary); font-weight:600;">${rank.icon} ${rank.name}</span></td>
@@ -4317,6 +4833,32 @@
       document.getElementById('friendName').textContent = player.name;
       const rank = getCurrentRank(player.xp || 0);
       document.getElementById('friendRankBadge').textContent = `${rank.icon} ${rank.name}`;
+      
+      const stBadge = document.getElementById('friendStatusBadge');
+      if (stBadge) {
+        if (player.statusEmoji) {
+          stBadge.textContent = player.statusEmoji;
+          stBadge.style.display = 'inline-block';
+        } else {
+          stBadge.style.display = 'none';
+        }
+      }
+
+      const bioBox = document.getElementById('friendBioText');
+      if (bioBox) {
+        if (player.bio) {
+          bioBox.textContent = `"${player.bio}"`;
+          bioBox.style.display = 'block';
+        } else {
+          bioBox.style.display = 'none';
+        }
+      }
+
+      const avBox = document.getElementById('friendAvatarBox');
+      if (avBox && player.profileColor) {
+        avBox.style.borderColor = player.profileColor;
+        avBox.style.boxShadow = `0 0 15px ${player.profileColor}66`;
+      }
       document.getElementById('friendExams').textContent = player.examsCount || 0;
       document.getElementById('friendAvg').textContent = player.avgGrade ? Number(player.avgGrade).toFixed(1) : "0.0";
       document.getElementById('friendXp').textContent = `${player.xp || 0} XP`;
@@ -5841,6 +6383,7 @@
       document.documentElement.setAttribute('data-theme', savedTheme);
       initTopicFilters();
       loadSavedSession();
+      loadSavedWebThemeColor();
       startDuelInvitationPolling();
       initKaTeX();
     });
