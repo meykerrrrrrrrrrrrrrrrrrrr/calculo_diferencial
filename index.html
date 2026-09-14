@@ -3081,7 +3081,7 @@
       </div>
 
       <!-- BLOQUE 1: NÚMEROS REALES -->
-      <div class="theory-content-block active" id="topicBlock_reales">
+      <div class="theory-content-block active" id="theoryBlock_reales">
         <div class="theory-section-card">
           <div class="theory-section-title">
             <span>🔢</span> Tema 1: Números Reales y Aritmética Fundamental (Taller #1)
@@ -3155,7 +3155,7 @@
       </div>
 
       <!-- BLOQUE 2: EXPRESIONES ALGEBRAICAS -->
-      <div class="theory-content-block" id="topicBlock_expresiones">
+      <div class="theory-content-block" id="theoryBlock_expresiones">
         <div class="theory-section-card">
           <div class="theory-section-title">
             <span>📐</span> Tema 2: Expresiones Algebraicas y Reducción (Taller #2)
@@ -3226,7 +3226,7 @@
       </div>
 
       <!-- BLOQUE 3: PRODUCTOS NOTABLES -->
-      <div class="theory-content-block" id="topicBlock_productos">
+      <div class="theory-content-block" id="theoryBlock_productos">
         <div class="theory-section-card">
           <div class="theory-section-title">
             <span>⚡</span> Tema 3: Productos Notables (Taller #2)
@@ -3303,7 +3303,7 @@
 
       <!-- BLOQUE 4: FACTORIZACIÓN -->
       <!-- BLOQUE 4: FACTORIZACIÓN COMPLETA (TALLER #3) -->
-      <div class="theory-content-block" id="topicBlock_factorizacion">
+      <div class="theory-content-block" id="theoryBlock_factorizacion">
         <div class="theory-section-card">
           <div class="theory-section-title">
             <span>🧩</span> Tema 4: Métodos de Factorización Completa (Taller #3)
@@ -3543,7 +3543,7 @@
         </div>
       </div>
 
-      <div class="theory-content-block" id="topicBlock_fracciones">
+      <div class="theory-content-block" id="theoryBlock_fracciones">
         <div class="theory-section-card">
           <div class="theory-section-title">
             <span>➗</span> Tema 5: Fracciones Algebraicas y Simplificación
@@ -3606,7 +3606,7 @@
 
       <!-- BLOQUE 6: DESIGUALDADES E INECUACIONES -->
       <!-- BLOQUE 6: DESIGUALDADES E INECUACIONES (TALLER #4) -->
-      <div class="theory-content-block" id="topicBlock_desigualdades">
+      <div class="theory-content-block" id="theoryBlock_desigualdades">
         <div class="theory-section-card">
           <div class="theory-section-title">
             <span>⚖️</span> Tema 6: Desigualdades e Inecuaciones (Taller #4)
@@ -3763,7 +3763,7 @@
       </div>
 
       <!-- BLOQUE 7: LA LÍNEA RECTA Y PENDIENTES (TALLER #4) -->
-      <div class="theory-content-block" id="topicBlock_linea_recta">
+      <div class="theory-content-block" id="theoryBlock_linea_recta">
         <div class="theory-section-card">
           <div class="theory-section-title">
             <span>📈</span> Tema 7: La Línea Recta y Pendientes (Taller #4)
@@ -3946,7 +3946,7 @@
         </div>
       </div>
 
-      <div class="theory-content-block" id="topicBlock_sistemas">
+      <div class="theory-content-block" id="theoryBlock_sistemas">
         <div class="theory-section-card">
           <div class="theory-section-title">
             <span>🎯</span> Tema 8: Sistemas de Ecuaciones Lineales 2x2 (Taller #4)
@@ -6489,7 +6489,7 @@
         block.classList.remove('active');
       });
 
-      const target = document.getElementById(`topicBlock_${topicKey}`);
+      const target = document.getElementById(`theoryBlock_${topicKey}`);
       if (target) {
         target.classList.add('active');
       }
@@ -6521,7 +6521,7 @@
       if (!foundAnyInActive) {
         const topics = ['reales', 'expresiones', 'productos', 'factorizacion', 'fracciones', 'desigualdades', 'linea_recta', 'sistemas'];
         for (const tk of topics) {
-          const b = document.getElementById(`topicBlock_${tk}`);
+          const b = document.getElementById(`theoryBlock_${tk}`);
           if (b && b.textContent.toLowerCase().includes(q)) {
             switchTheoryTopic(tk);
             filterTheoryLibrary(query);
