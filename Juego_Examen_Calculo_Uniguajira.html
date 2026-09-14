@@ -4520,7 +4520,43 @@
       { id: 7, name: "Maestro Élite Uniguajira", minXp: 16000, maxXp: 999999, icon: "👑" }
     ];
 
-    
+    let currentUser = null;
+    let remotePlayers = [{"id": "user_1789159972880", "name": "meyker", "password": "326247878", "avatar": "👑", "customAvatar": "", "profileColor": "#a855f7", "statusEmoji": "🔥 En Racha", "bio": "¡Apuntándole al 5.0 en Cálculo Diferencial! 🚀", "stickers": [{"id": "stk_1", "type": "emoji", "content": "👑", "x": 20, "y": 25}, {"id": "stk_2", "type": "emoji", "content": "🔥", "x": 65, "y": 30}], "xp": 520, "examsCount": 4, "totalGradeSum": 18.2, "avgGrade": 4.6, "bestTopic": "Factorización", "worstTopic": "Desigualdades", "duelWins": 3, "duelLosses": 1, "topicScores": {"numeros_reales": 120, "expresiones_alg": 90, "productos_notables": 110, "factorizacion": 140, "fracciones_alg": 60, "desigualdades": 50, "linea_recta": 80, "ecuaciones": 70}}, {"id": "user_est_andres", "name": "Andrés Cotes", "password": "pass_andres_123", "avatar": "👨‍💻", "customAvatar": "", "profileColor": "#00d2df", "statusEmoji": "🧠 Modo Genio", "bio": "Ingeniería de Sistemas - Grupo 1", "stickers": [{"id": "stk_3", "type": "emoji", "content": "⚡", "x": 25, "y": 20}, {"id": "stk_4", "type": "emoji", "content": "🚀", "x": 70, "y": 35}], "xp": 480, "examsCount": 3, "totalGradeSum": 13.5, "avgGrade": 4.5, "bestTopic": "Línea Recta", "worstTopic": "Fracciones Alg.", "duelWins": 2, "duelLosses": 2, "topicScores": {"numeros_reales": 80, "expresiones_alg": 90, "productos_notables": 70, "factorizacion": 80, "fracciones_alg": 40, "desigualdades": 60, "linea_recta": 110, "ecuaciones": 50}}, {"id": "user_est_valen", "name": "Valentina Freyle", "password": "pass_valen_123", "avatar": "👩‍🎓", "customAvatar": "", "profileColor": "#ec4899", "statusEmoji": "🎯 Enfoque Total", "bio": "Estudiando con toda para el parcial con el Prof. Edwind", "stickers": [{"id": "stk_5", "type": "emoji", "content": "🌟", "x": 15, "y": 30}, {"id": "stk_6", "type": "emoji", "content": "💎", "x": 60, "y": 25}], "xp": 390, "examsCount": 3, "totalGradeSum": 12.6, "avgGrade": 4.2, "bestTopic": "Productos Notables", "worstTopic": "Factorización", "duelWins": 1, "duelLosses": 1, "topicScores": {"numeros_reales": 70, "expresiones_alg": 60, "productos_notables": 95, "factorizacion": 45, "fracciones_alg": 40, "desigualdades": 40, "linea_recta": 35, "ecuaciones": 5}}, {"id": "user_est_carlos", "name": "Carlos Mendoza", "password": "pass_carlos_123", "avatar": "🐺", "customAvatar": "", "profileColor": "#10b981", "statusEmoji": "⚡ Listo para el Duelo", "bio": "¡Retame a un duelo 1v1 si te atreves! ⚔️", "stickers": [{"id": "stk_7", "type": "emoji", "content": "🐉", "x": 30, "y": 20}, {"id": "stk_8", "type": "emoji", "content": "🏆", "x": 65, "y": 40}], "xp": 340, "examsCount": 2, "totalGradeSum": 7.8, "avgGrade": 3.9, "bestTopic": "Desigualdades", "worstTopic": "Línea Recta", "duelWins": 3, "duelLosses": 0, "topicScores": {"numeros_reales": 50, "expresiones_alg": 40, "productos_notables": 45, "factorizacion": 55, "fracciones_alg": 30, "desigualdades": 80, "linea_recta": 20, "ecuaciones": 20}}, {"id": "user_est_mariana", "name": "Mariana Gómez", "password": "pass_mariana_123", "avatar": "🐱", "customAvatar": "", "profileColor": "#f97316", "statusEmoji": "📚 Estudiando", "bio": "Repasando la biblioteca teórica paso a paso 📖", "stickers": [{"id": "stk_9", "type": "emoji", "content": "🎯", "x": 25, "y": 30}], "xp": 280, "examsCount": 2, "totalGradeSum": 7.4, "avgGrade": 3.7, "bestTopic": "Expresiones Alg.", "worstTopic": "Factorización", "duelWins": 1, "duelLosses": 2, "topicScores": {"numeros_reales": 40, "expresiones_alg": 70, "productos_notables": 50, "factorizacion": 30, "fracciones_alg": 30, "desigualdades": 25, "linea_recta": 25, "ecuaciones": 10}}];
+    let liveOnlineUsers = [];
+    let currentDifficulty = 'mixed';
+    let currentMode = 'exam';
+    let questionPool = [];
+    let currentIndex = 0;
+    let score = 0;
+    let streak = 0;
+    let maxStreak = 0;
+    let lives = 3;
+    let correctCount = 0;
+    let wrongCount = 0;
+    let sessionXpGained = 0;
+    let timerInterval = null;
+    let timeRemaining = 0;
+    let audioEnabled = true;
+    let audioCtx = null;
+    let userAnswersHistory = [];
+
+    let currentShuffledOptions = [];
+    let currentCorrectIndex = -1;
+    let selectedSubtopics = new Set();
+
+    let currentChatTab = 'global';
+    let chatActiveFriend = null;
+    let cachedChatData = { global: [], private: [] };
+    let chatPollTimer = null;
+    let isInitialChatPoll = true;
+    let seenChatMessageIds = new Set();
+    let unreadGlobalCount = 0;
+    let unreadPrivateCounts = {}; // { [senderId]: number }
+    let knownPrivateChats = {};   // { [userId]: { id, name, avatar, customAvatar } }
+
+    // Foto provisional para registro
+    let selectedRegAvatar = '🎓';
+    let selectedRegCustomAvatar = '';
 
     // 1. INICIALIZACIÓN DE SUBTEMAS
     function initTopicFilters() {
