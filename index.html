@@ -1747,6 +1747,78 @@
       transition: transform 0.2s, border-color 0.2s;
     }
 
+    /* --- TARJETAS INTERACTIVAS CON DESGLOSE PASO A PASO --- */
+    .formula-item-card.expandable {
+      cursor: pointer;
+      position: relative;
+      border: 1.5px solid rgba(0, 210, 223, 0.28);
+      background: linear-gradient(145deg, rgba(13, 21, 39, 0.85), rgba(6, 11, 20, 0.95));
+      transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .formula-item-card.expandable:hover {
+      border-color: var(--primary);
+      box-shadow: 0 6px 20px rgba(0, 210, 223, 0.25);
+      transform: translateY(-3px);
+    }
+    .formula-item-card.expandable .expand-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 10px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .formula-item-card.expandable .formula-breakdown {
+      display: none;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px dashed rgba(0, 210, 223, 0.3);
+      animation: fadeIn 0.3s ease;
+    }
+    .formula-item-card.expandable.open .formula-breakdown {
+      display: block;
+    }
+    .formula-item-card.expandable.open {
+      border-color: var(--secondary);
+      box-shadow: 0 0 25px rgba(255, 183, 3, 0.25);
+    }
+    .formula-item-card.expandable.open .expand-indicator {
+      color: var(--secondary);
+    }
+
+    .breakdown-step {
+      background: rgba(0, 0, 0, 0.35);
+      border-left: 3px solid var(--primary);
+      padding: 10px 14px;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 8px;
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+    .breakdown-step strong {
+      color: #fff;
+    }
+    .breakdown-example {
+      background: rgba(6, 214, 160, 0.08);
+      border: 1px solid rgba(6, 214, 160, 0.3);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-top: 10px;
+    }
+    .breakdown-example-title {
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--success);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+
     .formula-item-card:hover {
       border-color: var(--primary);
       transform: translateY(-2px);
@@ -2558,6 +2630,39 @@
       max-width: 100%;
     }
 
+  
+    /* Duelo: Barra de comunicación siempre visible con scroll horizontal de emojis */
+    .duel-comm-bar {
+      background: rgba(10, 18, 32, 0.98) !important;
+      border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
+      padding: 8px 12px !important;
+      display: flex !important;
+      flex-wrap: wrap !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      gap: 8px !important;
+      position: relative !important;
+      z-index: 50 !important;
+    }
+    .duel-reactions-row {
+      display: flex !important;
+      gap: 6px !important;
+      align-items: center !important;
+      overflow-x: auto !important;
+      -webkit-overflow-scrolling: touch !important;
+      scrollbar-width: none !important;
+      max-width: 100% !important;
+    }
+    .duel-reactions-row::-webkit-scrollbar {
+      display: none !important;
+    }
+    .duel-comm-actions-right {
+      display: flex !important;
+      gap: 6px !important;
+      align-items: center !important;
+      flex-shrink: 0 !important;
+    }
+
   </style>
 </head>
 
@@ -3197,6 +3302,7 @@
       </div>
 
       <!-- BLOQUE 4: FACTORIZACIÓN -->
+      <!-- BLOQUE 4: FACTORIZACIÓN COMPLETA (TALLER #3) -->
       <div class="theory-content-block" id="topicBlock_factorizacion">
         <div class="theory-section-card">
           <div class="theory-section-title">
@@ -3204,79 +3310,239 @@
           </div>
 
           <p style="font-size: 0.92rem; line-height: 1.6; color: var(--text-muted); margin-bottom: 1.25rem;">
-            Factorizar consiste en transformar una suma o resta algebraica en un producto de factores irreducibles. Es el tema más evaluado en el parcial de Cálculo Diferencial.
+            Factorizar consiste en transformar una suma o resta de polinomios en una multiplicación de factores primos irreducibles. <strong>Toca cualquier tarjeta a continuación para desplegar su explicación detallada, su algoritmo paso a paso y su ejemplo resuelto:</strong>
           </p>
 
           <div class="formula-badge-grid">
-            <div class="formula-item-card">
+            <!-- 1. FACTOR COMÚN MONOMIO Y POLINOMIO -->
+            <div class="formula-item-card expandable" onclick="toggleFormulaCard(this)">
               <div class="formula-label">1. Factor Común Monomio / Polinomio</div>
               <div class="formula-math">$$ax + bx = x(a+b)$$</div>
-              <div class="formula-desc">Se extrae el Máximo Común Divisor (MCD) de los coeficientes y las letras comunes elevadas a su <strong>menor exponente</strong>.</div>
+              <div class="formula-desc">Se extrae el Máximo Común Divisor (MCD) numérico y las variables repetidas al <strong>menor exponente</strong>.</div>
+              <div class="expand-indicator">▼ Toca para ver desglose y paso a paso 📖</div>
+              <div class="formula-breakdown">
+                <div class="breakdown-step">
+                  <strong>Paso 1:</strong> Hallar el MCD de todos los coeficientes numéricos.
+                </div>
+                <div class="breakdown-step">
+                  <strong>Paso 2:</strong> Identificar las letras o variables que se repiten en <em>todos</em> los términos y tomar la de menor potencia.
+                </div>
+                <div class="breakdown-step">
+                  <strong>Paso 3:</strong> Dividir cada término del polinomio original entre el factor común extraído y colocar el resultado entre paréntesis.
+                </div>
+                <div class="breakdown-example">
+                  <div class="breakdown-example-title"><span>📝</span> Ejemplo Resuelto Paso a Paso:</div>
+                  <div style="font-size: 0.95rem; margin-bottom: 6px;">Factorizar: $$12x^3y^2 - 18x^2y^3 + 24x^4y$$</div>
+                  <div style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
+                    • MCD(12, 18, 24) = <strong>6</strong>.<br>
+                    • Menores potencias comunes: $x^2$ e $y^1 \implies \mathbf{6x^2y}$.<br>
+                    • Dividiendo cada término: $rac{12x^3y^2}{6x^2y} = 2xy$; $rac{-18x^2y^3}{6x^2y} = -3y^2$; $rac{24x^4y}{6x^2y} = 4x^2$.<br>
+                    • <strong>Resultado Final:</strong> $\mathbf{6x^2y(2xy - 3y^2 + 4x^2)}$
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div class="formula-item-card">
-              <div class="formula-label">2. Factor Común por Agrupación</div>
+            <!-- 2. FACTOR COMÚN POR AGRUPACIÓN -->
+            <div class="formula-item-card expandable" onclick="toggleFormulaCard(this)">
+              <div class="formula-label">2. Factor Común por Agrupación de Términos</div>
               <div class="formula-math">$$ax + ay + bx + by = (a+b)(x+y)$$</div>
-              <div class="formula-desc">Se agrupan términos en bloques de igual cantidad que tengan factores comunes, hasta dejar un binomio idéntico entre paréntesis.</div>
+              <div class="formula-desc">Aplica para polinomios de 4 o 6 términos donde no hay factor común global pero sí por parejas o tríos.</div>
+              <div class="expand-indicator">▼ Toca para ver desglose y paso a paso 📖</div>
+              <div class="formula-breakdown">
+                <div class="breakdown-step">
+                  <strong>Paso 1:</strong> Agrupar términos en pares que compartan coeficientes o letras: $(ax + ay) + (bx + by)$.
+                </div>
+                <div class="breakdown-step">
+                  <strong>Paso 2:</strong> Extraer el factor común de cada paréntesis por separado: $a(x+y) + b(x+y)$.
+                </div>
+                <div class="breakdown-step">
+                  <strong>Paso 3:</strong> Extraer el paréntesis común $(x+y)$ como nuevo factor común: $(x+y)(a+b)$.
+                </div>
+                <div class="breakdown-example">
+                  <div class="breakdown-example-title"><span>📝</span> Ejemplo Resuelto Paso a Paso (Taller #3):</div>
+                  <div style="font-size: 0.95rem; margin-bottom: 6px;">Factorizar: $$x^3 + 3x^2 - 5x - 15$$</div>
+                  <div style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
+                    • Agrupamos: $(x^3 + 3x^2) - (5x + 15)$.<br>
+                    • Factorizamos cada grupo: $x^2(x + 3) - 5(x + 3)$.<br>
+                    • Extraemos $(x + 3)$: $\mathbf{(x + 3)(x^2 - 5)}$.
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div class="formula-item-card">
+            <!-- 3. DIFERENCIA DE CUADRADOS PERFECTOS -->
+            <div class="formula-item-card expandable" onclick="toggleFormulaCard(this)">
               <div class="formula-label">3. Diferencia de Cuadrados</div>
               <div class="formula-math">$$a^2 - b^2 = (a - b)(a + b)$$</div>
-              <div class="formula-desc">Se extrae la raíz cuadrada exacta de ambos términos y se expresa como el producto de su suma por su diferencia. Ej: $4x^2 - 25 = (2x-5)(2x+5)$.</div>
+              <div class="formula-desc">Dos términos cuadrados separados por signo menos. Se factoriza como suma por diferencia de raíces.</div>
+              <div class="expand-indicator">▼ Toca para ver desglose y paso a paso 📖</div>
+              <div class="formula-breakdown">
+                <div class="breakdown-step">
+                  <strong>Paso 1:</strong> Sacar la raíz cuadrada exacta de ambos términos: $\sqrt{a^2} = a$, $\sqrt{b^2} = b$. (Recordar que para potencias el exponente se divide entre 2: $\sqrt{x^{2n}} = x^n$).
+                </div>
+                <div class="breakdown-step">
+                  <strong>Paso 2:</strong> Construir dos binomios: uno con la resta $(a - b)$ y el otro con la suma $(a + b)$.
+                </div>
+                <div class="breakdown-example">
+                  <div class="breakdown-example-title"><span>📝</span> Ejemplo Resuelto Paso a Paso:</div>
+                  <div style="font-size: 0.95rem; margin-bottom: 6px;">Factorizar: $$1 - x^{2a}$$</div>
+                  <div style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
+                    • $\sqrt{1} = 1$ y $\sqrt{x^{2a}} = x^a$.<br>
+                    • <strong>Resultado Final:</strong> $\mathbf{(1 - x^a)(1 + x^a)}$.<br>
+                    • Otro ejemplo: $49x^4 - 64y^6 = (7x^2 - 8y^3)(7x^2 + 8y^3)$.
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div class="formula-item-card">
-              <div class="formula-label">4. Trinomio de la forma $x^2 + bx + c$</div>
-              <div class="formula-math">$$x^2 + bx + c = (x + p)(x + q)$$</div>
-              <div class="formula-desc">Se buscan dos números $p$ y $q$ tales que su producto sea $c$ ($p \cdot q = c$) y su suma algebraica sea $b$ ($p + q = b$).</div>
-            </div>
-
-            <div class="formula-item-card">
-              <div class="formula-label">5. Suma y Diferencia de Cubos</div>
-              <div class="formula-math">$$a^3 \pm b^3 = (a \pm b)(a^2 \mp ab + b^2)$$</div>
-              <div class="formula-desc">Binomio con las raíces cúbicas multiplicado por el trinomio formado por: cuadrado del primero, producto opuesto, y cuadrado del segundo.</div>
-            </div>
-
-            <div class="formula-item-card">
-              <div class="formula-label">6. Trinomio Cuadrado Perfecto (TCP)</div>
+            <!-- 4. TRINOMIO CUADRADO PERFECTO (TCP) -->
+            <div class="formula-item-card expandable" onclick="toggleFormulaCard(this)">
+              <div class="formula-label">4. Trinomio Cuadrado Perfecto (TCP)</div>
               <div class="formula-math">$$a^2 \pm 2ab + b^2 = (a \pm b)^2$$</div>
-              <div class="formula-desc">El primer y tercer término tienen raíces cuadradas exactas positivas, y el término central es el doble producto de dichas raíces.</div>
+              <div class="formula-desc">Los extremos tienen raíces exactas positivas y el término del centro es exactamente el doble producto $2ab$.</div>
+              <div class="expand-indicator">▼ Toca para ver desglose y paso a paso 📖</div>
+              <div class="formula-breakdown">
+                <div class="breakdown-step">
+                  <strong>Paso 1:</strong> Extraer las raíces cuadradas de los extremos: $\sqrt{a^2} = a$ y $\sqrt{b^2} = b$.
+                </div>
+                <div class="breakdown-step">
+                  <strong>Paso 2:</strong> Verificar si el término central coincide con $2 \cdot a \cdot b$.
+                </div>
+                <div class="breakdown-step">
+                  <strong>Paso 3:</strong> Escribir el binomio al cuadrado conservando el signo del segundo término: $(a \pm b)^2$.
+                </div>
+                <div class="breakdown-example">
+                  <div class="breakdown-example-title"><span>📝</span> Ejemplo Resuelto Paso a Paso:</div>
+                  <div style="font-size: 0.95rem; margin-bottom: 6px;">Factorizar: $$9x^2 - 30xy + 25y^2$$</div>
+                  <div style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
+                    • $\sqrt{9x^2} = 3x$; $\sqrt{25y^2} = 5y$.<br>
+                    • Doble producto: $2(3x)(5y) = 30xy$ (¡Coincide exactamente!).<br>
+                    • <strong>Resultado Final:</strong> $\mathbf{(3x - 5y)^2}$.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 5. TRINOMIO DE LA FORMA x^2 + bx + c -->
+            <div class="formula-item-card expandable" onclick="toggleFormulaCard(this)">
+              <div class="formula-label">5. Trinomio de la forma $x^2 + bx + c$</div>
+              <div class="formula-math">$$x^2 + bx + c = (x + p)(x + q)$$</div>
+              <div class="formula-desc">Se buscan dos números $p$ y $q$ tales que su producto sea $c$ y su suma algebraica sea $b$.</div>
+              <div class="expand-indicator">▼ Toca para ver desglose y paso a paso 📖</div>
+              <div class="formula-breakdown">
+                <div class="breakdown-step">
+                  <strong>Paso 1:</strong> Abrir dos paréntesis: $(x \quad)(x \quad)$.
+                </div>
+                <div class="breakdown-step">
+                  <strong>Paso 2:</strong> Colocar en el primer paréntesis el signo de $b$. En el segundo paréntesis colocar el producto de signos de $b$ y $c$.
+                </div>
+                <div class="breakdown-step">
+                  <strong>Paso 3:</strong> Buscar dos números $p$ y $q$ que multiplicados den $c$ ($p \cdot q = c$) y sumados o restados den $b$ ($p + q = b$).
+                </div>
+                <div class="breakdown-example">
+                  <div class="breakdown-example-title"><span>📝</span> Ejemplo Resuelto Paso a Paso:</div>
+                  <div style="font-size: 0.95rem; margin-bottom: 6px;">Factorizar: $$x^2 - 5x - 24$$</div>
+                  <div style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
+                    • Buscamos dos números que multiplicados den $-24$ y restados den $-5$.<br>
+                    • Los números son $-8$ y $+3$ porque $(-8)(3) = -24$ y $-8 + 3 = -5$.<br>
+                    • <strong>Resultado Final:</strong> $\mathbf{(x - 8)(x + 3)}$.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 6. TRINOMIO DE LA FORMA ax^2 + bx + c -->
+            <div class="formula-item-card expandable" onclick="toggleFormulaCard(this)">
+              <div class="formula-label">6. Trinomio de la forma $ax^2 + bx + c$ ($a \neq 1$)</div>
+              <div class="formula-math">$$\frac{(ax + p)(ax + q)}{a}$$</div>
+              <div class="formula-desc">Multiplicamos y dividimos todo por $a$ para reducirlo a la forma anterior y luego simplificamos.</div>
+              <div class="expand-indicator">▼ Toca para ver desglose y paso a paso 📖</div>
+              <div class="formula-breakdown">
+                <div class="breakdown-step">
+                  <strong>Paso 1:</strong> Multiplicar y dividir todo el trinomio por $a$. El término central se expresa como $b(ax)$ y el extremo como $a \cdot c$.
+                </div>
+                <div class="breakdown-step">
+                  <strong>Paso 2:</strong> Buscar dos números que multiplicados den $a \cdot c$ y sumados den $b$.
+                </div>
+                <div class="breakdown-step">
+                  <strong>Paso 3:</strong> Extraer factor común de los paréntesis para simplificar el denominador $a$.
+                </div>
+                <div class="breakdown-example">
+                  <div class="breakdown-example-title"><span>📝</span> Ejemplo Resuelto Paso a Paso:</div>
+                  <div style="font-size: 0.95rem; margin-bottom: 6px;">Factorizar: $$6x^2 + 7x - 5$$</div>
+                  <div style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
+                    • Multiplicamos por 6: $rac{(6x)^2 + 7(6x) - 30}{6}$.<br>
+                    • Buscamos números que multiplicados den $-30$ y sumados den $7$: son $+10$ y $-3$.<br>
+                    • $rac{(6x + 10)(6x - 3)}{6} = rac{2(3x + 5) \cdot 3(2x - 1)}{6}$.<br>
+                    • Cancelando el 6 con $2 \cdot 3$: $\mathbf{(3x + 5)(2x - 1)}$.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 7. SUMA Y DIFERENCIA DE CUBOS -->
+            <div class="formula-item-card expandable" onclick="toggleFormulaCard(this)">
+              <div class="formula-label">7. Suma y Diferencia de Cubos Perfectos</div>
+              <div class="formula-math">$$a^3 \pm b^3 = (a \pm b)(a^2 \mp ab + b^2)$$</div>
+              <div class="formula-desc">Binomio de raíces cúbicas por trinomio (cuadrado primero $\mp$ producto $\pm$ cuadrado segundo).</div>
+              <div class="expand-indicator">▼ Toca para ver desglose y paso a paso 📖</div>
+              <div class="formula-breakdown">
+                <div class="breakdown-step">
+                  <strong>Paso 1:</strong> Extraer las raíces cúbicas: $\sqrt[3]{a^3} = a$ y $\sqrt[3]{b^3} = b$.
+                </div>
+                <div class="breakdown-step">
+                  <strong>Paso 2:</strong> El primer factor es el binomio con el mismo signo: $(a + b)$ o $(a - b)$.
+                </div>
+                <div class="breakdown-step">
+                  <strong>Paso 3:</strong> El segundo factor es el trinomio con signo opuesto en el centro: $(a^2 - ab + b^2)$ o $(a^2 + ab + b^2)$.
+                </div>
+                <div class="breakdown-example">
+                  <div class="breakdown-example-title"><span>📝</span> Ejemplo Resuelto Paso a Paso:</div>
+                  <div style="font-size: 0.95rem; margin-bottom: 6px;">Factorizar: $$8x^3 + 27$$</div>
+                  <div style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
+                    • $\sqrt[3]{8x^3} = 2x$, $\sqrt[3]{27} = 3$.<br>
+                    • Binomio: $(2x + 3)$.<br>
+                    • Trinomio: $(2x)^2 - (2x)(3) + 3^2 = 4x^2 - 6x + 9$.<br>
+                    • <strong>Resultado Final:</strong> $\mathbf{(2x + 3)(4x^2 - 6x + 9)}$.
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
-          <!-- Ejemplo Resuelto Paso a Paso -->
+          <!-- Ejemplo Modelo Completo de Factorización Total -->
           <div class="worked-example-card">
             <div class="worked-example-header">
-              <span class="worked-example-title"><span>📝</span> Ejercicio Modelo: Factor Común por Agrupación</span>
-              <span class="meta-tag" style="background: rgba(0, 210, 223, 0.15); color: var(--primary);">Taller #3 - Ejercicio 12</span>
+              <span class="worked-example-title"><span>📝</span> Ejercicio Maestro: Factorización Combinada Completa</span>
+              <span class="meta-tag" style="background: rgba(0, 210, 223, 0.15); color: var(--primary);">Parcial Cálculo Diferencial</span>
             </div>
             <div class="worked-example-problem">
-              Factorizar completamente el polinomio: $$x^3 - 15 - 5x + 3x^2$$
+              Factorizar al máximo la expresión: $$2x^4 - 32$$
             </div>
             <div class="step-procedure-list">
               <div class="worked-step-row">
-                <strong>Paso 1 (Ordenar convenientemente):</strong> Reordenamos los términos para asociar coeficientes proporcionales:
-                <br>• $(x^3 + 3x^2) + (-5x - 15)$
+                <strong>Paso 1 (Factor Común Monomio):</strong> Extraemos el factor numérico 2:<br>
+                • $2(x^4 - 16)$
               </div>
               <div class="worked-step-row">
-                <strong>Paso 2 (Extraer factor común de cada grupo):</strong>
-                <br>• Del primer grupo $(x^3 + 3x^2)$ el factor común es $x^2$: $x^2(x + 3)$
-                <br>• Del segundo grupo $(-5x - 15)$ extraemos $-5$: $-5(x + 3)$
+                <strong>Paso 2 (Diferencia de Cuadrados):</strong> Factorizamos $(x^4 - 16)$:<br>
+                • $\sqrt{x^4} = x^2$ y $\sqrt{16} = 4 \implies (x^2 - 4)(x^2 + 4)$.<br>
+                • Ahora tenemos: $2(x^2 - 4)(x^2 + 4)$
               </div>
               <div class="worked-step-row">
-                <strong>Paso 3 (Extraer el binomio común $(x + 3)$):</strong>
-                <br>• Ambos términos contienen $(x + 3)$: $(x + 3)(x^2 - 5)$
+                <strong>Paso 3 (Segunda Diferencia de Cuadrados):</strong> El factor $(x^2 - 4)$ aún se puede descomponer:<br>
+                • $(x^2 - 4) = (x - 2)(x + 2)$.<br>
+                • Nótese que $(x^2 + 4)$ es una suma de cuadrados irreducible en $\mathbb{R}$.
               </div>
             </div>
             <div class="worked-final-answer">
-              ✅ <strong>Resultado Factorizado:</strong> $(x + 3)(x^2 - 5)$
+              ✅ <strong>Factorización Irreducible Final:</strong> $$2(x - 2)(x + 2)(x^2 + 4)$$
             </div>
           </div>
         </div>
       </div>
 
-      <!-- BLOQUE 5: FRACCIONES ALGEBRAICAS -->
       <div class="theory-content-block" id="topicBlock_fracciones">
         <div class="theory-section-card">
           <div class="theory-section-title">
@@ -3339,6 +3605,7 @@
       </div>
 
       <!-- BLOQUE 6: DESIGUALDADES E INECUACIONES -->
+      <!-- BLOQUE 6: DESIGUALDADES E INECUACIONES (TALLER #4) -->
       <div class="theory-content-block" id="topicBlock_desigualdades">
         <div class="theory-section-card">
           <div class="theory-section-title">
@@ -3346,70 +3613,156 @@
           </div>
 
           <p style="font-size: 0.92rem; line-height: 1.6; color: var(--text-muted); margin-bottom: 1.25rem;">
-            Una inecuación es una desigualdad algebraica donde el objetivo es hallar el conjunto de valores de $x$ (intervalo) que hacen verdadera la proposición.
+            Una inecuación es una desigualdad matemática entre dos expresiones algebraicas. Resolverla implica hallar el intervalo de números reales que hacen verdadera la condición. <strong>Toca cualquier tarjeta para desplegar el procedimiento paso a paso y sus casos especiales:</strong>
           </p>
 
           <div class="formula-badge-grid">
-            <div class="formula-item-card">
-              <div class="formula-label">Inversión por Número Negativo</div>
+            <!-- 1. PROPIEDAD DE INVERSIÓN POR SIGNO NEGATIVO -->
+            <div class="formula-item-card expandable" onclick="toggleFormulaCard(this)">
+              <div class="formula-label">1. Regla de Oro: Inversión por Negativo</div>
               <div class="formula-math">$$a < b \iff -a > -b$$</div>
-              <div class="formula-desc">Al multiplicar o dividir ambos miembros por un número negativo ($c < 0$), el sentido de la desigualdad <strong>se invierte obligatoriamente</strong>.</div>
+              <div class="formula-desc">Al multiplicar o dividir ambos miembros por un número negativo, el sentido de la desigualdad <strong>se invierte obligatoriamente</strong>.</div>
+              <div class="expand-indicator">▼ Toca para ver desglose y paso a paso 📖</div>
+              <div class="formula-breakdown">
+                <div class="breakdown-step">
+                  <strong>Paso 1:</strong> Si multiplicas o divides por un número positivo $c > 0$: el signo de la desigualdad se conserva ($ac < bc$).
+                </div>
+                <div class="breakdown-step">
+                  <strong>Paso 2:</strong> Si multiplicas o divides por un número negativo $c < 0$: el signo se invierte de inmediato: $<$ pasa a $>$, y $\le$ pasa a $\ge$.
+                </div>
+                <div class="breakdown-example">
+                  <div class="breakdown-example-title"><span>📝</span> Ejemplo Resuelto Paso a Paso:</div>
+                  <div style="font-size: 0.95rem; margin-bottom: 6px;">Resolver: $$-3x + 5 \le 17$$</div>
+                  <div style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
+                    • Restamos 5 a ambos lados: $-3x \le 12$.<br>
+                    • Dividimos entre $-3$ (¡Número negativo! Invertimos el signo de $\le$ a $\ge$):<br>
+                    • $x \ge rac{12}{-3} \implies \mathbf{x \ge -4}$.<br>
+                    • <strong>Intervalo Solución:</strong> $\mathbf{[-4, \infty)}$.
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div class="formula-item-card">
-              <div class="formula-label">Inecuaciones Racionales</div>
-              <div class="formula-math">$$\frac{P(x)}{Q(x)} \ge 0 \implies Q(x) \neq 0$$</div>
-              <div class="formula-desc">El denominador <strong>NUNCA puede ser cero</strong>. Por tanto, los puntos críticos del denominador <strong>siempre llevan intervalo abierto</strong> $($ o $)$.</div>
+            <!-- 2. DESIGUALDADES DOBLES O SIMULTÁNEAS -->
+            <div class="formula-item-card expandable" onclick="toggleFormulaCard(this)">
+              <div class="formula-label">2. Inecuaciones Dobles o Compuestas</div>
+              <div class="formula-math">$$a \le f(x) < b$$</div>
+              <div class="formula-desc">Se resuelven aplicando la misma operación simultáneamente a las 3 partes (izquierda, centro y derecha).</div>
+              <div class="expand-indicator">▼ Toca para ver desglose y paso a paso 📖</div>
+              <div class="formula-breakdown">
+                <div class="breakdown-step">
+                  <strong>Paso 1:</strong> Aislar la variable $x$ en la sección central sumando o restando el término independiente en las 3 secciones.
+                </div>
+                <div class="breakdown-step">
+                  <strong>Paso 2:</strong> Dividir las 3 partes entre el coeficiente de $x$. Si es negativo, invertir ambos signos de desigualdad.
+                </div>
+                <div class="breakdown-step">
+                  <strong>Paso 3:</strong> Escribir el intervalo acotado $[a, b)$, $(a, b]$ o $(a, b)$.
+                </div>
+                <div class="breakdown-example">
+                  <div class="breakdown-example-title"><span>📝</span> Ejemplo Resuelto Paso a Paso:</div>
+                  <div style="font-size: 0.95rem; margin-bottom: 6px;">Resolver: $$-4 \le 2x - 6 < 8$$</div>
+                  <div style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
+                    • Sumamos 6 a las 3 partes: $-4 + 6 \le 2x < 8 + 6 \implies 2 \le 2x < 14$.<br>
+                    • Dividimos todo entre 2: $1 \le x < 7$.<br>
+                    • <strong>Intervalo Solución:</strong> $\mathbf{[1, 7)}$.
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div class="formula-item-card">
-              <div class="formula-label">Método de Zonas / Cementerio</div>
-              <div class="formula-math">$$(x - 1)(x - 4) > 0$$</div>
-              <div class="formula-desc">Se colocan las raíces en la recta real y se analiza el signo resultante en cada intervalo probando valores de prueba.</div>
+            <!-- 3. INECUACIONES CUADRÁTICAS Y POLINÓMICAS -->
+            <div class="formula-item-card expandable" onclick="toggleFormulaCard(this)">
+              <div class="formula-label">3. Inecuaciones Cuadráticas (Método de Signos)</div>
+              <div class="formula-math">$$ax^2 + bx + c > 0 \quad (	ext{o } \le 0)$$</div>
+              <div class="formula-desc">Se iguala a cero, se factoriza para hallar los puntos críticos y se construye la tabla de signos (cementerio).</div>
+              <div class="expand-indicator">▼ Toca para ver desglose y paso a paso 📖</div>
+              <div class="formula-breakdown">
+                <div class="breakdown-step">
+                  <strong>Paso 1:</strong> Pasar todos los términos al miembro izquierdo dejando un cero a la derecha.
+                </div>
+                <div class="breakdown-step">
+                  <strong>Paso 2:</strong> Factorizar completamente el polinomio para obtener los puntos críticos (donde cada factor se anula).
+                </div>
+                <div class="breakdown-step">
+                  <strong>Paso 3:</strong> Ubicar los puntos críticos en la recta real dividiéndola en intervalos y probar un valor de prueba en cada intervalo.
+                </div>
+                <div class="breakdown-example">
+                  <div class="breakdown-example-title"><span>📝</span> Ejemplo Resuelto Paso a Paso:</div>
+                  <div style="font-size: 0.95rem; margin-bottom: 6px;">Resolver: $$x^2 - 3x - 10 > 0$$</div>
+                  <div style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
+                    • Factorizamos: $(x - 5)(x + 2) > 0$.<br>
+                    • Puntos críticos: $x = 5$ y $x = -2$.<br>
+                    • Intervalos: $(-\infty, -2)$, $(-2, 5)$ y $(5, \infty)$.<br>
+                    • Signo de $(x-5)(x+2)$: En $(-\infty, -2)$ es $(-)(-) = \mathbf{+}$; en $(-2, 5)$ es $(-)(+) = \mathbf{-}$; en $(5, \infty)$ es $(+)(+) = \mathbf{+}$.<br>
+                    • Como buscamos $>0$ (positivos): $\mathbf{(-\infty, -2) \cup (5, \infty)}$.
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div class="formula-item-card">
-              <div class="formula-label">Doble Desigualdad</div>
-              <div class="formula-math">$$a \le f(x) \le b$$</div>
-              <div class="formula-desc">Lo que se opera (sumar, restar, dividir) se efectúa simultáneamente en los tres miembros de la desigualdad.</div>
+            <!-- 4. INECUACIONES RACIONALES O FRACCIONARIAS -->
+            <div class="formula-item-card expandable" onclick="toggleFormulaCard(this)">
+              <div class="formula-label">4. Inecuaciones Racionales o Fraccionarias</div>
+              <div class="formula-math">$$\frac{P(x)}{Q(x)} \ge 0$$</div>
+              <div class="formula-desc">¡Peligro! Nunca pasar a multiplicar el denominador con variables porque su signo es desconocido. El denominador jamás puede ser 0.</div>
+              <div class="expand-indicator">▼ Toca para ver desglose y paso a paso 📖</div>
+              <div class="formula-breakdown">
+                <div class="breakdown-step">
+                  <strong>Paso 1:</strong> Pasar todo a un solo miembro de modo que el otro lado sea exactamente 0: $rac{P(x)}{Q(x)} \ge 0$.
+                </div>
+                <div class="breakdown-step">
+                  <strong>Paso 2:</strong> Efectuar la suma/resta de fracciones algebraica y factorizar numerador y denominador.
+                </div>
+                <div class="breakdown-step">
+                  <strong>Paso 3 (Regla Vital):</strong> Los ceros del denominador $Q(x) = 0$ <strong>SIEMPRE van abiertos con paréntesis $($ $)$</strong>, incluso si la inecuación tiene $\ge$ o $\le$.
+                </div>
+                <div class="breakdown-example">
+                  <div class="breakdown-example-title"><span>📝</span> Ejemplo Resuelto Paso a Paso (Taller #4):</div>
+                  <div style="font-size: 0.95rem; margin-bottom: 6px;">Resolver: $$\frac{x - 3}{x + 4} \le 0$$</div>
+                  <div style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
+                    • Puntos críticos: Numerador $x = 3$ (cerrado por $\le$). Denominador $x = -4$ (abierto por división entre cero).<br>
+                    • Intervalos en la recta: $(-\infty, -4)$, $(-4, 3]$ y $[3, \infty)$.<br>
+                    • Signo del cociente: Negativo únicamente entre $-4$ y $3$.<br>
+                    • <strong>Solución:</strong> $\mathbf{(-4, 3]}$.
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
-          <!-- Ejemplo Resuelto Paso a Paso -->
+          <!-- Ejercicio Modelo de Desigualdades -->
           <div class="worked-example-card">
             <div class="worked-example-header">
-              <span class="worked-example-title"><span>📝</span> Ejercicio de Examen: Inecuación Racional con Restricción</span>
-              <span class="meta-tag" style="background: rgba(0, 210, 223, 0.15); color: var(--primary);">Taller #4 - Pág 7</span>
+              <span class="worked-example-title"><span>📝</span> Ejercicio Examen: Inecuación Racional con Restricción de Cero</span>
+              <span class="meta-tag" style="background: rgba(0, 210, 223, 0.15); color: var(--primary);">Taller #4 - Ejercicio 8</span>
             </div>
             <div class="worked-example-problem">
-              Resolver la inecuación y dar el intervalo solución: $$\frac{2x - 8}{3x + 9} \ge 0$$
+              Determinar el conjunto solución de: $$\frac{2x - 5}{x - 1} \ge 1$$
             </div>
             <div class="step-procedure-list">
               <div class="worked-step-row">
-                <strong>Paso 1 (Puntos Críticos):</strong>
-                <br>• Numerador: $2x - 8 = 0 \implies 2x = 8 \implies x = 4$
-                <br>• Denominador: $3x + 9 = 0 \implies 3x = -9 \implies x = -3$
+                <strong>Paso 1 (Igualar a cero):</strong> Restamos 1 a ambos lados (NO multiplicamos por $x-1$):<br>
+                • $\frac{2x - 5}{x - 1} - 1 \ge 0 \implies \frac{(2x - 5) - (x - 1)}{x - 1} \ge 0$
               </div>
               <div class="worked-step-row">
-                <strong>Paso 2 (Restricción Fundamental):</strong>
-                <br>• Como el denominador no puede anularse, en $x = -3$ el intervalo es <strong>estrictamente abierto</strong> $(-3)$.
-                <br>• Como la inecuación incluye igualdad ($\ge$), en el numerador $x = 4$ es <strong>cerrado</strong> $[4]$.
+                <strong>Paso 2 (Simplificar numerador):</strong><br>
+                • $\frac{2x - 5 - x + 1}{x - 1} \ge 0 \implies \mathbf{\frac{x - 4}{x - 1} \ge 0}$
               </div>
               <div class="worked-step-row">
-                <strong>Paso 3 (Análisis de Signos en la Recta):</strong>
-                <br>• Zona 1 $(-\infty, -3)$: con $x = -4 \to \frac{-16}{-3} = (+) \ge 0$ (CUMPLE)
-                <br>• Zona 2 $(-3, 4)$: con $x = 0 \to \frac{-8}{9} = (-) < 0$ (NO CUMPLE)
-                <br>• Zona 3 $(4, \infty)$: con $x = 5 \to \frac{2}{24} = (+) \ge 0$ (CUMPLE)
+                <strong>Paso 3 (Puntos críticos y regla de signos):</strong><br>
+                • Cero del numerador: $x = 4$ (cerrado). Cero del denominador: $x = 1$ (abierto obligatoriamente por asíntota).<br>
+                • En $(-\infty, 1)$: $\frac{-}{-} = +$. En $(1, 4)$: $\frac{-}{+} = -$. En $[4, \infty)$: $\frac{+}{+} = +$.
               </div>
             </div>
             <div class="worked-final-answer">
-              ✅ <strong>Conjunto Solución:</strong> $x \in (-\infty, -3) \cup [4, \infty)$
+              ✅ <strong>Intervalo Solución Final:</strong> $$(-\infty, 1) \cup [4, \infty)$$
             </div>
           </div>
         </div>
       </div>
 
-      <!-- BLOQUE 7: LA LÍNEA RECTA -->
+      <!-- BLOQUE 7: LA LÍNEA RECTA Y PENDIENTES (TALLER #4) -->
       <div class="theory-content-block" id="topicBlock_linea_recta">
         <div class="theory-section-card">
           <div class="theory-section-title">
@@ -3417,65 +3770,182 @@
           </div>
 
           <p style="font-size: 0.92rem; line-height: 1.6; color: var(--text-muted); margin-bottom: 1.25rem;">
-            La recta en el plano euclidiano está determinada por su pendiente $m$ (grado de inclinación) y sus puntos de intersección con los ejes coordenados.
+            En geometría analítica y cálculo, la línea recta describe relaciones de cambio constante. Su elemento fundamental es la <strong>pendiente $m$</strong>, que representa la razón de cambio o la derivada de una función lineal. <strong>Toca cualquier tarjeta para desglosar sus fórmulas y aplicaciones paso a paso:</strong>
           </p>
 
           <div class="formula-badge-grid">
-            <div class="formula-item-card">
-              <div class="formula-label">Fórmula de Pendiente ($m$)</div>
+            <!-- 1. PENDIENTE DE UNA RECTA -->
+            <div class="formula-item-card expandable" onclick="toggleFormulaCard(this)">
+              <div class="formula-label">1. Pendiente ($m$) dados Dos Puntos</div>
               <div class="formula-math">$$m = \frac{y_2 - y_1}{x_2 - x_1}$$</div>
-              <div class="formula-desc">Inclinación entre dos puntos $(x_1, y_1)$ y $(x_2, y_2)$. Recta horizontal: $m = 0$. Recta vertical: $m$ indefinida (división por cero).</div>
+              <div class="formula-desc">Mide la inclinación: $\Delta y / \Delta x$. Si $m > 0$ es creciente, si $m < 0$ decreciente, si $m = 0$ horizontal y vertical no definida.</div>
+              <div class="expand-indicator">▼ Toca para ver desglose y paso a paso 📖</div>
+              <div class="formula-breakdown">
+                <div class="breakdown-step">
+                  <strong>Paso 1:</strong> Identificar las coordenadas de dos puntos: $P_1(x_1, y_1)$ y $P_2(x_2, y_2)$.
+                </div>
+                <div class="breakdown-step">
+                  <strong>Paso 2:</strong> Calcular el cambio vertical en el numerador: $\Delta y = y_2 - y_1$.
+                </div>
+                <div class="breakdown-step">
+                  <strong>Paso 3:</strong> Calcular el cambio horizontal en el denominador: $\Delta x = x_2 - x_1$ (teniendo cuidado con la ley de signos al restar negativos).
+                </div>
+                <div class="breakdown-example">
+                  <div class="breakdown-example-title"><span>📝</span> Ejemplo Resuelto Paso a Paso:</div>
+                  <div style="font-size: 0.95rem; margin-bottom: 6px;">Hallar la pendiente que pasa por $P_1(-2, 5)$ y $P_2(4, -7)$:</div>
+                  <div style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
+                    • $x_1 = -2, y_1 = 5, x_2 = 4, y_2 = -7$.<br>
+                    • $m = \frac{-7 - 5}{4 - (-2)} = \frac{-12}{4 + 2} = \frac{-12}{6} = \mathbf{-2}$.<br>
+                    • <strong>Interpretación:</strong> Por cada unidad que se avanza en $x$, la recta desciende 2 unidades en $y$ (recta decreciente).
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div class="formula-item-card">
-              <div class="formula-label">Ecuación General y Pendiente Rápida</div>
-              <div class="formula-math">$$Ax + By + C = 0 \implies m = -\frac{A}{B}$$</div>
-              <div class="formula-desc">El corte con el eje $Y$ (intercepto) es $(0, -C/B)$ y el corte con el eje $X$ es $(-C/A, 0)$.</div>
+            <!-- 2. ECUACIÓN PUNTO - PENDIENTE -->
+            <div class="formula-item-card expandable" onclick="toggleFormulaCard(this)">
+              <div class="formula-label">2. Ecuación Punto - Pendiente</div>
+              <div class="formula-math">$$y - y_1 = m(x - x_1)$$</div>
+              <div class="formula-desc">La fórmula más práctica para hallar la ecuación de cualquier recta conociendo su pendiente $m$ y un punto $(x_1, y_1)$.</div>
+              <div class="expand-indicator">▼ Toca para ver desglose y paso a paso 📖</div>
+              <div class="formula-breakdown">
+                <div class="breakdown-step">
+                  <strong>Paso 1:</strong> Sustituir los valores de $m$, $x_1$ e $y_1$ en la fórmula: $y - y_1 = m(x - x_1)$.
+                </div>
+                <div class="breakdown-step">
+                  <strong>Paso 2:</strong> Aplicar la propiedad distributiva multiplicando $m$ por $x$ y por $-x_1$.
+                </div>
+                <div class="breakdown-step">
+                  <strong>Paso 3:</strong> Despejar $y$ para obtener la forma pendiente-intercepto $y = mx + b$, o igualar a cero para la forma general $Ax + By + C = 0$.
+                </div>
+                <div class="breakdown-example">
+                  <div class="breakdown-example-title"><span>📝</span> Ejemplo Resuelto Paso a Paso:</div>
+                  <div style="font-size: 0.95rem; margin-bottom: 6px;">Recta con pendiente $m = 3$ que pasa por $(2, -1)$:</div>
+                  <div style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
+                    • $y - (-1) = 3(x - 2) \implies y + 1 = 3x - 6$.<br>
+                    • Despejando $y$: $y = 3x - 6 - 1 \implies \mathbf{y = 3x - 7}$.<br>
+                    • Forma general: $\mathbf{3x - y - 7 = 0}$.
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div class="formula-item-card">
-              <div class="formula-label">Rectas Paralelas y Perpendiculares</div>
-              <div class="formula-math">$$\text{Paralelas: } m_1 = m_2 \quad | \quad \text{Perpendiculares: } m_1 \cdot m_2 = -1$$</div>
-              <div class="formula-desc">La pendiente perpendicular es el recíproco negativo: $m_2 = -\frac{1}{m_1}$. Ejemplo: si $m_1 = -\frac{2}{3} \implies m_2 = \frac{3}{2}$.</div>
+            <!-- 3. CONDICIÓN DE RECTAS PARALELAS -->
+            <div class="formula-item-card expandable" onclick="toggleFormulaCard(this)">
+              <div class="formula-label">3. Rectas Paralelas</div>
+              <div class="formula-math">$$m_1 = m_2$$</div>
+              <div class="formula-desc">Dos rectas nunca se intersectan si y solo si poseen la misma inclinación angular y por ende pendientes idénticas.</div>
+              <div class="expand-indicator">▼ Toca para ver desglose y paso a paso 📖</div>
+              <div class="formula-breakdown">
+                <div class="breakdown-step">
+                  <strong>Paso 1:</strong> Despejar $y$ de la recta dada para identificar su pendiente $m_1$ (el coeficiente que acompaña a $x$).
+                </div>
+                <div class="breakdown-step">
+                  <strong>Paso 2:</strong> Como la nueva recta es paralela, su pendiente debe ser igual: $m_2 = m_1$.
+                </div>
+                <div class="breakdown-step">
+                  <strong>Paso 3:</strong> Usar la pendiente $m_2$ y el punto por donde debe pasar en la fórmula punto-pendiente.
+                </div>
+                <div class="breakdown-example">
+                  <div class="breakdown-example-title"><span>📝</span> Ejemplo Resuelto Paso a Paso:</div>
+                  <div style="font-size: 0.95rem; margin-bottom: 6px;">Hallar la recta paralela a $y = 4x + 1$ que pasa por $(1, 8)$:</div>
+                  <div style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
+                    • Pendiente de la recta dada: $m_1 = 4$.<br>
+                    • Como es paralela: $m_2 = 4$.<br>
+                    • $y - 8 = 4(x - 1) \implies y - 8 = 4x - 4 \implies \mathbf{y = 4x + 4}$.
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div class="formula-item-card">
-              <div class="formula-label">Semiplanos (Inecuaciones Lineales 2D)</div>
-              <div class="formula-math">$$Ax + By + C > 0$$</div>
-              <div class="formula-desc">Se evalúa el punto de prueba origen $(0,0)$. Si cumple, la solución es el semiplano que contiene al origen; de lo contrario, el opuesto.</div>
+            <!-- 4. CONDICIÓN DE RECTAS PERPENDICULARES -->
+            <div class="formula-item-card expandable" onclick="toggleFormulaCard(this)">
+              <div class="formula-label">4. Rectas Perpendiculares (Normales)</div>
+              <div class="formula-math">$$m_1 \cdot m_2 = -1 \iff m_2 = -\frac{1}{m_1}$$</div>
+              <div class="formula-desc">Dos rectas forman un ángulo recto ($90^\circ$) si sus pendientes son recíprocas y de signo contrario (inverso opuesto).</div>
+              <div class="expand-indicator">▼ Toca para ver desglose y paso a paso 📖</div>
+              <div class="formula-breakdown">
+                <div class="breakdown-step">
+                  <strong>Paso 1:</strong> Determinar la pendiente $m_1$ de la recta de referencia.
+                </div>
+                <div class="breakdown-step">
+                  <strong>Paso 2:</strong> Invertir la fracción y cambiarle el signo para hallar $m_2 = -1 / m_1$. (Ej: si $m_1 = 3/5 \implies m_2 = -5/3$; si $m_1 = -4 \implies m_2 = 1/4$).
+                </div>
+                <div class="breakdown-step">
+                  <strong>Paso 3:</strong> Armar la ecuación de la recta perpendicular con el punto requerido.
+                </div>
+                <div class="breakdown-example">
+                  <div class="breakdown-example-title"><span>📝</span> Ejemplo Resuelto Paso a Paso (Taller #4):</div>
+                  <div style="font-size: 0.95rem; margin-bottom: 6px;">Recta perpendicular a $2x + 6y - 7 = 0$ que pasa por $(3, 1)$:</div>
+                  <div style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
+                    • Despejamos $y$: $6y = -2x + 7 \implies y = -rac{2}{6}x + rac{7}{6} = -rac{1}{3}x + rac{7}{6}$.<br>
+                    • Pendiente original: $m_1 = -1/3$.<br>
+                    • Pendiente perpendicular: $m_2 = -1 / (-1/3) = \mathbf{3}$.<br>
+                    • Ecuación: $y - 1 = 3(x - 3) \implies y - 1 = 3x - 9 \implies \mathbf{y = 3x - 8}$.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 5. RECTAS HORIZONTALES Y VERTICALES -->
+            <div class="formula-item-card expandable" onclick="toggleFormulaCard(this)">
+              <div class="formula-label">5. Rectas Especiales: Horizontal y Vertical</div>
+              <div class="formula-math">$$y = k \quad (m = 0) \qquad x = h \quad (m \text{ indef.})$$</div>
+              <div class="formula-desc">Horizontal: paralela al eje $X$, pendiente nula. Vertical: paralela al eje $Y$, división por cero ($\Delta x = 0$).</div>
+              <div class="expand-indicator">▼ Toca para ver desglose y paso a paso 📖</div>
+              <div class="formula-breakdown">
+                <div class="breakdown-step">
+                  <strong>Recta Horizontal:</strong> Todos sus puntos tienen la misma ordenada $y = k$. Su pendiente es estrictamente $m = 0$.
+                </div>
+                <div class="breakdown-step">
+                  <strong>Recta Vertical:</strong> Todos sus puntos tienen la misma abscisa $x = h$. Al calcular su pendiente se divide entre cero, por lo cual $m$ no está definida en los reales.
+                </div>
+                <div class="breakdown-example">
+                  <div class="breakdown-example-title"><span>📝</span> Ejemplo Aplicado:</div>
+                  <div style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
+                    • Recta horizontal por $(5, -4)$: Ecuación $\mathbf{y = -4}$ ($m = 0$).<br>
+                    • Recta vertical por $(5, -4)$: Ecuación $\mathbf{x = 5}$ ($m$ indefinida).
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
-          <!-- Ejemplo Resuelto Paso a Paso -->
+          <!-- Ejercicio Modelo de Línea Recta -->
           <div class="worked-example-card">
             <div class="worked-example-header">
-              <span class="worked-example-title"><span>📝</span> Ejercicio Resuelto: Pendiente y Recta Perpendicular</span>
-              <span class="meta-tag" style="background: rgba(0, 210, 223, 0.15); color: var(--primary);">Taller #4 - Ejercicios 9 y 10</span>
+              <span class="worked-example-title"><span>📝</span> Ejercicio Examen: Recta Perpendicular y Distancia</span>
+              <span class="meta-tag" style="background: rgba(0, 210, 223, 0.15); color: var(--primary);">Taller #4 - Ejercicio 14</span>
             </div>
             <div class="worked-example-problem">
-              Dada la recta $3x - 2y + 5 = 0$, hallar: (a) Su pendiente $m_1$, y (b) La pendiente $m_2$ de una recta perpendicular a ella.
+              Encontrar la ecuación de la recta mediatriz (perpendicular por el punto medio) del segmento que une los puntos $A(1, 2)$ y $B(5, 10)$.
             </div>
             <div class="step-procedure-list">
               <div class="worked-step-row">
-                <strong>Paso 1 (Pendiente $m_1$ de la ecuación general):</strong>
-                <br>• Identificamos: $A = 3, B = -2, C = 5$.
-                <br>• Despejando $y$: $-2y = -3x - 5 \implies y = \frac{-3}{-2}x + \frac{-5}{-2} \implies y = \frac{3}{2}x + \frac{5}{2}$.
-                <br>• Por tanto, la pendiente es $m_1 = \frac{3}{2}$.
+                <strong>Paso 1 (Punto Medio $M$):</strong><br>
+                • $M = \left(\frac{x_1 + x_2}{2}, \frac{y_1 + y_2}{2}\right) = \left(\frac{1 + 5}{2}, \frac{2 + 10}{2}\right) = \mathbf{(3, 6)}$.
               </div>
               <div class="worked-step-row">
-                <strong>Paso 2 (Condición de perpendicularidad):</strong>
-                <br>• $m_1 \cdot m_2 = -1 \implies m_2 = -\frac{1}{m_1}$
-                <br>• $m_2 = -\frac{1}{3/2} = -\frac{2}{3}$.
+                <strong>Paso 2 (Pendiente del segmento $AB$):</strong><br>
+                • $m_{AB} = \frac{10 - 2}{5 - 1} = \frac{8}{4} = \mathbf{2}$.
+              </div>
+              <div class="worked-step-row">
+                <strong>Paso 3 (Pendiente perpendicular de la mediatriz):</strong><br>
+                • $m_{\perp} = -\frac{1}{m_{AB}} = \mathbf{-\frac{1}{2}}$.
+              </div>
+              <div class="worked-step-row">
+                <strong>Paso 4 (Armar ecuación con $M(3, 6)$):</strong><br>
+                • $y - 6 = -\frac{1}{2}(x - 3) \implies y - 6 = -\frac{1}{2}x + \frac{3}{2}$.<br>
+                • Multiplicando todo por 2: $2y - 12 = -x + 3 \implies \mathbf{x + 2y - 15 = 0}$.
               </div>
             </div>
             <div class="worked-final-answer">
-              ✅ <strong>Respuestas:</strong> (a) $m_1 = \frac{3}{2}$ | (b) $m_2 = -\frac{2}{3}$
+              ✅ <strong>Ecuación de la Mediatriz Final:</strong> $$y = -\frac{1}{2}x + \frac{15}{2} \quad \iff \quad x + 2y - 15 = 0$$
             </div>
           </div>
         </div>
       </div>
 
-      <!-- BLOQUE 8: SISTEMAS DE ECUACIONES -->
       <div class="theory-content-block" id="topicBlock_sistemas">
         <div class="theory-section-card">
           <div class="theory-section-title">
@@ -5993,6 +6463,21 @@
       showScreen('screenLibrary');
       switchTheoryTopic(initialTopic);
       setTimeout(() => initKaTeX(), 100);
+    }
+
+    
+    function toggleFormulaCard(cardEl) {
+      if (!cardEl) return;
+      cardEl.classList.toggle('open');
+      const ind = cardEl.querySelector('.expand-indicator');
+      if (ind) {
+        if (cardEl.classList.contains('open')) {
+          ind.innerHTML = '▲ Toca para contraer desglose';
+        } else {
+          ind.innerHTML = '▼ Toca para ver desglose y paso a paso 📖';
+        }
+      }
+      setTimeout(() => initKaTeX(), 50);
     }
 
     function switchTheoryTopic(topicKey) {
