@@ -1,29 +1,5 @@
 [
-  {
-    "id": "user_1789159972880",
-    "name": "meyker",
-    "password": "326247878",
-    "avatar": "🎓",
-    "customAvatar": "",
-    "xp": 0,
-    "examsCount": 0,
-    "totalGradeSum": 0,
-    "avgGrade": 0.0,
-    "bestTopic": "Por determinar",
-    "worstTopic": "Por determinar",
-    "duelWins": 0,
-    "duelLosses": 0,
-    "topicScores": {
-      "numeros_reales": 0,
-      "expresiones_alg": 0,
-      "productos_notables": 0,
-      "factorizacion": 0,
-      "fracciones_alg": 0,
-      "desigualdades": 0,
-      "linea_recta": 0,
-      "ecuaciones": 0
-    }
-  },
+  
   {
     "id": "user_est_andres",
     "name": "Andrés Cotes",
